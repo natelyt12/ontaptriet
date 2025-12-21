@@ -9,6 +9,7 @@
     <body>
         <main id="app" class="container">
             <p class="credit">Ôn tập Triết học by Gemini. Prompted by @phucthanhh. <a href="https://github.com/natelyt12/ontaptriet">Github</a></p>
+            <p class="joke">Anh Binh Qua Dep Trai</p>
             <section id="menu-screen" class="box active">
                 <div class="box-header">Chọn chế độ ôn tập</div>
                 <div class="box-body">
@@ -60,8 +61,8 @@
                     <p id="question-text" class="question-title"></p>
                     <div id="options-container"></div>
                     <div class="box-footer">
-                        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">Tiếp theo</button>
                         <button class="btn btn-muted" onclick="location.reload()">Thoát</button>
+                        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">Tiếp theo</button>
                     </div>
                 </div>
             </section>
@@ -91,6 +92,19 @@
                     </div>
                 </div>
             </section>
+            <canvas id="bg-canvas"></canvas>
+
+            <div class="bg-picker-container">
+                <div id="bg-menu" class="bg-menu hidden">
+                    <button class="bg-opt" onclick="setBG('none')">None</button>
+                    <button class="bg-opt" onclick="setBG('snow')">Tuyết rơi</button>
+                    <button class="bg-opt" onclick="setBG('dots')">Liên kết</button>
+                    <button class="bg-opt" onclick="setBG('stars')">Vũ trụ</button>
+                    <button class="bg-opt" onclick="setBG('matrix')">Matrix Rain</button>
+                    <button class="bg-opt" onclick="setBG('fireflies')">Đom đóm</button>
+                </div>
+                <button class="bg-toggle-btn" onclick="toggleBGMenu()">🎨</button>
+            </div>
         </main>
         <script src="script.js"></script>
     </body>

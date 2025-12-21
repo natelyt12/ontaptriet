@@ -229,3 +229,230 @@ function goBack(id) {
 }
 
 window.onload = loadData;
+
+// --- CANVAS BACKGROUND LOGIC ---
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+let animationId = null;
+let particles = [];
+let bgMode = localStorage.getItem("bg_mode") || "snow"; // Lưu chế độ bg người dùng chọn
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Fade in canvas khi load
+window.addEventListener("load", () => {
+    canvas.style.opacity = "1";
+    setBG(bgMode);
+});
+
+function toggleBGMenu() {
+    document.getElementById("bg-menu").classList.toggle("hidden");
+}
+
+// Cập nhật hàm setBG để nhận diện 2 hiệu ứng mới
+function setBG(mode) {
+    bgMode = mode;
+    localStorage.setItem("bg_mode", mode);
+    if (animationId) cancelAnimationFrame(animationId);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = [];
+
+    if (mode === "snow") initSnow();
+    else if (mode === "dots") initDots();
+    else if (mode === "stars") initStars();
+    else if (mode === "matrix") initMatrix(); // Mới
+    else if (mode === "fireflies") initFireflies(); // Mới
+
+    document.getElementById("bg-menu").classList.add("hidden");
+}
+
+// 1. Hiệu ứng Tuyết rơi chéo 30 độ
+function initSnow() {
+    for (let i = 0; i < 300; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 3 + 1,
+            d: Math.random() * 1 + 0.5, // tốc độ
+        });
+    }
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.beginPath();
+        for (let p of particles) {
+            ctx.moveTo(p.x, p.y);
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+            // Di chuyển chéo
+            p.y += p.d;
+            p.x += p.d * 0.5; // Tạo góc nghiêng ~30 độ
+            if (p.y > canvas.height) (p.y = -10), (p.x = Math.random() * canvas.width);
+            if (p.x > canvas.width) p.x = 0;
+        }
+        ctx.fill();
+        animationId = requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+// 2. Hiệu ứng Liên kết hạt (Neural Network)
+function initDots() {
+    for (let i = 0; i < 120; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+        });
+    }
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(201, 209, 217, 0.5)";
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            ctx.fillRect(p.x, p.y, 2, 2);
+
+            for (let j = i + 1; j < particles.length; j++) {
+                let p2 = particles[j];
+                let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                if (dist < 100) {
+                    ctx.strokeStyle = `rgba(139, 148, 158, ${1 - dist / 100})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+        }
+        animationId = requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+// 3. Hiệu ứng Vũ trụ (Starfield - Ý tưởng thêm)
+function initStars() {
+    for (let i = 0; i < 400; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            z: Math.random() * canvas.width,
+        });
+    }
+    function draw() {
+        ctx.fillStyle = "#0d1117";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let p of particles) {
+            p.z -= 2;
+            if (p.z <= 0) p.z = canvas.width;
+            let x = (p.x - canvas.width / 2) * (canvas.width / p.z) + canvas.width / 2;
+            let y = (p.y - canvas.height / 2) * (canvas.width / p.z) + canvas.height / 2;
+            let s = (1 - p.z / canvas.width) * 3;
+            ctx.fillStyle = "white";
+            ctx.fillRect(x, y, s, s);
+        }
+        animationId = requestAnimationFrame(draw);
+    }
+    draw();
+}
+
+// 4. Hiệu ứng Matrix Rain (Mưa mã rơi)
+// 4. Hiệu ứng Matrix Rain - Phiên bản White & Slow
+function initMatrix() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~".split("");
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let i = 0; i < columns; i++) drops[i] = 1;
+
+    // Biến điều khiển tốc độ
+    let lastTime = 0;
+    const fps = 50; // Số càng nhỏ thì càng chậm (15-20 là đẹp)
+    const nextFrameTime = 1000 / fps;
+
+    function draw(timestamp) {
+        // Tính toán thời gian giữa các khung hình để kiểm soát tốc độ
+        const deltaTime = timestamp - lastTime;
+
+        if (deltaTime > nextFrameTime) {
+            // Tạo hiệu ứng mờ dần (màu nền của GitHub)
+            ctx.fillStyle = "rgba(13, 17, 23, 0.15)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Đổi màu sang Trắng (với độ mờ 0.8 để không quá chói)
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset khi rơi hết màn hình
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            lastTime = timestamp;
+        }
+
+        animationId = requestAnimationFrame(draw);
+    }
+
+    animationId = requestAnimationFrame(draw);
+}
+
+// 5. Hiệu ứng Digital Fireflies (Đom đóm kỹ thuật số)
+function initFireflies() {
+    for (let i = 0; i < 50; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            s: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            a: Math.random(), // Alpha (độ mờ)
+            t: Math.random() * 100, // Time offset để hiệu ứng lung linh không bị trùng
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let p of particles) {
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.t += 0.02;
+
+            // Hiệu ứng lung linh (flickering) bằng hàm Sin
+            let currentAlpha = Math.abs(Math.sin(p.t)) * p.a;
+
+            ctx.beginPath();
+            let gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.s * 4);
+            gradient.addColorStop(0, `rgba(139, 148, 158, ${currentAlpha})`);
+            gradient.addColorStop(1, `rgba(13, 17, 23, 0)`);
+
+            ctx.fillStyle = gradient;
+            ctx.arc(p.x, p.y, p.s * 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Reset khi ra khỏi màn hình
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
+        }
+        animationId = requestAnimationFrame(draw);
+    }
+    draw();
+}

@@ -259,3 +259,92 @@ body {
         color: white;
     }
 }
+
+.joke {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    opacity: 0.5;
+    font-size: 0.7em;
+    transition: 0.6s;
+}
+
+.joke:hover {
+    opacity: 0;
+}
+
+/* Canvas Background */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Nằm dưới mọi thứ */
+    background-color: #0d1117;
+    opacity: 0;
+    transition: opacity 3s ease-in-out; /* Hiệu ứng fade 3s */
+    pointer-events: none;
+}
+
+/* Picker UI */
+.bg-picker-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.bg-toggle-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--color-box-bg);
+    border: 1px solid var(--color-border);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+.bg-toggle-btn:hover {
+    opacity: 1;
+    border-color: #8b949e;
+}
+
+.bg-menu {
+    background: var(--color-box-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.bg-opt {
+    background: transparent;
+    border: none;
+    color: var(--color-text-main);
+    padding: 6px 12px;
+    text-align: left;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+.bg-opt:hover {
+    background: var(--color-btn-outline-hover);
+}
+
+/* Giữ Credit của bạn luôn nổi bật */
+.credit {
+    z-index: 10;
+    pointer-events: auto;
+}
