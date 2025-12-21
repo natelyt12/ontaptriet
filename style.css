@@ -184,3 +184,67 @@ body {
     opacity: 0.5;
     font-size: 0.7em;
 }
+
+/* ... (Giữ nguyên các biến root và style cũ) ... */
+
+.text-left {
+    text-align: left;
+}
+
+/* Review Items */
+.wrong-item {
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    background: #0d1117;
+}
+
+.wrong-item .q-txt {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+.wrong-item .your-ans {
+    color: var(--color-danger);
+    margin-bottom: 4px;
+}
+.wrong-item .correct-ans {
+    color: var(--color-success);
+}
+
+/* History Items */
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--color-border);
+}
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.result-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+}
+
+#final-percent {
+    font-size: 32px;
+    color: var(--color-success);
+}
+
+#final-ratio {
+    font-size: 18px;
+    color: var(--color-text-main);
+    border-left: 1px solid var(--color-border);
+    padding-left: 10px;
+}

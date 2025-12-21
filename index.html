@@ -3,18 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>triết speedrun</title>
+        <title>Quiz Dashboard</title>
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <main id="app" class="container">
-            <p class="credit">Speedrun Triết học by Gemini. Prompted by @phucthanhh</p>
             <section id="menu-screen" class="box active">
                 <div class="box-header">Chọn chế độ ôn tập</div>
                 <div class="box-body">
                     <div class="btn-group">
                         <button class="btn btn-primary" onclick="selectMode('all')">Ôn tập ngẫu nhiên (3 Chương)</button>
                         <button class="btn btn-outline" onclick="showChapterSelection()">Ôn tập theo từng chương</button>
+                    </div>
+
+                    <div id="history-container" class="hidden">
+                        <div class="divider"></div>
+                        <p class="text-muted" style="font-size: 12px; margin-bottom: 8px">Lịch sử gần đây:</p>
+                        <div id="history-list"></div>
                     </div>
                 </div>
             </section>
@@ -27,20 +32,20 @@
                         <button class="btn btn-outline" onclick="selectMode('2')">Chương 2</button>
                         <button class="btn btn-outline" onclick="selectMode('3')">Chương 3</button>
                         <div class="divider"></div>
-                        <button class="btn btn-muted" onclick="goBack('menu-screen', 'chapter-screen')">← Quay lại</button>
+                        <button class="btn btn-muted" onclick="goBack('menu-screen')">← Quay lại</button>
                     </div>
                 </div>
             </section>
 
             <section id="limit-screen" class="box hidden">
-                <div class="box-header">Số lượng câu hỏi (Random ngẫu nhiên)</div>
+                <div class="box-header">Số lượng câu hỏi</div>
                 <div class="box-body">
                     <div class="btn-group">
                         <button class="btn btn-outline" onclick="startQuiz(25)">25 câu</button>
                         <button class="btn btn-outline" onclick="startQuiz(50)">50 câu</button>
                         <button class="btn btn-outline" onclick="startQuiz(0)">Tất cả</button>
                         <div class="divider"></div>
-                        <button class="btn btn-muted" onclick="goBack('menu-screen', 'limit-screen')">← Quay lại</button>
+                        <button class="btn btn-muted" onclick="goBack('menu-screen')">← Quay lại</button>
                     </div>
                 </div>
             </section>
@@ -60,12 +65,29 @@
                 </div>
             </section>
 
-            <section id="result-screen" class="box hidden text-center">
+            <section id="result-screen" class="box hidden">
                 <div class="box-header">Kết quả bài làm</div>
-                <div class="box-body">
-                    <h2 id="final-percent" class="text-success">0%</h2>
-                    <p id="final-score" style="margin-bottom: 20px"></p>
-                    <button class="btn btn-primary" onclick="location.reload()">Quay lại Menu</button>
+                <div class="box-body text-center">
+                    <div class="result-display">
+                        <h2 id="final-percent" class="text-success">0%</h2>
+                        <span id="final-ratio" class="text-muted"></span>
+                    </div>
+
+                    <p id="final-score" class="text-muted" style="margin-bottom: 20px; font-size: 13px"></p>
+
+                    <div class="btn-group">
+                        <button id="review-btn" class="btn btn-outline hidden" onclick="toggleReview()">Xem câu làm sai</button>
+                        <button class="btn btn-primary" onclick="location.reload()">Quay lại Menu</button>
+                    </div>
+
+                    <div
+                        id="wrong-answers-list"
+                        class="hidden text-left"
+                        style="margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 15px"
+                    >
+                        <p class="text-muted" style="margin-bottom: 10px; font-size: 14px">Chi tiết câu sai:</p>
+                        <div id="wrong-items-container"></div>
+                    </div>
                 </div>
             </section>
         </main>
