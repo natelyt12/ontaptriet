@@ -248,3 +248,14 @@ body {
     border-left: 1px solid var(--color-border);
     padding-left: 10px;
 }
+
+.credit {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0.5;
+    font-size: 0.7em;
+    a {
+        color: white;
+    }
+}
