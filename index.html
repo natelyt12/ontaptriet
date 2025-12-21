@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>triết speedrun</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main id="app" class="container">
+            <p class="credit">Speedrun Triết học by Gemini. Prompted by @phucthanhh</p>
+            <section id="menu-screen" class="box active">
+                <div class="box-header">Chọn chế độ ôn tập</div>
+                <div class="box-body">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="selectMode('all')">Ôn tập ngẫu nhiên (3 Chương)</button>
+                        <button class="btn btn-outline" onclick="showChapterSelection()">Ôn tập theo từng chương</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chapter-screen" class="box hidden">
+                <div class="box-header">Chọn chương muốn học</div>
+                <div class="box-body">
+                    <div class="btn-group grid-column">
+                        <button class="btn btn-outline" onclick="selectMode('1')">Chương 1</button>
+                        <button class="btn btn-outline" onclick="selectMode('2')">Chương 2</button>
+                        <button class="btn btn-outline" onclick="selectMode('3')">Chương 3</button>
+                        <div class="divider"></div>
+                        <button class="btn btn-muted" onclick="goBack('menu-screen', 'chapter-screen')">← Quay lại</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="limit-screen" class="box hidden">
+                <div class="box-header">Số lượng câu hỏi (Random ngẫu nhiên)</div>
+                <div class="box-body">
+                    <div class="btn-group">
+                        <button class="btn btn-outline" onclick="startQuiz(25)">25 câu</button>
+                        <button class="btn btn-outline" onclick="startQuiz(50)">50 câu</button>
+                        <button class="btn btn-outline" onclick="startQuiz(0)">Tất cả</button>
+                        <div class="divider"></div>
+                        <button class="btn btn-muted" onclick="goBack('menu-screen', 'limit-screen')">← Quay lại</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quiz-screen" class="box hidden">
+                <div class="box-header flex-between">
+                    <span id="progress">Câu 1/0</span>
+                    <span id="score-live" class="text-success">Đúng: 0</span>
+                </div>
+                <div class="box-body">
+                    <p id="question-text" class="question-title"></p>
+                    <div id="options-container"></div>
+                    <div class="box-footer">
+                        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">Tiếp theo</button>
+                        <button class="btn btn-muted" onclick="location.reload()">Thoát</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="result-screen" class="box hidden text-center">
+                <div class="box-header">Kết quả bài làm</div>
+                <div class="box-body">
+                    <h2 id="final-percent" class="text-success">0%</h2>
+                    <p id="final-score" style="margin-bottom: 20px"></p>
+                    <button class="btn btn-primary" onclick="location.reload()">Quay lại Menu</button>
+                </div>
+            </section>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>
