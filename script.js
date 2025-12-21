@@ -273,7 +273,7 @@ function setBG(mode) {
 
 // 1. Hiệu ứng Tuyết rơi chéo 30 độ
 function initSnow() {
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 100; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
@@ -302,7 +302,7 @@ function initSnow() {
 
 // 2. Hiệu ứng Liên kết hạt (Neural Network)
 function initDots() {
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 80; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
