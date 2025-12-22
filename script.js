@@ -246,7 +246,22 @@ resizeCanvas();
 
 // Fade in canvas khi load
 window.addEventListener("load", () => {
+    let bg = document.getElementById("bg-video");
+    let playsong = document.getElementById("playsong");
+    let bg_audio = document.getElementById("bg-audio");
     canvas.style.opacity = "1";
+    playsong.onclick = function () {
+        if (bg_audio.paused) {
+            canvas.style.opacity = "0.7";
+            bg.style.opacity = "0.9";
+            bg_audio.volume = 0.8;
+            bg_audio.play();
+        } else {
+            canvas.style.opacity = "1";
+            bg.style.opacity = "0";
+            bg_audio.pause();
+        }
+    };
     setBG(bgMode);
 });
 
@@ -265,7 +280,6 @@ function setBG(mode) {
     if (mode === "snow") initSnow();
     else if (mode === "dots") initDots();
     else if (mode === "stars") initStars();
-    else if (mode === "matrix") initMatrix(); // Mới
     else if (mode === "fireflies") initFireflies(); // Mới
 
     document.getElementById("bg-menu").classList.add("hidden");
@@ -363,53 +377,6 @@ function initStars() {
         animationId = requestAnimationFrame(draw);
     }
     draw();
-}
-
-// 4. Hiệu ứng Matrix Rain (Mưa mã rơi)
-// 4. Hiệu ứng Matrix Rain - Phiên bản White & Slow
-function initMatrix() {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~".split("");
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-
-    for (let i = 0; i < columns; i++) drops[i] = 1;
-
-    // Biến điều khiển tốc độ
-    let lastTime = 0;
-    const fps = 50; // Số càng nhỏ thì càng chậm (15-20 là đẹp)
-    const nextFrameTime = 1000 / fps;
-
-    function draw(timestamp) {
-        // Tính toán thời gian giữa các khung hình để kiểm soát tốc độ
-        const deltaTime = timestamp - lastTime;
-
-        if (deltaTime > nextFrameTime) {
-            // Tạo hiệu ứng mờ dần (màu nền của GitHub)
-            ctx.fillStyle = "rgba(13, 17, 23, 0.15)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Đổi màu sang Trắng (với độ mờ 0.8 để không quá chói)
-            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-            ctx.font = fontSize + "px monospace";
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                // Reset khi rơi hết màn hình
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-            lastTime = timestamp;
-        }
-
-        animationId = requestAnimationFrame(draw);
-    }
-
-    animationId = requestAnimationFrame(draw);
 }
 
 // 5. Hiệu ứng Digital Fireflies (Đom đóm kỹ thuật số)

@@ -9,7 +9,9 @@
     <body>
         <main id="app" class="container">
             <p class="credit">Ôn tập Triết học by Gemini. Prompted by @phucthanhh. <a href="https://github.com/natelyt12/ontaptriet">Github</a></p>
-            <p class="joke">Anh Binh Qua Dep Trai</p>
+            <p class="joke">Thi xong rồi mà vẫn còn ôn tập à, thôi thì thêm tí <a href="#" id="playsong">nhạc</a> cho có không khí</p>
+            <video id="bg-video" src="bg.mp4" autoplay loop muted></video>
+            <audio src="bg.mp3" id="bg-audio" loop></audio>
             <section id="menu-screen" class="box active">
                 <div class="box-header">Chọn chế độ ôn tập</div>
                 <div class="box-body">
@@ -100,7 +102,6 @@
                     <button class="bg-opt" onclick="setBG('snow')">Tuyết rơi</button>
                     <button class="bg-opt" onclick="setBG('dots')">Liên kết</button>
                     <button class="bg-opt" onclick="setBG('stars')">Vũ trụ</button>
-                    <button class="bg-opt" onclick="setBG('matrix')">Matrix Rain</button>
                     <button class="bg-opt" onclick="setBG('fireflies')">Đom đóm</button>
                 </div>
                 <button class="bg-toggle-btn" onclick="toggleBGMenu()">🎨</button>
