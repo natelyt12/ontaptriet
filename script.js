@@ -1,425 +1,459 @@
-let allQuestions = [];
-let currentQuiz = [];
-let currentIndex = 0;
-let score = 0;
-let selectedMode = "";
-let wrongQuestions = []; // Lưu các câu làm sai để xem lại
+// script.js
 
-// 1. Parser (Giữ nguyên logic cực mạnh của bạn)
-function parseRawText(text, chapterNum) {
+// 1. Hàm làm sạch text (xóa khoảng trắng thừa, xuống dòng thừa)
+function cleanText(str) {
+    return str ? str.trim().replace(/\s+/g, " ") : "";
+}
+
+// 2. Hàm chính: Parse text thô thành mảng câu hỏi
+function parseQuestions(rawText) {
     const questions = [];
-    const normalizedText = text.replace(/\r\n/g, "\n");
-    const segments = normalizedText.split(/(?=(?:\\s*)?Câu hỏi\s+\d+\s+Không trả lời)/i);
 
-    segments.forEach((segment) => {
-        if (segment.includes("The correct answer is:")) {
-            const idMatch = segment.match(/Câu hỏi\s+(\d+)/i);
-            const qNum = idMatch ? idMatch[1] : null;
+    // Tách các câu hỏi dựa trên pattern bắt đầu chung
+    // Dựa vào file mẫu: "Câu hỏi [số]\nKhông trả lời"
+    const rawBlocks = rawText.split(/Câu hỏi \d+\r?\nKhông trả lời/);
 
-            let questionContent = "";
-            const startQ = segment.indexOf("Đoạn văn câu hỏi");
-            const endQ = segment.indexOf("Select one:");
+    rawBlocks.forEach((block, index) => {
+        // Bỏ qua block rỗng (thường là phần đầu file)
+        if (!block.trim()) return;
 
-            if (startQ !== -1 && endQ !== -1) {
-                let rawQ = segment.substring(startQ + "Đoạn văn câu hỏi".length, endQ);
-                questionContent = rawQ.replace(new RegExp(`Câu hỏi\\s*${qNum}`, "gi"), "").trim();
-            }
+        try {
+            // A. Tách nội dung câu hỏi
+            // Lấy text giữa "Đoạn văn câu hỏi" và "Select one"
+            const questionPart = block.split("Đoạn văn câu hỏi")[1].split(/Câu hỏi \d+Select one:/)[0];
+            const questionText = cleanText(questionPart);
+
+            // B. Tách các đáp án (Option)
+            // Tìm phần text chứa các đáp án (từ sau Select one đến Phản hồi)
+            const optionsPart = block.split(/Câu hỏi \d+Select one:/)[1].split("Phản hồi")[0];
+
+            // Regex để bắt a., b., c., d.
+            // Logic: Tìm chữ cái + dấu chấm, lấy nội dung cho đến khi gặp chữ cái tiếp theo hoặc hết chuỗi
+            const optionMatches = [...optionsPart.matchAll(/([a-d])\.\s+([\s\S]*?)(?=(\n[a-d]\.)|$)/g)];
 
             const options = [];
-            const startOpt = segment.indexOf("Select one:");
-            const endOpt = segment.indexOf("Phản hồi");
+            optionMatches.forEach((match) => {
+                options.push(cleanText(match[2])); // match[2] là nội dung đáp án
+            });
 
-            if (startOpt !== -1 && endOpt !== -1) {
-                const optSection = segment.substring(startOpt, endOpt);
-                const matches = optSection.match(/[a-d]\.\n?([\s\S]*?)(?=\n[a-d]\.|\nPhản hồi|$)/g);
-                if (matches) {
-                    matches.forEach((m) => {
-                        options.push(m.replace(/^[a-d]\.\n?/, "").trim());
-                    });
+            // C. Tách đáp án đúng
+            const feedbackPart = block.split("The correct answer is:")[1];
+            const correctText = cleanText(feedbackPart);
+
+            // Tìm index của đáp án đúng trong mảng options
+            // Vì file text chỉ cho string đáp án (VD: "Nông nghiệp") chứ không cho "d."
+            // Nên ta phải so sánh string để tìm ra index (0, 1, 2, 3)
+            let correctIndex = -1;
+            options.forEach((opt, idx) => {
+                // So sánh tương đối (contains) hoặc chính xác
+                if (opt === correctText || opt.includes(correctText)) {
+                    correctIndex = idx;
                 }
-            }
+            });
 
-            let answer = "";
-            const answerMatch = segment.match(/The correct answer is:\s*(.*)/i);
-            if (answerMatch) answer = answerMatch[1].trim();
-
-            if (questionContent && options.length > 0 && answer) {
-                questions.push({ chapter: chapterNum, question: questionContent, options: options, answer: answer });
+            // Chỉ push nếu lấy đủ dữ liệu
+            if (questionText && options.length > 0) {
+                questions.push({
+                    id: index,
+                    question: questionText,
+                    options: options,
+                    correctAnswer: correctIndex, // Lưu index (0=a, 1=b...)
+                    correctText: correctText, // Lưu text gốc để debug nếu cần
+                });
             }
+        } catch (e) {
+            console.warn(`Lỗi khi parse câu hỏi thứ ${index}:`, e);
+            // Có thể bỏ qua câu lỗi hoặc log ra để sửa file text
         }
     });
+
     return questions;
 }
 
-// 2. LocalStorage Logic
-function saveToHistory(grade10, total, mode) {
-    let history = JSON.parse(localStorage.getItem("quiz_history") || "[]");
-    const newEntry = {
-        date: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + " " + new Date().toLocaleDateString("vi-VN"),
-        grade: grade10,
-        mode: mode === "all" ? "Tất cả" : "Chương " + mode,
-    };
+// --- PHẦN 2: CẤU HÌNH & QUẢN LÝ DỮ LIỆU ---
 
-    history.unshift(newEntry);
-    history = history.slice(0, 2);
-    localStorage.setItem("quiz_history", JSON.stringify(history));
-    displayHistory();
-}
+// 1. Cấu hình danh sách môn và file (Bạn phải tự khai báo đúng tên file trong folder)
+const appConfig = {
+    ktctMLN: {
+        name: "Kinh tế chính trị Mác - Lênin",
+        path: "baitap/ktctMLN",
+        files: [
+            { name: "Chương 1", file: "chuong1.txt" },
+            { name: "Chương 2", file: "chuong2.txt" },
+            { name: "Chương 3", file: "chuong3.txt" },
+            { name: "Chương 4", file: "chuong4.txt" },
+            { name: "Chương 5", file: "chuong5.txt" },
+            { name: "Chương 6", file: "chuong6.txt" },
+        ],
+    },
+    // Bạn có thể thêm môn khác vào đây theo cấu trúc tương tự
+    monKhac: {
+        name: "Môn mẫu (Demo)",
+        path: "baitap/monKhac",
+        files: [],
+    },
+};
 
-function displayHistory() {
-    const history = JSON.parse(localStorage.getItem("quiz_history") || "[]");
-    const container = document.getElementById("history-container");
-    const list = document.getElementById("history-list");
+// Biến toàn cục lưu trạng thái
+let currentQuestions = []; // Danh sách câu hỏi sau khi lọc/trộn
+let currentQuestionIndex = 0;
+let userScore = 0;
+let userAnswersLog = []; // Lưu lịch sử chọn để review
 
-    if (history.length > 0) {
-        container.classList.remove("hidden");
-        list.innerHTML = history
-            .map(
-                (item) => `
-            <div class="history-item">
-                <span>${item.mode} <small class="text-muted" style="font-size:10px">${item.date}</small></span>
-                <span style="font-weight:bold">${item.grade}</span>
-            </div>
-        `
-            )
-            .join("");
+// DOM Elements
+const menuScreen = document.getElementById("menu-screen");
+const quizScreen = document.getElementById("quiz-screen");
+const resultScreen = document.getElementById("result-screen");
+const subjectSelect = document.getElementById("subject-select");
+const chapterSelect = document.getElementById("chapter-select");
+
+// --- HÀM KHỞI TẠO MENU ---
+function initMenu() {
+    setTimeout(() => {
+        document.querySelector(".wallpaper").style.opacity = "1";
+    }, 500);
+    setTimeout(() => {
+        document.getElementById("app-window").classList.remove("closing");
+    }, 2000);
+    // 1. Render danh sách môn
+    for (const key in appConfig) {
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = appConfig[key].name;
+        subjectSelect.appendChild(option);
     }
+
+    // 2. Bắt sự kiện thay đổi môn để load chương
+    subjectSelect.addEventListener("change", loadChapters);
+
+    // Load chương cho môn mặc định ban đầu
+    loadChapters();
 }
 
-// 3. Quiz Control Logic
-async function loadData() {
-    const files = ["chuong1.txt", "chuong2.txt", "chuong3.txt"];
-    for (let i = 0; i < files.length; i++) {
-        try {
-            const response = await fetch(`baitap/${files[i]}`);
+function loadChapters() {
+    const subjectKey = subjectSelect.value;
+    const chapters = appConfig[subjectKey].files;
+
+    chapterSelect.innerHTML = '<option value="all">Ôn tập tất cả các chương</option>';
+
+    chapters.forEach((chap, index) => {
+        const option = document.createElement("option");
+        option.value = index; // Lưu index trong mảng files
+        option.textContent = chap.name;
+        chapterSelect.appendChild(option);
+    });
+}
+
+// --- HÀM XỬ LÝ KHI BẤM BẮT ĐẦU ---
+document.getElementById("start-btn").addEventListener("click", async () => {
+    const subjectKey = subjectSelect.value;
+    const chapterVal = chapterSelect.value;
+    const limit = document.querySelector('input[name="limit"]:checked').value;
+    const subjectData = appConfig[subjectKey];
+
+    let rawDataList = [];
+
+    try {
+        // Logic tải file
+        if (chapterVal === "all") {
+            // Tải tất cả file của môn đó
+            const promises = subjectData.files.map((file) => fetch(`${subjectData.path}/${file.file}`).then((res) => res.text()));
+            rawDataList = await Promise.all(promises);
+        } else {
+            // Tải 1 file cụ thể
+            const fileInfo = subjectData.files[chapterVal];
+            const response = await fetch(`${subjectData.path}/${fileInfo.file}`);
             const text = await response.text();
-            allQuestions = [...allQuestions, ...parseRawText(text, i + 1)];
-        } catch (err) {
-            console.error(err);
+            rawDataList = [text];
         }
+
+        // Parse và gộp tất cả câu hỏi
+        let allQuestions = [];
+        rawDataList.forEach((text) => {
+            allQuestions = allQuestions.concat(parseQuestions(text));
+        });
+
+        if (allQuestions.length === 0) {
+            alert("Không tìm thấy câu hỏi nào! Kiểm tra lại file text.");
+            return;
+        }
+
+        // Xáo trộn câu hỏi (Shuffle)
+        shuffleArray(allQuestions);
+
+        // Cắt số lượng câu hỏi theo yêu cầu
+        if (limit !== "all") {
+            currentQuestions = allQuestions.slice(0, parseInt(limit));
+        } else {
+            currentQuestions = allQuestions;
+        }
+
+        // Reset trạng thái và chuyển màn hình
+        startQuiz();
+    } catch (error) {
+        console.error(error);
+        alert("Lỗi khi tải dữ liệu: " + error.message);
     }
-    displayHistory();
+});
+
+// Hàm trộn mảng (Fisher-Yates Shuffle) - Để random câu hỏi
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
-function switchScreen(toId) {
-    document.querySelectorAll("section").forEach((s) => s.classList.add("hidden"));
-    document.getElementById(toId).classList.remove("hidden");
-}
+// Hàm bắt đầu vào màn hình Quiz
+function startQuiz() {
+    currentQuestionIndex = 0;
+    userScore = 0;
+    userAnswersLog = [];
 
-function startQuiz(limit) {
-    let pool = selectedMode === "all" ? [...allQuestions] : allQuestions.filter((q) => q.chapter == selectedMode);
-    pool.sort(() => Math.random() - 0.5);
-    currentQuiz = limit === 0 || limit > pool.length ? pool : pool.slice(0, limit);
-    currentIndex = 0;
-    score = 0;
-    wrongQuestions = [];
-    switchScreen("quiz-screen");
+    menuScreen.style.display = "none";
+    quizScreen.style.display = "block";
+
+    // Cập nhật tổng số câu
+    document.getElementById("total-q-num").innerText = currentQuestions.length;
+
+    // Gọi hàm hiển thị câu hỏi đầu tiên (sẽ viết ở bước sau)
     renderQuestion();
 }
 
 function renderQuestion() {
-    const q = currentQuiz[currentIndex];
-    document.getElementById("progress").innerText = `Câu ${currentIndex + 1} / ${currentQuiz.length}`;
-    document.getElementById("question-text").innerText = q.question;
-    document.getElementById("score-live").innerText = `Đúng: ${score}`;
+    const qData = currentQuestions[currentQuestionIndex];
 
-    const container = document.getElementById("options-container");
-    container.innerHTML = "";
-    q.options.forEach((opt) => {
-        const div = document.createElement("div");
-        div.className = "option";
-        div.innerText = opt;
-        div.onclick = () => checkAnswer(div, opt);
-        container.appendChild(div);
+    // 1. Cập nhật giao diện số câu
+    document.getElementById("current-q-num").innerText = currentQuestionIndex + 1;
+    document.getElementById("q-text").innerText = qData.question;
+
+    // 2. Xóa các đáp án cũ
+    const optionsContainer = document.getElementById("options-container");
+    optionsContainer.innerHTML = "";
+
+    // 3. Reset các nút chức năng
+    document.getElementById("next-btn").style.display = "none";
+    document.getElementById("feedback").innerText = "";
+
+    // 4. Tạo nút bấm cho từng đáp án
+    qData.options.forEach((optText, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        // Thêm A, B, C, D cho đẹp
+        const label = String.fromCharCode(65 + index); // 65 là mã ASCII của 'A'
+        btn.innerText = `${label}. ${optText}`;
+
+        // Gắn sự kiện click
+        btn.onclick = () => checkAnswer(index, btn);
+
+        optionsContainer.appendChild(btn);
     });
-    document.getElementById("next-btn").classList.add("hidden");
 }
 
-function checkAnswer(element, selected) {
-    const q = currentQuiz[currentIndex];
-    const correct = q.answer;
-    const all = document.querySelectorAll(".option");
-    all.forEach((el) => (el.style.pointerEvents = "none"));
+function checkAnswer(selectedIndex, selectedBtn) {
+    const qData = currentQuestions[currentQuestionIndex];
+    const optionsContainer = document.getElementById("options-container");
+    const allBtns = optionsContainer.querySelectorAll(".option-btn");
 
-    if (selected.trim() === correct.trim()) {
-        element.classList.add("correct");
-        score++;
+    // 1. Vô hiệu hóa tất cả các nút (không cho chọn lại)
+    allBtns.forEach((btn) => (btn.disabled = true));
+
+    // 2. Kiểm tra đúng sai
+    const isCorrect = selectedIndex === qData.correctAnswer;
+
+    if (isCorrect) {
+        // Nếu đúng: Tô xanh nút đã chọn
+        selectedBtn.classList.add("correct");
+        userScore++;
+        document.getElementById("feedback").innerText = "Chính xác! 🎉";
+        document.getElementById("feedback").style.color = "green";
     } else {
-        element.classList.add("wrong");
-        // Lưu câu sai
-        wrongQuestions.push({
-            question: q.question,
-            selected: selected,
-            correct: correct,
+        // Nếu sai: Tô đỏ nút đã chọn VÀ Tô xanh nút đúng
+        selectedBtn.classList.add("wrong");
+        allBtns[qData.correctAnswer].classList.add("correct");
+        document.getElementById("feedback").innerText = "Sai rồi";
+        document.getElementById("feedback").style.color = "red";
+    }
+
+    // 3. Lưu log để xem lại (Nếu sai)
+    if (!isCorrect) {
+        userAnswersLog.push({
+            question: qData.question,
+            selected: qData.options[selectedIndex],
+            correct: qData.options[qData.correctAnswer],
+            id: qData.id,
         });
-        all.forEach((el) => {
-            if (el.innerText.trim() === correct.trim()) el.classList.add("correct");
+    }
+
+    // 4. Hiện nút Next hoặc Kết thúc
+    const nextBtn = document.getElementById("next-btn");
+    nextBtn.style.display = "block";
+
+    if (currentQuestionIndex === currentQuestions.length - 1) {
+        nextBtn.innerText = "Xem kết quả 🏁";
+        nextBtn.onclick = finishQuiz;
+    } else {
+        nextBtn.innerText = "Câu tiếp theo ➜";
+        nextBtn.onclick = () => {
+            currentQuestionIndex++;
+            renderQuestion();
+        };
+    }
+}
+
+// --- PHẦN 4: KẾT QUẢ & XEM LẠI ---
+
+function finishQuiz() {
+    quizScreen.style.display = "none";
+    resultScreen.style.display = "block";
+
+    // 1. Tính toán điểm số
+    const total = currentQuestions.length;
+    const score10 = (userScore / total) * 10;
+
+    document.getElementById("final-score-10").innerText = score10.toFixed(1).replace(".", ",");
+
+    // 2. Render danh sách câu sai
+    const reviewContainer = document.getElementById("review-list");
+    reviewContainer.innerHTML = "";
+
+    if (userAnswersLog.length === 0) {
+        reviewContainer.innerHTML = '<p style="text-align:center; color:green">Chúc mừng! Bạn đã trả lời đúng tất cả! 🌟</p>';
+    } else {
+        userAnswersLog.forEach((item, idx) => {
+            const div = document.createElement("div");
+            div.className = "review-item";
+            div.innerHTML = `
+                <p><strong>Câu ${idx + 1}:</strong> ${item.question}</p>
+                <p style="color: red">❌ Bạn chọn: ${item.selected}</p>
+                <p class="review-correct">✅ Đáp án đúng: ${item.correct}</p>
+            `;
+            reviewContainer.appendChild(div);
         });
     }
-    document.getElementById("next-btn").classList.remove("hidden");
+
+    // 3. (Optional) Gọi hàm lưu lịch sử tại đây nếu muốn
+    saveHistory(score10.toFixed(1), userScore, total);
 }
 
-function nextQuestion() {
-    currentIndex++;
-    if (currentIndex < currentQuiz.length) renderQuestion();
-    else showResult();
-}
-
-function showResult() {
-    switchScreen("result-screen");
-
-    const total = currentQuiz.length;
-    const percent = Math.round((score / total) * 100);
-
-    // Tính điểm hệ 10 và làm tròn 1 chữ số thập phân
-    const grade10 = ((score / total) * 10).toFixed(1);
-
-    // Đổ dữ liệu vào giao diện
-    document.getElementById("final-percent").innerText = `${percent}%`;
-
-    // Hiển thị: "Điểm: 8.5 (17/20)"
-    document.getElementById("final-ratio").innerText = `Điểm: ${grade10} (${score}/${total})`;
-
-    document.getElementById("final-score").innerText = `Bạn đã hoàn thành bài ôn tập.`;
-
-    // Hiển thị nút xem lại nếu có câu sai
-    if (wrongQuestions.length > 0) {
-        document.getElementById("review-btn").classList.remove("hidden");
-    } else {
-        document.getElementById("review-btn").classList.add("hidden");
+// Xử lý nút quay về trang chủ (trong màn hình Quiz)
+document.getElementById("back-home-btn").addEventListener("click", () => {
+    if (confirm("Bạn có chắc muốn thoát? Kết quả sẽ không được lưu.")) {
+        location.reload(); // Cách đơn giản nhất để reset app
     }
-
-    // Lưu lịch sử (Lưu cả điểm hệ 10 vào lịch sử cho oai)
-    saveToHistory(grade10, total, selectedMode);
-}
-
-function toggleReview() {
-    const list = document.getElementById("wrong-answers-list");
-    const container = document.getElementById("wrong-items-container");
-
-    if (list.classList.contains("hidden")) {
-        list.classList.remove("hidden");
-        container.innerHTML = wrongQuestions
-            .map(
-                (q, i) => `
-            <div class="wrong-item">
-                <span class="q-txt">${i + 1}. ${q.question}</span>
-                <div class="your-ans">✖ Bạn chọn: ${q.selected}</div>
-                <div class="correct-ans">✔ Đáp án đúng: ${q.correct}</div>
-            </div>
-        `
-            )
-            .join("");
-        document.getElementById("review-btn").innerText = "Ẩn câu làm sai";
-    } else {
-        list.classList.add("hidden");
-        document.getElementById("review-btn").innerText = "Xem câu làm sai";
-    }
-}
-
-function showChapterSelection() {
-    switchScreen("chapter-screen");
-}
-function selectMode(mode) {
-    selectedMode = mode;
-    switchScreen("limit-screen");
-}
-function goBack(id) {
-    switchScreen(id);
-}
-
-window.onload = loadData;
-
-// --- CANVAS BACKGROUND LOGIC ---
-const canvas = document.getElementById("bg-canvas");
-const ctx = canvas.getContext("2d");
-let animationId = null;
-let particles = [];
-let bgMode = localStorage.getItem("bg_mode") || "snow"; // Lưu chế độ bg người dùng chọn
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-// Fade in canvas khi load
-window.addEventListener("load", () => {
-    let bg = document.getElementById("bg-video");
-    let playsong = document.getElementById("playsong");
-    let bg_audio = document.getElementById("bg-audio");
-    canvas.style.opacity = "1";
-    playsong.onclick = function () {
-        if (bg_audio.paused) {
-            canvas.style.opacity = "0.7";
-            bg.style.opacity = "0.9";
-            bg_audio.volume = 0.8;
-            bg_audio.play();
-        } else {
-            canvas.style.opacity = "1";
-            bg.style.opacity = "0";
-            bg_audio.pause();
-        }
-    };
-    setBG(bgMode);
 });
 
-function toggleBGMenu() {
-    document.getElementById("bg-menu").classList.toggle("hidden");
-}
+const redBtn = document.getElementById("close-btn");
 
-// Cập nhật hàm setBG để nhận diện 2 hiệu ứng mới
-function setBG(mode) {
-    bgMode = mode;
-    localStorage.setItem("bg_mode", mode);
-    if (animationId) cancelAnimationFrame(animationId);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles = [];
+redBtn.addEventListener("click", () => {
+    localStorage.setItem("easter_egg_active", "true");
+    document.getElementById("app-window").classList.add("closing");
+    setTimeout(() => {
+        window.close();
+    }, 1000);
+});
 
-    if (mode === "snow") initSnow();
-    else if (mode === "dots") initDots();
-    else if (mode === "stars") initStars();
-    else if (mode === "fireflies") initFireflies(); // Mới
+// --- PHẦN 6: DRAGGABLE WINDOW & CUSTOM CURSOR (PC ONLY) ---
 
-    document.getElementById("bg-menu").classList.add("hidden");
-}
+// Kiểm tra nếu là PC (màn hình lớn) mới chạy
+if (window.matchMedia("(min-width: 1024px)").matches) {
+    // A. CUSTOM CURSOR LOGIC
+    const cursor = document.getElementById("custom-cursor");
 
-// 1. Hiệu ứng Tuyết rơi chéo 30 độ
-function initSnow() {
-    for (let i = 0; i < 100; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 3 + 1,
-            d: Math.random() * 1 + 0.5, // tốc độ
-        });
+    document.addEventListener("mousemove", (e) => {
+        // Cập nhật vị trí con trỏ giả theo chuột thật
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    });
+
+    document.addEventListener("mousedown", () => cursor.classList.add("active"));
+    document.addEventListener("mouseup", () => cursor.classList.remove("active"));
+
+    // B. DRAGGABLE WINDOW LOGIC
+    const appWindow = document.getElementById("app-window");
+    const titleBar = document.querySelector(".title-bar");
+
+    let isDragging = false;
+    let startX,
+        startY,
+        initialTranslateX = 0,
+        initialTranslateY = 0;
+
+    // Hàm lấy giá trị translate hiện tại (vì chúng ta dùng transform để di chuyển)
+    function getTranslateValues(element) {
+        const style = window.getComputedStyle(element);
+        const matrix = new WebKitCSSMatrix(style.transform);
+        return { x: matrix.m41, y: matrix.m42 };
     }
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
-        ctx.beginPath();
-        for (let p of particles) {
-            ctx.moveTo(p.x, p.y);
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
-            // Di chuyển chéo
-            p.y += p.d;
-            p.x += p.d * 0.5; // Tạo góc nghiêng ~30 độ
-            if (p.y > canvas.height) (p.y = -10), (p.x = Math.random() * canvas.width);
-            if (p.x > canvas.width) p.x = 0;
+
+    titleBar.addEventListener("mousedown", (e) => {
+        // Chỉ kéo khi nhấn chuột trái
+        if (e.button !== 0) return;
+
+        isDragging = true;
+
+        // Lấy vị trí chuột bắt đầu
+        startX = e.clientX;
+        startY = e.clientY;
+
+        // Lấy vị trí cửa sổ hiện tại (nếu đã kéo trước đó)
+        const currentTransform = getTranslateValues(appWindow);
+        initialTranslateX = currentTransform.x;
+        initialTranslateY = currentTransform.y;
+
+        // Thêm class để (có thể) thay đổi style khi đang kéo
+        appWindow.style.transition = "none"; // Tắt animation để kéo không bị lag
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        e.preventDefault(); // Ngăn chặn bôi đen text khi kéo
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        // Di chuyển cửa sổ
+        appWindow.style.transform = `translate(${initialTranslateX + dx}px, ${initialTranslateY + dy}px)`;
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (isDragging) {
+            isDragging = false;
+            appWindow.style.transition = "all 0.3s ease"; // Bật lại animation cho mượt các hiệu ứng khác
         }
-        ctx.fill();
-        animationId = requestAnimationFrame(draw);
-    }
-    draw();
+    });
 }
 
-// 2. Hiệu ứng Liên kết hạt (Neural Network)
-function initDots() {
-    for (let i = 0; i < 80; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-        });
-    }
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "rgba(201, 209, 217, 0.5)";
-        for (let i = 0; i < particles.length; i++) {
-            let p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-            ctx.fillRect(p.x, p.y, 2, 2);
+// --- QUẢN LÝ HÌNH NỀN (LOGIC MỚI) ---
+function initWallpaper() {
+    // 1. Kiểm tra xem người dùng có vừa bấm nút tắt cửa sổ không
+    const isSpecialMode = localStorage.getItem("easter_egg_active");
 
-            for (let j = i + 1; j < particles.length; j++) {
-                let p2 = particles[j];
-                let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                if (dist < 100) {
-                    ctx.strokeStyle = `rgba(139, 148, 158, ${1 - dist / 100})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
-                }
-            }
-        }
-        animationId = requestAnimationFrame(draw);
+    if (isSpecialMode === "true") {
+        // === CHẾ ĐỘ ĐẶC BIỆT (Chỉ hiện 1 lần) ===
+        console.log("⚠️ Special Mode Activated!");
+
+        // Load ảnh đặc biệt (Bạn nhớ kiếm ảnh 'special.jpg' bỏ vào folder wall nhé)
+        // Gợi ý: Kiếm ảnh "Blue Screen of Death" hoặc "Broken Screen"
+        const specialPath = "wall/wee.png";
+        document.documentElement.style.setProperty("--bg-wallpaper", `url('${specialPath}')`);
+
+        // QUAN TRỌNG: Xóa ngay dấu hiệu này đi
+        // Để lần reload tiếp theo (F5 lần nữa) sẽ quay về bình thường
+        localStorage.removeItem("easter_egg_active");
+    } else {
+        // === CHẾ ĐỘ BÌNH THƯỜNG (Random) ===
+        const totalImages = 9; // Số lượng ảnh bạn có
+        const randomNum = Math.floor(Math.random() * totalImages) + 1;
+        const wallpaperPath = `wall/macos (${randomNum}).jpg`;
+
+        document.documentElement.style.setProperty("--bg-wallpaper", `url('${wallpaperPath}')`);
     }
-    draw();
 }
 
-// 3. Hiệu ứng Vũ trụ (Starfield - Ý tưởng thêm)
-function initStars() {
-    for (let i = 0; i < 400; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            z: Math.random() * canvas.width,
-        });
-    }
-    function draw() {
-        ctx.fillStyle = "#0d1117";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        for (let p of particles) {
-            p.z -= 2;
-            if (p.z <= 0) p.z = canvas.width;
-            let x = (p.x - canvas.width / 2) * (canvas.width / p.z) + canvas.width / 2;
-            let y = (p.y - canvas.height / 2) * (canvas.width / p.z) + canvas.height / 2;
-            let s = (1 - p.z / canvas.width) * 3;
-            ctx.fillStyle = "white";
-            ctx.fillRect(x, y, s, s);
-        }
-        animationId = requestAnimationFrame(draw);
-    }
-    draw();
-}
+// Chạy hàm khởi tạo ngay
+initWallpaper();
 
-// 5. Hiệu ứng Digital Fireflies (Đom đóm kỹ thuật số)
-function initFireflies() {
-    for (let i = 0; i < 50; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            s: Math.random() * 2 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
-            a: Math.random(), // Alpha (độ mờ)
-            t: Math.random() * 100, // Time offset để hiệu ứng lung linh không bị trùng
-        });
-    }
-
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        for (let p of particles) {
-            p.x += p.speedX;
-            p.y += p.speedY;
-            p.t += 0.02;
-
-            // Hiệu ứng lung linh (flickering) bằng hàm Sin
-            let currentAlpha = Math.abs(Math.sin(p.t)) * p.a;
-
-            ctx.beginPath();
-            let gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.s * 4);
-            gradient.addColorStop(0, `rgba(139, 148, 158, ${currentAlpha})`);
-            gradient.addColorStop(1, `rgba(13, 17, 23, 0)`);
-
-            ctx.fillStyle = gradient;
-            ctx.arc(p.x, p.y, p.s * 4, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Reset khi ra khỏi màn hình
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-        }
-        animationId = requestAnimationFrame(draw);
-    }
-    draw();
-}
+// Khởi chạy
+initMenu();

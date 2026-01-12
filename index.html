@@ -3,110 +3,91 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Ôn tập Triết</title>
+        <title>awesome website</title>
         <link rel="stylesheet" href="style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     </head>
     <body>
-        <main id="app" class="container">
-            <p class="credit">Ôn tập Triết học by Gemini. Prompted by @phucthanhh. <a href="https://github.com/natelyt12/ontaptriet">Github</a></p>
-            <p class="joke">Thi xong rồi mà vẫn còn ôn tập à, thôi thì thêm tí <a href="#" id="playsong">nhạc</a> cho có không khí</p>
-            <video id="bg-video" src="bg.mp4" autoplay loop muted></video>
-            <audio src="bg.mp3" id="bg-audio" loop></audio>
-            <section id="menu-screen" class="box active">
-                <div class="box-header">Chọn chế độ ôn tập</div>
-                <div class="box-body">
-                    <div class="btn-group">
-                        <button class="btn btn-primary" onclick="selectMode('all')">Ôn tập ngẫu nhiên (3 Chương)</button>
-                        <button class="btn btn-outline" onclick="showChapterSelection()">Ôn tập theo từng chương</button>
-                    </div>
+        <div class="wallpaper"></div>
 
-                    <div id="history-container" class="hidden">
-                        <div class="divider"></div>
-                        <p class="text-muted" style="font-size: 12px; margin-bottom: 8px">Lịch sử gần đây:</p>
-                        <div id="history-list"></div>
-                    </div>
+        <div class="mac-window closing" id="app-window">
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <div class="light red" id="close-btn"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green"></div>
                 </div>
-            </section>
-
-            <section id="chapter-screen" class="box hidden">
-                <div class="box-header">Chọn chương muốn học</div>
-                <div class="box-body">
-                    <div class="btn-group grid-column">
-                        <button class="btn btn-outline" onclick="selectMode('1')">Chương 1</button>
-                        <button class="btn btn-outline" onclick="selectMode('2')">Chương 2</button>
-                        <button class="btn btn-outline" onclick="selectMode('3')">Chương 3</button>
-                        <div class="divider"></div>
-                        <button class="btn btn-muted" onclick="goBack('menu-screen')">← Quay lại</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="limit-screen" class="box hidden">
-                <div class="box-header">Số lượng câu hỏi</div>
-                <div class="box-body">
-                    <div class="btn-group">
-                        <button class="btn btn-outline" onclick="startQuiz(25)">25 câu</button>
-                        <button class="btn btn-outline" onclick="startQuiz(50)">50 câu</button>
-                        <button class="btn btn-outline" onclick="startQuiz(0)">Tất cả</button>
-                        <div class="divider"></div>
-                        <button class="btn btn-muted" onclick="goBack('menu-screen')">← Quay lại</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="quiz-screen" class="box hidden">
-                <div class="box-header flex-between">
-                    <span id="progress">Câu 1/0</span>
-                    <span id="score-live" class="text-success">Đúng: 0</span>
-                </div>
-                <div class="box-body">
-                    <p id="question-text" class="question-title"></p>
-                    <div id="options-container"></div>
-                    <div class="box-footer">
-                        <button class="btn btn-muted" onclick="location.reload()">Thoát</button>
-                        <button id="next-btn" class="btn btn-primary hidden" onclick="nextQuestion()">Tiếp theo</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="result-screen" class="box hidden">
-                <div class="box-header">Kết quả bài làm</div>
-                <div class="box-body text-center">
-                    <div class="result-display">
-                        <h2 id="final-percent" class="text-success">0%</h2>
-                        <span id="final-ratio" class="text-muted"></span>
-                    </div>
-
-                    <p id="final-score" class="text-muted" style="margin-bottom: 20px; font-size: 13px"></p>
-
-                    <div class="btn-group">
-                        <button id="review-btn" class="btn btn-outline hidden" onclick="toggleReview()">Xem câu làm sai</button>
-                        <button class="btn btn-primary" onclick="location.reload()">Quay lại Menu</button>
-                    </div>
-
-                    <div
-                        id="wrong-answers-list"
-                        class="hidden text-left"
-                        style="margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 15px"
-                    >
-                        <p class="text-muted" style="margin-bottom: 10px; font-size: 14px">Chi tiết câu sai:</p>
-                        <div id="wrong-items-container"></div>
-                    </div>
-                </div>
-            </section>
-            <canvas id="bg-canvas"></canvas>
-
-            <div class="bg-picker-container">
-                <div id="bg-menu" class="bg-menu hidden">
-                    <button class="bg-opt" onclick="setBG('none')">None</button>
-                    <button class="bg-opt" onclick="setBG('snow')">Tuyết rơi</button>
-                    <button class="bg-opt" onclick="setBG('dots')">Liên kết</button>
-                    <button class="bg-opt" onclick="setBG('stars')">Vũ trụ</button>
-                    <button class="bg-opt" onclick="setBG('fireflies')">Đom đóm</button>
-                </div>
-                <button class="bg-toggle-btn" onclick="toggleBGMenu()">🎨</button>
+                <div class="window-title">App dùng để qua môn KTCTMLN và PLDC</div>
             </div>
-        </main>
+
+            <div class="window-content">
+                <div id="menu-screen" class="fade-in">
+                    <div class="hero-text">
+                        <h2>Thiết lập</h2>
+                        <p>Chọn bài tập của bạn</p>
+                    </div>
+
+                    <div class="compact-grid">
+                        <div class="mac-form-group">
+                            <label>Môn học</label>
+                            <select id="subject-select"></select>
+                        </div>
+
+                        <div class="mac-form-group">
+                            <label>Chương</label>
+                            <select id="chapter-select"></select>
+                        </div>
+                    </div>
+
+                    <div class="mac-form-group">
+                        <label>Số lượng câu</label>
+                        <div class="segmented-control">
+                            <label><input type="radio" name="limit" value="25" checked /><span>25</span></label>
+                            <label><input type="radio" name="limit" value="50" /><span>50</span></label>
+                            <label><input type="radio" name="limit" value="all" /><span>Tất cả</span></label>
+                        </div>
+                    </div>
+
+                    <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
+                </div>
+
+                <div id="quiz-screen" style="display: none" class="fade-in">
+                    <div class="quiz-header-compact">
+                        <button id="back-home-btn" class="mac-btn-text">‹ Quay lại</button>
+                        <span class="q-counter"><span id="current-q-num">1</span> / <span id="total-q-num">10</span></span>
+                    </div>
+
+                    <div class="split-view">
+                        <div class="question-pane">
+                            <h3 id="q-text">Loading...</h3>
+                        </div>
+                        <div id="options-container" class="options-list-compact"></div>
+                    </div>
+
+                    <div class="quiz-footer-compact">
+                        <span id="feedback" style="font-weight: 600; font-size: 13px"></span>
+                        <button id="next-btn" class="mac-btn-primary small" style="display: none">Tiếp theo</button>
+                    </div>
+                </div>
+
+                <div id="result-screen" style="display: none" class="fade-in">
+                    <div class="hero-text">
+                        <div class="score-big" id="final-score-10">0.0</div>
+                        <p>Điểm số (Hệ 10)</p>
+                    </div>
+
+                    <div class="divider">Chi tiết câu sai</div>
+                    <div id="review-list" style="max-height: 220px; overflow-y: auto"></div>
+
+                    <button onclick="location.reload()" class="mac-btn-primary" style="margin-top: 20px">Làm lại bài mới</button>
+                </div>
+            </div>
+
+            <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI</div>
+        </div>
+
+        <div id="custom-cursor"></div>
+
         <script src="script.js"></script>
     </body>
 </html>

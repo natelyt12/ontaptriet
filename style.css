@@ -1,362 +1,462 @@
-/* GitHub Dark Theme Palette */
+@import url("https://fonts.cdnfonts.com/css/sf-pro-display");
 :root {
-    --color-bg: #0d1117;
-    --color-box-bg: #161b22;
-    --color-border: #30363d;
-    --color-text-main: #c9d1d9;
-    --color-text-muted: #8b949e;
-    --color-btn-primary: #238636;
-    --color-btn-primary-hover: #2ea043;
-    --color-btn-outline: #21262d;
-    --color-btn-outline-hover: #30363d;
-    --color-success: #3fb950;
-    --color-danger: #f85149;
+    /* --- MACOS DARK MODE PALETTE --- */
+    --bg-wallpaper: url("wall/macos\ \(1\).jpg");
+
+    /* Window Background: Màu xám đen có độ trong suốt để tạo hiệu ứng Blur */
+    --bg-window: rgba(30, 30, 30, 0.75);
+
+    /* Content Background: Các mảng màu nền phụ */
+    --bg-content: rgba(255, 255, 255, 0.05);
+
+    /* Input/Button Background: Màu xám nhạt trong suốt */
+    --bg-input: rgba(255, 255, 255, 0.1);
+    --bg-input-hover: rgba(255, 255, 255, 0.15);
+
+    /* Border: Rất mỏng, tinh tế */
+    --border-subtle: rgba(255, 255, 255, 0.12);
+
+    /* Typography: Chuẩn San Francisco Text */
+    --text-main: #ffffff;
+    --text-sub: #98989d; /* SF Gray */
+
+    /* System Colors (Apple) */
+    --primary: #0a84ff; /* macOS System Blue */
+    --primary-hover: #0077ed;
+
+    --shadow-win: 0 40px 80px rgba(0, 0, 0, 0.6);
+
+    /* Quiz Feedback Colors (macOS System) */
+    /* Green */
+    --correct-bg: rgba(48, 209, 88, 0.2);
+    --correct-border: #30d158;
+    --correct-text: #30d158;
+
+    /* Red */
+    --wrong-bg: rgba(255, 69, 58, 0.2);
+    --wrong-border: #ff453a;
+    --wrong-text: #ff453a;
 }
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    font-family: "SF Pro Display", sans-serif;
+    letter-spacing: 0.8px !important;
 }
 
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 13px; /* Chuẩn macOS */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 10px;
-}
-
-.container {
-    width: 100%;
-    max-width: 500px;
-}
-
-/* GitHub Style Box */
-.box {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
     overflow: hidden;
+    color: var(--text-main);
+    background-color: #000; /* Fallback nếu ảnh lỗi */
+    user-select: none;
 }
 
-.box-header {
-    background-color: var(--color-box-bg);
-    padding: 12px 16px;
-    font-weight: 600;
-    border-bottom: 1px solid var(--color-border);
+.wallpaper {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--bg-wallpaper) center/cover;
+    opacity: 0;
+    transition: 1.5s;
 }
 
-.box-body {
-    padding: 16px;
-}
-
-.box-footer {
-    border-top: 1px solid var(--color-border);
-    padding-top: 16px;
-    margin-top: 16px;
+/* --- WINDOW CONTAINER --- */
+.mac-window {
+    width: 720px;
+    height: 520px;
+    background: var(--bg-window);
+    /* Hiệu ứng kính mờ (Vibrancy) mạnh */
+    backdrop-filter: blur(40px) saturate(150%);
+    -webkit-backdrop-filter: blur(40px) saturate(150%);
+    border-radius: 12px;
+    box-shadow: var(--shadow-win);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Viền sáng nhẹ làm nổi bật trên nền tối */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
 }
 
-/* Hidden elements */
-.hidden {
-    display: none !important;
+/* Title Bar */
+.title-bar {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center title */
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
-/* Buttons */
-.btn {
-    display: inline-block;
-    width: 100%;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
+.traffic-lights {
+    position: absolute;
+    left: 16px;
+    top: 13px;
+    display: flex;
+    gap: 8px;
+}
+.light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+/* Màu nút window trên nền tối thường ít rực hơn */
+.light.red {
+    background: #ff5f57;
     cursor: pointer;
-    border: 1px solid rgba(240, 246, 252, 0.1);
-    border-radius: 6px;
-    transition: 0.2s;
-    text-align: center;
-    margin-bottom: 8px;
+}
+.light.yellow {
+    background: #febc2e;
+}
+.light.green {
+    background: #28c840;
 }
 
-.btn-primary {
-    background-color: var(--color-btn-primary);
-    color: #ffffff;
-}
-.btn-primary:hover {
-    background-color: var(--color-btn-primary-hover);
-}
-
-.btn-outline {
-    background-color: var(--color-btn-outline);
-    color: var(--color-text-main);
-}
-.btn-outline:hover {
-    background-color: var(--color-btn-outline-hover);
-    border-color: #8b949e;
-}
-
-.btn-muted {
-    background-color: transparent;
-    color: var(--color-text-muted);
-    border: none;
-}
-.btn-muted:hover {
-    color: var(--color-text-main);
-}
-
-/* Quiz Styles */
-.question-title {
-    font-size: 16px;
+.window-title {
     font-weight: 400;
-    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    letter-spacing: -0.2px;
+}
+
+/* Content Area */
+.window-content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+/* Áp dụng cho chrome/edge/safari */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.6); /* Màu đen, hơi trong suốt cho tinh tế */
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Viền nhẹ để nổi trên nền tối */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Đậm hơn khi di chuột vào */
+}
+
+/* Fix riêng cho Firefox (nếu dùng) */
+.window-content,
+#review-list {
+    scrollbar-color: rgba(0, 0, 0, 0.6) transparent;
+    scrollbar-width: thin;
+}
+
+/* --- MENU UI --- */
+.hero-text {
+    margin-bottom: 24px;
+    text-align: center;
+}
+.hero-text h2 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+}
+.hero-text p {
+    color: var(--text-sub);
+    margin: 0;
+}
+
+.compact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     margin-bottom: 20px;
 }
 
-.option {
+.mac-form-group label {
     display: block;
-    width: 100%;
-    padding: 10px 12px;
     margin-bottom: 8px;
-    background-color: var(--color-box-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
+    font-weight: 500;
+    color: var(--text-sub);
+    font-size: 12px;
+}
+
+/* Select & Input style Mac tối */
+select {
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: 1px solid transparent; /* Mac input thường không viền hoặc viền rất mờ */
+    background: var(--bg-input);
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: none; /* Xóa mũi tên mặc định để custom nếu muốn, ở đây giữ simple */
+}
+select:focus {
+    background: var(--bg-input-hover);
+    box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.6); /* Focus ring màu xanh */
+}
+
+/* Segmented Control */
+.segmented-control {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    border-radius: 7px;
+}
+.segmented-control label {
+    flex: 1;
+    margin: 0;
+    text-align: center;
     cursor: pointer;
-    font-size: 14px;
-    transition: 0.1s;
 }
-.option:hover {
-    border-color: #8b949e;
+.segmented-control input {
+    display: none;
+}
+.segmented-control span {
+    display: block;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-size: 12px;
+    color: var(--text-sub);
+}
+.segmented-control input:checked + span {
+    background: rgba(99, 99, 102, 0.6); /* Selected state gray */
+    color: #fff;
+    font-weight: 500;
 }
 
-.correct {
-    border-color: var(--color-success) !important;
-    color: var(--color-success);
-    background: rgba(63, 185, 80, 0.1);
+/* Primary Button */
+.mac-btn-primary {
+    width: 100%;
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 13px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-.wrong {
-    border-color: var(--color-danger) !important;
-    color: var(--color-danger);
-    background: rgba(248, 81, 73, 0.1);
+.mac-btn-primary:hover {
+    background: var(--primary-hover);
+}
+.mac-btn-primary:active {
+    transform: scale(0.98);
 }
 
-/* Utilities */
-.flex-between {
+/* --- QUIZ UI --- */
+.quiz-header-compact {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
 }
-.text-success {
-    color: var(--color-success);
+.mac-btn-text {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
 }
-.text-center {
-    text-align: center;
+.q-counter {
+    color: var(--text-sub);
+    font-variant-numeric: tabular-nums;
+}
+
+.split-view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Question Card */
+.question-pane {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+}
+.question-pane h3 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #fff;
+}
+
+.options-list-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.option-btn {
+    padding: 12px;
+    background: var(--bg-input);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-align: left;
+    cursor: pointer;
+    color: #ddd;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+.option-btn:hover:not(:disabled) {
+    background: var(--bg-input-hover);
+    color: #fff;
+}
+
+/* Correct/Wrong States - Màu Mac System */
+.option-btn.correct {
+    background: var(--correct-bg) !important;
+    border: 1px solid var(--correct-border) !important;
+    color: var(--correct-text) !important;
+}
+.option-btn.wrong {
+    background: var(--wrong-bg) !important;
+    border: 1px solid var(--wrong-border) !important;
+    color: var(--wrong-text) !important;
+}
+
+.quiz-footer-compact {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 32px;
+}
+.mac-btn-primary.small {
+    width: auto;
+    margin: 0;
+}
+
+/* --- RESULT UI --- */
+.score-big {
+    font-size: 56px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -2px;
 }
 .divider {
-    height: 1px;
-    background: var(--color-border);
-    margin: 8px 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-sub);
+    border-bottom: 1px solid var(--border-subtle);
+    margin: 20px 0 10px;
+    padding-bottom: 5px;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-.box {
-    animation: fadeIn 0.2s ease-out;
-}
-
-.credit {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    opacity: 0.5;
-    font-size: 0.7em;
-}
-
-/* ... (Giữ nguyên các biến root và style cũ) ... */
-
-.text-left {
-    text-align: left;
-}
-
-/* Review Items */
-.wrong-item {
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 12px;
-    margin-bottom: 12px;
-    font-size: 13px;
-    background: #0d1117;
-}
-
-.wrong-item .q-txt {
-    font-weight: 600;
-    margin-bottom: 8px;
-    display: block;
-}
-.wrong-item .your-ans {
-    color: var(--color-danger);
-    margin-bottom: 4px;
-}
-.wrong-item .correct-ans {
-    color: var(--color-success);
-}
-
-/* History Items */
-.history-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 13px;
-    border-bottom: 1px solid var(--color-border);
-}
-.history-item:last-child {
-    border-bottom: none;
-}
-
-.result-display {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-    padding: 10px;
+.review-item {
     background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
     border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-subtle);
+}
+.review-item p {
+    margin: 4px 0;
+    color: #ccc;
+}
+.review-correct {
+    color: var(--correct-text) !important;
 }
 
-#final-percent {
-    font-size: 32px;
-    color: var(--color-success);
-}
-
-#final-ratio {
-    font-size: 18px;
-    color: var(--color-text-main);
-    border-left: 1px solid var(--color-border);
-    padding-left: 10px;
-}
-
-#bg-video {
-    z-index: -1;
+/* --- CREDIT --- */
+.app-credit {
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 8px;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: 2s;
-}
-
-.credit {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    opacity: 0.5;
-    font-size: 0.7em;
-    a {
-        color: white;
-    }
-}
-
-.joke {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    opacity: 0.5;
-    font-size: 0.7em;
-    transition: 0.6s;
-    cursor: default;
-    a {
-        color: white;
-    }
-}
-
-/* Canvas Background */
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Nằm dưới mọi thứ */
-    background-color: #0d1117;
-    opacity: 0;
-    transition: opacity 3s ease-in-out; /* Hiệu ứng fade 3s */
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.2);
     pointer-events: none;
 }
 
-/* Picker UI */
-.bg-picker-container {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+/* Mobile */
+@media (max-width: 400px) {
+    .mac-window {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+    }
+    .title-bar {
+        display: none;
+    } /* Mobile thì giấu title bar giả đi */
 }
 
-.bg-toggle-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background: var(--color-box-bg);
-    border: 1px solid var(--color-border);
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.6;
-}
-.bg-toggle-btn:hover {
-    opacity: 1;
-    border-color: #8b949e;
+select option {
+    background-color: #1e1e1e; /* Nền màu tối */
+    color: #fff; /* Chữ màu trắng */
 }
 
-.bg-menu {
-    background: var(--color-box-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+/* --- TÍNH NĂNG MỞ RỘNG (DRAG & CURSOR) --- */
+
+/* Chỉ áp dụng trên PC (màn hình lớn hơn 1024px) */
+@media (min-width: 1024px) {
+    /* 1. Ẩn con trỏ chuột mặc định & ép kiểu default cho mọi phần tử */
+    body,
+    * {
+        cursor: none !important;
+    }
+
+    /* 2. Style cho con trỏ chuột tùy chỉnh */
+    #custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 32px; /* Kích thước con trỏ, tùy chỉnh */
+        height: 32px;
+        background-image: url("cursor.png"); /* FILE ẢNH CURSOR CỦA BẠN */
+        background-size: contain;
+        background-repeat: no-repeat;
+        pointer-events: none; /* Quan trọng: để click xuyên qua được */
+        z-index: 9999; /* Luôn nổi trên cùng */
+        transform: translate(-18%, -10%); /* Căn giữa tâm chuột (tùy chỉnh nếu mũi tên ở góc) */
+        transition: transform 0.05s linear; /* Mượt mà một chút */
+        display: block;
+    }
+
+    /* Hiệu ứng khi nhấn chuột (nhỏ lại xíu cho có lực) */
+    #custom-cursor.active {
+        transform: translate(-26%, -18%) scale(0.8);
+    }
+
+    /* 3. Style cho thanh tiêu đề để biết là kéo được */
+    .title-bar {
+        cursor: none !important; /* Vẫn ẩn chuột */
+    }
 }
 
-.bg-opt {
-    background: transparent;
-    border: none;
-    color: var(--color-text-main);
-    padding: 6px 12px;
-    text-align: left;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    white-space: nowrap;
-}
-.bg-opt:hover {
-    background: var(--color-btn-outline-hover);
+/* Trên mobile thì ẩn con trỏ giả đi */
+@media (max-width: 1023px) {
+    #custom-cursor {
+        display: none;
+    }
 }
 
-/* Giữ Credit của bạn luôn nổi bật */
-.credit {
-    z-index: 10;
-    pointer-events: auto;
+#app-window {
+    transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.closing {
+    transform: scale(0.9);
+    opacity: 0;
 }
