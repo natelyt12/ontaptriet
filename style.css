@@ -390,7 +390,7 @@ select:focus {
 }
 
 /* Mobile */
-@media (max-width: 400px) {
+@media (max-width: 720px) {
     .mac-window {
         width: 100%;
         height: 100%;
