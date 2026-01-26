@@ -87,10 +87,22 @@ const appConfig = {
         ],
     },
     // Bạn có thể thêm môn khác vào đây theo cấu trúc tương tự
-    monKhac: {
-        name: "Môn mẫu (Demo)",
-        path: "baitap/monKhac",
-        files: [],
+    pldc: {
+        name: "Pháp luật đại cương",
+        path: "baitap/PLDC",
+        files: [
+            { name: "Chương 1", file: "chuong1.txt" },
+            { name: "Chương 2", file: "chuong2.txt" },
+            { name: "Chương 3", file: "chuong3.txt" },
+            { name: "Chương 4", file: "chuong4.txt" },
+            { name: "Chương 5", file: "chuong5.txt" },
+            { name: "Chương 6", file: "chuong6.txt" },
+            { name: "Chương 7", file: "chuong7.txt" },
+            { name: "Chương 8", file: "chuong8.txt" },
+            { name: "Chương 9", file: "chuong9.txt" },
+            { name: "Chương 10", file: "chuong10.txt" },
+            { name: "Chương 11", file: "chuong11.txt" },
+        ],
     },
 };
 
