@@ -448,7 +448,7 @@ function initWallpaper() {
 
         // Load ảnh đặc biệt (Bạn nhớ kiếm ảnh 'special.jpg' bỏ vào folder wall nhé)
         // Gợi ý: Kiếm ảnh "Blue Screen of Death" hoặc "Broken Screen"
-        const specialPath = "wall/wee.png";
+        const specialPath = "wall/wee.jpg";
         document.documentElement.style.setProperty("--bg-wallpaper", `url('${specialPath}')`);
 
         // QUAN TRỌNG: Xóa ngay dấu hiệu này đi
@@ -456,9 +456,9 @@ function initWallpaper() {
         localStorage.removeItem("easter_egg_active");
     } else {
         // === CHẾ ĐỘ BÌNH THƯỜNG (Random) ===
-        const totalImages = 9; // Số lượng ảnh bạn có
+        const totalImages = 11; // Số lượng ảnh bạn có
         const randomNum = Math.floor(Math.random() * totalImages) + 1;
-        const wallpaperPath = `wall/macos (${randomNum}).jpg`;
+        const wallpaperPath = `wall/macos (${randomNum})_output.jpg`;
 
         document.documentElement.style.setProperty("--bg-wallpaper", `url('${wallpaperPath}')`);
     }
