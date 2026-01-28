@@ -186,7 +186,7 @@ document.getElementById("start-btn").addEventListener("click", async () => {
         });
 
         if (allQuestions.length === 0) {
-            alert("Không tìm thấy câu hỏi nào! Kiểm tra lại file text.");
+            await macAlert("Không tìm thấy câu hỏi nào! Kiểm tra lại file text.");
             return;
         }
 
@@ -204,7 +204,7 @@ document.getElementById("start-btn").addEventListener("click", async () => {
         startQuiz();
     } catch (error) {
         console.error(error);
-        alert("Lỗi khi tải dữ liệu: " + error.message);
+        await macAlert("Lỗi khi tải dữ liệu: " + error.message);
     }
 });
 
@@ -349,8 +349,9 @@ function finishQuiz() {
 }
 
 // Xử lý nút quay về trang chủ (trong màn hình Quiz)
-document.getElementById("back-home-btn").addEventListener("click", () => {
-    if (confirm("Bạn có chắc muốn thoát? Kết quả sẽ không được lưu.")) {
+document.getElementById("back-home-btn").addEventListener("click", async () => {
+    const isConfirmed = await macConfirm("Quay lại menu?", "Kết quả ôn tập của bạn sẽ không được lưu lại.");
+    if (isConfirmed) {
         location.reload(); // Cách đơn giản nhất để reset app
     }
 });
@@ -365,22 +366,57 @@ redBtn.addEventListener("click", () => {
     }, 1000);
 });
 
-// --- PHẦN 6: DRAGGABLE WINDOW & CUSTOM CURSOR (PC ONLY) ---
+/**
+ * HỆ THỐNG MAC MODAL (Mượt mà hơn với Expo Animation)
+ */
+function showModal(title, message, isConfirm = false) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById("mac-modal-overlay");
+        const titleEl = document.getElementById("mac-modal-title");
+        const messageEl = document.getElementById("mac-modal-message");
+        const okBtn = document.getElementById("mac-modal-ok");
+        const cancelBtn = document.getElementById("mac-modal-cancel");
 
-// Kiểm tra nếu là PC (màn hình lớn) mới chạy
-if (window.matchMedia("(min-width: 1024px)").matches) {
-    // A. CUSTOM CURSOR LOGIC
-    const cursor = document.getElementById("custom-cursor");
+        titleEl.innerText = title;
+        messageEl.innerText = message;
+        cancelBtn.style.display = isConfirm ? "block" : "none";
 
-    document.addEventListener("mousemove", (e) => {
-        // Cập nhật vị trí con trỏ giả theo chuột thật
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
+        // Show modal with animation
+        overlay.style.display = "flex";
+        setTimeout(() => overlay.classList.add("active"), 10);
+
+        const cleanup = (result) => {
+            // Hiệu ứng Expo khi đóng
+            overlay.classList.remove("active");
+            overlay.classList.add("closing");
+
+            setTimeout(() => {
+                overlay.style.display = "none";
+                overlay.classList.remove("closing");
+                okBtn.removeEventListener("click", onOk);
+                cancelBtn.removeEventListener("click", onCancel);
+                resolve(result);
+            }, 400); // Đợi animation đóng hoàn tất
+        };
+
+        const onOk = () => cleanup(true);
+        const onCancel = () => cleanup(false);
+
+        okBtn.addEventListener("click", onOk);
+        cancelBtn.addEventListener("click", onCancel);
     });
+}
 
-    document.addEventListener("mousedown", () => cursor.classList.add("active"));
-    document.addEventListener("mouseup", () => cursor.classList.remove("active"));
+async function macAlert(message) {
+    return await showModal("Thông báo", message, false);
+}
 
+async function macConfirm(title, message) {
+    return await showModal(title, message, true);
+}
+
+// --- PHẦN 6: DRAGGABLE WINDOW (PC ONLY) ---
+if (window.matchMedia("(min-width: 1024px)").matches) {
     // B. DRAGGABLE WINDOW LOGIC
     const appWindow = document.getElementById("app-window");
     const titleBar = document.querySelector(".title-bar");

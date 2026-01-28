@@ -1,93 +1,109 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>awesome website</title>
-        <link rel="stylesheet" href="style.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="wallpaper"></div>
 
-        <div class="mac-window closing" id="app-window">
-            <div class="title-bar">
-                <div class="traffic-lights">
-                    <div class="light red" id="close-btn"></div>
-                    <div class="light yellow"></div>
-                    <div class="light green"></div>
-                </div>
-                <div class="window-title">App dùng để qua môn KTCTMLN và PLDC</div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>awesome website</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wallpaper"></div>
+
+    <div class="mac-window closing" id="app-window">
+        <div class="title-bar">
+            <div class="traffic-lights">
+                <div class="light red" id="close-btn"></div>
+                <div class="light yellow"></div>
+                <div class="light green"></div>
             </div>
+            <div class="window-title">App dùng để qua môn KTCTMLN và PLDC</div>
+        </div>
 
-            <div class="window-content">
-                <div id="menu-screen" class="fade-in">
-                    <div class="hero-text">
-                        <h2>Thiết lập</h2>
-                        <p>Chọn bài tập của bạn</p>
-                    </div>
+        <div class="window-content">
+            <div id="menu-screen" class="fade-in">
+                <div class="hero-text">
+                    <h2>Thiết lập</h2>
+                    <p>Chọn bài tập của bạn</p>
+                </div>
 
-                    <div class="compact-grid">
-                        <div class="mac-form-group">
-                            <label>Môn học</label>
-                            <select id="subject-select"></select>
-                        </div>
-
-                        <div class="mac-form-group">
-                            <label>Chương</label>
-                            <select id="chapter-select"></select>
-                        </div>
+                <div class="compact-grid">
+                    <div class="mac-form-group">
+                        <label>Môn học</label>
+                        <select id="subject-select"></select>
                     </div>
 
                     <div class="mac-form-group">
-                        <label>Số lượng câu</label>
-                        <div class="segmented-control">
-                            <label><input type="radio" name="limit" value="25" checked /><span>25</span></label>
-                            <label><input type="radio" name="limit" value="50" /><span>50</span></label>
-                            <label><input type="radio" name="limit" value="all" /><span>Tất cả</span></label>
-                        </div>
-                    </div>
-
-                    <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
-                </div>
-
-                <div id="quiz-screen" style="display: none" class="fade-in">
-                    <div class="quiz-header-compact">
-                        <button id="back-home-btn" class="mac-btn-text">‹ Quay lại</button>
-                        <span class="q-counter"><span id="current-q-num">1</span> / <span id="total-q-num">10</span></span>
-                    </div>
-
-                    <div class="split-view">
-                        <div class="question-pane">
-                            <h3 id="q-text">Loading...</h3>
-                        </div>
-                        <div id="options-container" class="options-list-compact"></div>
-                    </div>
-
-                    <div class="quiz-footer-compact">
-                        <span id="feedback" style="font-weight: 600; font-size: 13px"></span>
-                        <button id="next-btn" class="mac-btn-primary small" style="display: none">Tiếp theo</button>
+                        <label>Chương</label>
+                        <select id="chapter-select"></select>
                     </div>
                 </div>
 
-                <div id="result-screen" style="display: none" class="fade-in">
-                    <div class="hero-text">
-                        <div class="score-big" id="final-score-10">0.0</div>
-                        <p>Điểm số (Hệ 10)</p>
+                <div class="mac-form-group">
+                    <label>Số lượng câu</label>
+                    <div class="segmented-control">
+                        <label><input type="radio" name="limit" value="25" checked /><span>25</span></label>
+                        <label><input type="radio" name="limit" value="50" /><span>50</span></label>
+                        <label><input type="radio" name="limit" value="all" /><span>Tất cả</span></label>
                     </div>
+                </div>
 
-                    <div class="divider">Chi tiết câu sai</div>
-                    <div id="review-list" style="max-height: 220px; overflow-y: auto"></div>
+                <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
+            </div>
 
-                    <button onclick="location.reload()" class="mac-btn-primary" style="margin-top: 20px">Làm lại bài mới</button>
+            <div id="quiz-screen" style="display: none" class="fade-in">
+                <div class="quiz-header-compact">
+                    <button id="back-home-btn" class="mac-btn-text">‹ Quay lại</button>
+                    <span class="q-counter"><span id="current-q-num">1</span> / <span id="total-q-num">10</span></span>
+                </div>
+
+                <div class="split-view">
+                    <div class="question-pane">
+                        <h3 id="q-text">Loading...</h3>
+                    </div>
+                    <div id="options-container" class="options-list-compact"></div>
+                </div>
+
+                <div class="quiz-footer-compact">
+                    <span id="feedback" style="font-weight: 600; font-size: 13px"></span>
+                    <button id="next-btn" class="mac-btn-primary small" style="display: none">Tiếp theo</button>
                 </div>
             </div>
 
-            <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI</div>
+            <div id="result-screen" style="display: none" class="fade-in">
+                <div class="hero-text">
+                    <div class="score-big" id="final-score-10">0.0</div>
+                    <p>Điểm số (Hệ 10)</p>
+                </div>
+
+                <div class="divider">Chi tiết câu sai</div>
+                <div id="review-list" style="max-height: 220px; overflow-y: auto"></div>
+
+                <button onclick="location.reload()" class="mac-btn-primary" style="margin-top: 20px">Làm lại bài
+                    mới</button>
+            </div>
         </div>
 
-        <div id="custom-cursor"></div>
+        <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI</div>
+    </div>
 
-        <script src="script.js"></script>
-    </body>
+    <!-- macOS Style Custom Modal -->
+    <div id="mac-modal-overlay" class="modal-overlay" style="display: none;">
+        <div class="mac-modal">
+            <div class="mac-modal-content">
+                <h3 id="mac-modal-title">Thông báo</h3>
+                <p id="mac-modal-message">Nội dung thông báo ở đây...</p>
+            </div>
+            <div class="mac-modal-buttons">
+                <button id="mac-modal-cancel" class="mac-btn-secondary">Hủy</button>
+                <button id="mac-modal-ok" class="mac-btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
 </html>

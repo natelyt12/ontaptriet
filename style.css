@@ -1,4 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
+
 :root {
     /* --- MACOS DARK MODE PALETTE --- */
     --bg-wallpaper: url("wall/macos\ \(1\).jpg");
@@ -18,10 +19,12 @@
 
     /* Typography: Chuẩn San Francisco Text */
     --text-main: #ffffff;
-    --text-sub: #98989d; /* SF Gray */
+    --text-sub: #98989d;
+    /* SF Gray */
 
     /* System Colors (Apple) */
-    --primary: #0a84ff; /* macOS System Blue */
+    --primary: #0a84ff;
+    /* macOS System Blue */
     --primary-hover: #0077ed;
 
     --shadow-win: 0 40px 80px rgba(0, 0, 0, 0.6);
@@ -47,14 +50,16 @@
 body {
     margin: 0;
     padding: 0;
-    font-size: 13px; /* Chuẩn macOS */
+    font-size: 13px;
+    /* Chuẩn macOS */
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     color: var(--text-main);
-    background-color: #000; /* Fallback nếu ảnh lỗi */
+    background-color: #000;
+    /* Fallback nếu ảnh lỗi */
     user-select: none;
 }
 
@@ -77,7 +82,8 @@ body {
     -webkit-backdrop-filter: blur(40px) saturate(150%);
     border-radius: 12px;
     box-shadow: var(--shadow-win);
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Viền sáng nhẹ làm nổi bật trên nền tối */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Viền sáng nhẹ làm nổi bật trên nền tối */
     display: flex;
     flex-direction: column;
     position: relative;
@@ -88,7 +94,8 @@ body {
     height: 38px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Center title */
+    justify-content: center;
+    /* Center title */
     padding: 0 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     position: relative;
@@ -101,19 +108,23 @@ body {
     display: flex;
     gap: 8px;
 }
+
 .light {
     width: 12px;
     height: 12px;
     border-radius: 50%;
 }
+
 /* Màu nút window trên nền tối thường ít rực hơn */
 .light.red {
     background: #ff5f57;
     cursor: pointer;
 }
+
 .light.yellow {
     background: #febc2e;
 }
+
 .light.green {
     background: #28c840;
 }
@@ -133,6 +144,7 @@ body {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
+
 /* Áp dụng cho chrome/edge/safari */
 ::-webkit-scrollbar {
     width: 8px;
@@ -143,13 +155,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.6); /* Màu đen, hơi trong suốt cho tinh tế */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Màu đen, hơi trong suốt cho tinh tế */
     border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Viền nhẹ để nổi trên nền tối */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Viền nhẹ để nổi trên nền tối */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Đậm hơn khi di chuột vào */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Đậm hơn khi di chuột vào */
 }
 
 /* Fix riêng cho Firefox (nếu dùng) */
@@ -164,12 +179,14 @@ body {
     margin-bottom: 24px;
     text-align: center;
 }
+
 .hero-text h2 {
     margin: 0 0 6px 0;
     font-size: 22px;
     font-weight: 400;
     color: #fff;
 }
+
 .hero-text p {
     color: var(--text-sub);
     margin: 0;
@@ -195,17 +212,22 @@ select {
     width: 100%;
     padding: 6px 12px;
     border-radius: 5px;
-    border: 1px solid transparent; /* Mac input thường không viền hoặc viền rất mờ */
+    border: 1px solid transparent;
+    /* Mac input thường không viền hoặc viền rất mờ */
     background: var(--bg-input);
     color: #fff;
     font-size: 13px;
     outline: none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    -webkit-appearance: none; /* Xóa mũi tên mặc định để custom nếu muốn, ở đây giữ simple */
+    -webkit-appearance: none;
+    /* Xóa mũi tên mặc định để custom nếu muốn, ở đây giữ simple */
+    appearance: none;
 }
+
 select:focus {
     background: var(--bg-input-hover);
-    box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.6); /* Focus ring màu xanh */
+    box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.6);
+    /* Focus ring màu xanh */
 }
 
 /* Segmented Control */
@@ -215,15 +237,18 @@ select:focus {
     padding: 2px;
     border-radius: 7px;
 }
+
 .segmented-control label {
     flex: 1;
     margin: 0;
     text-align: center;
     cursor: pointer;
 }
+
 .segmented-control input {
     display: none;
 }
+
 .segmented-control span {
     display: block;
     padding: 5px 0;
@@ -231,8 +256,10 @@ select:focus {
     font-size: 12px;
     color: var(--text-sub);
 }
-.segmented-control input:checked + span {
-    background: rgba(99, 99, 102, 0.6); /* Selected state gray */
+
+.segmented-control input:checked+span {
+    background: rgba(99, 99, 102, 0.6);
+    /* Selected state gray */
     color: #fff;
     font-weight: 500;
 }
@@ -251,11 +278,29 @@ select:focus {
     cursor: pointer;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
+
 .mac-btn-primary:hover {
     background: var(--primary-hover);
 }
+
 .mac-btn-primary:active {
     transform: scale(0.98);
+}
+
+.mac-btn-secondary {
+    width: 100%;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.mac-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* --- QUIZ UI --- */
@@ -267,6 +312,7 @@ select:focus {
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-subtle);
 }
+
 .mac-btn-text {
     background: none;
     border: none;
@@ -275,6 +321,7 @@ select:focus {
     font-size: 13px;
     padding: 0;
 }
+
 .q-counter {
     color: var(--text-sub);
     font-variant-numeric: tabular-nums;
@@ -293,6 +340,7 @@ select:focus {
     border-radius: 8px;
     border: 1px solid var(--border-subtle);
 }
+
 .question-pane h3 {
     margin: 0;
     font-size: 15px;
@@ -306,6 +354,7 @@ select:focus {
     flex-direction: column;
     gap: 10px;
 }
+
 .option-btn {
     padding: 12px;
     background: var(--bg-input);
@@ -317,6 +366,7 @@ select:focus {
     font-size: 13px;
     transition: all 0.2s;
 }
+
 .option-btn:hover:not(:disabled) {
     background: var(--bg-input-hover);
     color: #fff;
@@ -328,6 +378,7 @@ select:focus {
     border: 1px solid var(--correct-border) !important;
     color: var(--correct-text) !important;
 }
+
 .option-btn.wrong {
     background: var(--wrong-bg) !important;
     border: 1px solid var(--wrong-border) !important;
@@ -341,6 +392,7 @@ select:focus {
     align-items: center;
     height: 32px;
 }
+
 .mac-btn-primary.small {
     width: auto;
     margin: 0;
@@ -353,6 +405,7 @@ select:focus {
     color: #fff;
     letter-spacing: -2px;
 }
+
 .divider {
     font-size: 11px;
     text-transform: uppercase;
@@ -370,10 +423,12 @@ select:focus {
     margin-bottom: 8px;
     border: 1px solid var(--border-subtle);
 }
+
 .review-item p {
     margin: 4px 0;
     color: #ccc;
 }
+
 .review-correct {
     color: var(--correct-text) !important;
 }
@@ -397,52 +452,103 @@ select:focus {
         border-radius: 0;
         border: none;
     }
+
     .title-bar {
         display: none;
-    } /* Mobile thì giấu title bar giả đi */
+    }
+
+    /* Mobile thì giấu title bar giả đi */
 }
 
 select option {
-    background-color: #1e1e1e; /* Nền màu tối */
-    color: #fff; /* Chữ màu trắng */
+    background-color: #1e1e1e;
+    /* Nền màu tối */
+    color: #fff;
+    /* Chữ màu trắng */
 }
 
-/* --- TÍNH NĂNG MỞ RỘNG (DRAG & CURSOR) --- */
+/* --- MAC MODAL SYSTEM --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* Chỉ áp dụng trên PC (màn hình lớn hơn 1024px) */
-@media (min-width: 1024px) {
-    /* 1. Ẩn con trỏ chuột mặc định & ép kiểu default cho mọi phần tử */
-    body,
-    * {
-        cursor: none !important;
+.mac-modal {
+    width: 280px;
+    background: rgba(45, 45, 45, 0.9);
+    backdrop-filter: blur(30px);
+    border-radius: 12px;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    animation: modalSpring 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+}
+
+@keyframes modalSpring {
+    0% {
+        transform: scale(0.85);
+        opacity: 0;
     }
 
-    /* 2. Style cho con trỏ chuột tùy chỉnh */
-    #custom-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 32px; /* Kích thước con trỏ, tùy chỉnh */
-        height: 32px;
-        background-image: url("cursor.png"); /* FILE ẢNH CURSOR CỦA BẠN */
-        background-size: contain;
-        background-repeat: no-repeat;
-        pointer-events: none; /* Quan trọng: để click xuyên qua được */
-        z-index: 9999; /* Luôn nổi trên cùng */
-        transform: translate(-18%, -10%); /* Căn giữa tâm chuột (tùy chỉnh nếu mũi tên ở góc) */
-        transition: transform 0.05s linear; /* Mượt mà một chút */
-        display: block;
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
+}
 
-    /* Hiệu ứng khi nhấn chuột (nhỏ lại xíu cho có lực) */
-    #custom-cursor.active {
-        transform: translate(-26%, -18%) scale(0.8);
-    }
+.mac-modal-content {
+    padding: 24px 20px 20px;
+    text-align: center;
+}
 
-    /* 3. Style cho thanh tiêu đề để biết là kéo được */
-    .title-bar {
-        cursor: none !important; /* Vẫn ẩn chuột */
-    }
+.mac-modal-content h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.mac-modal-content p {
+    margin: 0;
+    font-size: 12px;
+    color: #ddd;
+    line-height: 1.4;
+}
+
+.mac-modal-buttons {
+    display: flex;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.mac-modal-buttons button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px;
+    font-size: 13px;
+    color: var(--primary);
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.mac-modal-buttons button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mac-modal-buttons button#mac-modal-ok {
+    font-weight: 600;
+    border-left: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.mac-modal-buttons button.mac-btn-primary {
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
 }
 
 /* Trên mobile thì ẩn con trỏ giả đi */
