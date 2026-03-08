@@ -1,41 +1,33 @@
 @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 
 :root {
-    /* --- MACOS DARK MODE PALETTE --- */
-    --bg-wallpaper: url("wall/macos\ \(1\).jpg");
+    /* --- TECH UI PALETTE --- */
 
-    /* Window Background: Màu xám đen có độ trong suốt để tạo hiệu ứng Blur */
+    /* Window Background */
     --bg-window: rgba(30, 30, 30, 0.75);
 
-    /* Content Background: Các mảng màu nền phụ */
+    /* Content Background */
     --bg-content: rgba(255, 255, 255, 0.05);
 
-    /* Input/Button Background: Màu xám nhạt trong suốt */
-    --bg-input: rgba(255, 255, 255, 0.1);
+    /* System Colors */
+    --primary: rgba(255, 255, 255, 0.2);
+    --primary-hover: rgba(255, 255, 255, 0.3);
+    --bg-input: rgba(255, 255, 255, 0.05);
     --bg-input-hover: rgba(255, 255, 255, 0.15);
+    --border-subtle: rgba(255, 255, 255, 0.2);
 
-    /* Border: Rất mỏng, tinh tế */
-    --border-subtle: rgba(255, 255, 255, 0.12);
-
-    /* Typography: Chuẩn San Francisco Text */
+    /* Typography */
     --text-main: #ffffff;
     --text-sub: #98989d;
-    /* SF Gray */
-
-    /* System Colors (Apple) */
-    --primary: #0a84ff;
-    /* macOS System Blue */
-    --primary-hover: #0077ed;
 
     --shadow-win: 0 40px 80px rgba(0, 0, 0, 0.6);
 
-    /* Quiz Feedback Colors (macOS System) */
-    /* Green */
+    /* Quiz Feedback Colors */
     --correct-bg: rgba(48, 209, 88, 0.2);
     --correct-border: #30d158;
     --correct-text: #30d158;
 
-    /* Red */
     --wrong-bg: rgba(255, 69, 58, 0.2);
     --wrong-border: #ff453a;
     --wrong-text: #ff453a;
@@ -43,16 +35,13 @@
 
 * {
     box-sizing: border-box;
-    font-family: "SF Pro Display", sans-serif;
-    letter-spacing: 0.8px !important;
+    font-family: "Google Sans", sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-size: 13px;
-    /* Chuẩn macOS */
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,15 +56,22 @@ body {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--bg-wallpaper) center/cover;
+    background: #000;
     opacity: 0;
     transition: 1.5s;
+    overflow: hidden;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* --- WINDOW CONTAINER --- */
 .mac-window {
-    width: 720px;
-    height: 520px;
+    width: 600px;
+    height: 680px;
     background: var(--bg-window);
     /* Hiệu ứng kính mờ (Vibrancy) mạnh */
     backdrop-filter: blur(40px) saturate(150%);
@@ -101,39 +97,29 @@ body {
     position: relative;
 }
 
-.traffic-lights {
+.window-controls {
     position: absolute;
-    left: 16px;
-    top: 13px;
+    right: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
-    gap: 8px;
 }
 
-.light {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-/* Màu nút window trên nền tối thường ít rực hơn */
-.light.red {
-    background: #ff5f57;
+.win-close-btn {
+    width: 46px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
+    transition: background-color 0.1s, color 0.1s;
 }
 
-.light.yellow {
-    background: #febc2e;
-}
-
-.light.green {
-    background: #28c840;
-}
-
-.window-title {
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 13px;
-    letter-spacing: -0.2px;
+.win-close-btn:hover {
+    background-color: #E81123;
+    color: #fff;
 }
 
 /* Content Area */
@@ -207,27 +193,101 @@ body {
     font-size: 12px;
 }
 
-/* Select & Input style Mac tối */
-select {
+/* Custom Select */
+.custom-select-wrapper {
+    position: relative;
     width: 100%;
-    padding: 6px 12px;
+}
+
+.custom-select-display {
+    width: 100%;
+    padding: 8px 12px;
     border-radius: 5px;
-    border: 1px solid transparent;
-    /* Mac input thường không viền hoặc viền rất mờ */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     background: var(--bg-input);
     color: #fff;
     font-size: 13px;
-    outline: none;
+    cursor: pointer;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    -webkit-appearance: none;
-    /* Xóa mũi tên mặc định để custom nếu muốn, ở đây giữ simple */
-    appearance: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+    user-select: none;
 }
 
-select:focus {
+.custom-select-display.tech-hover {
     background: var(--bg-input-hover);
-    box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.6);
-    /* Focus ring màu xanh */
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.custom-select-display.active {
+    background: var(--bg-input-hover);
+    border-color: rgba(255, 255, 255, 0.5);
+    background-image: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+    background-size: 300% 100%;
+    animation: techSweep 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(255, 255, 255, 0.6);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-select-display.active .arrow-down {
+    transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 6px;
+}
+
+.custom-select-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-select-option {
+    padding: 10px 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 2px;
+}
+
+.custom-select-option.tech-hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.custom-select-option.selected {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-weight: 500;
 }
 
 /* Segmented Control */
@@ -255,13 +315,22 @@ select:focus {
     border-radius: 5px;
     font-size: 12px;
     color: var(--text-sub);
+    transition: all 0.2s;
+}
+
+.segmented-control label.tech-hover span {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .segmented-control input:checked+span {
-    background: rgba(99, 99, 102, 0.6);
-    /* Selected state gray */
+    background-color: rgba(99, 99, 102, 0.6);
+    background-image: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.6) 50%, transparent 60%);
+    background-size: 300% 100%;
+    background-position: 100% 50%;
     color: #fff;
     font-weight: 500;
+    animation: techSweep 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Primary Button */
@@ -367,22 +436,51 @@ select:focus {
     transition: all 0.2s;
 }
 
-.option-btn:hover:not(:disabled) {
+.option-btn.tech-hover:not(:disabled) {
     background: var(--bg-input-hover);
     color: #fff;
 }
 
 /* Correct/Wrong States - Màu Mac System */
 .option-btn.correct {
-    background: var(--correct-bg) !important;
+    /* Nền cứng (xuất hiện ngay lập tức) */
+    background-color: var(--correct-bg) !important;
+    /* Lớp tia sáng phụt qua */
+    background-image: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%) !important;
+    background-size: 300% 100% !important;
+    background-position: 100% 50% !important;
     border: 1px solid var(--correct-border) !important;
     color: var(--correct-text) !important;
+    animation: techSweep 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
 }
 
 .option-btn.wrong {
-    background: var(--wrong-bg) !important;
+    background-color: var(--wrong-bg) !important;
+    background-image: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%) !important;
+    background-size: 300% 100% !important;
+    background-position: 100% 50% !important;
     border: 1px solid var(--wrong-border) !important;
     color: var(--wrong-text) !important;
+    animation: techSweep 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes techSweep {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        /* Trượt background về bên trái để màu đích (đang nằm bên trái gradient) lộ diện từ Trái qua Phải */
+        background-position: 0% 50%;
+    }
+}
+
+.option-btn.correct::after {
+    --corner-color: rgba(48, 209, 88, 0.6) !important;
+}
+
+.option-btn.wrong::after {
+    --corner-color: rgba(255, 69, 58, 0.6) !important;
 }
 
 .quiz-footer-compact {
@@ -396,6 +494,23 @@ select:focus {
 .mac-btn-primary.small {
     width: auto;
     margin: 0;
+}
+
+#back-home-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-sub);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+#back-home-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 /* --- RESULT UI --- */
@@ -565,4 +680,215 @@ select option {
 .closing {
     transform: scale(0.9);
     opacity: 0;
+}
+
+/* --- TECH VIBE OVERRIDES --- */
+* {
+    border-radius: 0 !important;
+}
+
+/* Đổi Title bar: Xóa mác MacOS, thêm nét công nghệ */
+.title-bar {
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(30, 30, 30, 0.6);
+}
+
+.traffic-lights {
+    display: none;
+    /* Ẩn 3 nút đỏ vàng xanh */
+}
+
+.window-title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Window viền công nghệ */
+.mac-window,
+.mac-modal {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    background: rgba(20, 20, 20, 0.8) !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Nút bấm, select, và option: Hiệu ứng 4 góc */
+button,
+select,
+.custom-select-display,
+.option-btn,
+.segmented-control label {
+    position: relative;
+    /* transition cũ của các nút */
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.1s !important;
+}
+
+
+
+/* Tạo 4 góc */
+button::after,
+select::after,
+.custom-select-display::after,
+.option-btn::after,
+.segmented-control label::after {
+    content: '';
+    position: absolute;
+    /* Xuất phát từ khoảng cách bay ra xa hơn một xíu nữa */
+    top: -14px;
+    left: -14px;
+    right: -14px;
+    bottom: -14px;
+    margin: -2px;
+    transition: top 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28), left 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28), right 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28), bottom 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28), opacity 0.3s, margin 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    box-sizing: border-box;
+
+    --corner-color: rgba(255, 255, 255, 0.6);
+    --c: 10px;
+    /* Chiều dài góc */
+    --t: 2px;
+    /* Độ dày viền */
+    background:
+        linear-gradient(var(--corner-color), var(--corner-color)) top left/var(--c) var(--t) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) top left/var(--t) var(--c) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) top right/var(--c) var(--t) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) top right/var(--t) var(--c) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) bottom left/var(--c) var(--t) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) bottom left/var(--t) var(--c) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) bottom right/var(--c) var(--t) no-repeat,
+        linear-gradient(var(--corner-color), var(--corner-color)) bottom right/var(--t) var(--c) no-repeat;
+    /* Thay vì animate bằng CSS animation, ta dùng transition kết hợp JS class cho mượt mà hoàn toàn */
+}
+
+/* 1. Zoom in nhanh khi hover vào (add class .tech-hover) */
+.tech-hover::after {
+    /* Dừng lại ở khoảng cách an toàn, không quá sát mép (tạo hiệu ứng có đệm) */
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    margin: -2px;
+    opacity: 1;
+}
+
+
+/* Highlight màu text */
+.hero-text h2,
+.score-big {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.hero-text p {
+    color: #ccc;
+}
+
+/* Highlight màu text */
+
+.segmented-control input:checked+span {
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+}
+
+.mac-btn-primary {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.option-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ddd;
+}
+
+.mac-btn-text {
+    color: #fff;
+}
+
+.divider {
+    color: #ccc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.mac-form-group label {
+    color: #fff;
+}
+
+/* Thêm hiệu ứng nhấn (click) scale 0.9 */
+button:active,
+select:active,
+.custom-select-display:active,
+.option-btn:active:not(:disabled),
+.segmented-control label:active {
+    transform: scale(0.99) !important;
+    transition: transform 0.05s ease-in-out;
+}
+
+button,
+select,
+.custom-select-display,
+.option-btn,
+.segmented-control label {
+    transition: all 0.1s ease-in-out;
+}
+
+@media (max-width: 650px) {
+    .mac-window {
+        width: 100%;
+        height: 100dvh !important;
+        min-height: 100dvh;
+        max-height: 100dvh;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+
+/* JUMPSCARE ANIMATION */
+@keyframes glitch-anim {
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-10px, 10px)
+    }
+
+    40% {
+        transform: translate(-10px, -10px)
+    }
+
+    60% {
+        transform: translate(10px, 10px)
+    }
+
+    80% {
+        transform: translate(10px, -10px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
+}
+
+.jumpscare-shake {
+    animation: glitch-anim 0.05s infinite !important;
+    filter: invert(1) hue-rotate(180deg) saturate(3) !important;
+    pointer-events: none;
+}
+
+.scare-overlay {
+    position: fixed;
+    inset: 0;
+    background: red;
+    z-index: 99999;
+    opacity: 0.6;
+    pointer-events: none;
+    mix-blend-mode: color-burn;
 }

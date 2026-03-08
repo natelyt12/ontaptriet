@@ -10,16 +10,18 @@
 </head>
 
 <body>
-    <div class="wallpaper"></div>
+    <div class="wallpaper">
+        <video id="bg-video" loop muted playsinline preload="auto">
+            <source src="wall/wee.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <div class="mac-window closing" id="app-window">
         <div class="title-bar">
-            <div class="traffic-lights">
-                <div class="light red" id="close-btn"></div>
-                <div class="light yellow"></div>
-                <div class="light green"></div>
+            <div class="window-controls">
+                <div class="win-close-btn" id="close-btn">&#x2715;</div>
             </div>
-            <div class="window-title">App dùng để qua môn KTCTMLN và PLDC</div>
+            <div class="window-title">App qua môn KTCTMLN và PLDC</div>
         </div>
 
         <div class="window-content">
@@ -79,7 +81,7 @@
                 </div>
 
                 <div class="divider">Chi tiết câu sai</div>
-                <div id="review-list" style="max-height: 220px; overflow-y: auto"></div>
+                <div id="review-list" style="max-height: 400px; overflow-y: auto; padding-right: 5px"></div>
 
                 <button onclick="location.reload()" class="mac-btn-primary" style="margin-top: 20px">Làm lại bài
                     mới</button>
@@ -89,19 +91,7 @@
         <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI</div>
     </div>
 
-    <!-- macOS Style Custom Modal -->
-    <div id="mac-modal-overlay" class="modal-overlay" style="display: none;">
-        <div class="mac-modal">
-            <div class="mac-modal-content">
-                <h3 id="mac-modal-title">Thông báo</h3>
-                <p id="mac-modal-message">Nội dung thông báo ở đây...</p>
-            </div>
-            <div class="mac-modal-buttons">
-                <button id="mac-modal-cancel" class="mac-btn-secondary">Hủy</button>
-                <button id="mac-modal-ok" class="mac-btn-primary">OK</button>
-            </div>
-        </div>
-    </div>
+    <!-- Removed mac-modal-overlay as requested -->
 
     <script src="script.js"></script>
 </body>

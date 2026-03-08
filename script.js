@@ -140,6 +140,9 @@ function initMenu() {
 
     // Load chương cho môn mặc định ban đầu
     loadChapters();
+
+    // Khởi tạo Custom Select cho môn học
+    updateCustomSelect(subjectSelect);
 }
 
 function loadChapters() {
@@ -154,7 +157,90 @@ function loadChapters() {
         option.textContent = chap.name;
         chapterSelect.appendChild(option);
     });
+
+    // Cập nhật Custom Select cho chương
+    updateCustomSelect(chapterSelect);
 }
+
+// --- HỆ THỐNG CUSTOM SELECT (DROPDOWN) GIAO DIỆN TECH ---
+function updateCustomSelect(selectEl) {
+    let wrapper = selectEl.parentElement;
+    if (!wrapper.classList.contains('custom-select-wrapper')) {
+        const newWrapper = document.createElement('div');
+        newWrapper.className = 'custom-select-wrapper';
+        wrapper.insertBefore(newWrapper, selectEl);
+        newWrapper.appendChild(selectEl);
+        wrapper = newWrapper;
+    }
+
+    const oldDisplay = wrapper.querySelector('.custom-select-display');
+    if (oldDisplay) oldDisplay.remove();
+    const oldDropdown = wrapper.querySelector('.custom-select-dropdown');
+    if (oldDropdown) oldDropdown.remove();
+
+    selectEl.style.display = 'none';
+
+    const display = document.createElement('div');
+    display.className = 'custom-select-display';
+    display.innerHTML = `<span>${selectEl.options[selectEl.selectedIndex]?.text || ''}</span> <div class="arrow-down"></div>`;
+
+    // Thêm hover như mọi nút khác
+    display.addEventListener('mouseover', () => display.classList.add('tech-hover'));
+    display.addEventListener('mouseout', () => display.classList.remove('tech-hover'));
+
+    const dropdown = document.createElement('div');
+    dropdown.className = 'custom-select-dropdown';
+
+    Array.from(selectEl.options).forEach((opt, index) => {
+        const item = document.createElement('div');
+        item.className = 'custom-select-option';
+        item.textContent = opt.text;
+
+        if (index === selectEl.selectedIndex) item.classList.add('selected');
+
+        item.addEventListener('click', () => {
+            selectEl.selectedIndex = index;
+            selectEl.dispatchEvent(new Event('change'));
+
+            display.querySelector('span').textContent = opt.text;
+
+            dropdown.querySelectorAll('.custom-select-option').forEach(el => el.classList.remove('selected'));
+            item.classList.add('selected');
+
+            dropdown.classList.remove('show');
+            display.classList.remove('active');
+        });
+
+        item.addEventListener('mouseover', () => item.classList.add('tech-hover'));
+        item.addEventListener('mouseout', () => item.classList.remove('tech-hover'));
+
+        dropdown.appendChild(item);
+    });
+
+    display.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.custom-select-dropdown.show').forEach(d => {
+            if (d !== dropdown) {
+                d.classList.remove('show');
+                d.previousElementSibling.classList.remove('active');
+            }
+        });
+
+        dropdown.classList.toggle('show');
+        display.classList.toggle('active');
+    });
+
+    wrapper.appendChild(display);
+    wrapper.appendChild(dropdown);
+}
+
+document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select-dropdown.show').forEach(d => {
+        d.classList.remove('show');
+        d.previousElementSibling.classList.remove('active');
+    });
+});
+
 
 // --- HÀM XỬ LÝ KHI BẤM BẮT ĐẦU ---
 document.getElementById("start-btn").addEventListener("click", async () => {
@@ -186,7 +272,7 @@ document.getElementById("start-btn").addEventListener("click", async () => {
         });
 
         if (allQuestions.length === 0) {
-            await macAlert("Không tìm thấy câu hỏi nào! Kiểm tra lại file text.");
+            alert("Không tìm thấy câu hỏi nào! Kiểm tra lại file text.");
             return;
         }
 
@@ -204,7 +290,7 @@ document.getElementById("start-btn").addEventListener("click", async () => {
         startQuiz();
     } catch (error) {
         console.error(error);
-        await macAlert("Lỗi khi tải dữ liệu: " + error.message);
+        alert("Lỗi khi tải dữ liệu: " + error.message);
     }
 });
 
@@ -277,14 +363,10 @@ function checkAnswer(selectedIndex, selectedBtn) {
         // Nếu đúng: Tô xanh nút đã chọn
         selectedBtn.classList.add("correct");
         userScore++;
-        document.getElementById("feedback").innerText = "Chính xác! 🎉";
-        document.getElementById("feedback").style.color = "green";
     } else {
         // Nếu sai: Tô đỏ nút đã chọn VÀ Tô xanh nút đúng
         selectedBtn.classList.add("wrong");
         allBtns[qData.correctAnswer].classList.add("correct");
-        document.getElementById("feedback").innerText = "Sai rồi";
-        document.getElementById("feedback").style.color = "red";
     }
 
     // 3. Lưu log để xem lại (Nếu sai)
@@ -349,71 +431,119 @@ function finishQuiz() {
 }
 
 // Xử lý nút quay về trang chủ (trong màn hình Quiz)
-document.getElementById("back-home-btn").addEventListener("click", async () => {
-    const isConfirmed = await macConfirm("Quay lại menu?", "Kết quả ôn tập của bạn sẽ không được lưu lại.");
+document.getElementById("back-home-btn").addEventListener("click", () => {
+    const isConfirmed = confirm("Quay lại menu?\n\nKết quả ôn tập của bạn sẽ không được lưu lại.");
     if (isConfirmed) {
         location.reload(); // Cách đơn giản nhất để reset app
     }
 });
 
+let isMurkyModeActive = false;
+let swgAudioGlobal = null;
+
 const redBtn = document.getElementById("close-btn");
 
 redBtn.addEventListener("click", () => {
-    localStorage.setItem("easter_egg_active", "true");
-    document.getElementById("app-window").classList.add("closing");
-    setTimeout(() => {
-        window.close();
-    }, 1000);
+    if (isMurkyModeActive) {
+        triggerJumpscare();
+    } else {
+        // Lưu thời điểm hết hạn là 10 phút kể từ bây giờ
+        const expiryTime = Date.now() + 10 * 60 * 1000;
+        localStorage.setItem("easter_egg_expiry", expiryTime.toString());
+
+        document.getElementById("app-window").classList.add("closing");
+        setTimeout(() => {
+            window.close();
+        }, 1000);
+    }
 });
 
-/**
- * HỆ THỐNG MAC MODAL (Mượt mà hơn với Expo Animation)
- */
-function showModal(title, message, isConfirm = false) {
-    return new Promise((resolve) => {
-        const overlay = document.getElementById("mac-modal-overlay");
-        const titleEl = document.getElementById("mac-modal-title");
-        const messageEl = document.getElementById("mac-modal-message");
-        const okBtn = document.getElementById("mac-modal-ok");
-        const cancelBtn = document.getElementById("mac-modal-cancel");
+function triggerJumpscare() {
+    const glitchStr = "ŴĜžűĺŮÍŮĮŐŹ¥ŎĔŚîÿÒťďðģÊÍŲŹŃćųŶìñÊÃşøĦ¼·ŴμõŨŠ×łŝŞ";
+    document.title = glitchStr;
 
-        titleEl.innerText = title;
-        messageEl.innerText = message;
-        cancelBtn.style.display = isConfirm ? "block" : "none";
-
-        // Show modal with animation
-        overlay.style.display = "flex";
-        setTimeout(() => overlay.classList.add("active"), 10);
-
-        const cleanup = (result) => {
-            // Hiệu ứng Expo khi đóng
-            overlay.classList.remove("active");
-            overlay.classList.add("closing");
-
-            setTimeout(() => {
-                overlay.style.display = "none";
-                overlay.classList.remove("closing");
-                okBtn.removeEventListener("click", onOk);
-                cancelBtn.removeEventListener("click", onCancel);
-                resolve(result);
-            }, 400); // Đợi animation đóng hoàn tất
-        };
-
-        const onOk = () => cleanup(true);
-        const onCancel = () => cleanup(false);
-
-        okBtn.addEventListener("click", onOk);
-        cancelBtn.addEventListener("click", onCancel);
+    // Gây nhiễu toàn bộ chữ trên trang
+    const allElements = document.querySelectorAll('h1, h2, h3, p, span, button, div, label');
+    allElements.forEach(el => {
+        if (el.children.length === 0 && el.innerText.trim() !== "") {
+            let scrambled = "";
+            for (let i = 0; i < el.innerText.length; i++) {
+                scrambled += glitchStr[Math.floor(Math.random() * glitchStr.length)];
+            }
+            el.innerText = scrambled;
+        }
     });
+
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(50, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(3000, audioCtx.currentTime + 2.5);
+
+        gainNode.gain.setValueAtTime(2, audioCtx.currentTime);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start();
+
+        setTimeout(() => {
+            oscillator.stop();
+
+            // Tắt nhạc nền nếu có
+            if (swgAudioGlobal) {
+                swgAudioGlobal.pause();
+                swgAudioGlobal.currentTime = 0;
+            }
+
+            // Xóa sạch nội dung, bôi đen, ẩn chuột
+            document.body.innerHTML = '';
+            document.body.className = '';
+            document.body.style.backgroundColor = '#000';
+            document.documentElement.style.backgroundColor = '#000';
+            document.body.style.cursor = 'none';
+
+            // --- PHẦN KẾT: HỒN MA DANVJPRO HIỆN HÌNH ---
+            setTimeout(() => {
+                // 1. Chơi nhạc Sybau
+                const sybauAudio = new Audio("wall/sybau.mp3");
+                sybauAudio.play().catch(e => console.log(e));
+
+                // 2. Tạo hình ảnh hiện lên từ từ
+                const img = document.createElement("img");
+                img.src = "wall/danvjppro.jpeg";
+                img.style.position = "fixed";
+                img.style.top = "50%";
+                img.style.left = "50%";
+                img.style.transform = "translate(-50%, -50%)";
+                img.style.width = "100vw";
+                img.style.height = "100vh";
+                img.style.objectFit = "cover";
+                img.style.opacity = "0";
+                img.style.transition = "opacity 40s linear";
+                img.style.zIndex = "999999";
+
+                document.body.appendChild(img);
+
+                // Ép reflow rồi bắt đầu fade in
+                setTimeout(() => {
+                    img.style.opacity = "1"; // Hiện mờ mờ ảo ảo cho chất
+                }, 100);
+
+                // Sau 30s hiện xong thì reload cho tỉnh táo
+                setTimeout(() => {
+                    localStorage.removeItem("easter_egg_expiry");
+                    location.reload();
+                }, 15100);
+            }, 3000);
+        }, 2500); // Kéo dài tiếng rè lên 2.5 giây
+    } catch (e) {
+        console.error("Audio API lỗi: ", e);
+    }
 }
 
-async function macAlert(message) {
-    return await showModal("Thông báo", message, false);
-}
-
-async function macConfirm(title, message) {
-    return await showModal(title, message, true);
-}
 
 // --- PHẦN 6: DRAGGABLE WINDOW (PC ONLY) ---
 if (window.matchMedia("(min-width: 1024px)").matches) {
@@ -473,30 +603,45 @@ if (window.matchMedia("(min-width: 1024px)").matches) {
     });
 }
 
-// --- QUẢN LÝ HÌNH NỀN (LOGIC MỚI) ---
+// --- QUẢN LÝ HÌNH NỀN (LOGIC MỚI BẰNG VIDEO & EASTER EGG) ---
 function initWallpaper() {
-    // 1. Kiểm tra xem người dùng có vừa bấm nút tắt cửa sổ không
-    const isSpecialMode = localStorage.getItem("easter_egg_active");
+    const bgVideo = document.getElementById("bg-video");
+    const expiryTime = localStorage.getItem("easter_egg_expiry");
+    const currentTime = Date.now();
 
-    if (isSpecialMode === "true") {
-        // === CHẾ ĐỘ ĐẶC BIỆT (Chỉ hiện 1 lần) ===
-        console.log("⚠️ Special Mode Activated!");
+    // Nếu tồn tại timer và chưa hết hạn 10p
+    if (expiryTime && currentTime < parseInt(expiryTime)) {
+        console.log("⚠️ Easter Egg: Murky Mode is Active for 10 minutes!");
+        document.title = "painful website";
+        isMurkyModeActive = true;
 
-        // Load ảnh đặc biệt (Bạn nhớ kiếm ảnh 'special.jpg' bỏ vào folder wall nhé)
-        // Gợi ý: Kiếm ảnh "Blue Screen of Death" hoặc "Broken Screen"
-        const specialPath = "wall/wee.jpg";
-        document.documentElement.style.setProperty("--bg-wallpaper", `url('${specialPath}')`);
+        // Thay hình nền video
+        if (bgVideo) {
+            bgVideo.querySelector('source').src = "wall/murky.mp4";
+            bgVideo.load();
+        }
 
-        // QUAN TRỌNG: Xóa ngay dấu hiệu này đi
-        // Để lần reload tiếp theo (F5 lần nữa) sẽ quay về bình thường
-        localStorage.removeItem("easter_egg_active");
-    } else {
-        // === CHẾ ĐỘ BÌNH THƯỜNG (Random) ===
-        const totalImages = 11; // Số lượng ảnh bạn có
-        const randomNum = Math.floor(Math.random() * totalImages) + 1;
-        const wallpaperPath = `wall/macos (${randomNum})_output.jpg`;
+        // Bật nhạc nền (cần tương tác người dùng)
+        swgAudioGlobal = new Audio("wall/swg.mp3");
+        swgAudioGlobal.loop = true;
 
-        document.documentElement.style.setProperty("--bg-wallpaper", `url('${wallpaperPath}')`);
+        // Thử play luôn (có thể bị trình duyệt chặn)
+        swgAudioGlobal.play().catch(e => {
+            console.log("Trình duyệt chặn autoplay âm thanh, đang đợi click:", e);
+            const playAudioOnInteraction = () => {
+                if (swgAudioGlobal) swgAudioGlobal.play();
+                document.removeEventListener('click', playAudioOnInteraction);
+            };
+            document.addEventListener('click', playAudioOnInteraction);
+        });
+    } else if (expiryTime) {
+        // Đã quá 10p thì dọn dẹp
+        localStorage.removeItem("easter_egg_expiry");
+    }
+
+    // Chỉ tự động play hình nền video trên máy tính (width lớn)
+    if (bgVideo && window.innerWidth > 650) {
+        bgVideo.play().catch(e => console.log("Trình duyệt chặn autoplay video:", e));
     }
 }
 
@@ -505,3 +650,42 @@ initWallpaper();
 
 // Khởi chạy
 initMenu();
+
+// --- BỔ SUNG LOGIC GIAO DIỆN HOVER "TECH-VIBE" ---
+
+document.addEventListener('mouseover', (e) => {
+    // Chỉ chọn các element UI tương tác
+    const target = e.target.closest('button, select, .option-btn, .review-item, .segmented-control label');
+    if (!target) return;
+
+    // Nếu đã hover trước đó rồi thì bỏ qua nhảy lại
+    if (target.classList.contains('tech-hover')) return;
+
+    // 1. Zoom vào (tech-hover)
+    target.classList.add('tech-hover');
+
+    // -- THÊM STYLE HOVER THAY CSS --
+    if (target.classList.contains('option-btn') && !target.disabled) {
+        target.style.color = '#fff';
+        target.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+    }
+});
+
+document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('button, select, .option-btn, .review-item, .segmented-control label');
+    if (!target) return;
+
+    // Kiểm tra xem chuột có trỏ vào con bên trong
+    const related = e.relatedTarget;
+    if (target?.contains(related)) return;
+
+    // Rời chuột ra lập tức gỡ bỏ mọi hover
+    target.classList.remove('tech-hover');
+
+    // Reset style
+    target.style.backgroundColor = '';
+    target.style.color = '';
+    target.style.borderColor = '';
+    target.style.boxShadow = '';
+});
+
