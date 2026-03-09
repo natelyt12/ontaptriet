@@ -16,25 +16,58 @@ redBtn.addEventListener("click", () => {
         }
         triggerJumpscare();
     } else {
-        // Track: Payload tắt cửa sổ lần 1 (Kích hoạt Murky Mode cho lần sau)
-        if (typeof gtag === 'function') {
-            gtag('event', 'window_close_normal', {
-                'description': 'User closed window normally, unlocking murky mode'
-            });
+        let closes = parseInt(localStorage.getItem("easter_egg_closes") || "0");
+        closes++;
+        localStorage.setItem("easter_egg_closes", closes.toString());
+
+        let remaining = 3 - closes;
+
+        if (remaining <= 0) {
+            // Track: Kích hoạt payload 1 (Murky Mode cho lần sau)
+            if (typeof gtag === 'function') {
+                gtag('event', 'window_close_normal', {
+                    'description': 'User closed window normally, unlocking murky mode'
+                });
+            }
+            const expiryTime = Date.now() + 10 * 60 * 1000;
+            localStorage.setItem("easter_egg_expiry", expiryTime.toString());
+            localStorage.removeItem("easter_egg_closes");
+
+            // Hiện chữ Good Luck
+            const goodLuckText = document.createElement("div");
+            goodLuckText.innerText = `good luck`;
+            goodLuckText.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.9); font-size: 22px; font-family: monospace; z-index: 9999; text-shadow: 0 0 20px rgba(255,255,255,0.5); pointer-events: none;";
+            document.body.appendChild(goodLuckText);
+
+            goodLuckText.animate([
+                { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+                { opacity: 0, transform: "translate(-50%, -50%) scale(1.1)" }
+            ], { duration: 2500, easing: "ease-in", fill: "forwards" });
+        } else {
+            // Hiện dòng chữ đếm ngược ở giữa màn hình
+            const warningText = document.createElement("div");
+            warningText.innerText = `payload incoming in ${remaining}`;
+            warningText.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.8); font-size: 22px; font-family: monospace; z-index: 9999; text-shadow: 0 0 15px rgba(255,255,255,0.4); pointer-events: none;";
+            document.body.appendChild(warningText);
+
+            // Hiệu ứng fade out trễ dần
+            warningText.animate([
+                { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+                { opacity: 0, transform: "translate(-50%, -50%) scale(0.95)" }
+            ], { duration: 2500, easing: "ease-out", fill: "forwards" });
         }
-        const expiryTime = Date.now() + 10 * 60 * 1000;
-        localStorage.setItem("easter_egg_expiry", expiryTime.toString());
 
         const appWindow = document.getElementById("app-window");
-        const currentTransform = window.getComputedStyle(appWindow).transform;
-        appWindow.animate([
-            { transform: `${currentTransform} scale(1)`, opacity: 1 },
-            { transform: `${currentTransform} scale(0.8)`, opacity: 0 }
-        ], { duration: 400, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
+        if (appWindow) {
+            // Sử dụng CSS class 'closing' để kích hoạt transition mặc định (ổn định hơn .animate)
+            appWindow.classList.add('closing');
+        }
 
+        // Tăng thời gian chờ để thấy hiệu ứng text fade đẹp hơn trước khi tắt hẳn tab
         setTimeout(() => {
+            if (appWindow) appWindow.style.display = 'none';
             window.close();
-        }, 500);
+        }, 3000);
     }
 });
 
@@ -115,6 +148,7 @@ function triggerJumpscare() {
             document.body.className = '';
             document.body.style.backgroundColor = '#000';
             document.documentElement.style.backgroundColor = '#000';
+            localStorage.clear();
 
             setTimeout(() => {
                 const sybauAudio = new Audio("wall/sybau.mp3");
@@ -140,7 +174,6 @@ function triggerJumpscare() {
                 }, 100);
 
                 setTimeout(() => {
-                    localStorage.clear();
                     window.close();
                 }, 15100);
             }, 3000);

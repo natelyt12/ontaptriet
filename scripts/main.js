@@ -6,7 +6,6 @@ function initWallpaper() {
 
     // Nếu tồn tại timer và chưa hết hạn 10p
     if (expiryTime && currentTime < parseInt(expiryTime)) {
-        console.log("⚠️ Easter Egg: Murky Mode is Active for 10 minutes!");
         document.title = "painful website";
         isMurkyModeActive = true;
 
@@ -37,6 +36,27 @@ function initWallpaper() {
             };
             document.addEventListener('click', playAudioOnInteraction);
         });
+
+        // Nút toggle âm thanh
+        const muteBtn = document.createElement("button");
+        muteBtn.innerHTML = "mute";
+        muteBtn.style.cssText = "position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(0,0,0,0.5); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; padding: 5px 10px; font-size: 0.8; cursor: pointer; transition: 0.2s;";
+
+        muteBtn.addEventListener("mouseover", () => muteBtn.style.background = "rgba(255,255,255,0.1)");
+        muteBtn.addEventListener("mouseout", () => muteBtn.style.background = "rgba(0,0,0,0.5)");
+
+        muteBtn.addEventListener("click", () => {
+            if (swgAudioGlobal.volume > 0) {
+                // Tắt tiếng nhưng CỐ TÌNH để nguyên state play() để AudioContext vẫn lấy mẫu đệm được (Fake Mute)
+                swgAudioGlobal.volume = 0;
+                muteBtn.innerHTML = "unmute";
+            } else {
+                swgAudioGlobal.volume = 0.5;
+                muteBtn.innerHTML = "mute";
+            }
+        });
+        document.body.appendChild(muteBtn);
+
     } else if (expiryTime) {
         // Đã quá 10p thì dọn dẹp
         localStorage.removeItem("easter_egg_expiry");

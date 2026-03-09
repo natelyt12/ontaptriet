@@ -756,9 +756,9 @@ select::after,
     box-sizing: border-box;
 
     --corner-color: rgba(255, 255, 255, 0.6);
-    --c: 10px;
+    --c: 8px;
     /* Chiều dài góc */
-    --t: 2px;
+    --t: 1px;
     /* Độ dày viền */
     background:
         linear-gradient(var(--corner-color), var(--corner-color)) top left/var(--c) var(--t) no-repeat,
@@ -775,11 +775,10 @@ select::after,
 /* 1. Zoom in nhanh khi hover vào (add class .tech-hover) */
 .tech-hover::after {
     /* Dừng lại ở khoảng cách an toàn, không quá sát mép (tạo hiệu ứng có đệm) */
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    margin: -2px;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
     opacity: 1;
 }
 
