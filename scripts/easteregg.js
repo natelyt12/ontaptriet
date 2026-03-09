@@ -7,8 +7,21 @@ const redBtn = document.getElementById("close-btn");
 
 redBtn.addEventListener("click", () => {
     if (isMurkyModeActive) {
+        // Track: Payload tắt cửa sổ lần 2 (Kích hoạt error audio/jumpscare)
+        if (typeof gtag === 'function') {
+            gtag('event', 'window_close_scare', {
+                'mode': 'murky',
+                'description': 'User closed window while murky mode was active'
+            });
+        }
         triggerJumpscare();
     } else {
+        // Track: Payload tắt cửa sổ lần 1 (Kích hoạt Murky Mode cho lần sau)
+        if (typeof gtag === 'function') {
+            gtag('event', 'window_close_normal', {
+                'description': 'User closed window normally, unlocking murky mode'
+            });
+        }
         const expiryTime = Date.now() + 10 * 60 * 1000;
         localStorage.setItem("easter_egg_expiry", expiryTime.toString());
 
@@ -45,15 +58,15 @@ function triggerJumpscare() {
         if (audioCtx.state === 'suspended') {
             audioCtx.resume();
         }
-        
-        const frameCount = Math.floor(audioCtx.sampleRate * 0.04); 
+
+        const frameCount = Math.floor(audioCtx.sampleRate * 0.04);
         let buffer;
 
         if (swgAudioBufferGlobal && swgAudioGlobal) {
             const currentTime = swgAudioGlobal.currentTime;
             const startFrame = Math.floor(currentTime * audioCtx.sampleRate);
             buffer = audioCtx.createBuffer(swgAudioBufferGlobal.numberOfChannels, frameCount, audioCtx.sampleRate);
-            
+
             for (let channel = 0; channel < swgAudioBufferGlobal.numberOfChannels; channel++) {
                 const nowBuffering = buffer.getChannelData(channel);
                 const originalData = swgAudioBufferGlobal.getChannelData(channel);
@@ -66,13 +79,13 @@ function triggerJumpscare() {
             buffer = audioCtx.createBuffer(1, frameCount, audioCtx.sampleRate);
             const channelData = buffer.getChannelData(0);
             for (let i = 0; i < frameCount; i++) {
-                channelData[i] = (Math.random() * 2 - 1) * 0.8; 
+                channelData[i] = (Math.random() * 2 - 1) * 0.8;
             }
         }
 
         const source = audioCtx.createBufferSource();
         source.buffer = buffer;
-        source.loop = true; 
+        source.loop = true;
 
         const gainNode = audioCtx.createGain();
         gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
@@ -123,7 +136,7 @@ function triggerJumpscare() {
                 document.body.appendChild(img);
 
                 setTimeout(() => {
-                    img.style.opacity = "1"; 
+                    img.style.opacity = "1";
                 }, 100);
 
                 setTimeout(() => {
@@ -131,8 +144,14 @@ function triggerJumpscare() {
                     window.close();
                 }, 15100);
             }, 3000);
-        }, 2500); 
+        }, 2500);
     } catch (e) {
         console.error("Audio API lỗi: ", e);
+        if (typeof gtag === 'function') {
+            gtag('event', 'audio_api_error', {
+                'error_message': e.message,
+                'is_murky': isMurkyModeActive
+            });
+        }
     }
 }
