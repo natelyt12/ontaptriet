@@ -554,15 +554,17 @@ body {
     .mac-window {
         width: 100%;
         height: 100%;
-        border-radius: 0;
-        border: none;
+        border-radius: 0 !important;
+        border: none !important;
     }
 
     .title-bar {
         display: none;
     }
 
-    .pc-only { display: none !important; }
+    .pc-only {
+        display: none !important;
+    }
 }
 
 select option {
@@ -715,6 +717,7 @@ select option {
     border: 1px solid var(--wrong-border) !important;
     color: var(--wrong-text) !important;
 }
+
 .mac-btn-danger:hover::after {
     --corner-color: rgba(255, 69, 58, 0.6) !important;
 }

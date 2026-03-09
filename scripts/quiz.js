@@ -33,6 +33,15 @@ document.getElementById("start-btn").addEventListener("click", async () => {
 
         shuffleArray(allQuestions);
 
+        // Mix answer options
+        allQuestions.forEach(q => {
+            if (q.correctAnswer !== -1) {
+                const correctOptText = q.options[q.correctAnswer];
+                shuffleArray(q.options);
+                q.correctAnswer = q.options.indexOf(correctOptText);
+            }
+        });
+
         if (limit !== "all") {
             currentQuestions = allQuestions.slice(0, parseInt(limit));
         } else {
@@ -54,6 +63,11 @@ function startQuiz() {
     menuScreen.style.display = "none";
     quizScreen.style.display = "block";
 
+    const titleEl = document.querySelector(".window-title");
+    if (titleEl) {
+        titleEl.innerText = currentSubjectName;
+    }
+
     document.getElementById("total-q-num").innerText = currentQuestions.length;
     renderQuestion();
 }
@@ -73,7 +87,7 @@ function renderQuestion() {
     qData.options.forEach((optText, index) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
-        const label = String.fromCharCode(65 + index); 
+        const label = String.fromCharCode(65 + index);
         btn.innerText = `${label}. ${optText}`;
 
         btn.onclick = () => checkAnswer(index, btn);
@@ -158,6 +172,6 @@ function finishQuiz() {
 
 document.getElementById("back-home-btn").addEventListener("click", () => {
     appConfirm("Quay lại menu?\n\nKết quả ôn tập của bạn sẽ không được lưu lại.", () => {
-        location.reload(); 
+        location.reload();
     });
 });

@@ -137,9 +137,9 @@ document.addEventListener("mousedown", (e) => {
     if (e.button !== 0) return;
     const titleBar = e.target.closest(".title-bar");
     if (!titleBar) return;
-    
+
     // Nếu bấm nhầm nút close thì không drag
-    if(e.target.closest(".win-close-btn")) return;
+    if (e.target.closest(".win-close-btn")) return;
 
     const win = titleBar.closest(".mac-window");
     if (!win) return;
@@ -152,7 +152,7 @@ document.addEventListener("mousedown", (e) => {
     currentDraggingWindow = win;
     startX = e.clientX;
     startY = e.clientY;
-    
+
     const currentTransform = getTranslateValues(win);
     initialTranslateX = currentTransform.x;
     initialTranslateY = currentTransform.y;
@@ -192,19 +192,19 @@ function createAppWindow(title, contentElement, width = 600, height = 680) {
         win.style.top = "0";
         win.style.transform = "none";
     }
-    
+
     // Setup kích thước
     if (window.innerWidth > 720) {
         win.style.width = width === "auto" ? "auto" : width + "px";
         win.style.height = height === "auto" ? "auto" : height + "px";
     }
-    
+
     win.style.zIndex = ++windowZIndexCounter;
 
     // Title Bar
     const titleBar = document.createElement("div");
     titleBar.className = "title-bar";
-    
+
     const controls = document.createElement("div");
     controls.className = "window-controls";
     const closeBtn = document.createElement("div");
@@ -238,13 +238,17 @@ function createAppWindow(title, contentElement, width = 600, height = 680) {
 
     win.appendChild(titleBar);
     win.appendChild(contentArea);
-    
+
     document.body.appendChild(win);
-    
+
     // Animation mở lên - không dùng fill "forwards" để trả lại inline transform (cho phép kéo)
+    const isMobile = window.innerWidth <= 720;
+    const startTransform = isMobile ? "scale(0.8)" : "translate(-50%, -50%) scale(0.8)";
+    const endTransform = isMobile ? "scale(1)" : "translate(-50%, -50%) scale(1)";
+
     win.animate([
-        { transform: "translate(-50%, -50%) scale(0.8)", opacity: 0 },
-        { transform: "translate(-50%, -50%) scale(1)", opacity: 1 }
+        { transform: startTransform, opacity: 0 },
+        { transform: endTransform, opacity: 1 }
     ], { duration: 300, easing: "cubic-bezier(0.23, 1, 0.32, 1)" });
 
     return win;
@@ -259,15 +263,17 @@ window.alert = function (message) {
             <button class="mac-btn-primary small alert-ok-btn" style="width: 100px;">OK</button>
         </div>
     `;
-    
+
     const alertWin = createAppWindow("Thông báo", alertBody, 400, "auto");
-    
+
     const okBtn = alertBody.querySelector(".alert-ok-btn");
     okBtn.onclick = () => {
         const currentTransform = window.getComputedStyle(alertWin).transform;
+        const isMobile = window.innerWidth <= 720;
+        const outTransform = isMobile ? "scale(0.8)" : `${currentTransform} scale(0.8)`;
         alertWin.animate([
-            { transform: `${currentTransform} scale(1)`, opacity: 1 },
-            { transform: `${currentTransform} scale(0.8)`, opacity: 0 }
+            { transform: isMobile ? "scale(1)" : `${currentTransform} scale(1)`, opacity: 1 },
+            { transform: outTransform, opacity: 0 }
         ], { duration: 300, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
         setTimeout(() => alertWin.remove(), 300);
     };
@@ -283,17 +289,19 @@ window.appConfirm = function (message, onConfirm) {
             <button class="mac-btn-primary small confirm-ok-btn mac-btn-danger" style="width: 100px;">Đồng ý</button>
         </div>
     `;
-    
-    const confirmWin = createAppWindow("Xác nhận Hệ thống", confirmBody, 400, "auto");
-    
+
+    const confirmWin = createAppWindow("Xác nhận", confirmBody, 400, "auto");
+
     const cancelBtn = confirmBody.querySelector(".confirm-cancel-btn");
     const okBtn = confirmBody.querySelector(".confirm-ok-btn");
-    
+
     const closeWin = () => {
         const currentTransform = window.getComputedStyle(confirmWin).transform;
+        const isMobile = window.innerWidth <= 720;
+        const outTransform = isMobile ? "scale(0.8)" : `${currentTransform} scale(0.8)`;
         confirmWin.animate([
-            { transform: `${currentTransform} scale(1)`, opacity: 1 },
-            { transform: `${currentTransform} scale(0.8)`, opacity: 0 }
+            { transform: isMobile ? "scale(1)" : `${currentTransform} scale(1)`, opacity: 1 },
+            { transform: outTransform, opacity: 0 }
         ], { duration: 300, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
         setTimeout(() => confirmWin.remove(), 300);
     };

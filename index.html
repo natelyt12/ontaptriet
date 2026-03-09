@@ -7,6 +7,14 @@
     <title>awesome website</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9EVME21XW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-F9EVME21XW');
+    </script>
 </head>
 
 <body>
@@ -53,7 +61,8 @@
                 </div>
 
                 <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
-                <button id="history-btn" class="mac-btn-secondary" style="margin-top: 10px; width: 100%;">Xem lịch sử làm bài</button>
+                <button id="history-btn" class="mac-btn-secondary" style="margin-top: 10px; width: 100%;">Xem lịch sử
+                    làm bài</button>
             </div>
 
             <div id="quiz-screen" style="display: none" class="fade-in">
@@ -82,7 +91,8 @@
                 </div>
 
                 <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <button onclick="location.reload()" class="mac-btn-primary" style="flex: 1;">Làm lại bài mới</button>
+                    <button onclick="location.reload()" class="mac-btn-primary" style="flex: 1;">Làm lại bài
+                        mới</button>
                 </div>
 
                 <div class="divider">Chi tiết câu sai</div>
@@ -94,12 +104,14 @@
                     <button id="history-back-btn" class="mac-btn-text">‹ Quay lại</button>
                     <!-- Title and Open Window Button are removed since the UI acts differently per platform automatically -->
                 </div>
-                
+
                 <div id="history-content" style="padding-top: 5px;">
                     <!-- Lịch sử sẽ được inject vào đây -->
                 </div>
-                
-                <button id="clear-history-btn" class="mac-btn-secondary" style="margin-top: 20px; width: 100%; color: #fff; border-color: rgba(255, 255, 255, 0.2);">Xóa toàn bộ lịch sử</button>
+
+                <button id="clear-history-btn" class="mac-btn-secondary"
+                    style="margin-top: 20px; width: 100%; color: #fff; border-color: rgba(255, 255, 255, 0.2);">Xóa toàn
+                    bộ lịch sử</button>
             </div>
         </div>
 
