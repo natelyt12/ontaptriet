@@ -11,7 +11,7 @@
 
 <body>
     <div class="wallpaper">
-        <video id="bg-video" loop muted playsinline preload="auto">
+        <video id="bg-video" loop muted autoplay playsinline webkit-playsinline preload="auto">
             <source src="wall/wee.mp4" type="video/mp4">
         </video>
     </div>
@@ -53,6 +53,7 @@
                 </div>
 
                 <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
+                <button id="history-btn" class="mac-btn-secondary" style="margin-top: 10px; width: 100%;">Xem lịch sử làm bài</button>
             </div>
 
             <div id="quiz-screen" style="display: none" class="fade-in">
@@ -80,11 +81,25 @@
                     <p>Điểm số (Hệ 10)</p>
                 </div>
 
-                <div class="divider">Chi tiết câu sai</div>
-                <div id="review-list" style="max-height: 400px; overflow-y: auto; padding-right: 5px"></div>
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <button onclick="location.reload()" class="mac-btn-primary" style="flex: 1;">Làm lại bài mới</button>
+                </div>
 
-                <button onclick="location.reload()" class="mac-btn-primary" style="margin-top: 20px">Làm lại bài
-                    mới</button>
+                <div class="divider">Chi tiết câu sai</div>
+                <div id="review-list"></div>
+            </div>
+
+            <div id="history-screen" style="display: none" class="fade-in">
+                <div class="quiz-header-compact">
+                    <button id="history-back-btn" class="mac-btn-text">‹ Quay lại</button>
+                    <!-- Title and Open Window Button are removed since the UI acts differently per platform automatically -->
+                </div>
+                
+                <div id="history-content" style="padding-top: 5px;">
+                    <!-- Lịch sử sẽ được inject vào đây -->
+                </div>
+                
+                <button id="clear-history-btn" class="mac-btn-secondary" style="margin-top: 20px; width: 100%; color: #fff; border-color: rgba(255, 255, 255, 0.2);">Xóa toàn bộ lịch sử</button>
             </div>
         </div>
 
@@ -93,7 +108,13 @@
 
     <!-- Removed mac-modal-overlay as requested -->
 
-    <script src="script.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/parser.js"></script>
+    <script src="scripts/history.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/quiz.js"></script>
+    <script src="scripts/easteregg.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 
 </html>
