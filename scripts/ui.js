@@ -1,10 +1,11 @@
 // --- HÀM KHỞI TẠO MENU ---
 function initMenu() {
     setTimeout(() => {
-        document.querySelector(".wallpaper").style.opacity = "1";
-    }, 500);
-    setTimeout(() => {
         document.getElementById("app-window").classList.remove("closing");
+    }, 500);
+
+    setTimeout(() => {
+        document.querySelector(".wallpaper").style.opacity = "1";
     }, 2000);
     // 1. Render danh sách môn
     for (const key in appConfig) {
@@ -22,6 +23,65 @@ function initMenu() {
 
     // Khởi tạo Custom Select cho môn học
     updateCustomSelect(subjectSelect);
+
+    // Bắt sự kiện cho nút Thông tin
+    const infoBtn = document.getElementById("info-btn");
+    if (infoBtn) {
+        infoBtn.addEventListener("click", showAppInfo);
+    }
+    
+    // Nút Thông tin cho bản Mobile
+    const mobileInfoBtn = document.getElementById("mobile-info-toggle");
+    if (mobileInfoBtn) {
+        mobileInfoBtn.addEventListener("click", showAppInfo);
+    }
+}
+
+function showAppInfo() {
+    const infoHTML = `
+        <div style="text-align: center; margin-bottom: 20px;">
+            <p style="font-size: 40px; margin: 0; line-height: 1;">🎓</p>
+            <h2 style="margin: 10px 0 5px; color: var(--text-main);">Ôn Tập Trắc Nghiệm</h2>
+            <p style="color: var(--text-sub); margin: 0; font-size: 13px;">Phiên bản 1.4.2</p>
+        </div>
+        <div style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <p style="margin: 0 0 10px;"><strong>Tác giả:</strong> Phúc Thanh tại DCCNTT-16.3</p>
+            <p style="margin: 0 0 10px;">Ứng dụng giúp bạn ôn luyện trắc nghiệm các môn học lý thuyết trên trường một cách hiệu quả nhất. Thiết kế bởi tôi và xây dựng bằng Gemini AI, cùng với sự đóng góp của anh em trong Giáo Phái.</p>
+            <p style="margin: 0;"><strong>Tính năng nổi bật:</strong></p>
+            <ul style="margin: 5px 0 10px; padding-left: 20px;">
+                <li>Chế độ Tập trung chống xao nhãng.</li>
+                <li>Lưu trữ lịch sử, theo dõi tiến độ.</li>
+                <li>Giao diện tối ưu có cả Sáng và Tối.</li>
+            </ul>
+            <div style="width: 100%; box-sizing: border-box;">
+                <a href="https://discord.gg/axTMHhXR" target="_blank" class="discord-btn">
+                    <div class="discord-logo-wrapper">
+                        <svg width="32" height="32" viewBox="0 0 127.14 96.36" fill="#5865F2" xmlns="http://www.w3.org/2000/svg"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77.7,77.7,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.09-.09C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                    </div>
+                    <div class="discord-text-wrapper">
+                        <span class="discord-title">Gia nhập Giáo Phái Dân Con</span>
+                        <span class="discord-subtitle">giao lưu cùng bọn tôi</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="modal-buttons" style="border-top: none; padding-bottom: 0;">
+            <button class="mac-btn-primary small" id="info-ok-btn" style="width: 100%;">Đã Hiểu</button>
+        </div>
+    `;
+
+    const infoWin = createAppWindow("Thông tin Ứng dụng", infoHTML, 380, "auto");
+    const okBtn = infoWin.querySelector("#info-ok-btn");
+    okBtn.onclick = () => {
+        const currentTransform = window.getComputedStyle(infoWin).transform;
+        const isMobile = window.innerWidth <= 720;
+        const outTransform = isMobile ? "scale(0.95)" : `${currentTransform} scale(0.95)`;
+        infoWin.animate([
+            { transform: isMobile ? "scale(1)" : `${currentTransform} scale(1)`, opacity: 1 },
+            { transform: outTransform, opacity: 0 }
+        ], { duration: 300, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
+        setTimeout(() => infoWin.remove(), 300);
+    };
 }
 
 function loadChapters() {
@@ -138,8 +198,8 @@ document.addEventListener("mousedown", (e) => {
     const titleBar = e.target.closest(".title-bar");
     if (!titleBar) return;
 
-    // Nếu bấm nhầm nút close thì không drag
-    if (e.target.closest(".win-close-btn")) return;
+    // Nếu bấm nhầm nút close hoặc info thì không drag
+    if (e.target.closest(".win-close-btn") || e.target.closest(".win-info-btn")) return;
 
     const win = titleBar.closest(".mac-window");
     if (!win) return;
@@ -215,7 +275,7 @@ function createAppWindow(title, contentElement, width = 600, height = 680) {
         const currentTransform = window.getComputedStyle(win).transform;
         win.animate([
             { transform: `${currentTransform} scale(1)`, opacity: 1 },
-            { transform: `${currentTransform} scale(0.8)`, opacity: 0 }
+            { transform: `${currentTransform} scale(0.95)`, opacity: 0 }
         ], { duration: 300, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
         setTimeout(() => win.remove(), 300);
     };
@@ -243,7 +303,7 @@ function createAppWindow(title, contentElement, width = 600, height = 680) {
 
     // Animation mở lên - không dùng fill "forwards" để trả lại inline transform (cho phép kéo)
     const isMobile = window.innerWidth <= 720;
-    const startTransform = isMobile ? "scale(0.8)" : "translate(-50%, -50%) scale(0.8)";
+    const startTransform = isMobile ? "scale(0.95)" : "translate(-50%, -50%) scale(0.95)";
     const endTransform = isMobile ? "scale(1)" : "translate(-50%, -50%) scale(1)";
 
     win.animate([
@@ -258,9 +318,9 @@ function createAppWindow(title, contentElement, width = 600, height = 680) {
 window.alert = function (message) {
     const alertBody = document.createElement("div");
     alertBody.innerHTML = `
-        <p style="color:#fff; text-align:center; font-size: 14px; line-height: 1.4; margin: 15px 0;">${message}</p>
-        <div style="display:flex; justify-content:center; padding-bottom: 15px;">
-            <button class="mac-btn-primary small alert-ok-btn" style="width: 100px;">OK</button>
+        <p class="modal-text">${message}</p>
+        <div class="modal-buttons">
+            <button class="mac-btn-primary small alert-ok-btn">OK</button>
         </div>
     `;
 
@@ -270,7 +330,7 @@ window.alert = function (message) {
     okBtn.onclick = () => {
         const currentTransform = window.getComputedStyle(alertWin).transform;
         const isMobile = window.innerWidth <= 720;
-        const outTransform = isMobile ? "scale(0.8)" : `${currentTransform} scale(0.8)`;
+        const outTransform = isMobile ? "scale(0.95)" : `${currentTransform} scale(0.95)`;
         alertWin.animate([
             { transform: isMobile ? "scale(1)" : `${currentTransform} scale(1)`, opacity: 1 },
             { transform: outTransform, opacity: 0 }
@@ -283,10 +343,10 @@ window.alert = function (message) {
 window.appConfirm = function (message, onConfirm) {
     const confirmBody = document.createElement("div");
     confirmBody.innerHTML = `
-        <p style="color:#fff; text-align:center; font-size: 14px; line-height: 1.4; margin: 15px 10px;">${message.replace(/\n/g, "<br>")}</p>
-        <div style="display:flex; justify-content:center; gap: 12px; padding-bottom: 15px;">
-            <button class="mac-btn-secondary small confirm-cancel-btn" style="width: 100px; color: #fff; background: rgba(255,255,255,0.1); border: none;">Hủy</button>
-            <button class="mac-btn-primary small confirm-ok-btn mac-btn-danger" style="width: 100px;">Đồng ý</button>
+        <p class="modal-text">${message.replace(/\n/g, "<br>")}</p>
+        <div class="modal-buttons">
+            <button class="mac-btn-secondary small confirm-cancel-btn">Hủy</button>
+            <button class="mac-btn-secondary small confirm-ok-btn">Đồng ý</button>
         </div>
     `;
 
@@ -298,7 +358,7 @@ window.appConfirm = function (message, onConfirm) {
     const closeWin = () => {
         const currentTransform = window.getComputedStyle(confirmWin).transform;
         const isMobile = window.innerWidth <= 720;
-        const outTransform = isMobile ? "scale(0.8)" : `${currentTransform} scale(0.8)`;
+        const outTransform = isMobile ? "scale(0.95)" : `${currentTransform} scale(0.95)`;
         confirmWin.animate([
             { transform: isMobile ? "scale(1)" : `${currentTransform} scale(1)`, opacity: 1 },
             { transform: outTransform, opacity: 0 }

@@ -157,7 +157,7 @@ function finishQuiz() {
             div.className = "review-item";
             div.innerHTML = `
                 <p><strong>Câu ${idx + 1}:</strong> ${item.question}</p>
-                <p style="color: red">❌ Bạn chọn: ${item.selected}</p>
+                <p class="review-wrong">❌ Bạn chọn: ${item.selected}</p>
                 <p class="review-correct">✅ Đáp án đúng: ${item.correct}</p>
             `;
             reviewContainer.appendChild(div);
@@ -170,8 +170,30 @@ function finishQuiz() {
     }
 }
 
+function resetToMenu() {
+    quizScreen.style.display = "none";
+    resultScreen.style.display = "none";
+    menuScreen.style.display = "block";
+
+    const titleEl = document.querySelector(".window-title");
+    if (titleEl) {
+        titleEl.innerText = "App này dùng để qua môn";
+    }
+
+    currentQuestions = [];
+    currentQuestionIndex = 0;
+    userScore = 0;
+    userAnswersLog = [];
+    
+    document.getElementById("options-container").innerHTML = "";
+    document.getElementById("feedback").innerText = "";
+    
+    const nextBtn = document.getElementById("next-btn");
+    if (nextBtn) nextBtn.style.display = "none";
+}
+
 document.getElementById("back-home-btn").addEventListener("click", () => {
     appConfirm("Quay lại menu?\n\nKết quả ôn tập của bạn sẽ không được lưu lại.", () => {
-        location.reload();
+        resetToMenu();
     });
 });

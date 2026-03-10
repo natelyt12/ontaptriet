@@ -28,8 +28,8 @@ function saveHistory(score10, correctCount, totalCount, subjectName, chapterName
     // Thêm vào đầu danh sách
     historyList.unshift(newRecord);
 
-    // Giới hạn tối đa 3 lượt (xóa phần tử cũ nhất ở cuối)
-    if (historyList.length > 3) {
+    // Giới hạn tối đa 5 lượt (xóa phần tử cũ nhất ở cuối)
+    if (historyList.length > 5) {
         historyList.pop();
     }
 
@@ -55,8 +55,7 @@ document.getElementById("history-btn").addEventListener("click", () => {
         scrollArea.innerHTML = historyContentHtml;
 
         const clearBtnCopy = document.createElement("button");
-        clearBtnCopy.className = "mac-btn-secondary";
-        clearBtnCopy.style.cssText = "width: 100%; color: #fff; border-color: rgba(255, 255, 255, 0.2); margin-top: auto;";
+        clearBtnCopy.className = "mac-btn-secondary clear-history-btn-ui";
         clearBtnCopy.innerHTML = "Xóa toàn bộ lịch sử";
         clearBtnCopy.onclick = () => {
             appConfirm("Bạn có chắc muốn xóa toàn bộ lịch sử ôn tập không?", () => {
@@ -115,35 +114,34 @@ function renderHistoryScreen() {
     historyList.forEach((record, idx) => {
         const recordDiv = document.createElement("div");
         recordDiv.className = "history-record-card";
-        recordDiv.style.cssText = "background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);";
 
         // Phần Header của Record
         const headerHtml = `
-            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+            <div class="history-card-header">
                 <div>
-                    <h4 style="margin: 0; color: #fff; font-size: 16px;">Lần ${historyList.length - idx} - ${record.date}</h4>
-                    <p style="margin: 4px 0 0 0; font-size: 13px; color: rgba(255,255,255,0.7)">${record.subject} | ${record.chapter}</p>
+                    <h4 class="history-card-title">Lần ${historyList.length - idx} - ${record.date}</h4>
+                    <p class="history-card-subtitle">${record.subject} | ${record.chapter}</p>
                 </div>
                 <div style="text-align: right">
-                    <span style="font-size: 20px; font-weight: bold; color: ${record.score >= 5 ? '#4ade80' : '#f87171'}">${record.score}</span>
-                    <p style="margin: 0; font-size: 12px; color: gray">${record.correct}/${record.total} câu</p>
+                    <span class="history-card-score" style="color: ${record.score >= 5 ? 'var(--correct-text)' : 'var(--wrong-text)'}">${record.score}</span>
+                    <p class="history-card-stats">${record.correct}/${record.total} câu</p>
                 </div>
             </div>
         `;
 
-        let mistakesHtml = `<details style="margin-bottom: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);">`;
-        mistakesHtml += `<summary style="padding: 12px; font-size: 14px; font-weight: bold; cursor: pointer; user-select: none; outline: none; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.8);">Chi tiết câu sai <span style="font-size: 10px; color: gray;">(Bấm để xem)</span></summary>`;
-        mistakesHtml += `<div style="padding: 0 12px 12px 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px;">`;
+        let mistakesHtml = `<details class="history-mistakes-details">`;
+        mistakesHtml += `<summary class="history-mistakes-summary">Chi tiết câu sai <span class="summary-hint">(Bấm để xem)</span></summary>`;
+        mistakesHtml += `<div class="history-mistakes-content">`;
 
         if (!record.mistakes || record.mistakes.length === 0) {
             mistakesHtml += `<p style="color: #4ade80; font-size: 13px; text-align: center; margin: 10px 0;">Tất cả đều đúng! 🌟</p>`;
         } else {
             record.mistakes.forEach((mistake, mIdx) => {
                 mistakesHtml += `
-                    <div class="review-item" style="margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.02); border-left: 4px solid rgba(255,255,255,0.1);">
-                        <p style="margin: 0 0 8px; font-size: 13.5px; line-height: 1.4;"><strong>Câu sai:</strong> ${mistake.question}</p>
-                        <p style="margin: 0 0 5px; font-size: 13px; color: #f87171">❌ Chọn: ${mistake.selected}</p>
-                        <p style="margin: 0; font-size: 13px; color: #4ade80">✅ Đáp án: ${mistake.correct}</p>
+                    <div class="review-item history-review-item">
+                        <p class="history-mistake-q"><strong>Câu sai:</strong> ${mistake.question}</p>
+                        <p class="review-wrong">❌ Chọn: ${mistake.selected}</p>
+                        <p class="review-correct">✅ Đáp án: ${mistake.correct}</p>
                     </div>
                 `;
             });

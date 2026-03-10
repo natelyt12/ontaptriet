@@ -31,6 +31,8 @@
     --wrong-bg: rgba(255, 69, 58, 0.2);
     --wrong-border: #ff453a;
     --wrong-text: #ff453a;
+
+    --corner-line: rgba(255, 255, 255, 0.6);
 }
 
 * {
@@ -58,14 +60,23 @@ body {
     z-index: -1;
     background: #000;
     opacity: 0;
-    transition: 1.5s;
+    transition: opacity 5s ease-in-out;
     overflow: hidden;
+}
+
+.wallpaper-overlay {
+    position: absolute;
+    inset: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
 }
 
 #bg-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 0;
 }
 
 /* --- WINDOW CONTAINER --- */
@@ -120,6 +131,86 @@ body {
 .win-close-btn:hover {
     background-color: #E81123;
     color: #fff;
+}
+
+.win-close-btn.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.win-info-btn {
+    width: 46px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: serif;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: background-color 0.1s, color 0.1s;
+}
+
+.win-info-btn:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+/* Discord Button */
+.discord-btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(88, 101, 242, 0.1);
+    border: 1px solid rgba(88, 101, 242, 0.4);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+    cursor: pointer;
+}
+
+.discord-btn:hover {
+    background: rgba(88, 101, 242, 0.2);
+    transform: translateY(-1px);
+}
+
+.discord-logo-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 16px;
+    margin-right: 16px;
+    border-right: 1px solid rgba(88, 101, 242, 0.3);
+}
+
+.discord-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.discord-title {
+    color: #5865F2;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.discord-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.2;
+}
+
+body.light-mode .discord-subtitle {
+    color: rgba(0, 0, 0, 0.6);
 }
 
 /* Content Area */
@@ -534,8 +625,109 @@ body {
     color: #ccc;
 }
 
+.review-wrong {
+    color: var(--wrong-text) !important;
+}
+
 .review-correct {
     color: var(--correct-text) !important;
+}
+
+/* --- HISTORY UI --- */
+.history-record-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.history-card-title {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+}
+
+.history-card-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.history-card-score {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.history-card-stats {
+    margin: 0;
+    font-size: 12px;
+    color: gray;
+}
+
+.history-mistakes-details {
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.history-mistakes-summary {
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.summary-hint {
+    font-size: 10px;
+    color: gray;
+}
+
+.history-mistakes-content {
+    padding: 0 12px 12px 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 5px;
+}
+
+.history-review-item {
+    margin-bottom: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 4px solid rgba(255, 255, 255, 0.1);
+}
+
+.history-mistake-q {
+    margin: 0 0 8px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: #fff;
+}
+
+#history-btn,
+#clear-history-btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.clear-history-btn-ui {
+    width: 100%;
+    margin-top: auto;
 }
 
 /* --- CREDIT --- */
@@ -561,9 +753,9 @@ body {
     .title-bar {
         display: none;
     }
-
-    .pc-only {
-        display: none !important;
+    
+    .mobile-info-toggle-btn {
+        display: flex !important;
     }
 }
 
@@ -620,11 +812,25 @@ select option {
     font-weight: 600;
 }
 
-.mac-modal-content p {
-    margin: 0;
-    font-size: 12px;
-    color: #ddd;
+.mac-modal-content p,
+.modal-text {
+    margin: 15px 10px;
+    font-size: 14px;
     line-height: 1.4;
+    color: #fff;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-bottom: 15px;
+}
+
+.modal-buttons button {
+    width: 100px;
+    border: 1px solid transparent;
 }
 
 .mac-modal-buttons {
@@ -658,12 +864,7 @@ select option {
     margin: 0;
 }
 
-/* Trên mobile thì ẩn con trỏ giả đi */
-@media (max-width: 1023px) {
-    #custom-cursor {
-        display: none;
-    }
-}
+
 
 #app-window {
     transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -686,10 +887,6 @@ select option {
     background: rgba(30, 30, 30, 0.6);
 }
 
-.traffic-lights {
-    display: none;
-    /* Ẩn 3 nút đỏ vàng xanh */
-}
 
 .window-title {
     color: #fff;
@@ -705,22 +902,7 @@ select option {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Nút Danger (Đỏ khi hover) dùng cho nút Đồng ý alert */
-.mac-btn-danger {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
 
-.mac-btn-danger:hover {
-    background-color: var(--wrong-bg) !important;
-    border: 1px solid var(--wrong-border) !important;
-    color: var(--wrong-text) !important;
-}
-
-.mac-btn-danger:hover::after {
-    --corner-color: rgba(255, 69, 58, 0.6) !important;
-}
 
 /* Nút bấm, select, và option: Hiệu ứng 4 góc */
 button,
@@ -755,7 +937,7 @@ select::after,
     z-index: 10;
     box-sizing: border-box;
 
-    --corner-color: rgba(255, 255, 255, 0.6);
+    --corner-color: var(--corner-line);
     --c: 8px;
     /* Chiều dài góc */
     --t: 1px;
@@ -856,45 +1038,307 @@ select,
 }
 
 
-/* JUMPSCARE ANIMATION */
-@keyframes glitch-anim {
-    0% {
-        transform: translate(0)
-    }
 
-    20% {
-        transform: translate(-10px, 10px)
-    }
 
-    40% {
-        transform: translate(-10px, -10px)
-    }
+/* --- LIGHT MODE --- */
+body.light-mode {
+    --bg-window: rgba(255, 255, 255, 0.65);
+    --bg-content: rgba(0, 0, 0, 0.05);
+    --primary: rgba(0, 122, 255, 0.8);
+    --primary-hover: rgba(0, 122, 255, 1);
+    --bg-input: rgba(0, 0, 0, 0.05);
+    --bg-input-hover: rgba(0, 0, 0, 0.1);
+    --border-subtle: rgba(0, 0, 0, 0.2);
+    --text-main: #111111;
+    --text-sub: #555555;
+    background-color: #f0f0f0;
+    --corner-line: rgba(0, 0, 0, 0.4);
 
-    60% {
-        transform: translate(10px, 10px)
-    }
+    /* Quiz Feedback Colors - Darker for Light Mode */
+    --correct-bg: rgba(20, 140, 40, 0.1);
+    --correct-border: #148c28;
+    --correct-text: #148c28;
 
-    80% {
-        transform: translate(10px, -10px)
-    }
-
-    100% {
-        transform: translate(0)
-    }
+    --wrong-bg: rgba(200, 30, 30, 0.1);
+    --wrong-border: #c81e1e;
+    --wrong-text: #b01818;
 }
 
-.jumpscare-shake {
-    animation: glitch-anim 0.05s infinite !important;
-    filter: invert(1) hue-rotate(180deg) saturate(3) !important;
-    pointer-events: none;
+body.light-mode .window-title,
+body.light-mode .hero-text h2,
+body.light-mode .score-big,
+body.light-mode .question-pane h3,
+/* Fix info icons color in Light Mode (turn white on hover) */
+body.light-mode .win-info-btn:not(:hover),
+body.light-mode #mobile-info-toggle:not(:hover) #mobile-info-icon {
+    color: var(--primary) !important;
 }
 
-.scare-overlay {
+body.light-mode .win-info-btn:hover {
+    color: #ffffff !important;
+}
+
+body.light-mode .win-close-btn,
+body.light-mode .modal-text,
+body.light-mode .history-card-title,
+body.light-mode .history-mistake-q,
+body.light-mode .review-item p,
+body.light-mode .mac-modal-content h3,
+body.light-mode .mac-modal-content p {
+    color: #000000 !important;
+}
+
+body.light-mode .window-title,
+body.light-mode .hero-text h2,
+body.light-mode .score-big,
+body.light-mode .question-pane h3 {
+    text-shadow: none !important;
+}
+
+body.light-mode .hero-text p,
+body.light-mode .mac-form-group label,
+body.light-mode .divider,
+body.light-mode textarea {
+    color: var(--text-sub);
+}
+
+body.light-mode .option-btn,
+body.light-mode .mac-btn-text,
+body.light-mode .custom-select-display,
+body.light-mode select {
+    color: var(--text-main);
+}
+
+body.light-mode .option-btn.tech-hover:not(:disabled) {
+    background: rgba(0, 122, 255, 0.1) !important;
+    border: 1px solid rgba(0, 122, 255, 0.5) !important;
+    color: #007aff !important;
+    --corner-line: #007aff;
+}
+
+body.light-mode select option {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-mode .mac-window,
+body.light-mode .mac-modal {
+    background: var(--bg-window) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .title-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode .mac-btn-primary,
+body.light-mode .mac-btn-secondary,
+body.light-mode .confirm-cancel-btn,
+body.light-mode .confirm-ok-btn {
+    color: #555555 !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+body.light-mode .mac-btn-primary.tech-hover,
+body.light-mode .mac-btn-secondary.tech-hover,
+body.light-mode .confirm-cancel-btn.tech-hover {
+    background: rgba(0, 122, 255, 0.1) !important;
+    border: 1px solid rgba(0, 122, 255, 0.5) !important;
+    color: #007aff !important;
+    --corner-line: #007aff !important;
+}
+
+
+body.light-mode .segmented-control label.tech-hover span {
+    background: rgba(134, 134, 134, 0.4) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .segmented-control input:checked+span {
+    background: #007aff !important;
+    color: #ffffff !important;
+    background-image: none !important;
+    box-shadow: 0 1px 3px rgba(0, 122, 255, 0.3) !important;
+}
+
+body.light-mode .arrow-down {
+    border-top-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+body.light-mode .custom-select-dropdown {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .custom-select-option {
+    color: #444444 !important;
+}
+
+body.light-mode .custom-select-option.tech-hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #000000 !important;
+}
+
+body.light-mode .custom-select-option.selected {
+    background: rgba(0, 122, 255, 0.1) !important;
+    color: #007aff !important;
+}
+
+body.light-mode .app-credit {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+/* .win-close-btn color consolidated above */
+
+body.light-mode .win-close-btn:hover {
+    color: #ffffff !important;
+}
+
+/* Back button hover */
+body.light-mode #back-home-btn:hover,
+body.light-mode #history-back-btn:hover {
+    color: #007aff !important;
+    background: rgba(0, 122, 255, 0.1) !important;
+}
+
+/* Modal Content Text Color consolidated above */
+
+body.light-mode .mac-modal-buttons button,
+body.light-mode .mac-modal .mac-modal-buttons button,
+body.light-mode .modal-buttons button {
+    color: #007aff !important;
+}
+
+/* Button base styles have been consolidated above */
+
+body.light-mode .review-item {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* .review-item p color consolidated above */
+
+body.light-mode .review-item p.review-wrong {
+    color: var(--wrong-text) !important;
+}
+
+body.light-mode .review-item p.review-correct {
+    color: var(--correct-text) !important;
+}
+
+
+body.light-mode .history-record-card {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    backdrop-filter: blur(10px);
+}
+
+body.light-mode .history-card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* .history-card-title, .history-mistake-q color consolidated above */
+
+body.light-mode .history-card-subtitle {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+body.light-mode .history-mistakes-details {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .history-mistakes-summary {
+    color: #333333 !important;
+}
+
+body.light-mode .history-review-item {
+    background: rgba(255, 255, 255, 0.0) !important;
+    border-left: 4px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Hover Cancel -> Blue (Consolidated above) */
+
+/* Hover OK -> Red */
+body.light-mode .confirm-ok-btn.tech-hover {
+    background: var(--wrong-bg) !important;
+    border: 1px solid var(--wrong-border) !important;
+    color: var(--wrong-text) !important;
+    --corner-line: var(--wrong-text) !important;
+}
+
+/* STRICTLY NO BORDER RADIUS */
+body.light-mode * {
+    border-radius: 0 !important;
+}
+
+/* Floating Buttons Container */
+.floating-controls {
     position: fixed;
-    inset: 0;
-    background: red;
-    z-index: 99999;
-    opacity: 0.6;
-    pointer-events: none;
-    mix-blend-mode: color-burn;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+}
+
+.theme-toggle-btn,
+.focus-toggle-btn,
+.mobile-info-toggle-btn {
+    background: var(--bg-window);
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-info-toggle-btn {
+    display: none; /* Chỉ hiện trên mobile */
+}
+
+.theme-toggle-btn:hover,
+.focus-toggle-btn:hover,
+.mobile-info-toggle-btn:hover {
+    transform: scale(1.1);
+    background: var(--bg-input-hover);
+}
+
+/* Light Mode Overrides for floating buttons to prevent "merging" */
+body.light-mode .theme-toggle-btn,
+body.light-mode .focus-toggle-btn,
+body.light-mode .mobile-info-toggle-btn {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Focus Mode effect - DARK (Default) */
+body.focus-mode .wallpaper-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Focus Mode effect - LIGHT */
+body.light-mode.focus-mode .wallpaper-overlay {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+}
+
+body.focus-mode .mac-window,
+body.focus-mode .mac-modal {
+    box-shadow: none !important;
 }

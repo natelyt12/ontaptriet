@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>awesome website</title>
+    <title>App qua môn</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9EVME21XW"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -20,16 +21,18 @@
 <body>
     <div class="wallpaper">
         <video id="bg-video" loop muted autoplay playsinline webkit-playsinline preload="auto">
-            <source src="wall/wee.mp4" type="video/mp4">
+            <source src="wall/bg.mp4" type="video/mp4">
         </video>
+        <div class="wallpaper-overlay"></div>
     </div>
 
     <div class="mac-window closing" id="app-window">
         <div class="title-bar">
             <div class="window-controls">
-                <div class="win-close-btn" id="close-btn">&#x2715;</div>
+                <div class="win-info-btn" id="info-btn" title="Thông tin ứng dụng">i</div>
+                <div class="win-close-btn disabled" title="Không thể đóng">&#x2715;</div>
             </div>
-            <div class="window-title">App qua môn KTCTMLN và PLDC</div>
+            <div class="window-title">App này dùng để qua môn</div>
         </div>
 
         <div class="window-content">
@@ -61,8 +64,7 @@
                 </div>
 
                 <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
-                <button id="history-btn" class="mac-btn-secondary" style="margin-top: 10px; width: 100%;">Xem lịch sử
-                    làm bài</button>
+                <button id="history-btn" class="mac-btn-secondary">Xem lịch sử làm bài</button>
             </div>
 
             <div id="quiz-screen" style="display: none" class="fade-in">
@@ -91,7 +93,7 @@
                 </div>
 
                 <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <button onclick="location.reload()" class="mac-btn-primary" style="flex: 1;">Làm lại bài
+                    <button onclick="resetToMenu()" class="mac-btn-primary" style="flex: 1;">Làm lại bài
                         mới</button>
                 </div>
 
@@ -109,9 +111,7 @@
                     <!-- Lịch sử sẽ được inject vào đây -->
                 </div>
 
-                <button id="clear-history-btn" class="mac-btn-secondary"
-                    style="margin-top: 20px; width: 100%; color: #fff; border-color: rgba(255, 255, 255, 0.2);">Xóa toàn
-                    bộ lịch sử</button>
+                <button id="clear-history-btn" class="mac-btn-secondary">Xóa toàn bộ lịch sử</button>
             </div>
         </div>
 
@@ -120,12 +120,25 @@
 
     <!-- Removed mac-modal-overlay as requested -->
 
+    <!-- Floating Controls -->
+    <div class="floating-controls">
+        <button id="mobile-info-toggle" class="mobile-info-toggle-btn" title="Thông tin ứng dụng">
+            <span id="mobile-info-icon"
+                style="font-family: serif; font-style: italic; font-weight: bold; font-size: 22px;">i</span>
+        </button>
+        <button id="focus-toggle" class="focus-toggle-btn" title="Chế độ tập trung">
+            <span id="focus-icon">🎯</span>
+        </button>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Chuyển chế độ sáng/tối">
+            <span id="theme-icon">☀️</span>
+        </button>
+    </div>
+
     <script src="scripts/config.js"></script>
     <script src="scripts/parser.js"></script>
     <script src="scripts/history.js"></script>
     <script src="scripts/ui.js"></script>
     <script src="scripts/quiz.js"></script>
-    <script src="scripts/easteregg.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 
