@@ -29,7 +29,7 @@ function initMenu() {
     if (infoBtn) {
         infoBtn.addEventListener("click", showAppInfo);
     }
-    
+
     // Nút Thông tin cho bản Mobile
     const mobileInfoBtn = document.getElementById("mobile-info-toggle");
     if (mobileInfoBtn) {
@@ -46,7 +46,7 @@ function showAppInfo() {
         </div>
         <div style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--border-subtle);">
             <p style="margin: 0 0 10px;"><strong>Tác giả:</strong> Phúc Thanh tại DCCNTT-16.3</p>
-            <p style="margin: 0 0 10px;">Ứng dụng giúp bạn ôn luyện trắc nghiệm các môn học lý thuyết trên trường một cách hiệu quả nhất. Thiết kế bởi tôi và xây dựng bằng Gemini AI, cùng với sự đóng góp của anh em trong Giáo Phái.</p>
+            <p style="margin: 0 0 10px;">Ứng dụng giúp bạn ôn luyện trắc nghiệm các môn học lý thuyết trên trường một cách hiệu quả nhất.</p>
             <p style="margin: 0;"><strong>Tính năng nổi bật:</strong></p>
             <ul style="margin: 5px 0 10px; padding-left: 20px;">
                 <li>Chế độ Tập trung chống xao nhãng.</li>
