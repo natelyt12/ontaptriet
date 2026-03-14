@@ -209,6 +209,78 @@ body {
     line-height: 1.2;
 }
 
+/* GitHub Button */
+.github-btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.github-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.github-logo-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 16px;
+    margin-right: 16px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.github-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.github-title {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.github-subtitle {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.2;
+}
+
+body.light-mode .github-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .github-title {
+    color: #000000;
+}
+
+body.light-mode .github-subtitle {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-mode .github-logo-wrapper {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .github-logo-wrapper svg {
+    fill: #000000;
+}
+
 body.light-mode .discord-subtitle {
     color: rgba(0, 0, 0, 0.6);
 }
