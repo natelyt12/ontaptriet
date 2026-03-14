@@ -1,4 +1,5 @@
 // --- CẤU HÌNH & QUẢN LÝ DỮ LIỆU ---
+const APP_VERSION = "1.5";
 
 // 1. Cấu hình danh sách môn và file (Bạn phải tự khai báo đúng tên file trong folder)
 const appConfig = {
@@ -25,6 +26,7 @@ let userAnswersLog = []; // Lưu lịch sử chọn để review
 // Thông tin môn bộ được chọn lúc làm
 let currentSubjectName = "";
 let currentChapterName = "";
+let currentFocusedOptionIndex = -1; // Chỉ mục câu hỏi đang được tập trung (phím mũi tên)
 
 // DOM Elements toàn cục
 const menuScreen = document.getElementById("menu-screen");

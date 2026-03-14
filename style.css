@@ -822,8 +822,16 @@ body.light-mode .discord-subtitle {
         border: none !important;
     }
 
-    .title-bar {
+    /* Hide title bar ONLY for main window on mobile */
+    #app-window .title-bar {
         display: none;
+    }
+    
+    /* Ensure other windows (modals) show title bar for closing */
+    .mac-window:not(#app-window) .title-bar {
+        display: flex;
+        background: rgba(30,30,30, 0.9);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
     .mobile-info-toggle-btn {

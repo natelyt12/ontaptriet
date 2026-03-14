@@ -35,6 +35,15 @@ function initMenu() {
     if (mobileInfoBtn) {
         mobileInfoBtn.addEventListener("click", showAppInfo);
     }
+
+    // Tự động hiện Changelog nếu là bản mới
+    setTimeout(() => {
+        const lastSeenVer = localStorage.getItem("last_seen_version");
+        if (lastSeenVer !== APP_VERSION) {
+            showChangelog();
+            localStorage.setItem("last_seen_version", APP_VERSION);
+        }
+    }, 1000);
 }
 
 function showAppInfo() {
@@ -42,7 +51,7 @@ function showAppInfo() {
         <div style="text-align: center; margin-bottom: 20px;">
             <p style="font-size: 40px; margin: 0; line-height: 1;">🎓</p>
             <h2 style="margin: 10px 0 5px; color: var(--text-main);">Ôn Tập Trắc Nghiệm</h2>
-            <p style="color: var(--text-sub); margin: 0; font-size: 13px;">Phiên bản 1.4.3</p>
+            <p style="color: var(--text-sub); margin: 0; font-size: 13px;">Phiên bản ${APP_VERSION}</p>
         </div>
         <div style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--border-subtle);">
             <p style="margin: 0 0 10px;"><strong>Tác giả:</strong> Phúc Thanh tại DCCNTT-16.3</p>
@@ -74,13 +83,21 @@ function showAppInfo() {
                 </a>
             </div>
         </div>
-        <div class="modal-buttons" style="border-top: none; padding-bottom: 0;">
-            <button class="mac-btn-primary small" id="info-ok-btn" style="width: 100%;">Đã Hiểu</button>
+        <div class="modal-buttons" style="border-top: none; padding-bottom: 0; flex-direction: column; gap: 8px;">
+            <button class="mac-btn-secondary small" id="view-changelog-btn" style="width: 100%; margin: 0;">Xem nhật ký cập nhật</button>
+            <button class="mac-btn-primary small" id="info-ok-btn" style="width: 100%; margin: 0;">Đã Hiểu</button>
         </div>
     `;
 
     const infoWin = createAppWindow("Thông tin Ứng dụng", infoHTML, 380, "auto");
     const okBtn = infoWin.querySelector("#info-ok-btn");
+    const changelogBtn = infoWin.querySelector("#view-changelog-btn");
+
+    changelogBtn.onclick = () => {
+        // Tắt cửa sổ Info rồi mở Changelog
+        okBtn.click();
+        setTimeout(showChangelog, 350);
+    };
     okBtn.onclick = () => {
         const currentTransform = window.getComputedStyle(infoWin).transform;
         const isMobile = window.innerWidth <= 720;
@@ -91,6 +108,55 @@ function showAppInfo() {
         ], { duration: 300, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
         setTimeout(() => infoWin.remove(), 300);
     };
+}
+
+function showChangelog() {
+    const changelogHTML = `
+        <div style="font-size: 13px; line-height: 1.6; color: var(--text-main);">
+            <div style="margin-bottom: 20px; border-left: 3px solid #007aff; padding-left: 12px;">
+                <h3 style="margin: 0 0 5px; color: #007aff;">v1.5 - Nâng cấp trải nghiệm</h3>
+                <p style="margin: 0 0 8px;">Hiện tại đã có thể ôn bài bằng bàn phím thay vì chuột:</p>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li><strong>Phím Mũi tên:</strong> Di chuyển giữa các đáp án.</li>
+                    <li><strong>Phím Enter:</strong> Chọn đáp án và chuyển sang câu tiếp theo.</li>
+                    <li><strong>Phím Esc:</strong> Thoát nhanh về Menu chính.</li>
+                    <li><strong>Nhật ký cập nhật:</strong> Xem lại các thay đổi mới qua nút trong Menu Thông tin.</li>
+                </ul>
+            </div>
+            
+            <div style="margin-bottom: 15px; opacity: 1;">
+                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4.3</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Cập nhật mã nguồn GitHub trực tiếp trong App Info.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 15px; opacity: 1;">
+                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4.2</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Sửa lỗi dữ liệu Chương 1 Kinh tế chính trị Mác-Lênin.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 15px; opacity: 1;">
+                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4.1</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Sửa một số lỗi giao diện và logic nhỏ.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 15px; opacity: 1;">
+                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4</h4>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Đại tu toàn bộ giao diện theo phong cách Tech-UI.</li>
+                    <li>Hiệu ứng 4 góc (Tech Corners) khi tương tác.</li>
+                    <li>Nâng cấp Glassmorphism và tối ưu hóa chế độ sáng/tối.</li>
+                </ul>
+            </div>
+        </div>
+    `;
+
+    const clWin = createAppWindow("Nhật ký Cập nhật", changelogHTML, 400, "500");
 }
 
 function loadChapters() {

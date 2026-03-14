@@ -82,7 +82,9 @@ function renderQuestion() {
     optionsContainer.innerHTML = "";
 
     document.getElementById("next-btn").style.display = "none";
+    document.getElementById("next-btn").classList.remove("tech-hover"); // Reset hover của nút Tiếp theo
     document.getElementById("feedback").innerText = "";
+    currentFocusedOptionIndex = -1; // Reset focus khi sang câu mới
 
     qData.options.forEach((optText, index) => {
         const btn = document.createElement("button");
@@ -135,6 +137,9 @@ function checkAnswer(selectedIndex, selectedBtn) {
             renderQuestion();
         };
     }
+
+    // Tự động "hover" vào nút Tiếp theo để người dùng biết chỉ cần Enter
+    nextBtn.classList.add("tech-hover");
 }
 
 function finishQuiz() {
@@ -196,4 +201,60 @@ document.getElementById("back-home-btn").addEventListener("click", () => {
     appConfirm("Quay lại menu?\n\nKết quả ôn tập của bạn sẽ không được lưu lại.", () => {
         resetToMenu();
     });
+});
+
+// --- HỆ THỐNG ĐIỀU HƯỚNG BẰNG BÀN PHÍM ---
+window.addEventListener("keydown", (e) => {
+    // Chỉ hoạt động khi đang ở màn hình Quiz
+    if (quizScreen.style.display !== "block") return;
+
+    const optionsContainer = document.getElementById("options-container");
+    const allBtns = Array.from(optionsContainer.querySelectorAll(".option-btn"));
+    const nextBtn = document.getElementById("next-btn");
+
+    // 1. Phím Escape - Thoát
+    if (e.key === "Escape") {
+        document.getElementById("back-home-btn").click();
+        return;
+    }
+
+    // 2. Nếu đã chọn đáp án rồi (nút Tiếp theo đang hiện)
+    if (nextBtn.style.display === "block") {
+        if (e.key === "Enter") {
+            nextBtn.click();
+        }
+        return; // Không cho phép chọn lại bằng phím mũi tên
+    }
+
+    // 3. Nếu chưa chọn đáp án - Điều hướng các option
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        e.preventDefault();
+
+        if (allBtns.length === 0) return;
+
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+            currentFocusedOptionIndex++;
+            if (currentFocusedOptionIndex >= allBtns.length) currentFocusedOptionIndex = 0;
+        } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+            currentFocusedOptionIndex--;
+            if (currentFocusedOptionIndex < 0) currentFocusedOptionIndex = allBtns.length - 1;
+        }
+
+        // Cập nhật trạng thái hover giả lập
+        allBtns.forEach((btn, idx) => {
+            if (idx === currentFocusedOptionIndex) {
+                btn.classList.add("tech-hover");
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                btn.classList.remove("tech-hover");
+            }
+        });
+    }
+
+    // 4. Phím Enter - Chọn đáp án đang focus
+    if (e.key === "Enter" && currentFocusedOptionIndex !== -1) {
+        if (allBtns[currentFocusedOptionIndex] && !allBtns[currentFocusedOptionIndex].disabled) {
+            allBtns[currentFocusedOptionIndex].click();
+        }
+    }
 });
