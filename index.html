@@ -57,6 +57,7 @@
                 <div class="mac-form-group">
                     <label>Số lượng câu</label>
                     <div class="segmented-control">
+                        <label><input type="radio" name="limit" value="5" /><span>Xem trước (5)</span></label>
                         <label><input type="radio" name="limit" value="25" checked /><span>25</span></label>
                         <label><input type="radio" name="limit" value="50" /><span>50</span></label>
                         <label><input type="radio" name="limit" value="all" /><span>Tất cả</span></label>
@@ -115,7 +116,7 @@
             </div>
         </div>
 
-        <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI - v1.5</div>
+        <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI - v<span id="app-version-text">1.5</span></div>
     </div>
 
     <!-- Removed mac-modal-overlay as requested -->

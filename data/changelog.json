@@ -1,0 +1,45 @@
+[
+    {
+        "version": "v1.5.1",
+        "title": "Cập nhật tính năng",
+        "changes": [
+            "**Chế độ Xem trước:** Thêm tùy chọn làm nhanh 5 câu hỏi."
+        ]
+    },
+    {
+        "version": "v1.5",
+        "title": "Nâng cấp trải nghiệm",
+        "changes": [
+            "**Phím Mũi tên:** Di chuyển giữa các đáp án.",
+            "**Phím Enter:** Chọn đáp án và chuyển sang câu tiếp theo.",
+            "**Phím Esc:** Thoát nhanh về Menu chính.",
+            "**Nhật ký cập nhật:** Xem lại các thay đổi mới qua nút trong Menu Thông tin."
+        ]
+    },
+    {
+        "version": "v1.4.3",
+        "changes": [
+            "Cập nhật mã nguồn GitHub trực tiếp trong App Info."
+        ]
+    },
+    {
+        "version": "v1.4.2",
+        "changes": [
+            "Sửa lỗi dữ liệu Chương 1 Kinh tế chính trị Mác-Lênin."
+        ]
+    },
+    {
+        "version": "v1.4.1",
+        "changes": [
+            "Sửa một số lỗi giao diện và logic nhỏ."
+        ]
+    },
+    {
+        "version": "v1.4",
+        "changes": [
+            "Đại tu toàn bộ giao diện theo phong cách Tech-UI.",
+            "Hiệu ứng 4 góc (Tech Corners) khi tương tác.",
+            "Nâng cấp Glassmorphism và tối ưu hóa chế độ sáng/tối."
+        ]
+    }
+]

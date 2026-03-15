@@ -1,5 +1,4 @@
 // --- CẤU HÌNH & QUẢN LÝ DỮ LIỆU ---
-const APP_VERSION = "1.5";
 
 // 1. Cấu hình danh sách môn và file (Bạn phải tự khai báo đúng tên file trong folder)
 const appConfig = {

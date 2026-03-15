@@ -1,3 +1,13 @@
+const currentVersion = "1.5.1";
+
+// --- QUẢN LÝ PHIÊN BẢN ---
+function updateVersionUI() {
+    const versionElements = document.querySelectorAll("#app-version-text");
+    versionElements.forEach(el => {
+        el.textContent = currentVersion;
+    });
+}
+
 // --- QUẢN LÝ HÌNH NỀN ---
 function initWallpaper() {
     const bgVideo = document.getElementById("bg-video");
@@ -10,6 +20,7 @@ function initWallpaper() {
 
 // Chạy hàm khởi tạo khi trang tải xong
 document.addEventListener("DOMContentLoaded", () => {
+    updateVersionUI();
     initWallpaper();
     initMenu();
 });

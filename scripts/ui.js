@@ -39,9 +39,9 @@ function initMenu() {
     // Tự động hiện Changelog nếu là bản mới
     setTimeout(() => {
         const lastSeenVer = localStorage.getItem("last_seen_version");
-        if (lastSeenVer !== APP_VERSION) {
+        if (lastSeenVer !== currentVersion) {
             showChangelog();
-            localStorage.setItem("last_seen_version", APP_VERSION);
+            localStorage.setItem("last_seen_version", currentVersion);
         }
     }, 1000);
 }
@@ -51,7 +51,7 @@ function showAppInfo() {
         <div style="text-align: center; margin-bottom: 20px;">
             <p style="font-size: 40px; margin: 0; line-height: 1;">🎓</p>
             <h2 style="margin: 10px 0 5px; color: var(--text-main);">Ôn Tập Trắc Nghiệm</h2>
-            <p style="color: var(--text-sub); margin: 0; font-size: 13px;">Phiên bản ${APP_VERSION}</p>
+            <p style="color: var(--text-sub); margin: 0; font-size: 13px;">Phiên bản ${currentVersion}</p>
         </div>
         <div style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--border-subtle);">
             <p style="margin: 0 0 10px;"><strong>Tác giả:</strong> Phúc Thanh tại DCCNTT-16.3</p>
@@ -110,53 +110,43 @@ function showAppInfo() {
     };
 }
 
-function showChangelog() {
-    const changelogHTML = `
-        <div style="font-size: 13px; line-height: 1.6; color: var(--text-main);">
-            <div style="margin-bottom: 20px; border-left: 3px solid #007aff; padding-left: 12px;">
-                <h3 style="margin: 0 0 5px; color: #007aff;">v1.5 - Nâng cấp trải nghiệm</h3>
-                <p style="margin: 0 0 8px;">Hiện tại đã có thể ôn bài bằng bàn phím thay vì chuột:</p>
-                <ul style="margin: 0; padding-left: 20px;">
-                    <li><strong>Phím Mũi tên:</strong> Di chuyển giữa các đáp án.</li>
-                    <li><strong>Phím Enter:</strong> Chọn đáp án và chuyển sang câu tiếp theo.</li>
-                    <li><strong>Phím Esc:</strong> Thoát nhanh về Menu chính.</li>
-                    <li><strong>Nhật ký cập nhật:</strong> Xem lại các thay đổi mới qua nút trong Menu Thông tin.</li>
-                </ul>
-            </div>
-            
-            <div style="margin-bottom: 15px; opacity: 1;">
-                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4.3</h4>
-                <ul style="margin: 0; padding-left: 20px;">
-                    <li>Cập nhật mã nguồn GitHub trực tiếp trong App Info.</li>
-                </ul>
-            </div>
+async function showChangelog() {
+    try {
+        const response = await fetch('data/changelog.json');
+        const data = await response.json();
 
-            <div style="margin-bottom: 15px; opacity: 1;">
-                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4.2</h4>
-                <ul style="margin: 0; padding-left: 20px;">
-                    <li>Sửa lỗi dữ liệu Chương 1 Kinh tế chính trị Mác-Lênin.</li>
-                </ul>
-            </div>
+        let changelogHTML = `<div style="font-size: 13px; line-height: 1.6; color: var(--text-main); max-height: 400px; overflow-y: auto; padding-right: 5px;">`;
 
-            <div style="margin-bottom: 15px; opacity: 1;">
-                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4.1</h4>
-                <ul style="margin: 0; padding-left: 20px;">
-                    <li>Sửa một số lỗi giao diện và logic nhỏ.</li>
-                </ul>
-            </div>
+        data.forEach((item, index) => {
+            const isLatest = index === 0;
+            const borderStyle = isLatest ? 'border-left: 3px solid #007aff; padding-left: 12px;' : 'padding-left: 15px;';
+            const titleColor = '#007aff';
+            const opacity = isLatest ? '1' : '0.7';
 
-            <div style="margin-bottom: 15px; opacity: 1;">
-                <h4 style="margin: 0 0 5px; font-size: 14px; color: #007aff;">v1.4</h4>
-                <ul style="margin: 0; padding-left: 20px;">
-                    <li>Đại tu toàn bộ giao diện theo phong cách Tech-UI.</li>
-                    <li>Hiệu ứng 4 góc (Tech Corners) khi tương tác.</li>
-                    <li>Nâng cấp Glassmorphism và tối ưu hóa chế độ sáng/tối.</li>
-                </ul>
-            </div>
-        </div>
-    `;
+            changelogHTML += `
+                <div style="margin-bottom: 20px; ${borderStyle} opacity: ${opacity};">
+                    <h3 style="margin: 0 0 5px; color: ${titleColor}; font-size: ${isLatest ? '15px' : '14px'};">
+                        ${item.version}${item.title ? ' - ' + item.title : ''}
+                    </h3>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        ${item.changes.map(change => {
+                // Convert markdown-like **bold** to <strong>
+                const formattedChange = change.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                return `<li style="margin-bottom: 4px;">${formattedChange}</li>`;
+            }).join('')}
+                    </ul>
+                </div>
+            `;
+        });
 
-    const clWin = createAppWindow("Nhật ký Cập nhật", changelogHTML, 400, "500");
+        changelogHTML += `</div>`;
+
+        createAppWindow("Nhật ký Cập nhật", changelogHTML, 400, "auto");
+    } catch (error) {
+        console.error("Failed to load changelog:", error);
+        // Fallback for local testing if fetch fails
+        alert("Không thể tải nhật ký cập nhật. Vui lòng kiểm tra kết nối.");
+    }
 }
 
 function loadChapters() {
