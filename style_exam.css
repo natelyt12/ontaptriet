@@ -1,0 +1,541 @@
+/* --- EXAM MODE SPECIFIC STYLES --- */
+
+.full-screen-exam {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 500px;
+    margin-top: -250px;
+    margin-left: -150px;
+    background: var(--bg-window);
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    z-index: 99;
+    opacity: 0;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.8s cubic-bezier(0.85, 0, 0.15, 1),
+        opacity 0.4s ease-out;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.full-screen-exam.active {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    opacity: 1;
+    border-radius: 0;
+}
+
+/* Custom Scrollbar */
+.full-screen-exam::-webkit-scrollbar {
+    width: 8px;
+}
+
+.full-screen-exam::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.full-screen-exam::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.exam-content-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.7s ease-out;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 30px 150px;
+}
+
+.exam-content-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#exam-questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    position: relative;
+    /* Base for absolute items if needed */
+}
+
+/* --- PINTEREST GRID SYSTEM FOR SUBMISSION REVIEW --- */
+.exam-grid-container {
+    position: fixed;
+    top: calc(55% - 40px);
+    /* Đẩy lên 40px để tránh tràn khi có 50 câu */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 98vw;
+    height: 85vh;
+    display: flex;
+    /* Dùng flex để chia cột Pinterest */
+    gap: 10px;
+    padding: 10px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.exam-grid-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.exam-grid-container.visible {
+    opacity: 1;
+}
+
+.exam-slot-placeholder {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    width: 100%;
+    /* Chiều cao sẽ được set bằng JS dựa trên tỷ lệ scale */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.03);
+    font-size: 14px;
+}
+
+.exam-question-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    transform-origin: center;
+}
+
+.exam-q-text {
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #fff;
+    line-height: 1.5;
+}
+
+.exam-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Selected state */
+.option-btn.selected {
+    background: rgba(255, 193, 7, 0.1) !important;
+    border: 1px solid rgba(255, 193, 7, 0.4) !important;
+    color: #ffc107 !important;
+}
+
+.option-btn.selected::after {
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    opacity: 1;
+    --corner-color: #ffc107 !important;
+}
+
+/* --- EXAM CONTROL WINDOW UI --- */
+.exam-control-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.exam-status-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.status-dot {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.status-dot:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.status-dot.completed {
+    background: #ffc1072a;
+    border: 1px solid #ffc107;
+    color: #ffc107;
+}
+
+.status-dot.completed:hover {
+    background: rgba(255, 193, 7, 0.4);
+}
+
+.exam-control-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Make Control Window Transparent */
+.exam-control-window {
+    background: transparent !important;
+    backdrop-filter: blur(0px) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.exam-control-window .title-bar {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .exam-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #exam-mode-btn {
+        display: none;
+    }
+}
+
+/* --- SCORE ANIMATION OVERLAY --- */
+.score-anim-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.4);
+    /* Trong suốt hơn */
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+body.light-mode .score-anim-overlay {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.score-anim-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.score-impact-card {
+    background: transparent;
+    padding: 0;
+    text-align: center;
+    transform: translateY(120vh) scale(2);
+    /* Khởi đầu từ dưới cực to */
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    /* Expo Out */
+    pointer-events: none;
+}
+
+
+.score-impact-card.centered {
+    transform: translateY(0) scale(2);
+    /* Lên giữa nhưng vẫn to để chạy số */
+}
+
+.score-impact-card.slammed {
+    transform: translateY(0) scale(1) !important;
+    /* "Đập" xuống kích thước thực */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Slam hiệu ứng mạnh hơn */
+}
+
+.score-impact-card.to-top {
+    transform: translateY(-35vh) scale(1) !important;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.score-num-big {
+    font-size: 100px;
+    font-weight: 900;
+    letter-spacing: -5px;
+    color: #fff;
+    line-height: 0.8;
+    margin: 5px 0;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode .score-num-big {
+    color: #727272 !important;
+}
+
+.score-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+body.light-mode .score-subtitle {
+    color: #727272 !important;
+}
+
+.score-unit {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.score-review-list {
+    position: absolute;
+    top: 25vh;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    scrollbar-width: none;
+}
+
+.score-review-list::-webkit-scrollbar {
+    display: none;
+}
+
+.score-review-list.visible {
+    opacity: 1;
+}
+
+.score-review-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 69, 58, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    animation: slideUpFade 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.score-review-q {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1.4;
+}
+
+.score-review-ans {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.score-review-ans.yours {
+    background: rgba(255, 69, 58, 0.15);
+    color: #ff453a;
+    border: 1px solid rgba(255, 69, 58, 0.3);
+}
+
+.score-review-ans.correct {
+    background: rgba(48, 209, 88, 0.15);
+    color: #30d158;
+    border: 1px solid rgba(48, 209, 88, 0.3);
+}
+
+.score-footer {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.score-footer.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: all;
+}
+
+#score-finish-btn {
+    width: 50%;
+}
+
+.review-item-reveal {
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1) !important;
+    opacity: 1 !important;
+    transform: scale(1.05) translateY(-5px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 69, 58, 0.4) !important;
+    border-color: rgba(255, 69, 58, 0.9) !important;
+    z-index: 500 !important;
+}
+
+.review-item-reveal * {
+    opacity: 1 !important;
+}
+
+/* =============================================
+   EXAM MODE - LIGHT MODE OVERRIDES
+   ============================================= */
+
+/* Nền bài thi sáng */
+body.light-mode .full-screen-exam {
+    background: rgba(245, 245, 250, 0.97);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .full-screen-exam::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+/* Câu hỏi */
+body.light-mode .exam-question-item {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .exam-q-text {
+    color: #1a1a2e;
+}
+
+/* Đáp án - dùng lại .option-btn từ style.css, nhưng cần override màu chữ rõ hơn */
+body.light-mode .full-screen-exam .option-btn {
+    color: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.12);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Trạng thái đúng/sai trong light mode */
+body.light-mode .option-btn.correct {
+    background: rgba(48, 209, 88, 0.1) !important;
+    border-color: rgba(48, 209, 88, 0.5) !important;
+    color: #1a8f3e !important;
+}
+
+body.light-mode .option-btn.wrong {
+    background: rgba(255, 69, 58, 0.1) !important;
+    border-color: rgba(255, 69, 58, 0.5) !important;
+    color: #c02922 !important;
+}
+
+/* Grid Pinterest - placeholder sáng hơn */
+body.light-mode .exam-slot-placeholder {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.05);
+}
+
+/* Ô kết quả đúng/sai */
+body.light-mode .exam-question-item[style*="rgba(48, 209, 88"] {
+    background: rgba(48, 209, 88, 0.07) !important;
+}
+
+body.light-mode .exam-question-item[style*="rgba(255, 69, 58"] {
+    background: rgba(255, 69, 58, 0.07) !important;
+}
+
+/* Control window - status dots */
+body.light-mode .status-dot {
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.4);
+}
+
+body.light-mode .status-dot:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+body.light-mode .status-dot.completed {
+    background: rgba(255, 193, 7, 0.15);
+    border-color: #e6ac00;
+    color: #a07800;
+}
+
+body.light-mode .status-dot.completed:hover {
+    background: rgba(255, 193, 7, 0.3);
+}
+
+/* Score Overlay - luôn giữ dark vì nó là hiệu ứng dramatic */
+/* Nhưng review cards trong overlay thì cần điều chỉnh */
+body.light-mode .score-review-card {
+    border-color: rgba(255, 69, 58, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+body.light-mode .score-review-q {
+    color: #1a1a2e;
+}
+
+body.light-mode .score-review-ans.yours {
+    background: rgba(255, 69, 58, 0.08);
+    color: #c02922;
+    border-color: rgba(255, 69, 58, 0.3);
+}
+
+body.light-mode .score-review-ans.correct {
+    background: rgba(48, 209, 88, 0.08);
+    color: #1a8f3e;
+    border-color: rgba(48, 209, 88, 0.3);
+}
+
+/* Sidebar title trong control window */
+body.light-mode .exam-sidebar-title {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* Giữ màu vàng khi đã chọn VÀ đang hover (cả dark và light mode) */
+.option-btn.selected.tech-hover:not(:disabled),
+body.light-mode .option-btn.selected.tech-hover:not(:disabled) {
+    background: rgba(255, 193, 7, 0.18) !important;
+    border: 1px solid rgba(255, 193, 7, 0.699) !important;
+    color: #ffc107 !important;
+    --corner-line: #ffc107;
+}

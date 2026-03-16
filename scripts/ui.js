@@ -405,7 +405,7 @@ window.alert = function (message) {
 };
 
 // Hàm confirm bất đồng bộ sử dụng chung cửa sổ UI
-window.appConfirm = function (message, onConfirm) {
+window.appConfirm = function (message, onConfirm, onCancel) {
     const confirmBody = document.createElement("div");
     confirmBody.innerHTML = `
         <p class="modal-text">${message.replace(/\n/g, "<br>")}</p>
@@ -431,8 +431,16 @@ window.appConfirm = function (message, onConfirm) {
         setTimeout(() => confirmWin.remove(), 300);
     };
 
-    cancelBtn.onclick = () => { closeWin(); };
-    okBtn.onclick = () => { closeWin(); setTimeout(onConfirm, 350); };
+    cancelBtn.onclick = () => { 
+        cancelBtn.disabled = true; okBtn.disabled = true;
+        closeWin(); 
+        if (onCancel) setTimeout(onCancel, 350);
+    };
+    okBtn.onclick = () => { 
+        cancelBtn.disabled = true; okBtn.disabled = true;
+        closeWin(); 
+        setTimeout(onConfirm, 350); 
+    };
 };
 
 // BỔ SUNG LOGIC GIAO DIỆN HOVER "TECH-VIBE"

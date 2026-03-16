@@ -1,4 +1,4 @@
-const currentVersion = "1.5.1";
+const currentVersion = "1.6.0";
 
 // --- QUẢN LÝ PHIÊN BẢN ---
 function updateVersionUI() {

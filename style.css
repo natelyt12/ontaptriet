@@ -528,6 +528,7 @@ body.light-mode .discord-subtitle {
     border-radius: 5px;
     font-weight: 400;
     font-size: 13px;
+    margin-top: 10px;
     cursor: pointer;
 }
 
@@ -826,14 +827,14 @@ body.light-mode .discord-subtitle {
     #app-window .title-bar {
         display: none;
     }
-    
+
     /* Ensure other windows (modals) show title bar for closing */
     .mac-window:not(#app-window) .title-bar {
         display: flex;
-        background: rgba(30,30,30, 0.9);
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        background: rgba(30, 30, 30, 0.9);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .mobile-info-toggle-btn {
         display: flex !important;
     }
@@ -1387,7 +1388,8 @@ body.light-mode * {
 }
 
 .mobile-info-toggle-btn {
-    display: none; /* Chỉ hiện trên mobile */
+    display: none;
+    /* Chỉ hiện trên mobile */
 }
 
 .theme-toggle-btn:hover,
@@ -1421,4 +1423,101 @@ body.light-mode.focus-mode .wallpaper-overlay {
 body.focus-mode .mac-window,
 body.focus-mode .mac-modal {
     box-shadow: none !important;
+}
+
+/* --- FULLSCREEN EXAM MODE --- */
+.full-screen-exam {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Khởi đầu là hình chữ nhật dọc */
+    width: 260px;
+    height: 500px;
+    background: var(--bg-window);
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    z-index: 100;
+    overflow: hidden;
+    opacity: 0;
+    /* Bắt đầu thu nhỏ và ở giữa */
+    transform: translate(-50%, -50%) scale(0.3);
+    transition: width 0.8s cubic-bezier(0.85, 0, 0.15, 1),
+        height 0.8s cubic-bezier(0.85, 0, 0.15, 1),
+        transform 0.8s cubic-bezier(0.85, 0, 0.15, 1),
+        opacity 0.5s ease-out,
+        border-radius 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    /* Góc bo tròn lúc khởi đầu cho đẹp */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.full-screen-exam.active {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    border-radius: 0;
+}
+
+.exam-content-wrapper {
+    width: 100%;
+    max-width: 950px;
+    margin: 30px auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#fullscreen-quiz-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.full-screen-exam #options-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.full-screen-exam .question-pane {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 35px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.full-screen-exam .question-pane h3 {
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+.full-screen-exam .option-btn {
+    padding: 18px 24px;
+    font-size: 15px;
+}
+
+@media (max-width: 800px) {
+    .full-screen-exam #options-container {
+        grid-template-columns: 1fr;
+    }
+
+    .exam-content-wrapper {
+        padding: 15px !important;
+        margin: 10px auto;
+    }
+
+    .full-screen-exam .question-pane {
+        padding: 20px;
+    }
+
+    .full-screen-exam .question-pane h3 {
+        font-size: 18px;
+    }
 }

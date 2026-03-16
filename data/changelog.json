@@ -1,5 +1,16 @@
 [
     {
+        "version": "v1.6.0",
+        "title": "Chế độ Bài kiểm tra",
+        "changes": [
+            "**Chế độ Bài kiểm tra:** Làm bài thi thử chuyên nghiệp với bảng theo dõi câu hỏi.",
+            "**Giao diện sống động:** Hiệu ứng nộp bài và hiển thị kết quả mới, trực quan hơn.",
+            "**Xem lại bài làm:** Dễ dàng kiểm tra lại các câu sai ngay sau khi biết điểm.",
+            "**Giao diện Sáng/Tối:** Hỗ trợ đầy đủ cả hai chế độ màu cho trải nghiệm tốt nhất.",
+            "**Tối ưu thao tác:** Các nút bấm và tương tác mượt mà, ổn định hơn."
+        ]
+    },
+    {
         "version": "v1.5.1",
         "title": "Cập nhật tính năng",
         "changes": [

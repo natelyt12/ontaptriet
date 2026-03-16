@@ -1,4 +1,7 @@
-document.getElementById("start-btn").addEventListener("click", async () => {
+document.getElementById("start-btn").addEventListener("click", async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true; // Vô hiệu hóa ngay lập tức khi nhấn review
+
     const subjectKey = subjectSelect.value;
     const chapterVal = chapterSelect.value;
     const limit = document.querySelector('input[name="limit"]:checked').value;
@@ -54,6 +57,7 @@ document.getElementById("start-btn").addEventListener("click", async () => {
         alert("Lỗi khi tải dữ liệu: " + error.message);
     }
 });
+
 
 function startQuiz() {
     currentQuestionIndex = 0;
@@ -179,6 +183,9 @@ function resetToMenu() {
     quizScreen.style.display = "none";
     resultScreen.style.display = "none";
     menuScreen.style.display = "block";
+
+    const startBtn = document.getElementById("start-btn");
+    if (startBtn) startBtn.disabled = false; // Kích hoạt lại nút bắt đầu
 
     const titleEl = document.querySelector(".window-title");
     if (titleEl) {
