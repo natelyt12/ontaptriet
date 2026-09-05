@@ -1,0 +1,1411 @@
+=== TRANG 1 ===
+1 
+ 
+ĐỀ CƯƠNG ÔN TẬP 
+MÔN: KIẾN TRÚC MÁY TÍNH  
+Câu 1. Máy tính điện tử là gì? 
+A. Thiết bị lưu trữ thông tin 
+B. Thiết bị số hóa và biến đổi thông tin  
+C. Thiết bị lưu trữ và xử lý thông tin  
+D. Thiết bị tạo và biến đổi thông tin  
+Câu 2. Máy tính đầu tiên ENIAC sử dụng linh kiện nào trong số các linh kiện sau? 
+A. Transistor lưỡng cực 
+B. Transistor trường 
+C. Đèn điện tử  
+D. IC bán dẫn 
+Câu 3. Trong các phát biểu sau, phát bi ểu nào đúng? 
+A. Phần cứng của máy tính bao gồm các đối tượng vật lý như: bản mạch chính, bộ nhớ 
+RAM, ROM, đĩa cứng, màn hình  
+B. Phần cứng của máy tính bao gồm các đối tượng như: bản mạch chính, bộ nhớ RAM, bộ 
+nhớ ROM, đĩa cứng, màn hình và chương trình được cài đặt trong ROM  
+C. Phần cứng của máy tính là chương trình được cài đặt trong bộ nhớ ROM  
+D. Phần cứng của máy tính chính là bộ xử lý trung tâm  
+Câu 4. Hãy cho biết các thành phần cơ bản của cấu trúc máy tính? 
+A. Ổ đĩa cứng, Bus liên k ết, ROM, CPU  
+B. ROM, Chuột, Bus liên k ết, Hệ thống nhớ 
+C. Hệ thống nhớ, Bàn phím, B ộ xử lý, Bus liên k ết 
+D. Hệ thống nhớ, Bộ xử lý, Bus liên k ết, Hệ thống vào ra  
+Câu 5. Việc trao đổi dữ liệu giữa thiết bị ngoại vi và máy tính được thực hiện qua: 
+A. Một thanh ghi điều khiển   
+B. Một cổng  
+C. Thanh ghi AX 
+D. Thanh ghi cờ 
+Câu 6. Phần mềm của máy tính là: 
+A. Các bộ điều phối thiết bị giúp cho việc ghép nối và ra được thực hiện một cách linh hoạt.  
+B. Cơ cấu trao đổi dữ liệu giữa các thiết bị phần cứng trong máy tính  
+C. Chương trình được cài đặt trong bộ nhớ ROM  
+D. Bộ vi xử lý và các vi mạch hỗ trợ cho nó  
+Câu 7. Trong các bộ phận sau, bộ phận nào không thuộc bộ xử lý trung tâm: 
+
+=== TRANG 2 ===
+2 
+ 
+A. Đơn vị phối ghép vào ra  
+B. Khối số học và logic  
+C. Tập các thanh ghi đa năng  
+D. Khối điều khiển 
+Câu 8. Trong các bộ phận sau, bộ phận nào không thuộc bộ xử lý trung tâm: 
+A. Bộ nhớ trong  
+B. Khối số học và logic  
+C. Tập các thanh ghi đa năng  
+D. Khối điều khiển để thi hành lệnh một cách tuần tự và tác động lên các mạch chức năng 
+nhằm thi hành lệnh. 
+Câu 9. Trong các bộ phận sau, bộ phận nào thuộc bộ xử lý trung tâm: 
+A. Bộ nhớ trong  
+B. Đơn vị phối ghép vào ra  
+C. Tập các thanh ghi đa năng  
+D. Khối điều khiển Bus hệ thống  
+Câu 10. Phát biểu nào sau đây là đúng khi phân c ấp bộ nhớ theo tốc độ từ chậm tới nhanh? 
+A. Thanh ghi, cache, bộ nhớ chính, bộ nhớ ngoài  
+B. Cache, thanh ghi, bộ nhớ chính, bộ nhớ ngoài  
+C. Thanh ghi, bộ nhớ chính, Cache, bộ nhớ ngoài  
+D. Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi  
+Câu 11. Phát biểu nào sau đây là đúng khi các thiết bị vào/ra có thể hiện được đầy đủ các dạng 
+thông tin “Văn bản, con số, âm thanh, hình ảnh”? 
+A. Màn hình cảm ứng, bàn phím, màn hình máy tính, chuột, máy in  
+B. Màn hình cảm ứng, chuột, màn hình máy tính, bàn phím, loa  
+C. Màn hình cảm ứng, màn hình máy tính, bàn phím, camera, micro  
+D. Các phương án trên đều sai  
+Câu 12. Chọn phương án đúng cho ba phương pháp đi ều khiển vào ra? 
+A. Vào/ra bằng chương trình, bằng DMA, bằng ngắt  
+B. Vào/ra bằng chương trình, bằng hệ thống, bằng DMA  
+C. Vào/ra bằng ngắt, bằng truy nhập CPU, bằng DMA  
+D. Vào/ra bằng ngắt, bằng truy nhập CPU, bằng hệ điều hành  
+Câu 13. Đâu là các loại lệnh I/O? 
+A. Đọc – Kiểm tra - Ghi 
+B. Điều khiển – Kiểm tra – Đọc – Ghi  
+C. Kiểm tra – Điều khiển – Đọc 
+D. Điều khiển – Đọc - Ghi 
+
+=== TRANG 3 ===
+3 
+ 
+Câu 14. Một ưu điểm của thiết bị lưu trữ ngoài so với bộ nhớ trong của máy tính là:  
+A. Thời gian truy cập nhỏ 
+B. Không bị mất dữ liệu khi mất nguồn  
+C. Tiêu thụ nguồn ít 
+D. Cấu tạo đơn giản  
+Câu 15. Chức năng của hệ thống hỗ trợ vào ra là: 
+A. Chuyển đổi dữ liệu từ môi trường bên ngoài thành dạng số và đưa vào máy tính  
+B. Tiếp nhận các ngắt từ các thiết bị vào ra dữ liệu  
+C. Đảm bảo việc trao đổi dữ liệu giữa máy tính và các thiết bị ngoại vi  
+D. Hỗ trợ thiết lập việc truyền dữ liệu giữa các máy tính  
+Câu 16. Cấu trúc cơ bản của CPU gồm:  
+A. Đơn vị điều khiển, đơn vị tính toán số học và logic, tập thanh ghi  
+B. Đơn vị điều khiển, đơn vị tính toán số học và logic, và đơn vị nối ghép  
+C. Đơn vị điều khiển, đơn vị tính toán số học và logic  
+D. Đơn vị điều khiển, đơn vị tính toán số học và logic, tập thanh ghi, và đơn vị nối ghép  
+Câu 17. Cách nhìn máy tính b ởi người lập trình là kiến trúc: 
+A. Ngôn ngữ máy      C. Kiến trúc tập lệnh  
+B. Vi kiến trúc      D. Ngôn ngữ trong máy tính  
+Câu 18. : “Prefix” trong cấu trúc của lệnh gọi là: 
+A. Tiền tố   B. Toán hạng  C. Mã toán  D. Địa chỉ trực tiếp  
+Câu 19. Thiết kế lệnh dùng cho: 
+A. Bộ nhớ RAM     C. Bộ nhớ ROM  
+B. Vi xử lý      D. Cả 3 đáp án trên  
+Câu 20. Xét lệnh LOAD. Lệnh này thuộc: 
+A. Nhóm lệnh số học 
+B. Nhóm lệnh chuyển dữ liệu  
+C. Nhóm lệnh điều khiển chương trình  
+D. Nhóm lệnh logic 
+Câu 21. Các thành phần của lệnh máy gồm:  
+A. Mã thao tác 
+B. Địa chỉ toán hạng 
+C. Mã thao tác và địa chỉ toán hạng  
+D. Mã thao tác, con trỏ và địa chỉ toán hạng  
+Câu 22. Lệnh MOV AX, BX là m ột ví dụ của chế độ định địa chỉ nào? 
+A. Trực tiếp      C. Tức thì 
+
+=== TRANG 4 ===
+4 
+ 
+B. Thanh ghi      D. Gián tiếp thanh ghi  
+Câu 23. Với công đoạn nhận lệnh của CPU, thứ tự thực hiện là: 
+A. Bộ đếm chương trình -> Bộ nhớ -> Thanh ghi lệnh 
+B. Bộ nhớ -> Bộ đếm chương trình->Thanh ghi lệnh 
+C. Bộ nhớ-> Thanh ghi lệnh ->Bộ đếm chương trình  
+D. Bộ đếm chương trình ->Thanh ghi lệnh -> Bộ nhớ 
+Câu 24. Theo cách phân lo ại hiện đại, có các lo ại máy tính sau đây?  
+A. Máy tính để bàn, máy tính lớn, máy tính nhúng  
+B. Máy tính để bàn, máy chủ, máy tính nhúng  
+C. Máy chủ, máy tính mini, máy tính lớn  
+D. Máy tính mini, máy tính nhúng, siêu máy tính  
+Câu 25. Hãy cho biết các thành phần cơ bản của cấu trúc máy tính? 
+A. Ổ đĩa cứng, Bus liên kết, ROM, CPU  
+B. ROM, Chuột, Bus liên kết, Hệ thống nhớ  
+C. Hệ thống nhớ, Bàn phím, Bộ xử lý, Bus liên kết  
+D. Hệ thống nhớ, Bộ xử lý, Bus liên kết, Hệ thống vào ra  
+Câu 26. Nhiệm vụ chính của đơn vị số học và logic ALU gồm? 
+A. Lưu trữ dữ liệu tạm thời 
+B. Điều khiển quá trình thực hiện lệnh  
+C. Giải mã lệnh 
+D. Thực hiện các phép toán số học, phép toán logic, phép dịch, quay  
+Câu 27. Các thành ph ần Bus cấu tạo lên đơn vị ghép nối Bus bên trong CPU g ồm? 
+A. Bus điều khiển      C. Bus dữ liệu  
+B. Bus địa chỉ      D. Cả 3 phương án trên  
+Câu 28. Hệ thống nhớ của máy tính bao gồm? 
+A. Bộ nhớ ngoài, Bộ nhớ trong    C. RAM, màn hình  
+B. ROM, máy in     D. Ổ đĩa cứng, màn hình   
+Câu 29. Phát biểu nào sau đây là sai đ ối với bộ nhớ RAM? 
+A. Bộ nhớ không khả biến      C. Bộ nhớ đọc/ghi tùy ý  
+B. Lưu trữ thông tin tạm thời     D. Có hai loại RAM  
+Câu 30. Bộ nhớ nào có giá thành đ ắt nhất? 
+A. RAM  B. ROM  C. Cache  D. Thanh ghi 
+Câu 31. Phát biểu nào sau đây là đúng khi phân c ấp bộ nhớ theo giá thành từ rẻ tới đắt? 
+A. Bộ nhớ ngoài, Thanh ghi, cache, bộ nhớ chính  
+B. Cache, thanh ghi, bộ nhớ chính, bộ nhớ ngoài  
+
+=== TRANG 5 ===
+5 
+ 
+C. Thanh ghi, bộ nhớ chính, Cache, bộ nhớ ngoài  
+D. Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi  
+Câu 32. PCI bus được dùng để kết nối và trao đổi tín hiệu với các loại Card nào? 
+A. Card mạng, card âm thanh, card ti vi, modems  
+B. Card mạng, card âm thanh, card ti vi, máy in  
+C. Card mạng, card âm thanh, card ti vi, máy quét (scan)  
+D. Card mạng, card âm thanh, card ti vi, máy fax  
+Câu 33. Đối với hệ thống nhớ máy tính, có thể có các đơn v ị truyền nào? 
+A. Theo khối nhớ     C. Cả a và b đều đúng  
+B. Theo từ nhớ      D. Cả a và b đều sai   
+Câu 34. Đâu không phải là phương pháp điều khiển vào – ra? 
+A. Vào – ra bằng chương trình (PIO) 
+B. Vào – ra bằng điều khiển ngắt (IDIO) 
+C. Vào – ra theo bản đồ bộ nhớ (MNIO)  
+D. Truy nhập bộ nhớ trực tiếp (DMA) 
+Câu 35. Ưu điểm của thiết bị lưu trữ ngoài là:  
+A. Tốc độ truy cập nhanh    C. Dung lượng lớn  
+B. Kích thước nhỏ     D. Dễ chế tạo hơn  
+Câu 36. Đầu cắm bàn phím dạng PS/2 có mấy chân? 
+A. 5   B. 6   C. 7    D. 8 
+Câu 37. Thành phần nào của CPU dùng cho việc truyền thông tin giữa các thành phần? 
+A. Đơn vị điều khiển     C. Đơn vị tính toán số học và logic  
+B. Tập thanh ghi    D. Đơn vị nối ghép  
+Câu 38. Các phép toán s ố học gồm: 
+A. Cộng, trừ, nhân, chia,  
+B. Cộng, trừ, nhân, chia, đảo dấu  
+C. Cộng, nhân, chia, đảo dấu  
+D. Cộng, trừ, nhân, đảo dấu  
+Câu 39. Kỹ thuật đường ống lệnh cải thiện hiệu năng bằng cách nào? 
+A. Tăng số lệnh thực hiện  
+B. Thực hiện lệnh nhanh hơn  
+C. Giảm số lệnh thực hiện  
+D. Không thực hiện lệnh 
+Câu 40. Các loại bộ nhớ trong không xóa được gồm: 
+
+=== TRANG 6 ===
+6 
+ 
+A. ROM hoặc PROM      C. ROM  
+B. PROM      D. ROM và PROM  
+Câu 41. Viết tắt của SSD là 
+A. Solid State Drive      C. Single State Drive 
+Solid Space Drive     D. Solid Spin Drive 
+Câu 42. Toán hạng có thể là: 
+A. Hằng số      C. Nội dung của thanh ghi  
+B. Nội dung của ngăn nhớ     D. Cả A, B, C đều đúng  
+Câu 43. CPU “lấy lệnh” từ đâu trong máy tính? 
+A. Thanh ghi      C. Bộ nhớ ROM  
+B. Bộ nhớ RAM      D. Ổ đĩa cứng   
+Câu 44. : Lệnh POP/PUSH là tác động đến 
+A. Bộ nhớ ROM      C. Ngăn xếp 
+B. Bộ nhớ RAM      D. Ngắt 
+Câu 45. Phương pháp định địa chỉ là gì? 
+A. Là cách thức địa chỉ hóa trong trường địa chỉ để xác định địa chỉ của thanh ghi 
+B. Là cách thức địa chỉ hóa trong trường địa chỉ để xác định đỉnh của ngăn xếp 
+C. Là cách thức địa chỉ hóa trong trường địa chỉ của lệnh để xác định nơi chứa toán hạng 
+D. Là cách thức địa chỉ hóa trong trường địa chỉ để xác định ngăn nhớ 
+Câu 46. : Cấu trúc chung của một mã lệnh gồm: 
+A. Mã toán, Toán hạng  
+B. Tiền tố, Mã toán, Toán hạng  
+C. Toán hạng, Địa chỉ trực tiếp  
+D. Tiền tố, Mã toán, Toán hạng, Địa chỉ trực tiếp  
+ Câu 47. MIMD là viết tắt của cụm từ nào? 
+A. Multiple Instruction Stream, Multiple Data Stream   
+B. Multiple Instruction Multiple Data Stream 
+C. Multiple Instruction Stream, Multiple Data  
+D. Multiple Instruction Steam, Multiple Data Steam  
+Câu 48. RISC là viết tắt của cụm từ nào? 
+A. Random Instruction Set Computing 
+B. Reduced Instruction Set Computer  
+C. Relational Instruction Set Computer 
+D. Recursive Instruction Set Computing 
+Câu 49. . RISC thường sử dụng loại nào của bộ nhớ để lưu trữ lệnh? 
+
+=== TRANG 7 ===
+7 
+ 
+A. ROM   B. RAM  C. Cache   D. Flash 
+Câu 50. Bus hệ thống của máy tính bao gồm: 
+A. Bus dữ liệu 
+B. Bus dữ liệu và Bus địa chỉ 
+C. Bus dữ liệu và Bus điều khiển 
+D. Bus dữ liệu, Bus địa chỉ và Bus điều khiển  
+Câu 51. Chức năng của hệ thống Bus trong máy tính là gì?  
+A. Mở rộng chức năng giao tiếp của máy tính 
+B. Liên kết các thành phần trong máy tính  
+C. Điều khiển các thiết bị ngoại vi 
+D. Biến đổi dạng tín hiệu trong máy tính 
+Câu 52. Bus nào trong máy tính có nhiệm vụ là đường truyền dẫn giữa CPU và các chip hỗ trợ 
+trung gian? 
+A. Bus trong bộ vi xử lý 
+B. Bus bộ vi xử lý  
+C. Bus ngoại vi 
+D. Bus hệ thống 
+Câu 53. Bus nào trong máy tính có nhi ệm vụ là đường truyền dẫn giữa các khối của bộ vi xử 
+lý? 
+A. Bus trong bộ vi xử lý  
+B. Bus bộ vi xử lý 
+C. Bus ngoại vi 
+D. Bus hệ thống 
+Câu 54. Bus nào trong máy tính có nhi ệm vụ kết nối bộ vi xử lý với bộ nhớ chính và bộ nhớ 
+Cache? 
+A. Bus trong bộ vi xử lý 
+B. Bus bộ vi xử lý  
+C. Bus ngoại vi 
+D. Bus hệ thống 
+Câu 55. Chức năng của Bus hệ thống trong máy tính là gì? 
+A. Là đường truyền dẫn giữa các khối của bộ vi xử lý 
+
+=== TRANG 8 ===
+8 
+ 
+B. Kết nối bộ vi xử lý với bộ nhớ chính, bộ nhớ Cache và các bộ điều khiển ghép nối vào ra  
+C. Kết nối hệ thống vào ra với bộ vi xử lý 
+D. Đường truyền dẫn giữa CPU và các chip h ỗ trợ trung gian 
+Câu 56. Đặc điểm quan trọng của Bus đồng bộ là gì? 
+A. Dữ liệu được truyền đồng thời 
+B. Dữ liệu được truyền không đồng thời 
+C. Có tín hiệu đồng hồ chung điều khiển hoạt động  
+D. Không có tín hiệu đồng hồ chung điều khiển hoạt động  
+Câu 57. Một trong các đặc điểm của Bus đồng bộ là: 
+A. Chu kỳ Bus thay đổi với từng cặp thiết bị trao đổi dữ liệu 
+B. Dữ liệu được truyền liên tục trong mọi chu kỳ Bus 
+C. Mọi thao tác được thực hiện trong những khoảng thời gian là bội số của chu kỳ Bus  
+D. Tần số tín hiệu đồng hồ chung thay đổi tùy theo điều kiện của hệ thống  
+Câu 58. Đặc điểm quan trọng của Bus không đồng bộ là gì? 
+A. Dữ liệu được truyền không đồng thời 
+B. Có tín hiệu đồng hồ chung điều khiển hoạt động 
+C. Không có tín hiệu đồng hồ chung điều khiển hoạt động  
+D. Dữ liệu được truyền đồng thời 
+Câu 59. Trong các đặc điểm sau, đặc điểm nào không phải của Bus đồng bộ? 
+A. Chu kỳ Bus không thay đổi với mọi cặp thiết bị trao đổi dữ liệu 
+B. Hệ thống được định thời một cách gián đoạn 
+C. Mọi thao tác được thực hiện trong những khoảng thời gian là bội số của chu kỳ Bus  
+D. Việc trao đổi dữ liệu giữa các thiết bị cần có tín hiệu handshake * 
+Câu 60. Tại sao trong thực tế Bus đồng bộ được sử dụng rộng rãi hơn Bus không đ ồng bộ?  
+A. Tận dụng tốt thời gian xử lý của CPU 
+B. Việc điều khiển hoạt động của máy tính dễ dàng hơn * 
+C. Dễ tận dụng các tiến bộ của công nghệ 
+D. Cho phép thay đổi chu kỳ Bus một cách mềm dẻo 
+Câu 61. Thành phần nào của CPU dùng cho việc lưu trữ? 
+A. Đơn vị điều khiển     C. Đơn vị tính toán số học và logic  
+B. Tập thanh ghi     D. Đơn vị nối ghép  
+
+=== TRANG 9 ===
+9 
+ 
+Câu 62. Theo mô hình đơn vị tính toán số học và logic (ALU), ALU trao đổi thông tin 2 chiều 
+với: 
+A. Thanh ghi cờ  
+B. Các tín hiệu từ đơn vị điều khiển  
+C. Thanh ghi cờ, Các tín hiệu từ đơn vị điều khiển  
+D. Các tín hiệu từ đơn vị điều khiển, chính ALU  
+Câu 63. CPU đa nhân (multi-core) là:  
+A. CPU có một đơn vị vi xử lý (core)  
+B. CPU có một hoặc nhiều đơn vị vi xử lý  
+C. CPU không có đơn vị vi xử lý  
+D. CPU có nhiều đơn vị vi xử lý  
+Câu 64. RAM lưu trữ thông tin:  
+A. Thông tin lâu dài     C. Thông tin thư mục 
+B. Thông tin của màn hình    D. Thông tin tạm thời  
+Câu 65. Viết tắt của HDD là:  
+A. Hark Disk Drive      C. Hard Drop Drive 
+B. Hard Disk Drive      D. Hard Disk Driver 
+Câu 66. Để tăng cường hiệu quả của máy tính, người ta đã nghĩ tới giải pháp song song b ằng 
+cách: 
+A. Tăng số lượng bộ nhớ    C. Tăng tốc độ xử lý 
+B. Tăng số lượng bộ xử lý     D. Tăng thiết bị vào ra  
+Câu 67. CISC thường sử dụng loại nào của bộ nhớ để lưu trữ lệnh? 
+A. ROM    B. RAM   C. Cache   D. Flash 
+Câu 68. . MISD là viết tắt của cụm từ nào? 
+A. Multiple Instruction Stream, Single Data Stream   
+B. Multiple Instruction Stream, Single Data  
+C. Multiple Instruction Stream Data Stream 
+D. Multiple Instruction Steam, Single Data Steam  
+Câu 69. Kiến trúc nào sau đây không s ử dụng kiến trúc song song? 
+A. SIMD    B. MIMD   C. SISD   D. SPMD 
+Câu 70. Mục đích của xử lý song song là: 
+A. Làm giảm thời gian tính toán của hệ thống  
+B. Giải quyết các bài toán có kích thước dữ liệu lớn  
+C. Giải quyết các bài toán có độ phức tạp cao  
+
+=== TRANG 10 ===
+10 
+ 
+D. Làm giảm thời gian tính toán của hệ thống, giải quyết các bài toán có kích thước dữ liệu 
+lớn, giải quyết các bài toán có độ phức tạp cao.  
+Câu 71. CISC là viết tắt của gì trong kiến trúc máy tính? 
+A. Central Instruction Set Computer 
+B. Complex Instruction Set Computer  
+C. Comprehensive Instruction Set Computer 
+D. Complete Instruction Set Computer 
+Câu 72. MIMD thuộc loại máy tính: 
+A. Nhiều dòng lệnh, nhiều dòng số liệu  
+B. Một dòng lệnh, nhiều dòng số liệu  
+C. Nhiều dòng lệnh, một dòng số liệu  
+D. Một dòng lệnh, một dòng số liệu.  
+Câu 73. Số nhị phân 1111000.101 đổi ra số thập phân, đáp án nào sau đây là đúng?  
+A. 126,5 
+B. 126,625 
+C. 120,75 
+D. 120,625 
+Câu 74. Trong hệ nhị phân số 11101.11(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  26,75 
+           B.  29,75  
+           C.  29,65 
+           D.  26,65 
+Câu 75. Trong hệ nhị phân số 10101.11(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  21.75  
+           B.  23.75 
+           C.  21.65 
+           D.  23.65 
+Câu 76. Trong hệ nhị phân số 10101.01(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  23.75 
+           B.  21.75 
+           C.  21,25  
+
+=== TRANG 11 ===
+11 
+ 
+           D.  23.25 
+Câu 77. Trong hệ nhị phân số 11101.01(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  27.75 
+           B.  29.75 
+           C.  27.25 
+           D.  29.25  
+Câu 78. Trong hệ nhị phân số 10111.1(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  23.5  
+           B.  23.25 
+           C.  25.5 
+           D.  25.25 
+Câu 79. Trong hệ nhị phân số 11001.01(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  27.75 
+           B.  25.25  
+           C.  27.25 
+           D.  25.75 
+Câu 80. Trong hệ nhị phân số 11001.11(2) tương ứng với giá trị thập phân nào trong các giá trị 
+sau đây: 
+           A.  27.75 
+           B.  29.75 
+           C.  25.75  
+           D.  29.25 
+Câu 81. Trong hệ đếm bát phân số 237.64(8) tương ứng với giá trị thập phân nào trong các giá 
+trị sau đây: 
+           A.  157.8125 
+           B.  159.8125  
+           C.  157.825 
+      D.  159.825 
+
+=== TRANG 12 ===
+12 
+ 
+Câu 82. Trong hệ đếm bát phân số 237.04(8) tương ứng với giá trị thập phân nào trong các giá 
+trị sau đây: 
+           A.  157.0625 
+           B.  157.8125 
+           C.  159.0625  
+           D.  159.8125 
+Câu 83. Trong hệ đếm bát phân số 235.04(8) tương ứng với giá trị thập phân nào trong các giá 
+trị sau đây: 
+           A.  157.0125 
+           B.  159.0125 
+           C.  159.0625 
+           D.  157.0625  
+Câu 84.  Trong hệ đếm bát phân số 237.04(8) tương ứng với giá trị thập phân nào trong các giá 
+trị sau đây: 
+           A.  157.0625 
+           B.  157.8125 
+           C.  159.0625  
+           D.  159.8125 
+Câu 85. Trong hệ đếm thập lục phân số 34F5(16) tương ứng với giá trị thập phân nào trong các 
+giá trị sau đây: 
+           A.  13557  
+           B.  15775 
+           C.  15459 
+           D.  13267 
+Câu 86. Trong hệ đếm thập lục phân số 44C5(16) tương ứng với giá trị thập phân nào trong các 
+giá trị sau đây: 
+           A.  15577 
+           B.  15875 
+           C.  18459 
+           D.  17605  
+Câu 87. Trong hệ đếm thập lục phân số 345F(16) tương ứng với giá trị thập phân nào trong các 
+giá trị sau đây: 
+
+=== TRANG 13 ===
+13 
+ 
+           A.  13557 
+           B.  13407  
+           C.  15459 
+           D.  13267 
+Câu 88. Trong hệ đếm thập lục phân (Hexa) số 3CF5(16) tương ứng với giá trị thập phân nào 
+trong các giá trị sau đây: 
+           A.  13537 
+           B.  15725 
+           C.  15605  
+           D.  13287 
+Câu 89. Số 267(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây: 
+           A.  100001011 (2)  
+           B.  101001011 (2) 
+           C.  100101011 (2) 
+           D.  110101011(2) 
+Câu 90. Số 247(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây: 
+           A.  10001011(2) 
+           B.  11100111 (2) 
+           C.  11110111 (2)  
+           D.  11010111(2) 
+Câu 91. Số 285(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây: 
+           A.  100001011 (2) 
+           B.  100011101 (2)  
+           C.  100101011 (2) 
+           D.  100101001 (2) 
+Câu 92. Số 277(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây: 
+           A.  100001001 (2) 
+           B.  100011011 (2) 
+           C.  100101011 (2) 
+           D.  100010101 (2)  
+Câu 93. Số 17,125 tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:  
+
+=== TRANG 14 ===
+14 
+ 
+ A. 10001.001  
+ B. 10011.001 
+ C. 10111.101 
+ D. 10111.111 
+Câu 94. Số 25,625 tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:  
+A. 11001.101  
+ B. 11001.001 
+ C. 10101.101 
+ D. 11011.101 
+Câu 95. Số 100010111001(2) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây: 
+           A.  1724(8) 
+           B.  4271 (8)  
+           C.  4217 (8) 
+           D.  7124(8) 
+Câu 96. Số 101001110111(2) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây: 
+           A.  5167(8)  
+           B.  6715 (8) 
+           C.  1675 (8) 
+           D.  1756(8) 
+Câu 97. Số 799(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây: 
+           A.  1545(8) 
+           B.  1403 (8) 
+           C.  1437 (8)  
+           D.  1565(8) 
+Câu 98. Số 785(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây: 
+           A.  1471(8) 
+           B.  1461 (8) 
+           C.  1451 (8) 
+           D.  1421(8)  
+Câu 99. Số 865(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây: 
+           A.  1541(8)  
+
+=== TRANG 15 ===
+15 
+ 
+           B.  1551 (8) 
+           C.  1561 (8) 
+           D.  1571(8) 
+Câu 100. Số 841(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây: 
+           A.  1505(8) 
+           B.  1511 (8)  
+           C.  1531 (8) 
+           D.  1551(8) 
+Câu 101. Số nhị phân 1111000110110111 đổi ra số Hexa; đáp án nào sau đây là đúng?  
+ A. FEB7 
+ B. F0D7 
+ C. F1B7  
+ D. F17B 
+Câu 102. Số nhị phân 1010100011100011 đổi ra số Hexa, đáp án nào sau đây là đúng?  
+ A. AE38 
+ B. 3E8A 
+ C. A8E3  
+ D. 8EA3 
+Câu 103. Số nhị phân 1110001110110101 đổi ra số Hexa; đáp án nào sau đây là đúng?  
+ A. EEB5 
+ B. E0D5 
+ C. E1B5 
+ D. E3B5  
+Câu 104. Số nhị phân 1001110110110100 đổi ra số Hexa; đáp án nào sau đây là đúng?  
+ A. 9DB4  
+ B. 4BD9 
+ C. 4DB9 
+ D. 9BD4 
+Câu 105. Tổng hai số nhị phân 11010011 + 01100101 bằng số nhị phân nào trong các s ố sau: 
+ A. 11111000 
+ B. 01111110 
+
+=== TRANG 16 ===
+16 
+ 
+ C. 00111000 
+ D. 100111000 
+Câu 106. Tổng hai số nhị phân 1010101(2) và 1101011(2) bằng số nhị phân nào trong các số sau: 
+           A.  11000000(2)  
+           B.  10100000 (2) 
+           C.  10010000 (2) 
+           D.  10001000(2) 
+Câu 107. Tổng hai số nhị phân 1010101(2) và 1100011(2) bằng số nhị phân nào trong các số sau: 
+           A.  11000000(2) 
+           B.  10111000 (2)  
+           C.  10011000 (2) 
+           D.  10001000(2) 
+Câu 108. Tổng hai số nhị phân 1010101(2) và 1101001(2) bằng số nhị phân nào trong các số sau: 
+           A.  10011000(2) 
+           B.  10101000 (2) 
+           C.  10111110 (2)  
+           D.  10111010(2) 
+Câu 109. Tổng hai số nhị phân 1011101(2) và 1101011(2) bằng số nhị phân nào trong các số sau: 
+           A.  10011000(2) 
+           B.  11100000 (2) 
+           C.  11010000 (2) 
+           D.  11001000(2)  
+Câu 110. Tổng hai số nhị phân 1010111(2) và 1101011(2) bằng số nhị phân nào trong các số sau: 
+           A.  10011000(2) 
+           B.  11000010 (2)  
+           C.  10010000 (2) 
+           D.  10001000(2) 
+Câu 111. Tổng hai số nhị phân 1001101(2) và 1101001(2) bằng số nhị phân nào trong các số sau: 
+           A.  10010010(2) 
+           B.  10100000 (2) 
+           C.  10110110 (2)  
+
+=== TRANG 17 ===
+17 
+ 
+           D.  10001000(2) 
+Câu 112. Hiệu hai số nhị phân 11010011 – 01100101 bằng số nhị phân nào trong các s ố sau: 
+ A. 01111000 
+ B. 01101110  
+ C. 01010000 
+ D. 10111000 
+Câu 113. Bộ xử lý trung tâm CPU gồm có các đơn v ị 
+ A. Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); t ập các thanh ghi 
+(RF); Bus bên trong và đơn v ị ghép nối Bus (BIU).  
+  B. Đơn vị điều khiển (CU); Bộ nhớ chính; tập các thanh ghi (RF); Bus bên trong và đơn 
+vị ghép nối Bus (BIU). 
+ C. Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); Bộ nhớ chính; tập 
+các thanh ghi (RF). 
+ D. Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); t ập các thanh ghi 
+(RF). 
+Câu 114. Chức năng nào dưới đây không thuộc đơn vị điều khiển (CU) 
+ A.  Điều khiển nhận lệnh từ bộ nhớ đưa vào thanh ghi lệnh và tăng nội dung của PC để 
+trỏ sang lệnh kế tiếp. 
+ B.  Giải mã lệnh nằm trong thanh ghi lệnh để xác định thao tác cần thực hiện và phát ra 
+tín hiệu điều khiển thực hiện lệnh đó. 
+ C.  Nhận tín hiệu yêu cầu từ bus hệ thống và đáp ứng với các yêu cầu đó. 
+ D. Thực hiện các phép tính s ố học và logic  
+Câu 115. Chương trình đang thực hiện nằm trong bộ nhớ chính và nó chiếm các vùng nhớ cơ 
+bản nào sau đây  
+ A. Vùng nhớ lệnh (Code): chứa các lệnh của chương trình. 
+ B. Vùng dữ liệu (Data): chứa dữ liệu của chương trình ; Thực chất đây là nơi c ấp phát 
+các ngăn nhớ cho các biến nhớ. 
+ C. Vùng ngăn xếp (Stack): là vùng nhớ có cấu trúc LIFO (Last In First Out) dùng để cất 
+giữ thông tin và sau đó có thể khôi phục lại. Thường dùng cho việc thực hiện các chương trình 
+con. 
+ D. Cả 3 vùng nhớ trên (Code, Data, Stack).   
+Câu 116. Trong các bộ phận sau, bộ phận nào không thuộc bộ xử lý trung tâm: 
+A.  Bộ điều khiển vào/ra DMA  
+
+=== TRANG 18 ===
+18 
+ 
+B.  Khối số học và logic 
+C.  Tập các thanh ghi đa năng  
+D.  Khối điều khiển 
+Câu 117. Thanh ghi PC - Program Counter là:  
+ A.  Bộ đếm chương trình  
+ B.  Con trỏ dữ liệu  
+ C.  Con trỏ ngăn xếp  
+ D. Thanh ghi lệnh  
+Câu 118. Thanh ghi con trỏ ngăn xếp; Khi cất thêm một thông tin vào ngăn xếp 
+ A. SP tự động tăng 
+ B. SP tự động giảm  
+ C. SP không thay đổi 
+ D. SP thay đổi ngẫu nhiên 
+Câu 119. Khi lấy một thông tin ra khỏi ngăn xếp: 
+ A. SP tự động tăng  
+ B. SP tự động giảm 
+ C. SP không thay đổi 
+ D. SP thay đổi ngẫu nhiên 
+Câu 120. Nội dung nào không thuộc bộ đếm chương trình PC 
+ A. Còn gọi là con trỏ lệnh (Instruction Pointer - IP),  
+ B. Là thanh ghi ch ứa địa chỉ của lệnh tiếp theo sẽ được nhận vào. 
+ C.  Sau khi một lệnh được nhận vào thì nội dung của PC tự động tăng để trỏ sang lệnh kế 
+tiếp nằm ngay sau lệnh vừa được nhận. 
+ D. Chứa địa chỉ của ngăn nhớ dữ liệu mà CPU muốn truy cập.  
+Câu 121. Nội dung nào không thuộc quá trình nhận lệnh trong chu trình lệnh của CPU 
+ A.  CPU đưa địa chỉ của lệnh cần nhận từ thanh ghi bộ đếm chương trình PC ra bus đ ịa 
+chỉ 
+ B.  CPU phát tín hi ệu điều khiển đọc bộ nhớ 
+ C.  Lệnh từ bộ nhớ được đặt lên bus dữ liệu và được CPU copy vào trong thanh ghi lệnh 
+IR; CPU tăng nội dung của PC để trỏ sang lệnh kế tiếp 
+ D. Lệnh từ thanh ghi lệnh IR được đưa đến đơn vị điều khiển  
+
+=== TRANG 19 ===
+19 
+ 
+Câu 122. Nội dung nào không thuộc quá trình nhận toán hoạng (toán hạng trực tiếp) trong chu 
+trình lệnh của CPU 
+ A. CPU đưa đ ịa chỉ của toán hạng ra bus địa chỉ 
+ B. CPU giải mã lệnh để xác định thao tác cần phải thực hiện 
+ C. CPU phát tín hi ệu điều khiển đọc 
+ D. Toán hạng được chuyển vào trong CPU 
+Câu 123. Nội dung nào không thuộc quá trình ghi toán hoạng trong chu trình lệnh của CPU 
+ A. CPU đưa đ ịa chỉ ra bus địa chỉ 
+ B. CPU đưa d ữ liệu cần ghi ra bus dữ liệu 
+ C. Chuyển dữ liệu giữa các thanh ghi  
+ D. CPU phát tín hi ệu điều khiển ghi; Dữ liệu trên bus dữ liệu được copy đến vị trí xác 
+định 
+Câu 124. Nguyên tắc của Pipeline (kỹ thuật đường ống lệnh) 
+ A. Chia chu trình lệnh thành các công đoạn và cho phép thực hiện gối lên nhau theo kiểu 
+dây chuyền.  
+ B. Chia chu trình lệnh thành các công đoạn và cho phép cùng 1 thời điểm thực hiện song 
+song đồng thời nhiều lệnh 
+ C. Chia chu trình lệnh thành các công đoạn và cho phép thực hiện tuần tự từng lệnh một 
+ D. Chia chu trình lệnh thành các công đoạn và gián đoạn thực hiện các công đoạn từng 
+lệnh. 
+Câu 125. Chức năng chính của Mainboard  
+A. Gắn kết các thành phần trên một hệ thống máy tính lại với nhau 
+B. Điều khiển thay đổi tốc độ BUS cho phù hợp với các thành phần khác nhau; Quản lý 
+nguồn cấp cho các thành ph ần trên Main 
+C. Cung cấp xung nhịp chủ (xung Clock) để đồng bộ hoạt động của toàn hệ thống. Chính 
+vì những chức năng quan trọng trên mà khi Main có s ự cố thì máy tính không thể hoạt 
+động được. 
+D. Tất cả các chức năng trên 
+Câu 126. Nhiệm vụ chính của đơn vị ghép nối Bus bên trong CPU g ồm? 
+A. Kết nối với hệ thống Bus bên ngoài CPU  
+B. Chỉ kết nối với đơn vị điều khiển CU  
+C. Chỉ kết nối với tập các thanh ghi  
+D. Truyền dẫn các tín hiệu giữa các bộ phận trong CPU và kết nối với hệ thống Bus bên 
+ngoài  
+
+=== TRANG 20 ===
+20 
+ 
+Câu 127. Các thiết bị sau thuộc đồng thời hệ thống đầu ra của máy tính? 
+A. Chuột, Bàn phím, Máy Scan, Máy chiếu Projector, Loa  
+B. Chuột, Bàn phím, Máy Scan, Micro, Webcam  
+C. Máy in Laser, Máy in kim, Màn hình, Loa, Máy chiếu Projector  
+D. Máy in Laser, Máy in kim, Màn hình, Chuột, Máy chiếu Projector  
+Câu 128. Bộ nhớ ngoài của máy tính bao gồm? 
+A. Cache, RAM, Đĩa cứng, USB, Đĩa mềm  
+B. Cache, ROM, Đĩa cứng, USB, Đĩa mềm  
+C. Cache, Thanh ghi, Đĩa cứng, USB, Đĩa mềm  
+D. Các phương án trên đều sai  
+Câu 129. Phát biểu nào sau đây là đúng đ ối với bộ nhớ RAM? 
+A. Là bộ nhớ ngoài 
+B. Dữ liệu vẫn được lưu trữ khi ngắt nguồn điện  
+C. Nơi lưu trữ thông tin khi máy tính đang xử lý  
+D. RAM được viết tắt của cụm từ Read Only Memory  
+Câu 130. Bộ nhớ nào là bộ nhớ chỉ đọc của máy tính? 
+A. RAM  B. ROM    C. Cache   D. Đĩa mềm 
+Câu 131. Khái niệm truy xuất ngẫu nhiên đối với bộ nhớ có ý nghĩa như thế nào? 
+A. Dữ liệu trong bộ nhớ được đọc hay ghi vào các th ời điểm ngẫu nhiên 
+B. Dữ liệu trong bộ nhớ được định địa chỉ một cách ngẫu nhiên 
+C. Dữ liệu trong bộ nhớ không được đọc hay ghi một cách tuần tự  
+D. Dữ liệu trong bộ nhớ có giá trị ngẫu nhiên 
+Câu 132. Các bộ nhớ nào sau đây cho phép truy nh ập ngẫu nhiên? 
+A. DRAM 
+B. ROM 
+C. Cache 
+D. Cả ba loại trên  
+Câu 133.  Đặc điểm của bộ nhớ Cache là: 
+A. Dung lượng lớn 
+B. Thời gian truy nhập lớn 
+C. Thời gian truy nhập nhỏ  
+D. Chi phí thấp 
+Câu 134. Đặc điểm của bộ nhớ Cache là: 
+
+=== TRANG 21 ===
+21 
+ 
+A. Có dung lượng lớn hơn bộ nhớ RAM 
+B. Cho phép truy nhập nhanh hơn so v ới bộ nhớ DRAM  
+C. Cho phép truy nhập nhanh hơn so v ới các thanh ghi c ủa CPU 
+D. Là bộ nhớ cố định 
+Câu 135. Chức năng của tín hiệu Chip Enable trong IC bộ nhớ là gì? 
+A. Cho phép đọc dữ liệu trong IC bộ nhớ 
+B. Cho phép ghi dữ liệu vào IC bộ nhớ 
+C. Cho phép IC bộ nhớ hoạt động  
+D. Cho phép đọC. ghi đồng thời đối với IC bộ nhớ 
+Câu 136. Đặc điểm của bộ nhớ ROM: 
+A. Cho phép ghi dữ liệu 
+B. Chỉ cho phép đọc dữ liệu  
+C. Bị mất dữ liệu khi không có nguồn cấp 
+D. Cho phép ghi/đọc dữ liệu đồng thời tại một vị trí nhớ 
+Câu 137. Đặc điểm của bộ nhớ RAM nói chung 
+A. Cho phép ghi dữ liệu  
+B. Chỉ cho phép đọc dữ liệu 
+C. Không bị mất dữ liệu khi không có nguồn cấp 
+D. Cho phép ghi/đọc dữ liệu đồng thời tại một vị trí nhớ 
+Câu 138. Đặc điểm của bộ nhớ SRAM 
+A. Phải được làm tươi theo chu k ỳ 
+B. Không phải làm tươi theo chu k ỳ  
+C. Thời gian truy nhập lớn 
+D. Chi phí trên một bit nhớ thấp 
+Câu 139. Đặc điểm của bộ nhớ DRAM 
+A. Thời gian truy nhập nhỏ 
+B. Chi phí trên một bit nhớ cao 
+C. Không phải làm tươi theo chu k ỳ  
+D. Phải được làm tươi theo chu k ỳ  
+Câu 140. Bộ nhớ Cache được cấu trúc từ loại bộ nhớ nào trong số các bộ nhớ sau đây? 
+    A. SRAM  
+
+=== TRANG 22 ===
+22 
+ 
+    B. DRAM 
+    C. ROM 
+    D. Flash ROM  
+Câu 141. Chức năng của bộ nhớ Cache trong máy tính là gì?  
+A. Giúp mở rộng dung lượng bộ nhớ 
+B. Chứa các toán hạng là hằng số 
+C. Lưu giữ dữ liệu mà bộ vi xử lý thường xuyên sử dụng  
+D. Lưu giữ các tham số hệ thống 
+Câu 142. Đường dây Read/Write trong IC b ộ nhớ có chức năng là gì? 
+A. Cho biết bộ nhớ có cho phép đọc và ghi hay không  
+B. Cho biết bộ nhớ có thể đọc và ghi đồng thời hay không 
+C. Cho biết thao tác được thực hiện là đọc hay ghi  
+D. Cho biết bộ nhớ có bị cấm đọc hay cấm ghi không 
+Câu 143. Trong các bộ nhớ sau, bộ nhớ nào yêu cầu làm tươi theo chu k ỳ? 
+A. SRAM 
+B. DRAM  
+C. PROM 
+D. EPROM 
+Câu 144. Trong các bộ nhớ SRAM và DRAM, lo ại nào tiêu thụ nguồn nuôi lớn hơn? 
+A. SRAM  
+B. DRAM 
+C. Bằng nhau 
+D. Không so sánh đư ợc 
+Câu 145. Đặc điểm của bộ nhớ ROM là: 
+A. Cho phép truy nhập nhanh hơn bộ nhớ RAM 
+B. Nội dung không bị thay đổi  
+C. Lưu trữ được nhiều thông tin hơn bộ nhớ RAM 
+D. Được sử dụng làm bộ nhớ Cache 
+Câu 146. Phát biểu nào sau đây đúng?  
+A. Bộ nhớ SRAM rẻ hơn bộ nhớ DRAM 
+B. Bộ nhớ SRAM được sử dụng chỉ tại thời điểm khởi động máy tính 
+
+=== TRANG 23 ===
+23 
+ 
+C. Bộ nhớ SRAM được sử dụng cho bộ nhớ Cache  
+D. Bộ nhớ SRAM có thời gian truy nhập lớn hơn DRAM 
+Câu 147. Mạch chọn địa chỉ hàng và mạch chọn địa chỉ cột tạo thành mạch gì? 
+A. Mạch tạo địa chỉ bộ nhớ 
+B. Mạch giải mã địa chỉ  
+C. Mạch đọc/ghi dữ liệu bộ nhớ 
+D. Mạch cho phép chốt địa chỉ bộ nhớ 
+Câu 148. Cấu tạo của một ô nhớ DRAM như thế nào? 
+A. Gồm hai tụ điện và một Transistor 
+B. Gồm một tụ điện và một Transistor  
+C. Gồm hai tụ điện và hai Transistor 
+D. Gồm hai tụ điện và hai Transistor 
+Câu 149. Cấu tạo của một ô nhớ SRAM như thế nào? 
+A. Gồm hai tụ điện và ba Transistor 
+B. Gồm ba tụ điện và hai Transistor 
+C. Gồm bốn tụ điện và hai Transistor 
+D. Gồm sáu Transistor  
+Câu 150. Tốc độ truy nhập của bộ nhớ SRAM so với bộ nhớ DRAM như thế nào? 
+A. Chậm hơn 
+B. Nhanh hơn  
+C. Bằng nhau 
+D. Không xác định được 
+Câu 151. Hãy cho biết trình tự xử lý thông tin của máy tính điện tử:  
+A. Nhập thông tin -> Xử lý thông tin -> Xuất thông tin  
+B. CPU -> Đĩa cứng -> Màn hình 
+C. CPU -> Bàn phím -> Màn hình  
+D. Bàn phím -> Máy in -> Màn hình  
+Câu 152. Khối xử lý trung tâm CPU gồm những thành phần nào? 
+A. Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Đơn vị ghép nối 
+Bus  
+B. Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Bộ nhớ ngoài  
+C. Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Bộ nhớ trong  
+
+=== TRANG 24 ===
+24 
+ 
+D. Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Hệ thống vào/ra 
+Câu 153. Nhiệm vụ chính của tập các thanh ghi g ồm? 
+A. Chứa mã lệnh điều khiển  
+B. Chứa dữ liệu tạm thời  
+C. Kho chứa lệnh và dữ liệu tạm thời cho CPU xử lý  
+D. Thực hiện các phép toán số học  
+Câu 154. Các thiết bị sau thuộc đồng thời hệ thống đầu vào của máy tính? 
+A. Màn hình, Chuột, Bàn phím, Máy Scan, Máy chiếu Projector  
+B. Chuột, Bàn phím, Máy Scan, Micro, Webcam  
+C. Cache, Màn hình, RAM, Chuột, Máy chiếu Projector  
+D. Máy Scan, Màn hình, Micro, Đĩa CD -ROM, Webcam  
+Câu 155. Bộ nhớ nào là bộ nhớ truy cập ngẫu nhiên của máy tính? 
+A. RAM   B. ROM   C. Đĩa CD-ROM   D. Đĩa mềm 
+Câu 156. Trong kiến trúc máy tính, những bộ nhớ nào nằm trong bộ vi xử lý? 
+A. Ổ đĩa cứng, Bộ nhớ chính     C. Cache, Ổ đĩa cứng  
+B. Tập thanh ghi, Bộ nhớ Cache    D. Tập thanh ghi, Ổ đĩa cứng  
+Câu 157. Máy tính UNIVAC s ử dụng linh kiện nào là chính trong các linh ki ện sau? 
+A. Transistor (bóng bán dẫn)     C. Đèn điện tử  
+B. IC bán dẫn      D. IC cảm biến 
+Câu 158. Địa chỉ toán hạng là: 
+A. Nơi chứa các toán hạng mà thao tác sẽ tác động  
+B. Nơi chứa lệnh 
+C. Nơi chứa thao tác  
+D. B và C đúng 
+Câu 159. Quy trình thực hiện lệnh đúng là: 
+A. Lấy lệnh, Nạp các tham số, Giải mã lệnh, xử lý lệnh, ghi kết quả  
+B. Lấy lệnh, Giải mã lệnh, xử lý lệnh, Nạp các tham số, ghi kết quả  
+C. Lấy lệnh, Giải mã lệnh, Nạp các tham số, xử lý lệnh, ghi kết quả  
+D. Lấy lệnh, xử lý lệnh, Giải mã lệnh, Nạp các tham số, ghi kết quả  
+Câu 160. : Cơ ch ế CPU tạm dừng chương trình đang thực hiện để chuyển sang chương trình 
+khác gọi là: 
+A. PUSH  B. POP   C. INTERRUPT   D. STOP 
+Câu 161. Máy tính ENIAC sử dụng linh kiện nào là chính trong các linh ki ện sau? 
+A. Transistor (bóng bán dẫn)    C. Đèn điện tử  
+
+=== TRANG 25 ===
+25 
+ 
+B. IC bán dẫn      D. IC cảm biến 
+Câu 162. Máy tính Von-Newmann là máy tính 
+A. Thực hiện nhiều lệnh cùng một lúc (song song), có 2 bộ xử lý  
+B. Thực hiện các lệnh tuần tự, có 2 bộ xử lý  
+C. Có 1 bộ xử lý, thực hiện lệnh tuần tự  
+D. Các phương án trên đều sai  
+Câu 163. Bộ đếm chương trình PC có nhi ệm vụ: 
+A. Giữ địa chỉ của lệnh tiếp theo sẽ được nhận vào  
+B. Chứa địa chỉ của ngăn nhớ đỉnh ngăn xếp  
+C. Chứa địa chỉ của ngăn nhớ dữ liệu  
+D. Giữ địa chỉ của lệnh đã thực hiện  
+Câu 164. Chế độ định địa chỉ gián tiếp thanh ghi là gì? 
+A. Địa chỉ toán hạng là một thanh ghi được sử dụng để chứa địa chỉ lệch của ô nhớ chứa dữ 
+liệu 
+B. Toán hạng là ngăn nhớ có địa chỉ nằm trong thanh ghi 
+C. Toán hạng nằm ngay trong trường địa chỉ của lệnh 
+D. Dùng các thanh ghi bên trong CPU như là các toán h ạng để chứa dữ liệu cần thao tác 
+Câu 165. Đối với một lệnh mã máy, toán h ạng không thể là: 
+A. Một hằng số 
+B. Nội dung của thanh ghi 
+C. Nội dung của ngăn nhớ  
+D. Nội dung của thanh ghi có địa chỉ nằm trong một ngăn nhớ  
+Câu 166. Phát biểu nào sau đây đúng?  
+A. Bộ nhớ DRAM được sử dụng làm Cache trong máy tính  
+B. Bộ nhớ DRAM có giá thành cao hơn SRAM  
+C. Bộ nhớ DRAM có giá thành th ấp hơn SRAM  
+D. Bộ nhớ DRAM chỉ được sử dụng vào thời điểm khởi động máy tính 
+Câu 167. Phát biểu nào sau đây đúng?  
+A. Bộ nhớ SRAM chỉ được sử dụng làm Cache trong máy tính  
+B. Bộ nhớ SRAM có giá thành cao hơn DRAM  
+C. Bộ nhớ SRAM có thời gian truy nhập lớn hơn DRAM  
+D. Bộ nhớ SRAM chỉ được sử dụng vào thời điểm khởi động máy tính 
+Câu 168. Bộ nhớ SRAM lưu trữ thông tin bằng gì? 
+A. Tụ điện 
+
+=== TRANG 26 ===
+26 
+ 
+B. Flip-Flop  
+C. Mạch lưỡng cực 
+D. Mạch MOS 
+Câu 169. Bộ nhớ DRAM cần các mạch bên ngoài để thực hiện chức năng gì? 
+A. Giải mã hàng 
+B. Giải mã cột 
+C. Làm tươi  
+D. Giải mã ô nhớ 
+Câu 170. Một bộ nhớ 64 Kbit có thể được tổ chức theo kiểu nào? 
+A. 64K × 1 
+B. 8K × 8 
+C. 16K × 4 
+D. Tất cả các kiểu trên  
+Câu 171. Tại sao bộ nhớ DRAM phải được làm tươi? 
+A. Nếu không, các tụ điện sẽ bị đánh thủng 
+B. Nếu không, nguồn cấp cho tụ điện sẽ hết và dữ liệu sẽ bị mất  
+C. Nếu không, mạch điện sẽ tiêu thụ nhiều năng lượng hơn 
+D. Nếu không, các ô nh ớ sẽ bị định địa chỉ nhầm 
+Câu 172. Tại sao với các hệ thống bộ nhớ dung lượng rất nhỏ, người ta không sử dụng bộ nhớ 
+loại DRAM mà thường dùng loại SRAM? 
+A. Vì bộ nhớ DRAM đòi hỏi mạch làm tươi nên sẽ không kinh tế khi dùng với bộ nhớ có 
+dung lượng nhỏ  
+B. Vì bộ nhớ DRAM chỉ cho phép xây bộ nhớ với dung lượng lớn 
+C. Vì bộ nhớ DRAM có thời gian truy nhập tăng lên khi dung lượng bộ nhớ nhỏ 
+D. Vì bộ nhớ SRAM có thời gian truy nhập nhỏ hơn DRAM chỉ khi dùng cho bộ nhớ dung 
+lượng nhỏ 
+Câu 173. Bộ nhớ DRAM lưu trữ thông tin bằng gì? 
+A. Tụ điện  
+B. Flip-Flop  
+C. Mạch lưỡng cực 
+D. Mạch MOS 
+
+=== TRANG 27 ===
+27 
+ 
+Câu 174. Các bộ nhớ RAM-ROM khác với các bộ nhớ ngoài ở những điều sau, ngoại trừ: 
+A. Cách mã hóa các bit  
+B. Cách tổ chức bộ nhớ 
+C. Cách truy nhập dữ liệu trên các phần tử của bộ nhớ 
+D. Các vị trí nhớ dùng để lưu trữ các bit nhị phân  
+Câu 175. Hãy chỉ ra khẳng định sai trong các kh ẳng định sau đây: 
+A. Bộ nhớ trong là tập hợp các ô nhớ, mỗi ô nhớ có một số bit nhất định và chứa một thông 
+tin được mã hoá thành số nhị phân mà không quan tâm đến kiểu của dữ liệu mà nó đang 
+chứa 
+B. Mỗi ô nhớ trong bộ nhớ trong đều tương ứng với một địa chỉ 
+C. Thời gian truy cập vào mỗi ô nhớ trong bộ nhớ trong là ngẫu nhiên  
+D. Bộ nhớ trong còn được gọi là bộ nhớ truy cập ngẫu nhiên 
+Câu 176. Đặc điểm của bộ nhớ ngoài so với bộ nhớ trong của máy tính là:  
+A. Tốc độ truy cập bộ nhớ thường rất cao 
+B. Dung lượng nhỏ 
+C. Không mất dữ liệu khi mất nguồn  
+D. Giá thành cao 
+Câu 177. Một ưu điểm của bộ nhớ ngoài so với bộ nhớ trong của máy tính là:  
+A. Tốc độ truy cập nhanh 
+B. Dung lượng lớn  
+C. Kích thước nhỏ gọn 
+D. Cấu tạo đơn giản 
+Câu 178. So với bộ nhớ trong, bộ nhớ ngoài của máy tính có ưu đi ểm là:  
+A. Tốc độ truy cập nhanh 
+B. Không bị mất dữ liệu khi mất nguồn  
+C. Kích thước nhỏ gọn 
+D. Cấu tạo đơn giản 
+Câu 179. Bộ điều khiển DMA (DMAC) tham gia qu ản lý bộ nhớ trong trường hợp nào? 
+A. Trong việc truyền số liệu giữa bộ điều khiển ổ đĩa và bộ nhớ  
+B. Trong việc truyền số liệu giữa khối ALU và bộ nhớ  
+C. Trong việc truyền số liệu giữa các thanh ghi và b ộ nhớ  
+
+=== TRANG 28 ===
+28 
+ 
+D. Xác lập các tham s ố của BIOS 
+Câu 180. Phát biểu nào sau đây đúng khi nói v ề bộ nhớ Cache?  
+A. Bộ nhớ chính có tốc độ nhanh hơn bộ nhớ Cache  
+B. Bộ nhớ Cache không được đặt trên cùng chip với CPU  
+C. Bộ nhớ Cache được đặt giữa bộ nhớ chính và bộ nhớ ngoài  
+D. Bộ nhớ Cache có thê đư ợc đặt trên cùng chip với CPU  
+Câu 181. Để đọc hoặc ghi được dữ liệu trên đĩa cứng BIOS cần thông tin nào trong các thông 
+tin sau:  
+A. Head 
+B. Cylinder 
+C. Sector 
+D. Cả 3 thông tin trên  
+Câu 182. Khi khởi động, vi xử lý sẽ thực hiện chương trình ở đâu trước tiên? 
+A. ROM  
+B. RAM 
+C. Ổ đĩa cứng 
+D. Đĩa khởi động (boot) 
+Câu 183. Một ô nhớ có địa chỉ là:  
+A. 1 byte  
+B. 2 byte 
+C. 3 byte 
+D. 4 byte 
+Câu 184. SDRAM viết tắt của cụm từ 
+A. Static Dynamic RAM  
+B. Static Data RAM 
+C. Static RAM 
+D. Synchronuos Dynamic RAM 
+Câu 185. DDRAM viết tắt của cụm từ 
+A. Double Data RAM 
+B. Double Data Rate Dynamic RAM   
+C. Double Data Rate RAM  
+
+=== TRANG 29 ===
+29 
+ 
+D. Double Dynamic RAM 
+Câu 186. Mục đích của hoạt động ngắt? 
+A. Gián đoạn chương trình chính 
+B. Chuyển tới chương trình con phục vụ ngắt làm 1 việc nào đó 
+C. Tăng hiệu quả làm việc của CPU  
+D. Cả a,b,c đều sai. 
+Câu 187. Trong các khối sau, khối nào không thuộc hệ thống hỗ trợ vào ra? 
+A. Bộ điều khiển ổ đĩa 
+B. Bộ phối ghép màn hình 
+C. Bộ điều khiển bàn phím 
+D. Các thanh ghi đa năng  
+Câu 188. Trong các thiết bị sau, thiết bị nào không phải là thiết bị ngoại vi: 
+A. Màn hình 
+B. RAM  
+C. Đĩa cứng 
+D. Bàn phím 
+Câu 189. Trong các thành phần sau, thành ph ần nào thuộc hệ thống hỗ trợ phối ghép vào ra? 
+A. Cache 
+B. Cáp nguồn ổ cứng 
+C. Giao tiếp cổng USB  
+D. Các thanh ghi đa năng  
+Câu 190. Chức năng nào sau đây không ph ải là chức năng của hệ thống hỗ trợ vào ra? 
+A. Phối ghép các thiết bị ngoại vi với các thành phần khác của máy tính 
+B. Đảm bảo việc chuyển dữ liệu giữa máy tính và thiết bị ngoại vi  
+C. Điều khiển cấp phát bộ vi xử lý cho các thao tác trong môi trư ờng đa nhiệm  
+D. Hỗ trợ việc truyền dữ liệu giữa các thiết bị ngoại vi và bộ nhớ 
+Câu 191. Chức năng của hệ thống hỗ trợ vào ra là: 
+A. Chuyển đổi dữ liệu từ môi trường bên ngoài thành dạng số và đưa vào máy tính  
+B. Đảm bảo việc trao đổi dữ liệu giữa máy tính và các thi ết bị ngoại vi  
+C. Tiếp nhận các ngắt từ các thiết bị vào ra dữ liệu 
+D. Hỗ trợ thiết lập việc truyền dữ liệu giữa các máy tính 
+
+=== TRANG 30 ===
+30 
+ 
+Câu 192. Đặc điểm của thiết bị lưu trữ ngoài là:  
+A. Tốc độ truy cập nhanh 
+B. Dung lượng nhỏ 
+C. Không mất dữ liệu khi mất nguồn  
+D. Giá thành cao 
+Câu 193. Nguyên tắc lưu trữ của thiết bị lưu trữ ngoài thường là:  
+A. Bộ nhớ bán dẫn 
+B. Bộ nhớ từ, quang hoặc quang từ  
+C. Hiện tượng từ trễ 
+D. Hiệu ứng dòng Fucô 
+Câu 194. Đầu cắm bàn phím dạng PS/2 có mấy chân? 
+B. 5  
+C. 6  
+D. 7 
+E. 8 
+Câu 195. Giao tiếp bàn phím dạng PS/2 có mấy đường dữ liệu? 
+A. 1  
+B. 2 
+C. 3 
+D. 4 
+Câu 196. Việc truyền dữ liệu từ bàn phím tới máy tính thường theo nguyên tắc nào? 
+A. Song song 
+B. Nối tiếp  
+C. Song công 
+D. Bán song công 
+Câu 197. Các bộ vi xử lý kiểu CISC có đặc điểm là: 
+A. Có số lượng các lệnh ít hơn so với các bộ vi xử lý kiểu RISC 
+B. Sử dụng nhiều RAM hơn so v ới các bộ vi xử lý kiểu RISC 
+C. Có tốc độ đồng hồ trung bình                                                                                                                                                                                                                                                                                                                                                                                                                                                
+D. Sử dụng các lệnh có kích thước khác nhau  
+Câu 198. Các bộ vi xử lý kiểu RISC điển hình có đặc điểm là: 
+
+=== TRANG 31 ===
+31 
+ 
+A. Có các bộ nhớ Cache với dung lượng lớn hơn so với các bộ vi xử lý kiểu CISC 
+B. Có ít thanh ghi hơn so v ới các bộ vi xử lý kiểu CISC 
+C. Kém tin cậy hơn so với các bộ vi xử lý kiểu CISC 
+D. Thường thực hiện mỗi lệnh trong một xung nhịp Clock  
+Câu 199. Tốc độ truy nhập của các thanh ghi so v ới bộ nhớ RAM thì: 
+A. Nhanh hơn  
+B. Chậm hơn 
+C. Xấp xỉ nhau 
+D. Không so sánh đư ợc 
+Câu 200. Thanh ghi IP cho biết thông tin gì? 
+A. Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ  
+B. Địa chỉ segment của lệnh kế tiếp sẽ được thực hiện  
+C. Địa chỉ offset của lệnh kế tiếp sẽ được thực hiện  
+D. Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành 
+Câu 201. Thanh ghi CS cho biết thông tin gì? 
+A. Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ  
+B. Địa chỉ bắt đầu của đoạn dữ liệu phục vụ cho chương trình hiện hành 
+C. Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ 
+D. Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành 
+Câu 202. Thanh ghi DS cho bi ết thông tin gì? 
+A. Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ  
+B. Địa chỉ bắt đầu của đoạn dữ liệu chứa các biến của chương trình hiện hành  
+C. Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ 
+D. Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành 
+Câu 203. Thanh ghi SS cho biết thông tin gì? 
+A. Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ  
+B. Địa chỉ bắt đầu của đoạn dữ liệu phục vụ cho chương trình hiện hành  
+C. Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ  
+D. Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành 
+Câu 204. Thanh ghi ES cho biết thông tin gì? 
+A. Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ  
+
+=== TRANG 32 ===
+32 
+ 
+B. Địa chỉ kết thúc của đoạn dữ liệu phục vụ cho chương trình hiện hành 
+C. Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ 
+D. Địa chỉ đoạn dữ liệu mở rộng phục vụ cho chương trình hiện hành  
+Câu 205. Cơ chế DMA là gì? 
+A. Truy cập ngoại vi trực tiếp 
+B. Truy cập bộ nhớ trực tiếp  
+C. Điều khiển thiết bị ngoại vi thông qua qua b ộ nhớ 
+D. Điều khiển hệ thống bộ nhớ thông qua thiết bị ngoại vi 
+Câu 206. DMA là viết tắt của: 
+A. Direct Management Access  
+B. Direct Memory Application Access  
+C. Direct Memory Access  
+D. Direct Mainboard Administration 
+Câu 207. Cơ chế DMA cho phép thực hiện điều gì? 
+A. Truyền dữ liệu trực tiếp giữa bộ nhớ và các thiết bị ngoại vi  
+B. Truyền dữ liệu trực tiếp giữa bộ nhớ và các thanh ghi trong b ộ vi xử lý 
+C. Truyền dữ liệu trực tiếp giữa các thiết bị ngoại vi  
+D. Truyền dữ liệu trực tiếp giữa các thành phần trong hệ thống bộ nhớ 
+Câu 208. Khi chương trình con đư ợc gọi, địa chỉ quay về được cất vào: 
+               A. Ngăn xếp  
+               B. Thanh ghi con trỏ ngăn xếp 
+               C. Cặp thanh ghi CS:IP 
+               D. Bộ đếm chương trình 
+Câu 209. Thông thường khi một chương trình con phục vụ ngắt được thực hiện xong: 
+               A. Bộ vi xử lý phải được khởi động lại 
+               B. Một yêu cầu ngắt xuất hiện 
+               C. Chương trình bị tạm dừng sẽ được tiếp tục thực hiện  
+               D. Hệ thống bị dừng (Halt) 
+Câu 210. Một tín hiệu vào của bộ vi xử lý làm cho nó tạm dừng chương trình đang thực hiện thì 
+được gọi là: 
+               A. Nghỉ (Break) 
+
+=== TRANG 33 ===
+33 
+ 
+               B. Ngắt (Interrupt)  
+               C. Dừng (Stop) 
+               D. Đợi (Wait) 
+Câu 211. Xét lệnh ADD. Lệnh này thuộc: 
+A. Nhóm lệnh số học 
+B. Nhóm lệnh chuyển dữ liệu  
+C. Nhóm lệnh điều khiển chương trình  
+D. Nhóm lệnh logic 
+Câu 212. Trong một lệnh mã máy, phát bi ểu nào sau đây là đúng?  
+A. Có thể có nhiều mã lệnh  
+B. Không tồn tại lệnh không có toán hạng  
+C. Toán hạng là duy nhất 
+D. Có thể có nhiều toán hạng  
+Câu 213. “Opertion code” trong cấu trúc của lệnh gọi là: 
+A. Tiền tố      C. Toán hạng 
+B. Mã toán      D. Địa chỉ trực tiếp  
+Câu 214. Ngôn ngữ trong máy tính có đặc điểm: 
+A. Gọi là mã máy 
+B. Được đọc bởi máy tính  
+C. Được biểu diễn bằng các bít 0 và 1  
+D. Cả 3 đáp án trên  
+Câu 215. Các cấu hình nối ghép gồm có:  
+A. Điểm - điểm     C. Điểm - đa điểm 
+B. Điểm - điểm và điểm - đa điểm   D. Đa điểm - đa điểm 
+Câu 216. Phương pháp DMA cho phép:  
+A. Trao đổi dữ liệu trực tiếp giữa ngoại vi và bộ nhớ trong  
+B. Trao đổi dữ liệu trực tiếp giữa bộ nhớ trong và bộ nhớ Cache 
+C. Trao đổi dữ liệu trực tiếp giữa bộ nhớ ngoài và bộ nhớ Cache 
+D. Trao đổi dữ liệu trực tiếp giữa ngoại vi và bộ nhớ ngoài  
+Câu 217. Thành phần nào của CPU dùng cho việc tính toán? 
+A. Đơn vị điều khiển     C. Đơn vị tính toán số học và logic  
+B. Tập thanh ghi    D. Đơn vị nối ghép  
+Câu 218. Nhiệm vụ nào của CPU thực hiện xác định thao tác mà lệnh yêu cầu? 
+A. Nhận lệnh     C. Nhận dữ liệu  
+
+=== TRANG 34 ===
+34 
+ 
+B. Giải mã lệnh     D. Ghi dữ liệu 
+Câu 219. Theo mô hình đơn vị tính toán số học và logic (ALU), ALU nhận thông tin từ:  
+A. Thanh ghi cờ 
+B. Các tín hiệu từ đơn vị điều khiển  
+C. Các thanh ghi, Các tín hiệu từ đơn vị điều khiển  
+D. Các tín hiệu từ đơn vị điều khiển, các thanh ghi cờ  
+Câu 220. Các loại bus trong tổ chức của CPU gồm:  
+A. Bus điều khiển, bus địa chỉ  
+B. Bus dữ liệu, bus địa chỉ  
+C. Bus dữ liệu, bus điều khiển, bus địa chỉ  
+D. Bus dữ liệu, bus điều khiển  
+Câu 221. ROM lưu trữ các thông tin sau:  
+A. Thư viện các chương trình con, các chương trình điều khiển hệ thống, các bảng chức 
+năng, vi chương trình.  
+B. Thư viện các chương trình con, các chương trình điều khiển hệ thống, các bảng chức 
+năng. 
+C. Thư viện các chương trình con, các chương trình điều khiển hệ thống, vi chương trình.  
+D. Các chương trình điều khiển hệ thống, các bảng chức năng, vi chương trình.  
+Câu 222. Cách nhìn máy tính bởi người lập trình là kiến trúc: 
+A. Ngôn ngữ máy 
+B. Kiến trúc tập lệnh  
+C. Vi kiến trúc 
+D. Ngôn ngữ trong máy tính 
+Câu 223. Ngôn ngữ trong máy tính có đặc điểm: 
+A. Gọi là mã máy 
+B. Được đọc bởi máy tính  
+C. Được biểu diễn bằng các bít 0 và 1  
+D. Cả 3 đáp án trên  
+Câu 224. Ngôn ngữ trong máy tính bao gồm 
+A. Hợp ngữ và lập trình bậc cao  
+B. Lập trình bậc cao 
+C. Mã máy 
+D. Hợp ngữ và ngôn ngữ máy  
+Câu 225. Cấu trúc chung của một mã lệnh gồm: 
+A. Mã toán, Toán hạng 
+B. Tiền tố, Mã toán, Toán h ạng  
+
+=== TRANG 35 ===
+35 
+ 
+C. Toán hạng, Địa chỉ trực tiếp 
+D. Tiền tố, Mã toán, Toán h ạng, Địa chỉ trực 
+Câu 226. “Prefix” trong cấu trúc của lệnh gọi là: 
+A. Tiền tố  
+B. Toán hạng 
+C. Mã toán 
+D. Địa chỉ trực tiếp 
+Câu 227. “Opertion code” trong cấu trúc của lệnh gọi là: 
+A. Tiền tố  
+B. Toán hạng 
+C. Mã toán  
+D. Địa chỉ trực tiếp 
+Câu 228. “Operand” trong cấu trúc của lệnh gọi là: 
+A. Tiền tố  
+B. Toán hạng 
+C. Mã toán  
+D. Địa chỉ trực tiếp 
+Câu 229. Cấu trúc đúng của một lệnh là 
+A. Tiền tố, Toán hạng, Mã toán, Địa chỉ trực tiếp  
+B. Mã toán, Tiền tố, Toán hạng, Địa chỉ trực tiếp  
+C. Tiền tố, Mã toán, Toán hạng, Địa chỉ trực tiếp  
+D. Tiền tố, Mã toán, Địa chỉ trực tiếp, Toán hạng  
+Câu 230. Trong cấu trúc chung của lệnh, địa chỉ trực tiếp là: 
+A. Bộ nhớ 
+B. Nơi chứa các toán hạng  
+C. Nơi chứa lệnh 
+D. Ngăn xếp 
+Câu 231. Thiết kế lệnh dùng cho: 
+C. Bộ nhớ RAM 
+D. Bộ nhớ ROM 
+E. Vi xử lý  
+F. Cả 3 đáp án trên  
+Câu 232. Một tập lệnh được mô tả bằng: 
+A. Mã nhị phân 
+B. Mã hexa 
+C. Mã unicode 
+
+=== TRANG 36 ===
+36 
+ 
+D. Mã telex 
+Câu 234. Trong một lệnh mã máy, phát bi ểu nào sau đây là đúng?  
+E. Có thể có nhiều mã lệnh  
+F. Không tồn tại lệnh không có toán hạng  
+G. Toán hạng là duy nhất 
+H. Có thể có nhiều t oán hạng 
+Câu 235. Dòng vi xử lý RISC dùng cho s ố lượng lệnh 
+A. Nhiều lệnh 
+B. Ít lệnh  
+C. Không phụ thuộc vào số lượng  
+D. A và C đúng 
+Câu 236. Máy tính với số lượng lệnh rút gọn tương ứng với dòng vi xử lý 
+A. CISC 
+B. RISC 
+C. RIRC 
+D. RIST 
+Câu 237. Máy tính với số lượng lệnh phức tạp tương ứng với dòng vi xử lý 
+A. CISC 
+B. RISC 
+C. RIRC 
+D. RIST 
+Câu 238. Xét lệnh LOAD. Lệnh này thuộc: 
+E. Nhóm lệnh số học 
+F. Nhóm lệnh chuyển dữ liệu  
+G. Nhóm lệnh điều khiển chương trình  
+H. Nhóm lệnh logic 
+Câu 239. Xét lệnh MOV. Lệnh này thuộc: 
+A. Nhóm lệnh số học 
+B. Nhóm lệnh chuyển dữ liệu  
+C. Nhóm lệnh điều khiển chương trình  
+D. Nhóm lệnh logic 
+Câu 240. Xét lệnh ADD. Lệnh này thuộc: 
+E. Nhóm lệnh số học 
+F. Nhóm lệnh chuyển dữ liệu  
+G. Nhóm lệnh điều khiển chương trình  
+H. Nhóm lệnh logic 
+
+=== TRANG 37 ===
+37 
+ 
+Câu 241. Xét lệnh RETURN. Lệnh này thuộc: 
+A. Nhóm lệnh số học 
+B. Nhóm lệnh chuyển dữ liệu  
+C. Nhóm lệnh điều khiển chương trình  
+D. Nhóm lệnh logic 
+Câu 242. Thực hiện lệnh bao gồm các pha theo th ứ tự lần lượt là: 
+A. Đọc lệnh → Thực hiện lệnh → Giải mã → Lưu kết quả 
+B. Thực hiện lệnh → Đọc lệnh → Giải mã → Lưu kết quả 
+C. Giải mã → Đọc lệnh → Thực hiện lệnh → Lưu kết quả 
+D. Đọc lệnh → Giải mã → Thực hiện lệnh → Lưu kết quả  
+Câu 243. Biểu thức nào được thực hiện với hệ lệnh sau?  
+MOVE X, A 
+SUB X, B 
+A. X = A + B 
+B. X = B - A 
+C. X = A - B 
+D. X = A x B 
+Câu 244. Biểu thức nào tương ứng với chuỗi lệnh sau?  
+MOVE X, A 
+MUL X, B 
+ADD X, C 
+A. X = A + B x C 
+B. X = A x B + C 
+C. X = (A + B) x C 
+D. X = A x (B + C) 
+Câu 245. Biểu thức nào được thực hiện với hệ lệnh?  
+MOVE X, A 
+ADD X, B 
+MUL X, C 
+A. X = A × B + C  
+B. X = A + B × C  
+
+=== TRANG 38 ===
+38 
+ 
+C. X = (A + B) × C  
+D. X = A × C + B  
+Câu 246. Biểu thức nào được thực hiện với hệ lệnh?  
+MUL T, B, C  
+ADD X, A, T  
+A. X = A + (B × C)  
+B. X = (A + B) × C  
+C. X = (A × B) + C  
+D. X = A × (B – C) 
+Câu 247. Biểu thức nào được thực hiện với hệ lệnh?  
+ADD T, A, B  
+MUL X, T, C 
+A. X = A + (B × C)  
+B. X = (A + B) × C  
+C. X = A × (B + C)  
+D. X = (A × B) + C  
+Câu 248. Biểu thức nào được thực hiện với hệ lệnh?  
+ADD T, A, B  
+DIV X, T, C 
+A. X = A + (B ÷ C)  
+B. X = (A ÷ C) + B  
+C. X = (A + B) ÷ C  
+D. X = C ÷ (A + B)  
+Câu 249. Biểu thức nào được thực hiện với hệ lệnh?  
+SUB T1, A, B  
+ADD T2, C, D  
+MUL X, T1, T2 
+A. X = (A + B) × (C – D) 
+B. X = (A – B) + (C × D) 
+C. X = (A – B) × (C + D) 
+D. X = (A × C) – (B × D) 
+
+=== TRANG 39 ===
+39 
+ 
+Câu 250. Biểu thức toán học X = (A – B) ÷ C tương ứng với hệ lệnh nào dưới đây?  
+A.  MOVE X, A 
+ADD X, B 
+DIV X, C 
+B. MOVE X, A 
+SUB X, B 
+DIV X, C 
+C. MOVE X, A 
+DIV X, C 
+SUB X, B 
+D. MOVE X, B 
+SUB X, A 
+DIV X, C 
+ 
+ 

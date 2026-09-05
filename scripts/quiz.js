@@ -1,267 +1,186 @@
-document.getElementById("start-btn").addEventListener("click", async (e) => {
-    const btn = e.currentTarget;
-    btn.disabled = true; // Vô hiệu hóa ngay lập tức khi nhấn review
+// --- LOGIC ĐIỀU KHIỂN & NGHIỆP VỤ BÀI THI (QUIZ LOGIC) ---
 
-    const subjectKey = subjectSelect.value;
-    const chapterVal = chapterSelect.value;
-    const limit = document.querySelector('input[name="limit"]:checked').value;
+/**
+ * Tải và chuẩn bị bộ câu hỏi cho bài thi
+ * @param {string} subjectKey - Key của môn học trong appConfig ('ktctMLN', 'ktmt',...)
+ * @param {string|number} chapterVal - 'all' hoặc index của chương
+ * @param {string|number} limit - 'all' hoặc số lượng câu (25, 50,...)
+ * @returns {Promise<Array>} - Mảng câu hỏi đã được shuffle và chuẩn bị xong
+ */
+/**
+ * Tải toàn bộ câu hỏi gốc của môn và chương (không xáo trộn)
+ */
+async function fetchAllSubjectQuestions(subjectKey, chapterVal = "all") {
     const subjectData = appConfig[subjectKey];
+    if (!subjectData) {
+        throw new Error(`Không tìm thấy cấu hình cho môn: ${subjectKey}`);
+    }
 
-    // Cập nhật thông tin cho phần lịch sử
-    currentSubjectName = subjectData.name;
-    currentChapterName = chapterVal === "all" ? "Tất cả các chương" : subjectData.files[chapterVal].name;
+    let allQuestions = [];
 
-    let rawDataList = [];
-
-    try {
+    if (subjectData.type === "json") {
+        // Nạp dữ liệu định dạng JSON
+        const fileInfo = subjectData.files[chapterVal === "all" ? 0 : chapterVal] || subjectData.files[0];
+        const res = await fetch(`${subjectData.path}/${fileInfo.file}`);
+        const jsonData = await res.json();
+        allQuestions = parseJsonQuestions(jsonData);
+    } else {
+        // Nạp dữ liệu định dạng TXT
+        let rawTexts = [];
         if (chapterVal === "all") {
-            const promises = subjectData.files.map((file) => fetch(`${subjectData.path}/${file.file}`).then((res) => res.text()));
-            rawDataList = await Promise.all(promises);
+            const promises = subjectData.files.map(f => fetch(`${subjectData.path}/${f.file}`).then(r => r.text()));
+            rawTexts = await Promise.all(promises);
         } else {
             const fileInfo = subjectData.files[chapterVal];
-            const response = await fetch(`${subjectData.path}/${fileInfo.file}`);
-            const text = await response.text();
-            rawDataList = [text];
+            const res = await fetch(`${subjectData.path}/${fileInfo.file}`);
+            const text = await res.text();
+            rawTexts = [text];
         }
 
-        let allQuestions = [];
-        rawDataList.forEach((text) => {
+        rawTexts.forEach(text => {
             allQuestions = allQuestions.concat(parseQuestions(text));
         });
+    }
 
-        if (allQuestions.length === 0) {
-            alert("Không tìm thấy câu hỏi nào! Kiểm tra lại file text.");
-            return;
-        }
+    return allQuestions;
+}
 
+/**
+ * Tải và chuẩn bị bộ câu hỏi cho bài thi
+ * @param {string} subjectKey - Key của môn học trong appConfig ('ktctMLN', 'ktmt',...)
+ * @param {string|number} chapterVal - 'all' hoặc index của chương
+ * @param {string|number} limit - 'all' hoặc số lượng câu (25, 50,...)
+ * @param {boolean} isRandom - true: xáo trộn ngẫu nhiên; false: ôn theo dải câu hỏi
+ * @param {number} rangeFrom - Câu bắt đầu (1-indexed)
+ * @param {number} rangeTo - Câu kết thúc (1-indexed)
+ * @returns {Promise<Array>} - Mảng câu hỏi đã sẵn sàng
+ */
+async function loadQuizQuestions(subjectKey, chapterVal = "all", limit = "all", isRandom = true, rangeFrom = 1, rangeTo = 25) {
+    const subjectData = appConfig[subjectKey];
+    if (!subjectData) {
+        throw new Error(`Không tìm thấy cấu hình cho môn: ${subjectKey}`);
+    }
+
+    currentSubjectName = subjectData.name;
+    currentChapterName = chapterVal === "all" 
+        ? "Tất cả" 
+        : (subjectData.files[chapterVal] ? subjectData.files[chapterVal].name : "Tuỳ chọn");
+
+    const allQuestions = await fetchAllSubjectQuestions(subjectKey, chapterVal);
+
+    if (allQuestions.length === 0) {
+        throw new Error("Không tìm thấy câu hỏi nào trong dữ liệu!");
+    }
+
+    if (isRandom) {
+        // Chế độ: Xáo trộn ngẫu nhiên toàn bộ đề
         shuffleArray(allQuestions);
+        allQuestions.forEach(q => shuffleQuestionOptions(q));
 
-        // Mix answer options
-        allQuestions.forEach(q => {
-            if (q.correctAnswer !== -1) {
-                const correctOptText = q.options[q.correctAnswer];
-                shuffleArray(q.options);
-                q.correctAnswer = q.options.indexOf(correctOptText);
-            }
-        });
-
-        if (limit !== "all") {
+        if (limit !== "all" && parseInt(limit) > 0) {
             currentQuestions = allQuestions.slice(0, parseInt(limit));
         } else {
             currentQuestions = allQuestions;
         }
+    } else {
+        // Chế độ: Ôn tập theo phạm vi từ câu ... đến câu ...
+        const total = allQuestions.length;
+        let from = parseInt(rangeFrom, 10);
+        let to = parseInt(rangeTo, 10);
 
-        startQuiz();
-    } catch (error) {
-        console.error(error);
-        alert("Lỗi khi tải dữ liệu: " + error.message);
+        if (isNaN(from) || from < 1) from = 1;
+        if (isNaN(to) || to < 1) to = 1;
+
+        if (from > to) {
+            const temp = from;
+            from = to;
+            to = temp;
+        }
+
+        if (from > total) from = total;
+        if (to > total) to = total;
+
+        // Trích xuất lát cắt câu hỏi theo đúng thứ tự gốc trong đề cương
+        currentQuestions = allQuestions.slice(from - 1, to);
+
+        // Xáo trộn vị trí A/B/C/D của mỗi câu để đảm bảo khách quan
+        currentQuestions.forEach(q => shuffleQuestionOptions(q));
     }
-});
 
-
-function startQuiz() {
+    // Reset trạng thái bắt đầu
     currentQuestionIndex = 0;
     userScore = 0;
     userAnswersLog = [];
 
-    menuScreen.style.display = "none";
-    quizScreen.style.display = "block";
+    return currentQuestions;
+}
 
-    const titleEl = document.querySelector(".window-title");
-    if (titleEl) {
-        titleEl.innerText = currentSubjectName;
+/**
+ * Kiểm tra câu trả lời của người dùng cho câu hiện tại
+ * @param {number} selectedIndex - Chỉ số đáp án người dùng chọn (0, 1, 2, 3)
+ * @returns {Object} - Kết quả kiểm tra { isCorrect, correctIndex, selectedIndex }
+ */
+function submitAnswer(selectedIndex) {
+    const qData = currentQuestions[currentQuestionIndex];
+    if (!qData) {
+        throw new Error("Không tìm thấy câu hỏi hiện tại");
     }
-
-    document.getElementById("total-q-num").innerText = currentQuestions.length;
-    renderQuestion();
-}
-
-function renderQuestion() {
-    const qData = currentQuestions[currentQuestionIndex];
-
-    document.getElementById("current-q-num").innerText = currentQuestionIndex + 1;
-    document.getElementById("q-text").innerText = qData.question;
-
-    const optionsContainer = document.getElementById("options-container");
-    optionsContainer.innerHTML = "";
-
-    document.getElementById("next-btn").style.display = "none";
-    document.getElementById("next-btn").classList.remove("tech-hover"); // Reset hover của nút Tiếp theo
-    document.getElementById("feedback").innerText = "";
-    currentFocusedOptionIndex = -1; // Reset focus khi sang câu mới
-
-    qData.options.forEach((optText, index) => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        const label = String.fromCharCode(65 + index);
-        btn.innerText = `${label}. ${optText}`;
-
-        btn.onclick = () => checkAnswer(index, btn);
-
-        optionsContainer.appendChild(btn);
-    });
-}
-
-function checkAnswer(selectedIndex, selectedBtn) {
-    const qData = currentQuestions[currentQuestionIndex];
-    const optionsContainer = document.getElementById("options-container");
-    const allBtns = optionsContainer.querySelectorAll(".option-btn");
-
-    allBtns.forEach((btn) => (btn.disabled = true));
 
     const isCorrect = selectedIndex === qData.correctAnswer;
 
     if (isCorrect) {
-        selectedBtn.classList.add("correct");
         userScore++;
     } else {
-        selectedBtn.classList.add("wrong");
-        allBtns[qData.correctAnswer].classList.add("correct");
-    }
-
-    if (!isCorrect) {
         userAnswersLog.push({
-            question: qData.question,
-            selected: qData.options[selectedIndex],
-            correct: qData.options[qData.correctAnswer],
             id: qData.id,
+            question: qData.question,
+            selected: qData.options[selectedIndex] || "",
+            correct: qData.options[qData.correctAnswer] || qData.correctText || "",
         });
     }
 
-    const nextBtn = document.getElementById("next-btn");
-    nextBtn.style.display = "block";
-
-    if (currentQuestionIndex === currentQuestions.length - 1) {
-        nextBtn.innerText = "Xem kết quả 🏁";
-        nextBtn.onclick = finishQuiz;
-    } else {
-        nextBtn.innerText = "Câu tiếp theo ➜";
-        nextBtn.onclick = () => {
-            currentQuestionIndex++;
-            renderQuestion();
-        };
-    }
-
-    // Tự động "hover" vào nút Tiếp theo để người dùng biết chỉ cần Enter
-    nextBtn.classList.add("tech-hover");
+    return {
+        isCorrect: isCorrect,
+        correctIndex: qData.correctAnswer,
+        selectedIndex: selectedIndex,
+        userScore: userScore,
+        totalAnswered: currentQuestionIndex + 1,
+        totalQuestions: currentQuestions.length
+    };
 }
 
-function finishQuiz() {
-    quizScreen.style.display = "none";
-    resultScreen.style.display = "block";
-
+/**
+ * Lấy kết quả tổng kết bài thi và tự động lưu lịch sử
+ * @returns {Object} - Thông tin kết quả { score10, correctCount, totalCount, mistakes }
+ */
+function getQuizResult() {
     const total = currentQuestions.length;
-    const score10 = (userScore / total) * 10;
+    const score10 = total > 0 ? ((userScore / total) * 10).toFixed(1) : "0.0";
 
-    document.getElementById("final-score-10").innerText = score10.toFixed(1).replace(".", ",");
-
-    const reviewContainer = document.getElementById("review-list");
-    reviewContainer.innerHTML = "";
-
-    if (userAnswersLog.length === 0) {
-        reviewContainer.innerHTML = '<p style="text-align:center; color:green">Chúc mừng! Bạn đã trả lời đúng tất cả! 🌟</p>';
-    } else {
-        userAnswersLog.forEach((item, idx) => {
-            const div = document.createElement("div");
-            div.className = "review-item";
-            div.innerHTML = `
-                <p><strong>Câu ${idx + 1}:</strong> ${item.question}</p>
-                <p class="review-wrong">❌ Bạn chọn: ${item.selected}</p>
-                <p class="review-correct">✅ Đáp án đúng: ${item.correct}</p>
-            `;
-            reviewContainer.appendChild(div);
-        });
-    }
-
-    // GỌI HÀM LƯU LỊCH SỬ THÊM MỚI Ở ĐÂY
+    // Lưu vào lịch sử
     if (typeof saveHistory === 'function') {
-        saveHistory(score10.toFixed(1), userScore, total, currentSubjectName, currentChapterName, userAnswersLog);
+        saveHistory(score10, userScore, total, currentSubjectName, currentChapterName, userAnswersLog);
     }
+
+    return {
+        score10: score10,
+        score10Display: score10.replace(".", ","),
+        correctCount: userScore,
+        totalCount: total,
+        mistakes: [...userAnswersLog],
+        subjectName: currentSubjectName,
+        chapterName: currentChapterName
+    };
 }
 
-function resetToMenu() {
-    quizScreen.style.display = "none";
-    resultScreen.style.display = "none";
-    menuScreen.style.display = "block";
-
-    const startBtn = document.getElementById("start-btn");
-    if (startBtn) startBtn.disabled = false; // Kích hoạt lại nút bắt đầu
-
-    const titleEl = document.querySelector(".window-title");
-    if (titleEl) {
-        titleEl.innerText = "App này dùng để qua môn";
-    }
-
+/**
+ * Reset hoàn toàn trạng thái bài thi
+ */
+function resetQuizState() {
     currentQuestions = [];
     currentQuestionIndex = 0;
     userScore = 0;
     userAnswersLog = [];
-    
-    document.getElementById("options-container").innerHTML = "";
-    document.getElementById("feedback").innerText = "";
-    
-    const nextBtn = document.getElementById("next-btn");
-    if (nextBtn) nextBtn.style.display = "none";
+    currentSubjectName = "";
+    currentChapterName = "";
 }
-
-document.getElementById("back-home-btn").addEventListener("click", () => {
-    appConfirm("Quay lại menu?\n\nKết quả ôn tập của bạn sẽ không được lưu lại.", () => {
-        resetToMenu();
-    });
-});
-
-// --- HỆ THỐNG ĐIỀU HƯỚNG BẰNG BÀN PHÍM ---
-window.addEventListener("keydown", (e) => {
-    // Chỉ hoạt động khi đang ở màn hình Quiz
-    if (quizScreen.style.display !== "block") return;
-
-    const optionsContainer = document.getElementById("options-container");
-    const allBtns = Array.from(optionsContainer.querySelectorAll(".option-btn"));
-    const nextBtn = document.getElementById("next-btn");
-
-    // 1. Phím Escape - Thoát
-    if (e.key === "Escape") {
-        document.getElementById("back-home-btn").click();
-        return;
-    }
-
-    // 2. Nếu đã chọn đáp án rồi (nút Tiếp theo đang hiện)
-    if (nextBtn.style.display === "block") {
-        if (e.key === "Enter") {
-            nextBtn.click();
-        }
-        return; // Không cho phép chọn lại bằng phím mũi tên
-    }
-
-    // 3. Nếu chưa chọn đáp án - Điều hướng các option
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-        e.preventDefault();
-
-        if (allBtns.length === 0) return;
-
-        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-            currentFocusedOptionIndex++;
-            if (currentFocusedOptionIndex >= allBtns.length) currentFocusedOptionIndex = 0;
-        } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-            currentFocusedOptionIndex--;
-            if (currentFocusedOptionIndex < 0) currentFocusedOptionIndex = allBtns.length - 1;
-        }
-
-        // Cập nhật trạng thái hover giả lập
-        allBtns.forEach((btn, idx) => {
-            if (idx === currentFocusedOptionIndex) {
-                btn.classList.add("tech-hover");
-                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-                btn.classList.remove("tech-hover");
-            }
-        });
-    }
-
-    // 4. Phím Enter - Chọn đáp án đang focus
-    if (e.key === "Enter" && currentFocusedOptionIndex !== -1) {
-        if (allBtns[currentFocusedOptionIndex] && !allBtns[currentFocusedOptionIndex].disabled) {
-            allBtns[currentFocusedOptionIndex].click();
-        }
-    }
-});

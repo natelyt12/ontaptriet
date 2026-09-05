@@ -1,0 +1,6974 @@
+[
+  {
+    "id": 1,
+    "question": "Máy tính điện tử là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thiết bị lưu trữ thông tin",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thiết bị số hóa và biến đổi thông tin",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thiết bị lưu trữ và xử lý thông tin",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Thiết bị tạo và biến đổi thông tin",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Thiết bị lưu trữ và xử lý thông tin"
+  },
+  {
+    "id": 2,
+    "question": "Máy tính đầu tiên ENIAC sử dụng linh kiện nào trong số các linh kiện sau?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Transistor lưỡng cực",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Transistor trường",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đèn điện tử",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "IC bán dẫn",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Đèn điện tử"
+  },
+  {
+    "id": 3,
+    "question": "Trong các phát biểu sau, phát bi ểu nào đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Phần cứng của máy tính bao gồm các đối tượng vật lý như: bản mạch chính, bộ nhớ RAM, ROM, đĩa cứng, màn hình",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Phần cứng của máy tính bao gồm các đối tượng như: bản mạch chính, bộ nhớ RAM, bộ nhớ ROM, đĩa cứng, màn hình và chương trình được cài đặt trong ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Phần cứng của máy tính là chương trình được cài đặt trong bộ nhớ ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Phần cứng của máy tính chính là bộ xử lý trung tâm",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Phần cứng của máy tính bao gồm các đối tượng vật lý như: bản mạch chính, bộ nhớ RAM, ROM, đĩa cứng, màn hình"
+  },
+  {
+    "id": 4,
+    "question": "Hãy cho biết các thành phần cơ bản của cấu trúc máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ổ đĩa cứng, Bus liên k ết, ROM, CPU",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "ROM, Chuột, Bus liên k ết, Hệ thống nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Hệ thống nhớ, Bàn phím, B ộ xử lý, Bus liên k ết",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Hệ thống nhớ, Bộ xử lý, Bus liên k ết, Hệ thống vào ra",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Hệ thống nhớ, Bộ xử lý, Bus liên k ết, Hệ thống vào ra"
+  },
+  {
+    "id": 5,
+    "question": "Việc trao đổi dữ liệu giữa thiết bị ngoại vi và máy tính được thực hiện qua:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Một thanh ghi điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Một cổng",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Thanh ghi AX",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thanh ghi cờ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Một cổng"
+  },
+  {
+    "id": 6,
+    "question": "Phần mềm của máy tính là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Các bộ điều phối thiết bị giúp cho việc ghép nối và ra được thực hiện một cách linh hoạt.",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Cơ cấu trao đổi dữ liệu giữa các thiết bị phần cứng trong máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Chương trình được cài đặt trong bộ nhớ ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ vi xử lý và các vi mạch hỗ trợ cho nó",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Các bộ điều phối thiết bị giúp cho việc ghép nối và ra được thực hiện một cách linh hoạt."
+  },
+  {
+    "id": 7,
+    "question": "Trong các bộ phận sau, bộ phận nào không thuộc bộ xử lý trung tâm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị phối ghép vào ra",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Khối số học và logic",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tập các thanh ghi đa năng",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Khối điều khiển",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Đơn vị phối ghép vào ra"
+  },
+  {
+    "id": 8,
+    "question": "Trong các bộ phận sau, bộ phận nào không thuộc bộ xử lý trung tâm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ trong",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Khối số học và logic",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tập các thanh ghi đa năng",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Khối điều khiển để thi hành lệnh một cách tuần tự và tác động lên các mạch chức năng nhằm thi hành lệnh.",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bộ nhớ trong"
+  },
+  {
+    "id": 9,
+    "question": "Trong các bộ phận sau, bộ phận nào thuộc bộ xử lý trung tâm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ trong",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Đơn vị phối ghép vào ra",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tập các thanh ghi đa năng",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Khối điều khiển Bus hệ thống",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Tập các thanh ghi đa năng"
+  },
+  {
+    "id": 10,
+    "question": "Phát biểu nào sau đây là đúng khi phân c ấp bộ nhớ theo tốc độ từ chậm tới nhanh?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thanh ghi, cache, bộ nhớ chính, bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cache, thanh ghi, bộ nhớ chính, bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thanh ghi, bộ nhớ chính, Cache, bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi"
+  },
+  {
+    "id": 11,
+    "question": "Phát biểu nào sau đây là đúng khi các thiết bị vào/ra có thể hiện được đầy đủ các dạng thông tin “Văn bản, con số, âm thanh, hình ảnh”?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Màn hình cảm ứng, bàn phím, màn hình máy tính, chuột, máy in",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Màn hình cảm ứng, chuột, màn hình máy tính, bàn phím, loa",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Màn hình cảm ứng, màn hình máy tính, bàn phím, camera, micro",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Các phương án trên đều sai",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Màn hình cảm ứng, chuột, màn hình máy tính, bàn phím, loa"
+  },
+  {
+    "id": 12,
+    "question": "Chọn phương án đúng cho ba phương pháp đi ều khiển vào ra?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Vào/ra bằng chương trình, bằng DMA, bằng ngắt",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Vào/ra bằng chương trình, bằng hệ thống, bằng DMA",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Vào/ra bằng ngắt, bằng truy nhập CPU, bằng DMA",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Vào/ra bằng ngắt, bằng truy nhập CPU, bằng hệ điều hành",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Vào/ra bằng chương trình, bằng DMA, bằng ngắt"
+  },
+  {
+    "id": 13,
+    "question": "Đâu là các loại lệnh I/O?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đọc – Kiểm tra - Ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Điều khiển – Kiểm tra – Đọc – Ghi",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Kiểm tra – Điều khiển – Đọc",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Điều khiển – Đọc - Ghi",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Điều khiển – Kiểm tra – Đọc – Ghi"
+  },
+  {
+    "id": 14,
+    "question": "Một ưu điểm của thiết bị lưu trữ ngoài so với bộ nhớ trong của máy tính là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thời gian truy cập nhỏ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Không bị mất dữ liệu khi mất nguồn",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Tiêu thụ nguồn ít",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cấu tạo đơn giản",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Không bị mất dữ liệu khi mất nguồn"
+  },
+  {
+    "id": 15,
+    "question": "Chức năng của hệ thống hỗ trợ vào ra là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chuyển đổi dữ liệu từ môi trường bên ngoài thành dạng số và đưa vào máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Tiếp nhận các ngắt từ các thiết bị vào ra dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đảm bảo việc trao đổi dữ liệu giữa máy tính và các thiết bị ngoại vi",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Hỗ trợ thiết lập việc truyền dữ liệu giữa các máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Đảm bảo việc trao đổi dữ liệu giữa máy tính và các thiết bị ngoại vi"
+  },
+  {
+    "id": 16,
+    "question": "Cấu trúc cơ bản của CPU gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị điều khiển, đơn vị tính toán số học và logic, tập thanh ghi",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Đơn vị điều khiển, đơn vị tính toán số học và logic, và đơn vị nối ghép",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đơn vị điều khiển, đơn vị tính toán số học và logic",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đơn vị điều khiển, đơn vị tính toán số học và logic, tập thanh ghi, và đơn vị nối ghép",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Đơn vị điều khiển, đơn vị tính toán số học và logic, tập thanh ghi"
+  },
+  {
+    "id": 17,
+    "question": "Cách nhìn máy tính b ởi người lập trình là kiến trúc:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ngôn ngữ máy",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Kiến trúc tập lệnh",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Vi kiến trúc",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Ngôn ngữ trong máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Kiến trúc tập lệnh"
+  },
+  {
+    "id": 18,
+    "question": "“Prefix” trong cấu trúc của lệnh gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tiền tố",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mã toán",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ trực tiếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Tiền tố"
+  },
+  {
+    "id": 19,
+    "question": "Thiết kế lệnh dùng cho:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Vi xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Cả 3 đáp án trên",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Vi xử lý"
+  },
+  {
+    "id": 20,
+    "question": "Xét lệnh LOAD. Lệnh này thuộc:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhóm lệnh số học",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nhóm lệnh chuyển dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Nhóm lệnh điều khiển chương trình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Nhóm lệnh logic",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nhóm lệnh chuyển dữ liệu"
+  },
+  {
+    "id": 21,
+    "question": "Các thành phần của lệnh máy gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Mã thao tác",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Địa chỉ toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mã thao tác và địa chỉ toán hạng",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Mã thao tác, con trỏ và địa chỉ toán hạng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Mã thao tác và địa chỉ toán hạng"
+  },
+  {
+    "id": 22,
+    "question": "Lệnh MOV AX, BX là m ột ví dụ của chế độ định địa chỉ nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Trực tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tức thì",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thanh ghi",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Gián tiếp thanh ghi",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Thanh ghi"
+  },
+  {
+    "id": 23,
+    "question": "Với công đoạn nhận lệnh của CPU, thứ tự thực hiện là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ đếm chương trình -> Bộ nhớ -> Thanh ghi lệnh",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ -> Bộ đếm chương trình->Thanh ghi lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ-> Thanh ghi lệnh ->Bộ đếm chương trình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ đếm chương trình ->Thanh ghi lệnh -> Bộ nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bộ đếm chương trình -> Bộ nhớ -> Thanh ghi lệnh"
+  },
+  {
+    "id": 24,
+    "question": "Theo cách phân lo ại hiện đại, có các lo ại máy tính sau đây?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Máy tính để bàn, máy tính lớn, máy tính nhúng",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Máy tính để bàn, máy chủ, máy tính nhúng",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Máy chủ, máy tính mini, máy tính lớn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Máy tính mini, máy tính nhúng, siêu máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Máy tính để bàn, máy chủ, máy tính nhúng"
+  },
+  {
+    "id": 25,
+    "question": "Hãy cho biết các thành phần cơ bản của cấu trúc máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ổ đĩa cứng, Bus liên kết, ROM, CPU",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "ROM, Chuột, Bus liên kết, Hệ thống nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Hệ thống nhớ, Bàn phím, Bộ xử lý, Bus liên kết",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Hệ thống nhớ, Bộ xử lý, Bus liên kết, Hệ thống vào ra",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Hệ thống nhớ, Bộ xử lý, Bus liên kết, Hệ thống vào ra"
+  },
+  {
+    "id": 26,
+    "question": "Nhiệm vụ chính của đơn vị số học và logic ALU gồm?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Lưu trữ dữ liệu tạm thời",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Điều khiển quá trình thực hiện lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Giải mã lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thực hiện các phép toán số học, phép toán logic, phép dịch, quay",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Thực hiện các phép toán số học, phép toán logic, phép dịch, quay"
+  },
+  {
+    "id": 27,
+    "question": "Các thành ph ần Bus cấu tạo lên đơn vị ghép nối Bus bên trong CPU g ồm?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bus điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bus dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bus địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả 3 phương án trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả 3 phương án trên"
+  },
+  {
+    "id": 28,
+    "question": "Hệ thống nhớ của máy tính bao gồm?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ ngoài, Bộ nhớ trong",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "RAM, màn hình",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "ROM, máy in",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Ổ đĩa cứng, màn hình",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bộ nhớ ngoài, Bộ nhớ trong"
+  },
+  {
+    "id": 29,
+    "question": "Phát biểu nào sau đây là sai đ ối với bộ nhớ RAM?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ không khả biến",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ đọc/ghi tùy ý",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Lưu trữ thông tin tạm thời",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Có hai loại RAM",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bộ nhớ không khả biến"
+  },
+  {
+    "id": 30,
+    "question": "Bộ nhớ nào có giá thành đ ắt nhất?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thanh ghi",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Thanh ghi"
+  },
+  {
+    "id": 31,
+    "question": "Phát biểu nào sau đây là đúng khi phân c ấp bộ nhớ theo giá thành từ rẻ tới đắt?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ ngoài, Thanh ghi, cache, bộ nhớ chính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cache, thanh ghi, bộ nhớ chính, bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thanh ghi, bộ nhớ chính, Cache, bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi"
+  },
+  {
+    "id": 32,
+    "question": "PCI bus được dùng để kết nối và trao đổi tín hiệu với các loại Card nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Card mạng, card âm thanh, card ti vi, modems",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Card mạng, card âm thanh, card ti vi, máy in",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Card mạng, card âm thanh, card ti vi, máy quét (scan)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Card mạng, card âm thanh, card ti vi, máy fax",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Card mạng, card âm thanh, card ti vi, modems"
+  },
+  {
+    "id": 33,
+    "question": "Đối với hệ thống nhớ máy tính, có thể có các đơn v ị truyền nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Theo khối nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cả a và b đều đúng",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Theo từ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả a và b đều sai",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Cả a và b đều đúng"
+  },
+  {
+    "id": 34,
+    "question": "Đâu không phải là phương pháp điều khiển vào – ra?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Vào – ra bằng chương trình (PIO)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Vào – ra bằng điều khiển ngắt (IDIO)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Vào – ra theo bản đồ bộ nhớ (MNIO)",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Truy nhập bộ nhớ trực tiếp (DMA)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Vào – ra theo bản đồ bộ nhớ (MNIO)"
+  },
+  {
+    "id": 35,
+    "question": "Ưu điểm của thiết bị lưu trữ ngoài là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tốc độ truy cập nhanh",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Dung lượng lớn",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Kích thước nhỏ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Dễ chế tạo hơn",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Dung lượng lớn"
+  },
+  {
+    "id": 36,
+    "question": "Đầu cắm bàn phím dạng PS/2 có mấy chân?",
+    "options": [
+      {
+        "label": "A",
+        "text": "5",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "6",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "7",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "8",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "6"
+  },
+  {
+    "id": 37,
+    "question": "Thành phần nào của CPU dùng cho việc truyền thông tin giữa các thành phần?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đơn vị tính toán số học và logic",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Tập thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đơn vị nối ghép",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Đơn vị nối ghép"
+  },
+  {
+    "id": 38,
+    "question": "Các phép toán s ố học gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cộng, trừ, nhân, chia,",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cộng, trừ, nhân, chia, đảo dấu",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Cộng, nhân, chia, đảo dấu",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cộng, trừ, nhân, đảo dấu",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Cộng, trừ, nhân, chia, đảo dấu"
+  },
+  {
+    "id": 39,
+    "question": "Kỹ thuật đường ống lệnh cải thiện hiệu năng bằng cách nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tăng số lệnh thực hiện",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thực hiện lệnh nhanh hơn",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Giảm số lệnh thực hiện",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Không thực hiện lệnh",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Thực hiện lệnh nhanh hơn"
+  },
+  {
+    "id": 40,
+    "question": "Các loại bộ nhớ trong không xóa được gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "ROM hoặc PROM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "PROM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "ROM và PROM",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "ROM và PROM"
+  },
+  {
+    "id": 41,
+    "question": "Viết tắt của SSD là",
+    "options": [
+      {
+        "label": "A",
+        "text": "Solid State Drive",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Single State Drive",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Solid Space Drive",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Solid Spin Drive",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Solid State Drive"
+  },
+  {
+    "id": 42,
+    "question": "Toán hạng có thể là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Hằng số",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nội dung của thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nội dung của ngăn nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả A, B, C đều đúng",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả A, B, C đều đúng"
+  },
+  {
+    "id": 43,
+    "question": "CPU “lấy lệnh” từ đâu trong máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ RAM",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Ổ đĩa cứng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Bộ nhớ RAM"
+  },
+  {
+    "id": 44,
+    "question": "Lệnh POP/PUSH là tác động đến",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Ngăn xếp",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Ngắt",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Ngăn xếp"
+  },
+  {
+    "id": 45,
+    "question": "Phương pháp định địa chỉ là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Là cách thức địa chỉ hóa trong trường địa chỉ để xác định địa chỉ của thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Là cách thức địa chỉ hóa trong trường địa chỉ để xác định đỉnh của ngăn xếp",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Là cách thức địa chỉ hóa trong trường địa chỉ của lệnh để xác định nơi chứa toán hạng",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Là cách thức địa chỉ hóa trong trường địa chỉ để xác định ngăn nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Là cách thức địa chỉ hóa trong trường địa chỉ của lệnh để xác định nơi chứa toán hạng"
+  },
+  {
+    "id": 46,
+    "question": "Cấu trúc chung của một mã lệnh gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Mã toán, Toán hạng",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tiền tố, Mã toán, Toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Toán hạng, Địa chỉ trực tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Tiền tố, Mã toán, Toán hạng, Địa chỉ trực tiếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Mã toán, Toán hạng"
+  },
+  {
+    "id": 47,
+    "question": "MIMD là viết tắt của cụm từ nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Multiple Instruction Stream, Multiple Data Stream",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Multiple Instruction Multiple Data Stream",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Multiple Instruction Stream, Multiple Data",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Multiple Instruction Steam, Multiple Data Steam",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Multiple Instruction Stream, Multiple Data Stream"
+  },
+  {
+    "id": 48,
+    "question": "RISC là viết tắt của cụm từ nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Random Instruction Set Computing",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Reduced Instruction Set Computer",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Relational Instruction Set Computer",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Recursive Instruction Set Computing",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Reduced Instruction Set Computer"
+  },
+  {
+    "id": 49,
+    "question": "RISC thường sử dụng loại nào của bộ nhớ để lưu trữ lệnh?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cache",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Flash",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Cache"
+  },
+  {
+    "id": 50,
+    "question": "Bus hệ thống của máy tính bao gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bus dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bus dữ liệu và Bus địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bus dữ liệu và Bus điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bus dữ liệu, Bus địa chỉ và Bus điều khiển",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Bus dữ liệu, Bus địa chỉ và Bus điều khiển"
+  },
+  {
+    "id": 51,
+    "question": "Chức năng của hệ thống Bus trong máy tính là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Mở rộng chức năng giao tiếp của máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Liên kết các thành phần trong máy tính",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Điều khiển các thiết bị ngoại vi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Biến đổi dạng tín hiệu trong máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Liên kết các thành phần trong máy tính"
+  },
+  {
+    "id": 52,
+    "question": "Bus nào trong máy tính có nhiệm vụ là đường truyền dẫn giữa CPU và các chip hỗ trợ trung gian?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bus trong bộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bus bộ vi xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Bus ngoại vi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bus hệ thống",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Bus bộ vi xử lý"
+  },
+  {
+    "id": 53,
+    "question": "Bus nào trong máy tính có nhi ệm vụ là đường truyền dẫn giữa các khối của bộ vi xử lý?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bus trong bộ vi xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Bus bộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bus ngoại vi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bus hệ thống",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bus trong bộ vi xử lý"
+  },
+  {
+    "id": 54,
+    "question": "Bus nào trong máy tính có nhi ệm vụ kết nối bộ vi xử lý với bộ nhớ chính và bộ nhớ Cache?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bus trong bộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bus bộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bus ngoại vi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bus hệ thống",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Bus hệ thống"
+  },
+  {
+    "id": 55,
+    "question": "Chức năng của Bus hệ thống trong máy tính là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Là đường truyền dẫn giữa các khối của bộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Kết nối bộ vi xử lý với bộ nhớ chính, bộ nhớ Cache và các bộ điều khiển ghép nối vào ra",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Kết nối hệ thống vào ra với bộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đường truyền dẫn giữa CPU và các chip h ỗ trợ trung gian",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Kết nối bộ vi xử lý với bộ nhớ chính, bộ nhớ Cache và các bộ điều khiển ghép nối vào ra"
+  },
+  {
+    "id": 56,
+    "question": "Đặc điểm quan trọng của Bus đồng bộ là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Dữ liệu được truyền đồng thời",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dữ liệu được truyền không đồng thời",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Có tín hiệu đồng hồ chung điều khiển hoạt động",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Không có tín hiệu đồng hồ chung điều khiển hoạt động",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Có tín hiệu đồng hồ chung điều khiển hoạt động"
+  },
+  {
+    "id": 57,
+    "question": "Một trong các đặc điểm của Bus đồng bộ là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chu kỳ Bus thay đổi với từng cặp thiết bị trao đổi dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dữ liệu được truyền liên tục trong mọi chu kỳ Bus",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mọi thao tác được thực hiện trong những khoảng thời gian là bội số của chu kỳ Bus",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Tần số tín hiệu đồng hồ chung thay đổi tùy theo điều kiện của hệ thống",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Mọi thao tác được thực hiện trong những khoảng thời gian là bội số của chu kỳ Bus"
+  },
+  {
+    "id": 58,
+    "question": "Đặc điểm quan trọng của Bus không đồng bộ là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Dữ liệu được truyền không đồng thời",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Có tín hiệu đồng hồ chung điều khiển hoạt động",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Không có tín hiệu đồng hồ chung điều khiển hoạt động",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Dữ liệu được truyền đồng thời",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Không có tín hiệu đồng hồ chung điều khiển hoạt động"
+  },
+  {
+    "id": 59,
+    "question": "Trong các đặc điểm sau, đặc điểm nào không phải của Bus đồng bộ?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chu kỳ Bus không thay đổi với mọi cặp thiết bị trao đổi dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Hệ thống được định thời một cách gián đoạn",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mọi thao tác được thực hiện trong những khoảng thời gian là bội số của chu kỳ Bus",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Việc trao đổi dữ liệu giữa các thiết bị cần có tín hiệu handshake *",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Việc trao đổi dữ liệu giữa các thiết bị cần có tín hiệu handshake *"
+  },
+  {
+    "id": 60,
+    "question": "Tại sao trong thực tế Bus đồng bộ được sử dụng rộng rãi hơn Bus không đ ồng bộ?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tận dụng tốt thời gian xử lý của CPU",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Việc điều khiển hoạt động của máy tính dễ dàng hơn *",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Dễ tận dụng các tiến bộ của công nghệ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cho phép thay đổi chu kỳ Bus một cách mềm dẻo",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Việc điều khiển hoạt động của máy tính dễ dàng hơn *"
+  },
+  {
+    "id": 61,
+    "question": "Thành phần nào của CPU dùng cho việc lưu trữ?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đơn vị tính toán số học và logic",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Tập thanh ghi",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Đơn vị nối ghép",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Tập thanh ghi"
+  },
+  {
+    "id": 62,
+    "question": "Theo mô hình đơn vị tính toán số học và logic (ALU), ALU trao đổi thông tin 2 chiều với:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thanh ghi cờ",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Các tín hiệu từ đơn vị điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thanh ghi cờ, Các tín hiệu từ đơn vị điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Các tín hiệu từ đơn vị điều khiển, chính ALU",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Thanh ghi cờ"
+  },
+  {
+    "id": 63,
+    "question": "CPU đa nhân (multi-core) là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "CPU có một đơn vị vi xử lý (core)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "CPU có một hoặc nhiều đơn vị vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "CPU không có đơn vị vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "CPU có nhiều đơn vị vi xử lý",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "CPU có nhiều đơn vị vi xử lý"
+  },
+  {
+    "id": 64,
+    "question": "RAM lưu trữ thông tin:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thông tin lâu dài",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thông tin thư mục",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thông tin của màn hình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thông tin tạm thời",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Thông tin tạm thời"
+  },
+  {
+    "id": 65,
+    "question": "Viết tắt của HDD là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Hark Disk Drive",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Hard Drop Drive",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Hard Disk Drive",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Hard Disk Driver",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Hard Disk Drive"
+  },
+  {
+    "id": 66,
+    "question": "Để tăng cường hiệu quả của máy tính, người ta đã nghĩ tới giải pháp song song b ằng cách:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tăng số lượng bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tăng tốc độ xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Tăng số lượng bộ xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Tăng thiết bị vào ra",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Tăng số lượng bộ xử lý"
+  },
+  {
+    "id": 67,
+    "question": "CISC thường sử dụng loại nào của bộ nhớ để lưu trữ lệnh?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ROM",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Flash",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "ROM"
+  },
+  {
+    "id": 68,
+    "question": "MISD là viết tắt của cụm từ nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Multiple Instruction Stream, Single Data Stream",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Multiple Instruction Stream, Single Data",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Multiple Instruction Stream Data Stream",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Multiple Instruction Steam, Single Data Steam",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Multiple Instruction Stream, Single Data Stream"
+  },
+  {
+    "id": 69,
+    "question": "Kiến trúc nào sau đây không s ử dụng kiến trúc song song?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SIMD",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "MIMD",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "SISD",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "SPMD",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "SISD"
+  },
+  {
+    "id": 70,
+    "question": "Mục đích của xử lý song song là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Làm giảm thời gian tính toán của hệ thống",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Giải quyết các bài toán có kích thước dữ liệu lớn",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Giải quyết các bài toán có độ phức tạp cao",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Làm giảm thời gian tính toán của hệ thống, giải quyết các bài toán có kích thước dữ liệu lớn, giải quyết các bài toán có độ phức tạp cao.",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Làm giảm thời gian tính toán của hệ thống, giải quyết các bài toán có kích thước dữ liệu lớn, giải quyết các bài toán có độ phức tạp cao."
+  },
+  {
+    "id": 71,
+    "question": "CISC là viết tắt của gì trong kiến trúc máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Central Instruction Set Computer",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Complex Instruction Set Computer",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Comprehensive Instruction Set Computer",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Complete Instruction Set Computer",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Complex Instruction Set Computer"
+  },
+  {
+    "id": 72,
+    "question": "MIMD thuộc loại máy tính:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhiều dòng lệnh, nhiều dòng số liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Một dòng lệnh, nhiều dòng số liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nhiều dòng lệnh, một dòng số liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Một dòng lệnh, một dòng số liệu.",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Nhiều dòng lệnh, nhiều dòng số liệu"
+  },
+  {
+    "id": 73,
+    "question": "Số nhị phân 1111000.101 đổi ra số thập phân, đáp án nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "126,5",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "126,625",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "120,75",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "120,625",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "120,625"
+  },
+  {
+    "id": 74,
+    "question": "Trong hệ nhị phân số 11101.11(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "26,75",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "29,75",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "29,65",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "26,65",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "29,75"
+  },
+  {
+    "id": 75,
+    "question": "Trong hệ nhị phân số 10101.11(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "21.75",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "23.75",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "21.65",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "23.65",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "21.75"
+  },
+  {
+    "id": 76,
+    "question": "Trong hệ nhị phân số 10101.01(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "23.75",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "21.75",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "21,25",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "23.25",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "21,25"
+  },
+  {
+    "id": 77,
+    "question": "Trong hệ nhị phân số 11101.01(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "27.75",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "29.75",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "27.25",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "29.25",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "29.25"
+  },
+  {
+    "id": 78,
+    "question": "Trong hệ nhị phân số 10111.1(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "23.5",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "23.25",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "25.5",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "25.25",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "23.5"
+  },
+  {
+    "id": 79,
+    "question": "Trong hệ nhị phân số 11001.01(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "27.75",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "25.25",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "27.25",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "25.75",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "25.25"
+  },
+  {
+    "id": 80,
+    "question": "Trong hệ nhị phân số 11001.11(2) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "27.75",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "29.75",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "25.75",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "29.25",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "25.75"
+  },
+  {
+    "id": 81,
+    "question": "Trong hệ đếm bát phân số 237.64(8) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "157.8125",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "159.8125",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "157.825",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "159.825",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "159.8125"
+  },
+  {
+    "id": 82,
+    "question": "Trong hệ đếm bát phân số 237.04(8) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "157.0625",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "157.8125",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "159.0625",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "159.8125",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "159.0625"
+  },
+  {
+    "id": 83,
+    "question": "Trong hệ đếm bát phân số 235.04(8) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "157.0125",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "159.0125",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "159.0625",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "157.0625",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "157.0625"
+  },
+  {
+    "id": 84,
+    "question": "Trong hệ đếm bát phân số 237.04(8) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "157.0625",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "157.8125",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "159.0625",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "159.8125",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "159.0625"
+  },
+  {
+    "id": 85,
+    "question": "Trong hệ đếm thập lục phân số 34F5(16) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "13557",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "15775",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "15459",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "13267",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "13557"
+  },
+  {
+    "id": 86,
+    "question": "Trong hệ đếm thập lục phân số 44C5(16) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "15577",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "15875",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "18459",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "17605",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "17605"
+  },
+  {
+    "id": 87,
+    "question": "Trong hệ đếm thập lục phân số 345F(16) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "13557",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "13407",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "15459",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "13267",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "13407"
+  },
+  {
+    "id": 88,
+    "question": "Trong hệ đếm thập lục phân (Hexa) số 3CF5(16) tương ứng với giá trị thập phân nào trong các giá trị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "13537",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "15725",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "15605",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "13287",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "15605"
+  },
+  {
+    "id": 89,
+    "question": "Số 267(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "100001011 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "101001011 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "100101011 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "110101011(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "100001011 (2)"
+  },
+  {
+    "id": 90,
+    "question": "Số 247(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "10001011(2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "11100111 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "11110111 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "11010111(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "11110111 (2)"
+  },
+  {
+    "id": 91,
+    "question": "Số 285(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "100001011 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "100011101 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "100101011 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "100101001 (2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "100011101 (2)"
+  },
+  {
+    "id": 92,
+    "question": "Số 277(10) tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "100001001 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "100011011 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "100101011 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "100010101 (2)",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "100010101 (2)"
+  },
+  {
+    "id": 93,
+    "question": "Số 17,125 tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "10001.001",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "10011.001",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "10111.101",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "10111.111",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "10001.001"
+  },
+  {
+    "id": 94,
+    "question": "Số 25,625 tương ứng với giá trị nhị phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "11001.101",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "11001.001",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "10101.101",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "11011.101",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "11001.101"
+  },
+  {
+    "id": 95,
+    "question": "Số 100010111001(2) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "1724(8)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "4271 (8)",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "4217 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "7124(8)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "4271 (8)"
+  },
+  {
+    "id": 96,
+    "question": "Số 101001110111(2) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "5167(8)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "6715 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "1675 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "1756(8)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "5167(8)"
+  },
+  {
+    "id": 97,
+    "question": "Số 799(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "1545(8)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "1403 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "1437 (8)",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "1565(8)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "1437 (8)"
+  },
+  {
+    "id": 98,
+    "question": "Số 785(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "1471(8)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "1461 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "1451 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "1421(8)",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "1421(8)"
+  },
+  {
+    "id": 99,
+    "question": "Số 865(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "1541(8)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "1551 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "1561 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "1571(8)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "1541(8)"
+  },
+  {
+    "id": 100,
+    "question": "Số 841(10) tương ứng với giá trị bát phân nào trong các giá tr ị sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "1505(8)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "1511 (8)",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "1531 (8)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "1551(8)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "1511 (8)"
+  },
+  {
+    "id": 101,
+    "question": "Số nhị phân 1111000110110111 đổi ra số Hexa; đáp án nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "FEB7",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "F0D7",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "F1B7",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "F17B",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "F1B7"
+  },
+  {
+    "id": 102,
+    "question": "Số nhị phân 1010100011100011 đổi ra số Hexa, đáp án nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "AE38",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "3E8A",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "A8E3",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "8EA3",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "A8E3"
+  },
+  {
+    "id": 103,
+    "question": "Số nhị phân 1110001110110101 đổi ra số Hexa; đáp án nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "EEB5",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "E0D5",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "E1B5",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "E3B5",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "E3B5"
+  },
+  {
+    "id": 104,
+    "question": "Số nhị phân 1001110110110100 đổi ra số Hexa; đáp án nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "9DB4",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "4BD9",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "4DB9",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "9BD4",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "9DB4"
+  },
+  {
+    "id": 105,
+    "question": "Tổng hai số nhị phân 11010011 + 01100101 bằng số nhị phân nào trong các s ố sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "11111000",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "01111110",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "00111000",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "100111000",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "100111000"
+  },
+  {
+    "id": 106,
+    "question": "Tổng hai số nhị phân 1010101(2) và 1101011(2) bằng số nhị phân nào trong các số sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "11000000(2)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "10100000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "10010000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "10001000(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "11000000(2)"
+  },
+  {
+    "id": 107,
+    "question": "Tổng hai số nhị phân 1010101(2) và 1100011(2) bằng số nhị phân nào trong các số sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "11000000(2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "10111000 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "10011000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "10001000(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "10111000 (2)"
+  },
+  {
+    "id": 108,
+    "question": "Tổng hai số nhị phân 1010101(2) và 1101001(2) bằng số nhị phân nào trong các số sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "10011000(2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "10101000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "10111110 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "10111010(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "10111110 (2)"
+  },
+  {
+    "id": 109,
+    "question": "Tổng hai số nhị phân 1011101(2) và 1101011(2) bằng số nhị phân nào trong các số sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "10011000(2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "11100000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "11010000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "11001000(2)",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "11001000(2)"
+  },
+  {
+    "id": 110,
+    "question": "Tổng hai số nhị phân 1010111(2) và 1101011(2) bằng số nhị phân nào trong các số sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "10011000(2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "11000010 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "10010000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "10001000(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "11000010 (2)"
+  },
+  {
+    "id": 111,
+    "question": "Tổng hai số nhị phân 1001101(2) và 1101001(2) bằng số nhị phân nào trong các số sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "10010010(2)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "10100000 (2)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "10110110 (2)",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "10001000(2)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "10110110 (2)"
+  },
+  {
+    "id": 112,
+    "question": "Hiệu hai số nhị phân 11010011 – 01100101 bằng số nhị phân nào trong các s ố sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "01111000",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "01101110",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "01010000",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "10111000",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "01101110"
+  },
+  {
+    "id": 113,
+    "question": "Bộ xử lý trung tâm CPU gồm có các đơn v ị",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); t ập các thanh ghi (RF); Bus bên trong và đơn v ị ghép nối Bus (BIU).",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Đơn vị điều khiển (CU); Bộ nhớ chính; tập các thanh ghi (RF); Bus bên trong và đơn vị ghép nối Bus (BIU).",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); Bộ nhớ chính; tập các thanh ghi (RF).",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); t ập các thanh ghi (RF).",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Đơn vị điều khiển (CU); đơn vị tính toán số học và logic (ALU); t ập các thanh ghi (RF); Bus bên trong và đơn v ị ghép nối Bus (BIU)."
+  },
+  {
+    "id": 114,
+    "question": "Chức năng nào dưới đây không thuộc đơn vị điều khiển (CU)",
+    "options": [
+      {
+        "label": "A",
+        "text": "Điều khiển nhận lệnh từ bộ nhớ đưa vào thanh ghi lệnh và tăng nội dung của PC để trỏ sang lệnh kế tiếp.",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Giải mã lệnh nằm trong thanh ghi lệnh để xác định thao tác cần thực hiện và phát ra tín hiệu điều khiển thực hiện lệnh đó.",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nhận tín hiệu yêu cầu từ bus hệ thống và đáp ứng với các yêu cầu đó.",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thực hiện các phép tính s ố học và logic",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Thực hiện các phép tính s ố học và logic"
+  },
+  {
+    "id": 115,
+    "question": "Chương trình đang thực hiện nằm trong bộ nhớ chính và nó chiếm các vùng nhớ cơ bản nào sau đây",
+    "options": [
+      {
+        "label": "A",
+        "text": "Vùng nhớ lệnh (Code): chứa các lệnh của chương trình.",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Vùng dữ liệu (Data): chứa dữ liệu của chương trình ; Thực chất đây là nơi c ấp phát các ngăn nhớ cho các biến nhớ.",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Vùng ngăn xếp (Stack): là vùng nhớ có cấu trúc LIFO (Last In First Out) dùng để cất giữ thông tin và sau đó có thể khôi phục lại. Thường dùng cho việc thực hiện các chương trình con.",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả 3 vùng nhớ trên (Code, Data, Stack).",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả 3 vùng nhớ trên (Code, Data, Stack)."
+  },
+  {
+    "id": 116,
+    "question": "Trong các bộ phận sau, bộ phận nào không thuộc bộ xử lý trung tâm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ điều khiển vào/ra DMA",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Khối số học và logic",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tập các thanh ghi đa năng",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Khối điều khiển",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bộ điều khiển vào/ra DMA"
+  },
+  {
+    "id": 117,
+    "question": "Thanh ghi PC - Program Counter là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ đếm chương trình",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Con trỏ dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Con trỏ ngăn xếp",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thanh ghi lệnh",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Bộ đếm chương trình"
+  },
+  {
+    "id": 118,
+    "question": "Thanh ghi con trỏ ngăn xếp; Khi cất thêm một thông tin vào ngăn xếp",
+    "options": [
+      {
+        "label": "A",
+        "text": "SP tự động tăng",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "SP tự động giảm",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "SP không thay đổi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "SP thay đổi ngẫu nhiên",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "SP tự động giảm"
+  },
+  {
+    "id": 119,
+    "question": "Khi lấy một thông tin ra khỏi ngăn xếp:",
+    "options": [
+      {
+        "label": "A",
+        "text": "SP tự động tăng",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "SP tự động giảm",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "SP không thay đổi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "SP thay đổi ngẫu nhiên",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "SP tự động tăng"
+  },
+  {
+    "id": 120,
+    "question": "Nội dung nào không thuộc bộ đếm chương trình PC",
+    "options": [
+      {
+        "label": "A",
+        "text": "Còn gọi là con trỏ lệnh (Instruction Pointer - IP),",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Là thanh ghi ch ứa địa chỉ của lệnh tiếp theo sẽ được nhận vào.",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Sau khi một lệnh được nhận vào thì nội dung của PC tự động tăng để trỏ sang lệnh kế tiếp nằm ngay sau lệnh vừa được nhận.",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Chứa địa chỉ của ngăn nhớ dữ liệu mà CPU muốn truy cập.",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Chứa địa chỉ của ngăn nhớ dữ liệu mà CPU muốn truy cập."
+  },
+  {
+    "id": 121,
+    "question": "Nội dung nào không thuộc quá trình nhận lệnh trong chu trình lệnh của CPU",
+    "options": [
+      {
+        "label": "A",
+        "text": "CPU đưa địa chỉ của lệnh cần nhận từ thanh ghi bộ đếm chương trình PC ra bus đ ịa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "CPU phát tín hi ệu điều khiển đọc bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Lệnh từ bộ nhớ được đặt lên bus dữ liệu và được CPU copy vào trong thanh ghi lệnh IR; CPU tăng nội dung của PC để trỏ sang lệnh kế tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Lệnh từ thanh ghi lệnh IR được đưa đến đơn vị điều khiển",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Lệnh từ thanh ghi lệnh IR được đưa đến đơn vị điều khiển"
+  },
+  {
+    "id": 122,
+    "question": "Nội dung nào không thuộc quá trình nhận toán hoạng (toán hạng trực tiếp) trong chu trình lệnh của CPU",
+    "options": [
+      {
+        "label": "A",
+        "text": "CPU đưa đ ịa chỉ của toán hạng ra bus địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "CPU giải mã lệnh để xác định thao tác cần phải thực hiện",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "CPU phát tín hi ệu điều khiển đọc",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Toán hạng được chuyển vào trong CPU",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "CPU giải mã lệnh để xác định thao tác cần phải thực hiện"
+  },
+  {
+    "id": 123,
+    "question": "Nội dung nào không thuộc quá trình ghi toán hoạng trong chu trình lệnh của CPU",
+    "options": [
+      {
+        "label": "A",
+        "text": "CPU đưa đ ịa chỉ ra bus địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "CPU đưa d ữ liệu cần ghi ra bus dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Chuyển dữ liệu giữa các thanh ghi",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "CPU phát tín hi ệu điều khiển ghi; Dữ liệu trên bus dữ liệu được copy đến vị trí xác định",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Chuyển dữ liệu giữa các thanh ghi"
+  },
+  {
+    "id": 124,
+    "question": "Nguyên tắc của Pipeline (kỹ thuật đường ống lệnh)",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chia chu trình lệnh thành các công đoạn và cho phép thực hiện gối lên nhau theo kiểu dây chuyền.",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Chia chu trình lệnh thành các công đoạn và cho phép cùng 1 thời điểm thực hiện song song đồng thời nhiều lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Chia chu trình lệnh thành các công đoạn và cho phép thực hiện tuần tự từng lệnh một",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Chia chu trình lệnh thành các công đoạn và gián đoạn thực hiện các công đoạn từng lệnh.",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Chia chu trình lệnh thành các công đoạn và cho phép thực hiện gối lên nhau theo kiểu dây chuyền."
+  },
+  {
+    "id": 125,
+    "question": "Chức năng chính của Mainboard",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gắn kết các thành phần trên một hệ thống máy tính lại với nhau",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Điều khiển thay đổi tốc độ BUS cho phù hợp với các thành phần khác nhau; Quản lý nguồn cấp cho các thành ph ần trên Main",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cung cấp xung nhịp chủ (xung Clock) để đồng bộ hoạt động của toàn hệ thống. Chính vì những chức năng quan trọng trên mà khi Main có s ự cố thì máy tính không thể hoạt động được.",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Tất cả các chức năng trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Tất cả các chức năng trên"
+  },
+  {
+    "id": 126,
+    "question": "Nhiệm vụ chính của đơn vị ghép nối Bus bên trong CPU g ồm?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Kết nối với hệ thống Bus bên ngoài CPU",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chỉ kết nối với đơn vị điều khiển CU",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Chỉ kết nối với tập các thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Truyền dẫn các tín hiệu giữa các bộ phận trong CPU và kết nối với hệ thống Bus bên ngoài",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Truyền dẫn các tín hiệu giữa các bộ phận trong CPU và kết nối với hệ thống Bus bên ngoài"
+  },
+  {
+    "id": 127,
+    "question": "Các thiết bị sau thuộc đồng thời hệ thống đầu ra của máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chuột, Bàn phím, Máy Scan, Máy chiếu Projector, Loa",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chuột, Bàn phím, Máy Scan, Micro, Webcam",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Máy in Laser, Máy in kim, Màn hình, Loa, Máy chiếu Projector",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Máy in Laser, Máy in kim, Màn hình, Chuột, Máy chiếu Projector",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Máy in Laser, Máy in kim, Màn hình, Loa, Máy chiếu Projector"
+  },
+  {
+    "id": 128,
+    "question": "Bộ nhớ ngoài của máy tính bao gồm?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cache, RAM, Đĩa cứng, USB, Đĩa mềm",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cache, ROM, Đĩa cứng, USB, Đĩa mềm",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cache, Thanh ghi, Đĩa cứng, USB, Đĩa mềm",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Các phương án trên đều sai",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Các phương án trên đều sai"
+  },
+  {
+    "id": 129,
+    "question": "Phát biểu nào sau đây là đúng đ ối với bộ nhớ RAM?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Là bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dữ liệu vẫn được lưu trữ khi ngắt nguồn điện",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nơi lưu trữ thông tin khi máy tính đang xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "RAM được viết tắt của cụm từ Read Only Memory",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Nơi lưu trữ thông tin khi máy tính đang xử lý"
+  },
+  {
+    "id": 130,
+    "question": "Bộ nhớ nào là bộ nhớ chỉ đọc của máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "ROM",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đĩa mềm",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "ROM"
+  },
+  {
+    "id": 131,
+    "question": "Khái niệm truy xuất ngẫu nhiên đối với bộ nhớ có ý nghĩa như thế nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Dữ liệu trong bộ nhớ được đọc hay ghi vào các th ời điểm ngẫu nhiên",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dữ liệu trong bộ nhớ được định địa chỉ một cách ngẫu nhiên",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Dữ liệu trong bộ nhớ không được đọc hay ghi một cách tuần tự",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Dữ liệu trong bộ nhớ có giá trị ngẫu nhiên",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Dữ liệu trong bộ nhớ được định địa chỉ một cách ngẫu nhiên"
+  },
+  {
+    "id": 132,
+    "question": "Các bộ nhớ nào sau đây cho phép truy nh ập ngẫu nhiên?",
+    "options": [
+      {
+        "label": "A",
+        "text": "DRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả ba loại trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả ba loại trên"
+  },
+  {
+    "id": 133,
+    "question": "Đặc điểm của bộ nhớ Cache là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Dung lượng lớn",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thời gian truy nhập lớn",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thời gian truy nhập nhỏ",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Chi phí thấp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Thời gian truy nhập nhỏ"
+  },
+  {
+    "id": 134,
+    "question": "Đặc điểm của bộ nhớ Cache là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Có dung lượng lớn hơn bộ nhớ RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cho phép truy nhập nhanh hơn so v ới bộ nhớ DRAM",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Cho phép truy nhập nhanh hơn so v ới các thanh ghi c ủa CPU",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Là bộ nhớ cố định",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Cho phép truy nhập nhanh hơn so v ới bộ nhớ DRAM"
+  },
+  {
+    "id": 135,
+    "question": "Chức năng của tín hiệu Chip Enable trong IC bộ nhớ là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cho phép đọc dữ liệu trong IC bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cho phép ghi dữ liệu vào IC bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cho phép IC bộ nhớ hoạt động",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Cho phép đọC. ghi đồng thời đối với IC bộ nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Cho phép IC bộ nhớ hoạt động"
+  },
+  {
+    "id": 136,
+    "question": "Đặc điểm của bộ nhớ ROM:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cho phép ghi dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chỉ cho phép đọc dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Bị mất dữ liệu khi không có nguồn cấp",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cho phép ghi/đọc dữ liệu đồng thời tại một vị trí nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Chỉ cho phép đọc dữ liệu"
+  },
+  {
+    "id": 137,
+    "question": "Đặc điểm của bộ nhớ RAM nói chung",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cho phép ghi dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Chỉ cho phép đọc dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Không bị mất dữ liệu khi không có nguồn cấp",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cho phép ghi/đọc dữ liệu đồng thời tại một vị trí nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Cho phép ghi dữ liệu"
+  },
+  {
+    "id": 138,
+    "question": "Đặc điểm của bộ nhớ SRAM",
+    "options": [
+      {
+        "label": "A",
+        "text": "Phải được làm tươi theo chu k ỳ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Không phải làm tươi theo chu k ỳ",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Thời gian truy nhập lớn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Chi phí trên một bit nhớ thấp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Không phải làm tươi theo chu k ỳ"
+  },
+  {
+    "id": 139,
+    "question": "Đặc điểm của bộ nhớ DRAM",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thời gian truy nhập nhỏ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chi phí trên một bit nhớ cao",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Không phải làm tươi theo chu k ỳ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Phải được làm tươi theo chu k ỳ",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Phải được làm tươi theo chu k ỳ"
+  },
+  {
+    "id": 140,
+    "question": "Bộ nhớ Cache được cấu trúc từ loại bộ nhớ nào trong số các bộ nhớ sau đây?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SRAM",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "DRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Flash ROM",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "SRAM"
+  },
+  {
+    "id": 141,
+    "question": "Chức năng của bộ nhớ Cache trong máy tính là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Giúp mở rộng dung lượng bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chứa các toán hạng là hằng số",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Lưu giữ dữ liệu mà bộ vi xử lý thường xuyên sử dụng",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Lưu giữ các tham số hệ thống",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Lưu giữ dữ liệu mà bộ vi xử lý thường xuyên sử dụng"
+  },
+  {
+    "id": 142,
+    "question": "Đường dây Read/Write trong IC b ộ nhớ có chức năng là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cho biết bộ nhớ có cho phép đọc và ghi hay không",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cho biết bộ nhớ có thể đọc và ghi đồng thời hay không",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cho biết thao tác được thực hiện là đọc hay ghi",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Cho biết bộ nhớ có bị cấm đọc hay cấm ghi không",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Cho biết thao tác được thực hiện là đọc hay ghi"
+  },
+  {
+    "id": 143,
+    "question": "Trong các bộ nhớ sau, bộ nhớ nào yêu cầu làm tươi theo chu k ỳ?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "DRAM",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "PROM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "EPROM",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "DRAM"
+  },
+  {
+    "id": 144,
+    "question": "Trong các bộ nhớ SRAM và DRAM, lo ại nào tiêu thụ nguồn nuôi lớn hơn?",
+    "options": [
+      {
+        "label": "A",
+        "text": "SRAM",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "DRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bằng nhau",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Không so sánh đư ợc",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "SRAM"
+  },
+  {
+    "id": 145,
+    "question": "Đặc điểm của bộ nhớ ROM là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cho phép truy nhập nhanh hơn bộ nhớ RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nội dung không bị thay đổi",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Lưu trữ được nhiều thông tin hơn bộ nhớ RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Được sử dụng làm bộ nhớ Cache",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nội dung không bị thay đổi"
+  },
+  {
+    "id": 146,
+    "question": "Phát biểu nào sau đây đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ SRAM rẻ hơn bộ nhớ DRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ SRAM được sử dụng chỉ tại thời điểm khởi động máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ SRAM được sử dụng cho bộ nhớ Cache",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ SRAM có thời gian truy nhập lớn hơn DRAM",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Bộ nhớ SRAM được sử dụng cho bộ nhớ Cache"
+  },
+  {
+    "id": 147,
+    "question": "Mạch chọn địa chỉ hàng và mạch chọn địa chỉ cột tạo thành mạch gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Mạch tạo địa chỉ bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Mạch giải mã địa chỉ",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Mạch đọc/ghi dữ liệu bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Mạch cho phép chốt địa chỉ bộ nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Mạch giải mã địa chỉ"
+  },
+  {
+    "id": 148,
+    "question": "Cấu tạo của một ô nhớ DRAM như thế nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gồm hai tụ điện và một Transistor",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Gồm một tụ điện và một Transistor",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Gồm hai tụ điện và hai Transistor",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Gồm hai tụ điện và hai Transistor",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Gồm một tụ điện và một Transistor"
+  },
+  {
+    "id": 149,
+    "question": "Cấu tạo của một ô nhớ SRAM như thế nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gồm hai tụ điện và ba Transistor",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Gồm ba tụ điện và hai Transistor",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Gồm bốn tụ điện và hai Transistor",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Gồm sáu Transistor",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Gồm sáu Transistor"
+  },
+  {
+    "id": 150,
+    "question": "Tốc độ truy nhập của bộ nhớ SRAM so với bộ nhớ DRAM như thế nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chậm hơn",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nhanh hơn",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Bằng nhau",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Không xác định được",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nhanh hơn"
+  },
+  {
+    "id": 151,
+    "question": "Hãy cho biết trình tự xử lý thông tin của máy tính điện tử:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhập thông tin -> Xử lý thông tin -> Xuất thông tin",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "CPU -> Đĩa cứng -> Màn hình",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "CPU -> Bàn phím -> Màn hình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bàn phím -> Máy in -> Màn hình",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Nhập thông tin -> Xử lý thông tin -> Xuất thông tin"
+  },
+  {
+    "id": 152,
+    "question": "Khối xử lý trung tâm CPU gồm những thành phần nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Đơn vị ghép nối Bus",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Bộ nhớ trong",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Hệ thống vào/ra",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Đơn vị điều khiển CU, Đơn vị số học và logic ALU, Tập các thanh ghi, Đơn vị ghép nối Bus"
+  },
+  {
+    "id": 153,
+    "question": "Nhiệm vụ chính của tập các thanh ghi g ồm?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chứa mã lệnh điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chứa dữ liệu tạm thời",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Kho chứa lệnh và dữ liệu tạm thời cho CPU xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Thực hiện các phép toán số học",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Kho chứa lệnh và dữ liệu tạm thời cho CPU xử lý"
+  },
+  {
+    "id": 154,
+    "question": "Các thiết bị sau thuộc đồng thời hệ thống đầu vào của máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Màn hình, Chuột, Bàn phím, Máy Scan, Máy chiếu Projector",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chuột, Bàn phím, Máy Scan, Micro, Webcam",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Cache, Màn hình, RAM, Chuột, Máy chiếu Projector",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Máy Scan, Màn hình, Micro, Đĩa CD -ROM, Webcam",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Chuột, Bàn phím, Máy Scan, Micro, Webcam"
+  },
+  {
+    "id": 155,
+    "question": "Bộ nhớ nào là bộ nhớ truy cập ngẫu nhiên của máy tính?",
+    "options": [
+      {
+        "label": "A",
+        "text": "RAM",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đĩa CD-ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đĩa mềm",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "RAM"
+  },
+  {
+    "id": 156,
+    "question": "Trong kiến trúc máy tính, những bộ nhớ nào nằm trong bộ vi xử lý?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ổ đĩa cứng, Bộ nhớ chính",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cache, Ổ đĩa cứng",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Tập thanh ghi, Bộ nhớ Cache",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Tập thanh ghi, Ổ đĩa cứng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Tập thanh ghi, Bộ nhớ Cache"
+  },
+  {
+    "id": 157,
+    "question": "Máy tính UNIVAC s ử dụng linh kiện nào là chính trong các linh ki ện sau?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Transistor (bóng bán dẫn)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đèn điện tử",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "IC bán dẫn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "IC cảm biến",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Đèn điện tử"
+  },
+  {
+    "id": 158,
+    "question": "Địa chỉ toán hạng là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nơi chứa các toán hạng mà thao tác sẽ tác động",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Nơi chứa lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nơi chứa thao tác",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "B và C đúng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Nơi chứa các toán hạng mà thao tác sẽ tác động"
+  },
+  {
+    "id": 159,
+    "question": "Quy trình thực hiện lệnh đúng là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Lấy lệnh, Nạp các tham số, Giải mã lệnh, xử lý lệnh, ghi kết quả",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Lấy lệnh, Giải mã lệnh, xử lý lệnh, Nạp các tham số, ghi kết quả",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Lấy lệnh, Giải mã lệnh, Nạp các tham số, xử lý lệnh, ghi kết quả",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Lấy lệnh, xử lý lệnh, Giải mã lệnh, Nạp các tham số, ghi kết quả",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Lấy lệnh, Giải mã lệnh, Nạp các tham số, xử lý lệnh, ghi kết quả"
+  },
+  {
+    "id": 160,
+    "question": "Cơ ch ế CPU tạm dừng chương trình đang thực hiện để chuyển sang chương trình khác gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "PUSH",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "POP",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "INTERRUPT",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "STOP",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "INTERRUPT"
+  },
+  {
+    "id": 161,
+    "question": "Máy tính ENIAC sử dụng linh kiện nào là chính trong các linh ki ện sau?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Transistor (bóng bán dẫn)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đèn điện tử",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "IC bán dẫn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "IC cảm biến",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Đèn điện tử"
+  },
+  {
+    "id": 162,
+    "question": "Máy tính Von-Newmann là máy tính",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thực hiện nhiều lệnh cùng một lúc (song song), có 2 bộ xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thực hiện các lệnh tuần tự, có 2 bộ xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Có 1 bộ xử lý, thực hiện lệnh tuần tự",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Các phương án trên đều sai",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Có 1 bộ xử lý, thực hiện lệnh tuần tự"
+  },
+  {
+    "id": 163,
+    "question": "Bộ đếm chương trình PC có nhi ệm vụ:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Giữ địa chỉ của lệnh tiếp theo sẽ được nhận vào",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Chứa địa chỉ của ngăn nhớ đỉnh ngăn xếp",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Chứa địa chỉ của ngăn nhớ dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Giữ địa chỉ của lệnh đã thực hiện",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Giữ địa chỉ của lệnh tiếp theo sẽ được nhận vào"
+  },
+  {
+    "id": 164,
+    "question": "Chế độ định địa chỉ gián tiếp thanh ghi là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Địa chỉ toán hạng là một thanh ghi được sử dụng để chứa địa chỉ lệch của ô nhớ chứa dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Toán hạng là ngăn nhớ có địa chỉ nằm trong thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Toán hạng nằm ngay trong trường địa chỉ của lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Dùng các thanh ghi bên trong CPU như là các toán h ạng để chứa dữ liệu cần thao tác",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Địa chỉ toán hạng là một thanh ghi được sử dụng để chứa địa chỉ lệch của ô nhớ chứa dữ liệu"
+  },
+  {
+    "id": 165,
+    "question": "Đối với một lệnh mã máy, toán h ạng không thể là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Một hằng số",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nội dung của thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nội dung của ngăn nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Nội dung của thanh ghi có địa chỉ nằm trong một ngăn nhớ",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Nội dung của thanh ghi có địa chỉ nằm trong một ngăn nhớ"
+  },
+  {
+    "id": 166,
+    "question": "Phát biểu nào sau đây đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ DRAM được sử dụng làm Cache trong máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ DRAM có giá thành cao hơn SRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ DRAM có giá thành th ấp hơn SRAM",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ DRAM chỉ được sử dụng vào thời điểm khởi động máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Bộ nhớ DRAM có giá thành th ấp hơn SRAM"
+  },
+  {
+    "id": 167,
+    "question": "Phát biểu nào sau đây đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ SRAM chỉ được sử dụng làm Cache trong máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ SRAM có giá thành cao hơn DRAM",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ SRAM có thời gian truy nhập lớn hơn DRAM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ SRAM chỉ được sử dụng vào thời điểm khởi động máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Bộ nhớ SRAM có giá thành cao hơn DRAM"
+  },
+  {
+    "id": 168,
+    "question": "Bộ nhớ SRAM lưu trữ thông tin bằng gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tụ điện",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Flip-Flop",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Mạch lưỡng cực",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Mạch MOS",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Flip-Flop"
+  },
+  {
+    "id": 169,
+    "question": "Bộ nhớ DRAM cần các mạch bên ngoài để thực hiện chức năng gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Giải mã hàng",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Giải mã cột",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Làm tươi",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Giải mã ô nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Làm tươi"
+  },
+  {
+    "id": 170,
+    "question": "Một bộ nhớ 64 Kbit có thể được tổ chức theo kiểu nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "64K × 1",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "8K × 8",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "16K × 4",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Tất cả các kiểu trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Tất cả các kiểu trên"
+  },
+  {
+    "id": 171,
+    "question": "Tại sao bộ nhớ DRAM phải được làm tươi?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nếu không, các tụ điện sẽ bị đánh thủng",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nếu không, nguồn cấp cho tụ điện sẽ hết và dữ liệu sẽ bị mất",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Nếu không, mạch điện sẽ tiêu thụ nhiều năng lượng hơn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Nếu không, các ô nh ớ sẽ bị định địa chỉ nhầm",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nếu không, nguồn cấp cho tụ điện sẽ hết và dữ liệu sẽ bị mất"
+  },
+  {
+    "id": 172,
+    "question": "Tại sao với các hệ thống bộ nhớ dung lượng rất nhỏ, người ta không sử dụng bộ nhớ loại DRAM mà thường dùng loại SRAM?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Vì bộ nhớ DRAM đòi hỏi mạch làm tươi nên sẽ không kinh tế khi dùng với bộ nhớ có dung lượng nhỏ",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Vì bộ nhớ DRAM chỉ cho phép xây bộ nhớ với dung lượng lớn",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Vì bộ nhớ DRAM có thời gian truy nhập tăng lên khi dung lượng bộ nhớ nhỏ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Vì bộ nhớ SRAM có thời gian truy nhập nhỏ hơn DRAM chỉ khi dùng cho bộ nhớ dung lượng nhỏ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Vì bộ nhớ DRAM đòi hỏi mạch làm tươi nên sẽ không kinh tế khi dùng với bộ nhớ có dung lượng nhỏ"
+  },
+  {
+    "id": 173,
+    "question": "Bộ nhớ DRAM lưu trữ thông tin bằng gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tụ điện",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Flip-Flop",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mạch lưỡng cực",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Mạch MOS",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Tụ điện"
+  },
+  {
+    "id": 174,
+    "question": "Các bộ nhớ RAM-ROM khác với các bộ nhớ ngoài ở những điều sau, ngoại trừ:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cách mã hóa các bit",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cách tổ chức bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cách truy nhập dữ liệu trên các phần tử của bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Các vị trí nhớ dùng để lưu trữ các bit nhị phân",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Các vị trí nhớ dùng để lưu trữ các bit nhị phân"
+  },
+  {
+    "id": 175,
+    "question": "Hãy chỉ ra khẳng định sai trong các kh ẳng định sau đây:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ trong là tập hợp các ô nhớ, mỗi ô nhớ có một số bit nhất định và chứa một thông tin được mã hoá thành số nhị phân mà không quan tâm đến kiểu của dữ liệu mà nó đang chứa",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Mỗi ô nhớ trong bộ nhớ trong đều tương ứng với một địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thời gian truy cập vào mỗi ô nhớ trong bộ nhớ trong là ngẫu nhiên",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ trong còn được gọi là bộ nhớ truy cập ngẫu nhiên",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Thời gian truy cập vào mỗi ô nhớ trong bộ nhớ trong là ngẫu nhiên"
+  },
+  {
+    "id": 176,
+    "question": "Đặc điểm của bộ nhớ ngoài so với bộ nhớ trong của máy tính là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tốc độ truy cập bộ nhớ thường rất cao",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dung lượng nhỏ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Không mất dữ liệu khi mất nguồn",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Giá thành cao",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Không mất dữ liệu khi mất nguồn"
+  },
+  {
+    "id": 177,
+    "question": "Một ưu điểm của bộ nhớ ngoài so với bộ nhớ trong của máy tính là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tốc độ truy cập nhanh",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dung lượng lớn",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Kích thước nhỏ gọn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cấu tạo đơn giản",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Dung lượng lớn"
+  },
+  {
+    "id": 178,
+    "question": "So với bộ nhớ trong, bộ nhớ ngoài của máy tính có ưu đi ểm là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tốc độ truy cập nhanh",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Không bị mất dữ liệu khi mất nguồn",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Kích thước nhỏ gọn",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cấu tạo đơn giản",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Không bị mất dữ liệu khi mất nguồn"
+  },
+  {
+    "id": 179,
+    "question": "Bộ điều khiển DMA (DMAC) tham gia qu ản lý bộ nhớ trong trường hợp nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Trong việc truyền số liệu giữa bộ điều khiển ổ đĩa và bộ nhớ",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Trong việc truyền số liệu giữa khối ALU và bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Trong việc truyền số liệu giữa các thanh ghi và b ộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Xác lập các tham s ố của BIOS",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Trong việc truyền số liệu giữa bộ điều khiển ổ đĩa và bộ nhớ"
+  },
+  {
+    "id": 180,
+    "question": "Phát biểu nào sau đây đúng khi nói v ề bộ nhớ Cache?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ chính có tốc độ nhanh hơn bộ nhớ Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ Cache không được đặt trên cùng chip với CPU",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ nhớ Cache được đặt giữa bộ nhớ chính và bộ nhớ ngoài",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ Cache có thê đư ợc đặt trên cùng chip với CPU",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Bộ nhớ Cache có thê đư ợc đặt trên cùng chip với CPU"
+  },
+  {
+    "id": 181,
+    "question": "Để đọc hoặc ghi được dữ liệu trên đĩa cứng BIOS cần thông tin nào trong các thông tin sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Head",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cylinder",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Sector",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả 3 thông tin trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả 3 thông tin trên"
+  },
+  {
+    "id": 182,
+    "question": "Khi khởi động, vi xử lý sẽ thực hiện chương trình ở đâu trước tiên?",
+    "options": [
+      {
+        "label": "A",
+        "text": "ROM",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Ổ đĩa cứng",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đĩa khởi động (boot)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "ROM"
+  },
+  {
+    "id": 183,
+    "question": "Một ô nhớ có địa chỉ là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "1 byte",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "2 byte",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "3 byte",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "4 byte",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "1 byte"
+  },
+  {
+    "id": 184,
+    "question": "SDRAM viết tắt của cụm từ",
+    "options": [
+      {
+        "label": "A",
+        "text": "Static Dynamic RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Static Data RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Static RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Synchronuos Dynamic RAM",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Synchronuos Dynamic RAM"
+  },
+  {
+    "id": 185,
+    "question": "DDRAM viết tắt của cụm từ",
+    "options": [
+      {
+        "label": "A",
+        "text": "Double Data RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Double Data Rate Dynamic RAM",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Double Data Rate RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Double Dynamic RAM",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Double Data Rate Dynamic RAM"
+  },
+  {
+    "id": 186,
+    "question": "Mục đích của hoạt động ngắt?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gián đoạn chương trình chính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Chuyển tới chương trình con phục vụ ngắt làm 1 việc nào đó",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tăng hiệu quả làm việc của CPU",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Cả a,b,c đều sai.",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Tăng hiệu quả làm việc của CPU"
+  },
+  {
+    "id": 187,
+    "question": "Trong các khối sau, khối nào không thuộc hệ thống hỗ trợ vào ra?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ điều khiển ổ đĩa",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ phối ghép màn hình",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bộ điều khiển bàn phím",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Các thanh ghi đa năng",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Các thanh ghi đa năng"
+  },
+  {
+    "id": 188,
+    "question": "Trong các thiết bị sau, thiết bị nào không phải là thiết bị ngoại vi:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Màn hình",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "RAM",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Đĩa cứng",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bàn phím",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "RAM"
+  },
+  {
+    "id": 189,
+    "question": "Trong các thành phần sau, thành ph ần nào thuộc hệ thống hỗ trợ phối ghép vào ra?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Cáp nguồn ổ cứng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Giao tiếp cổng USB",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Các thanh ghi đa năng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Giao tiếp cổng USB"
+  },
+  {
+    "id": 190,
+    "question": "Chức năng nào sau đây không ph ải là chức năng của hệ thống hỗ trợ vào ra?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Phối ghép các thiết bị ngoại vi với các thành phần khác của máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Đảm bảo việc chuyển dữ liệu giữa máy tính và thiết bị ngoại vi",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Điều khiển cấp phát bộ vi xử lý cho các thao tác trong môi trư ờng đa nhiệm",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Hỗ trợ việc truyền dữ liệu giữa các thiết bị ngoại vi và bộ nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Điều khiển cấp phát bộ vi xử lý cho các thao tác trong môi trư ờng đa nhiệm"
+  },
+  {
+    "id": 191,
+    "question": "Chức năng của hệ thống hỗ trợ vào ra là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Chuyển đổi dữ liệu từ môi trường bên ngoài thành dạng số và đưa vào máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Đảm bảo việc trao đổi dữ liệu giữa máy tính và các thi ết bị ngoại vi",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Tiếp nhận các ngắt từ các thiết bị vào ra dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Hỗ trợ thiết lập việc truyền dữ liệu giữa các máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Đảm bảo việc trao đổi dữ liệu giữa máy tính và các thi ết bị ngoại vi"
+  },
+  {
+    "id": 192,
+    "question": "Đặc điểm của thiết bị lưu trữ ngoài là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tốc độ truy cập nhanh",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Dung lượng nhỏ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Không mất dữ liệu khi mất nguồn",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Giá thành cao",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Không mất dữ liệu khi mất nguồn"
+  },
+  {
+    "id": 193,
+    "question": "Nguyên tắc lưu trữ của thiết bị lưu trữ ngoài thường là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ bán dẫn",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bộ nhớ từ, quang hoặc quang từ",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Hiện tượng từ trễ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Hiệu ứng dòng Fucô",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Bộ nhớ từ, quang hoặc quang từ"
+  },
+  {
+    "id": 194,
+    "question": "Đầu cắm bàn phím dạng PS/2 có mấy chân?",
+    "options": [
+      {
+        "label": "B",
+        "text": "5",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "6",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "7",
+        "isCorrect": false
+      },
+      {
+        "label": "E",
+        "text": "8",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "6"
+  },
+  {
+    "id": 195,
+    "question": "Giao tiếp bàn phím dạng PS/2 có mấy đường dữ liệu?",
+    "options": [
+      {
+        "label": "A",
+        "text": "1",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "2",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "3",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "4",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "1"
+  },
+  {
+    "id": 196,
+    "question": "Việc truyền dữ liệu từ bàn phím tới máy tính thường theo nguyên tắc nào?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Song song",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nối tiếp",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Song công",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bán song công",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nối tiếp"
+  },
+  {
+    "id": 197,
+    "question": "Các bộ vi xử lý kiểu CISC có đặc điểm là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Có số lượng các lệnh ít hơn so với các bộ vi xử lý kiểu RISC",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Sử dụng nhiều RAM hơn so v ới các bộ vi xử lý kiểu RISC",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Có tốc độ đồng hồ trung bình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Sử dụng các lệnh có kích thước khác nhau",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Sử dụng các lệnh có kích thước khác nhau"
+  },
+  {
+    "id": 198,
+    "question": "Các bộ vi xử lý kiểu RISC điển hình có đặc điểm là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Có các bộ nhớ Cache với dung lượng lớn hơn so với các bộ vi xử lý kiểu CISC",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Có ít thanh ghi hơn so v ới các bộ vi xử lý kiểu CISC",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Kém tin cậy hơn so với các bộ vi xử lý kiểu CISC",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Thường thực hiện mỗi lệnh trong một xung nhịp Clock",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Thường thực hiện mỗi lệnh trong một xung nhịp Clock"
+  },
+  {
+    "id": 199,
+    "question": "Tốc độ truy nhập của các thanh ghi so v ới bộ nhớ RAM thì:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhanh hơn",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Chậm hơn",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Xấp xỉ nhau",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Không so sánh đư ợc",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Nhanh hơn"
+  },
+  {
+    "id": 200,
+    "question": "Thanh ghi IP cho biết thông tin gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Địa chỉ segment của lệnh kế tiếp sẽ được thực hiện",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Địa chỉ offset của lệnh kế tiếp sẽ được thực hiện",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Địa chỉ offset của lệnh kế tiếp sẽ được thực hiện"
+  },
+  {
+    "id": 201,
+    "question": "Thanh ghi CS cho biết thông tin gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Địa chỉ bắt đầu của đoạn dữ liệu phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ"
+  },
+  {
+    "id": 202,
+    "question": "Thanh ghi DS cho bi ết thông tin gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Địa chỉ bắt đầu của đoạn dữ liệu chứa các biến của chương trình hiện hành",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Địa chỉ bắt đầu của đoạn dữ liệu chứa các biến của chương trình hiện hành"
+  },
+  {
+    "id": 203,
+    "question": "Thanh ghi SS cho biết thông tin gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Địa chỉ bắt đầu của đoạn dữ liệu phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ dữ liệu dạng chuỗi phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ"
+  },
+  {
+    "id": 204,
+    "question": "Thanh ghi ES cho biết thông tin gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Địa chỉ kết thúc của đoạn dữ liệu phục vụ cho chương trình hiện hành",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ đoạn dữ liệu mở rộng phục vụ cho chương trình hiện hành",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Địa chỉ đoạn dữ liệu mở rộng phục vụ cho chương trình hiện hành"
+  },
+  {
+    "id": 205,
+    "question": "Cơ chế DMA là gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Truy cập ngoại vi trực tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Truy cập bộ nhớ trực tiếp",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Điều khiển thiết bị ngoại vi thông qua qua b ộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Điều khiển hệ thống bộ nhớ thông qua thiết bị ngoại vi",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Truy cập bộ nhớ trực tiếp"
+  },
+  {
+    "id": 206,
+    "question": "DMA là viết tắt của:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Direct Management Access",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Direct Memory Application Access",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Direct Memory Access",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Direct Mainboard Administration",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Direct Memory Access"
+  },
+  {
+    "id": 207,
+    "question": "Cơ chế DMA cho phép thực hiện điều gì?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Truyền dữ liệu trực tiếp giữa bộ nhớ và các thiết bị ngoại vi",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Truyền dữ liệu trực tiếp giữa bộ nhớ và các thanh ghi trong b ộ vi xử lý",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Truyền dữ liệu trực tiếp giữa các thiết bị ngoại vi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Truyền dữ liệu trực tiếp giữa các thành phần trong hệ thống bộ nhớ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Truyền dữ liệu trực tiếp giữa bộ nhớ và các thiết bị ngoại vi"
+  },
+  {
+    "id": 208,
+    "question": "Khi chương trình con đư ợc gọi, địa chỉ quay về được cất vào:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ngăn xếp",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Thanh ghi con trỏ ngăn xếp",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cặp thanh ghi CS:IP",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ đếm chương trình",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Ngăn xếp"
+  },
+  {
+    "id": 209,
+    "question": "Thông thường khi một chương trình con phục vụ ngắt được thực hiện xong:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ vi xử lý phải được khởi động lại",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Một yêu cầu ngắt xuất hiện",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Chương trình bị tạm dừng sẽ được tiếp tục thực hiện",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Hệ thống bị dừng (Halt)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Chương trình bị tạm dừng sẽ được tiếp tục thực hiện"
+  },
+  {
+    "id": 210,
+    "question": "Một tín hiệu vào của bộ vi xử lý làm cho nó tạm dừng chương trình đang thực hiện thì được gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nghỉ (Break)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Ngắt (Interrupt)",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Dừng (Stop)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đợi (Wait)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Ngắt (Interrupt)"
+  },
+  {
+    "id": 211,
+    "question": "Xét lệnh ADD. Lệnh này thuộc:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhóm lệnh số học",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Nhóm lệnh chuyển dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nhóm lệnh điều khiển chương trình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Nhóm lệnh logic",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Nhóm lệnh số học"
+  },
+  {
+    "id": 212,
+    "question": "Trong một lệnh mã máy, phát bi ểu nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Có thể có nhiều mã lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Không tồn tại lệnh không có toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Toán hạng là duy nhất",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Có thể có nhiều toán hạng",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Có thể có nhiều toán hạng"
+  },
+  {
+    "id": 213,
+    "question": "“Opertion code” trong cấu trúc của lệnh gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tiền tố",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Mã toán",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ trực tiếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Mã toán"
+  },
+  {
+    "id": 214,
+    "question": "Ngôn ngữ trong máy tính có đặc điểm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gọi là mã máy",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Được đọc bởi máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Được biểu diễn bằng các bít 0 và 1",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả 3 đáp án trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả 3 đáp án trên"
+  },
+  {
+    "id": 215,
+    "question": "Các cấu hình nối ghép gồm có:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Điểm - điểm",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Điểm - đa điểm",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Điểm - điểm và điểm - đa điểm",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Đa điểm - đa điểm",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Điểm - điểm và điểm - đa điểm"
+  },
+  {
+    "id": 216,
+    "question": "Phương pháp DMA cho phép:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Trao đổi dữ liệu trực tiếp giữa ngoại vi và bộ nhớ trong",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Trao đổi dữ liệu trực tiếp giữa bộ nhớ trong và bộ nhớ Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Trao đổi dữ liệu trực tiếp giữa bộ nhớ ngoài và bộ nhớ Cache",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Trao đổi dữ liệu trực tiếp giữa ngoại vi và bộ nhớ ngoài",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Trao đổi dữ liệu trực tiếp giữa ngoại vi và bộ nhớ trong"
+  },
+  {
+    "id": 217,
+    "question": "Thành phần nào của CPU dùng cho việc tính toán?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đơn vị điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Đơn vị tính toán số học và logic",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tập thanh ghi",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đơn vị nối ghép",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Đơn vị tính toán số học và logic"
+  },
+  {
+    "id": 218,
+    "question": "Nhiệm vụ nào của CPU thực hiện xác định thao tác mà lệnh yêu cầu?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhận lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nhận dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Giải mã lệnh",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Ghi dữ liệu",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Giải mã lệnh"
+  },
+  {
+    "id": 219,
+    "question": "Theo mô hình đơn vị tính toán số học và logic (ALU), ALU nhận thông tin từ:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thanh ghi cờ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Các tín hiệu từ đơn vị điều khiển",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Các thanh ghi, Các tín hiệu từ đơn vị điều khiển",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Các tín hiệu từ đơn vị điều khiển, các thanh ghi cờ",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Các thanh ghi, Các tín hiệu từ đơn vị điều khiển"
+  },
+  {
+    "id": 220,
+    "question": "Các loại bus trong tổ chức của CPU gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bus điều khiển, bus địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Bus dữ liệu, bus địa chỉ",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Bus dữ liệu, bus điều khiển, bus địa chỉ",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Bus dữ liệu, bus điều khiển",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Bus dữ liệu, bus điều khiển, bus địa chỉ"
+  },
+  {
+    "id": 221,
+    "question": "ROM lưu trữ các thông tin sau:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Thư viện các chương trình con, các chương trình điều khiển hệ thống, các bảng chức năng, vi chương trình.",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Thư viện các chương trình con, các chương trình điều khiển hệ thống, các bảng chức năng.",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Thư viện các chương trình con, các chương trình điều khiển hệ thống, vi chương trình.",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Các chương trình điều khiển hệ thống, các bảng chức năng, vi chương trình.",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Thư viện các chương trình con, các chương trình điều khiển hệ thống, các bảng chức năng, vi chương trình."
+  },
+  {
+    "id": 222,
+    "question": "Cách nhìn máy tính bởi người lập trình là kiến trúc:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ngôn ngữ máy",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Kiến trúc tập lệnh",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Vi kiến trúc",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Ngôn ngữ trong máy tính",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Kiến trúc tập lệnh"
+  },
+  {
+    "id": 223,
+    "question": "Ngôn ngữ trong máy tính có đặc điểm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Gọi là mã máy",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Được đọc bởi máy tính",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Được biểu diễn bằng các bít 0 và 1",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cả 3 đáp án trên",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Cả 3 đáp án trên"
+  },
+  {
+    "id": 224,
+    "question": "Ngôn ngữ trong máy tính bao gồm",
+    "options": [
+      {
+        "label": "A",
+        "text": "Hợp ngữ và lập trình bậc cao",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Lập trình bậc cao",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mã máy",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Hợp ngữ và ngôn ngữ máy",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Mã máy"
+  },
+  {
+    "id": 225,
+    "question": "Cấu trúc chung của một mã lệnh gồm:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Mã toán, Toán hạng",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tiền tố, Mã toán, Toán h ạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Toán hạng, Địa chỉ trực tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Tiền tố, Mã toán, Toán h ạng, Địa chỉ trực",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Mã toán, Toán hạng"
+  },
+  {
+    "id": 226,
+    "question": "“Prefix” trong cấu trúc của lệnh gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tiền tố",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mã toán",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ trực tiếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Tiền tố"
+  },
+  {
+    "id": 227,
+    "question": "“Opertion code” trong cấu trúc của lệnh gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tiền tố",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mã toán",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ trực tiếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Mã toán"
+  },
+  {
+    "id": 228,
+    "question": "“Operand” trong cấu trúc của lệnh gọi là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tiền tố",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Toán hạng",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Mã toán",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Địa chỉ trực tiếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Toán hạng"
+  },
+  {
+    "id": 229,
+    "question": "Cấu trúc đúng của một lệnh là",
+    "options": [
+      {
+        "label": "A",
+        "text": "Tiền tố, Toán hạng, Mã toán, Địa chỉ trực tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Mã toán, Tiền tố, Toán hạng, Địa chỉ trực tiếp",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tiền tố, Mã toán, Toán hạng, Địa chỉ trực tiếp",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Tiền tố, Mã toán, Địa chỉ trực tiếp, Toán hạng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Tiền tố, Mã toán, Toán hạng, Địa chỉ trực tiếp"
+  },
+  {
+    "id": 230,
+    "question": "Trong cấu trúc chung của lệnh, địa chỉ trực tiếp là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Bộ nhớ",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nơi chứa các toán hạng",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Nơi chứa lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Ngăn xếp",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nơi chứa các toán hạng"
+  },
+  {
+    "id": 231,
+    "question": "Thiết kế lệnh dùng cho:",
+    "options": [
+      {
+        "label": "C",
+        "text": "Bộ nhớ RAM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bộ nhớ ROM",
+        "isCorrect": false
+      },
+      {
+        "label": "E",
+        "text": "Vi xử lý",
+        "isCorrect": true
+      },
+      {
+        "label": "F",
+        "text": "Cả 3 đáp án trên",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Vi xử lý"
+  },
+  {
+    "id": 232,
+    "question": "Một tập lệnh được mô tả bằng:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Mã nhị phân",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Mã hexa",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mã unicode",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Mã telex",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Mã nhị phân"
+  },
+  {
+    "id": 234,
+    "question": "Trong một lệnh mã máy, phát bi ểu nào sau đây là đúng?",
+    "options": [
+      {
+        "label": "E",
+        "text": "Có thể có nhiều mã lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "F",
+        "text": "Không tồn tại lệnh không có toán hạng",
+        "isCorrect": false
+      },
+      {
+        "label": "G",
+        "text": "Toán hạng là duy nhất",
+        "isCorrect": false
+      },
+      {
+        "label": "H",
+        "text": "Có thể có nhiều t oán hạng",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Có thể có nhiều t oán hạng"
+  },
+  {
+    "id": 235,
+    "question": "Dòng vi xử lý RISC dùng cho s ố lượng lệnh",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhiều lệnh",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Ít lệnh",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Không phụ thuộc vào số lượng",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "A và C đúng",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Ít lệnh"
+  },
+  {
+    "id": 236,
+    "question": "Máy tính với số lượng lệnh rút gọn tương ứng với dòng vi xử lý",
+    "options": [
+      {
+        "label": "A",
+        "text": "CISC",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "RISC",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "RIRC",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "RIST",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "RISC"
+  },
+  {
+    "id": 237,
+    "question": "Máy tính với số lượng lệnh phức tạp tương ứng với dòng vi xử lý",
+    "options": [
+      {
+        "label": "A",
+        "text": "CISC",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "RISC",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "RIRC",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "RIST",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "CISC"
+  },
+  {
+    "id": 238,
+    "question": "Xét lệnh LOAD. Lệnh này thuộc:",
+    "options": [
+      {
+        "label": "E",
+        "text": "Nhóm lệnh số học",
+        "isCorrect": false
+      },
+      {
+        "label": "F",
+        "text": "Nhóm lệnh chuyển dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "G",
+        "text": "Nhóm lệnh điều khiển chương trình",
+        "isCorrect": false
+      },
+      {
+        "label": "H",
+        "text": "Nhóm lệnh logic",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nhóm lệnh chuyển dữ liệu"
+  },
+  {
+    "id": 239,
+    "question": "Xét lệnh MOV. Lệnh này thuộc:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhóm lệnh số học",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nhóm lệnh chuyển dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "Nhóm lệnh điều khiển chương trình",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Nhóm lệnh logic",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "Nhóm lệnh chuyển dữ liệu"
+  },
+  {
+    "id": 240,
+    "question": "Xét lệnh ADD. Lệnh này thuộc:",
+    "options": [
+      {
+        "label": "E",
+        "text": "Nhóm lệnh số học",
+        "isCorrect": true
+      },
+      {
+        "label": "F",
+        "text": "Nhóm lệnh chuyển dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "G",
+        "text": "Nhóm lệnh điều khiển chương trình",
+        "isCorrect": false
+      },
+      {
+        "label": "H",
+        "text": "Nhóm lệnh logic",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "Nhóm lệnh số học"
+  },
+  {
+    "id": 241,
+    "question": "Xét lệnh RETURN. Lệnh này thuộc:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Nhóm lệnh số học",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Nhóm lệnh chuyển dữ liệu",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nhóm lệnh điều khiển chương trình",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "Nhóm lệnh logic",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "Nhóm lệnh điều khiển chương trình"
+  },
+  {
+    "id": 242,
+    "question": "Thực hiện lệnh bao gồm các pha theo th ứ tự lần lượt là:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Đọc lệnh → Thực hiện lệnh → Giải mã → Lưu kết quả",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Thực hiện lệnh → Đọc lệnh → Giải mã → Lưu kết quả",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Giải mã → Đọc lệnh → Thực hiện lệnh → Lưu kết quả",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Đọc lệnh → Giải mã → Thực hiện lệnh → Lưu kết quả",
+        "isCorrect": true
+      }
+    ],
+    "correctAnswer": 3,
+    "correctText": "Đọc lệnh → Giải mã → Thực hiện lệnh → Lưu kết quả"
+  },
+  {
+    "id": 243,
+    "question": "Biểu thức nào được thực hiện với hệ lệnh sau?\nMOVE X, A\nSUB X, B",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = A + B",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "X = B - A",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "X = A - B",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "X = A x B",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "X = A - B"
+  },
+  {
+    "id": 244,
+    "question": "Biểu thức nào tương ứng với chuỗi lệnh sau?\nMOVE X, A\nMUL X, B\nADD X, C",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = A + B x C",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "X = A x B + C",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "X = (A + B) x C",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "X = A x (B + C)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "X = A x B + C"
+  },
+  {
+    "id": 245,
+    "question": "Biểu thức nào được thực hiện với hệ lệnh?\nMOVE X, A\nADD X, B\nMUL X, C",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = A × B + C",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "X = A + B × C",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "X = (A + B) × C",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "X = A × C + B",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "X = (A + B) × C"
+  },
+  {
+    "id": 246,
+    "question": "Biểu thức nào được thực hiện với hệ lệnh?\nMUL T, B, C\nADD X, A, T",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = A + (B × C)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "X = (A + B) × C",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "X = (A × B) + C",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "X = A × (B – C)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 0,
+    "correctText": "X = A + (B × C)"
+  },
+  {
+    "id": 247,
+    "question": "Biểu thức nào được thực hiện với hệ lệnh?\nADD T, A, B\nMUL X, T, C",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = A + (B × C)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "X = (A + B) × C",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "X = A × (B + C)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "X = (A × B) + C",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "X = (A + B) × C"
+  },
+  {
+    "id": 248,
+    "question": "Biểu thức nào được thực hiện với hệ lệnh?\nADD T, A, B\nDIV X, T, C",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = A + (B ÷ C)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "X = (A ÷ C) + B",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "X = (A + B) ÷ C",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "X = C ÷ (A + B)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "X = (A + B) ÷ C"
+  },
+  {
+    "id": 249,
+    "question": "Biểu thức nào được thực hiện với hệ lệnh?\nSUB T1, A, B\nADD T2, C, D\nMUL X, T1, T2",
+    "options": [
+      {
+        "label": "A",
+        "text": "X = (A + B) × (C – D)",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "X = (A – B) + (C × D)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "X = (A – B) × (C + D)",
+        "isCorrect": true
+      },
+      {
+        "label": "D",
+        "text": "X = (A × C) – (B × D)",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 2,
+    "correctText": "X = (A – B) × (C + D)"
+  },
+  {
+    "id": 250,
+    "question": "Biểu thức toán học X = (A – B) ÷ C tương ứng với hệ lệnh nào dưới đây?",
+    "options": [
+      {
+        "label": "A",
+        "text": "MOVE X, A\nADD X, B\nDIV X, C",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "MOVE X, A\nSUB X, B\nDIV X, C",
+        "isCorrect": true
+      },
+      {
+        "label": "C",
+        "text": "MOVE X, A\nDIV X, C\nSUB X, B",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "MOVE X, B\nSUB X, A\nDIV X, C",
+        "isCorrect": false
+      }
+    ],
+    "correctAnswer": 1,
+    "correctText": "MOVE X, A\nSUB X, B\nDIV X, C"
+  }
+]

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft §k Unicode Obfuscator Simulator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(16, 185, 129, 0) 0%, rgba(16, 185, 129, 0.05) 10%, rgba(16, 185, 129, 0) 20%);
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-200 min-h-screen flex flex-col items-center justify-center p-4 md:p-6 font-sans">
+
+    <div class="max-w-3xl w-full bg-[#111827] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden relative scanline">
+        
+        <!-- HEADER -->
+        <div class="bg-slate-900 px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-emerald-500 font-bold text-xl font-mono">§k</span>
+                <h1 class="text-md font-bold tracking-wider text-slate-100 uppercase">
+                    Unicode Obfuscator (Minecraft Style)
+                </h1>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] font-mono border border-emerald-500/20">
+                REVEAL ENGINE ENABLED
+            </span>
+        </div>
+
+        <!-- MAIN INTERFACE -->
+        <div class="p-6 flex flex-col gap-6">
+            
+            <!-- INPUT CONTAINER -->
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                    Nhập văn bản mẫu (Chương trình sẽ giữ nguyên độ dài và làm loạn bằng Unicode):
+                </label>
+                <div class="flex gap-2">
+                    <input id="input-text" type="text" value="Minecraft §k Glitch" 
+                        placeholder="Nhập chữ bất kỳ..." 
+                        class="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono">
+                    
+                    <button onclick="resetInput()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs text-slate-300 transition-colors font-semibold">
+                        Đặt lại
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTROLS ROW -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Unicode Block / Range Selector -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                        Chọn dải mã Unicode ngẫu nhiên:
+                    </label>
+                    <select id="unicode-range" onchange="updateRangeDescription()" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 cursor-pointer font-mono">
+                        <option value="ascii" selected>Standard ASCII (0x0021 - 0x007E)</option>
+                        <option value="latin-ext">Latin mở rộng (0x0100 - 0x017F)</option>
+                        <option value="cyrillic">Cyrillic & Hy Lạp (0x0370 - 0x04FF)</option>
+                        <option value="arrows">Mũi tên & Hình học (0x2190 - 0x25FF)</option>
+                        <option value="math">Ký hiệu Toán học (0x2200 - 0x22FF)</option>
+                        <option value="blocks">Khối hộp đồ họa (0x2580 - 0x259F)</option>
+                        <option value="runes">Chữ cổ Runic (0x16A0 - 0x16F0)</option>
+                        <option value="chaos">Hỗn hợp diện rộng (0x00A0 - 0x0FFF)</option>
+                        <option value="all-mixed">✦ Trộn lẫn các dải trên (Mixed Ranges)</option>
+                        <option value="full-unicode">✦ Toàn không gian Unicode (0x0021 - 0x2BFF)</option>
+                    </select>
+                    <p id="range-info" class="text-[11px] text-slate-500 italic font-mono px-1">
+                        Dải chuẩn: Chứa các ký tự, số và dấu cơ bản nhất.
+                    </p>
+                </div>
+
+                <!-- Speed / Delay controls -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex justify-between">
+                        <span>Tốc độ hoán đổi:</span>
+                        <span id="speed-indicator" class="text-emerald-400 font-mono">Fast (30ms)</span>
+                    </label>
+                    <div class="flex items-center gap-3 bg-slate-950 border border-slate-800 rounded-lg p-2 h-[46px]">
+                        <input id="speed-slider" type="range" min="10" max="300" step="10" value="30" oninput="updateSpeed(this.value)" class="flex-1 accent-emerald-500 cursor-pointer bg-slate-800 h-1 rounded-lg appearance-none">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- REVEAL EFFECTS CONTROLS -->
+            <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 flex flex-col gap-4">
+                <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    Thiết lập Hiệu ứng Lộ chữ (Reveal Transitions)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Direction Selector -->
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[11px] text-slate-400 font-medium">Hướng hiển thị chữ chính xác:</label>
+                        <select id="reveal-direction" onchange="changeRevealDirection()" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 cursor-pointer font-mono">
+                            <option value="none">Không áp dụng (Làm loạn 100%)</option>
+                            <option value="ltr">Từ trái sang phải (Left ➔ Right)</option>
+                            <option value="rtl">Từ phải sang trái (Right ➔ Left)</option>
+                            <option value="center-out">Từ giữa ra hai bên (Center ➔ Out)</option>
+                            <option value="out-center">Từ ngoài vào giữa (Out ➔ Center)</option>
+                        </select>
+                    </div>
+
+                    <!-- Options & Action Toggles -->
+                    <div class="flex flex-col justify-end gap-2">
+                        <div class="flex items-center justify-between bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80">
+                            <label class="text-[11px] text-slate-300 font-mono flex items-center gap-2 cursor-pointer">
+                                <input id="chk-auto-loop" type="checkbox" checked class="rounded border-slate-800 bg-slate-950 text-emerald-500 focus:ring-0">
+                                <span>Tự động lặp lại (Auto Loop)</span>
+                            </label>
+                            
+                            <span id="reveal-state-badge" class="px-2 py-0.5 rounded text-[9px] font-mono bg-slate-800 text-slate-400 uppercase">
+                                Chờ lệnh
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Reveal Progress Bar -->
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                        <span>Tiến trình hiện chữ gốc:</span>
+                        <span id="reveal-progress-txt">0% (0/0 ký tự)</span>
+                    </div>
+                    <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-850">
+                        <div id="reveal-progress-bar" class="bg-gradient-to-r from-emerald-600 to-teal-400 h-full w-0 transition-all duration-150"></div>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="flex gap-2">
+                    <button id="btn-trigger-reveal" onclick="triggerRevealSequence()" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/20">
+                        ⚡ Bắt đầu Lộ Chữ
+                    </button>
+                    <button id="btn-glitch-all" onclick="resetToContinuousGlitch()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg transition-all">
+                        Làm loạn 100%
+                    </button>
+                </div>
+            </div>
+
+            <!-- PREVIEW WINDOWS -->
+            <div class="flex flex-col gap-3">
+                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Màn hình thử nghiệm thực tế:</div>
+                
+                <!-- Minecraft Simulation Monitor -->
+                <div class="bg-black/90 rounded-xl p-6 border border-slate-800 flex flex-col gap-4 font-mono">
+                    
+                    <!-- Sim 1: Dynamic Glitched rendering -->
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] text-slate-600 uppercase">Hiệu ứng động (Minecraft §k Effect):</span>
+                        <div class="text-xl md:text-2xl text-emerald-400 font-mono tracking-widest break-all bg-emerald-950/10 p-3 rounded border border-emerald-950/40 min-h-[56px] flex items-center" id="dynamic-output">
+                            <!-- Chữ nhấp nháy sẽ render tại đây -->
+                        </div>
+                    </div>
+
+                    <!-- Sim 2: Text to copy -->
+                    <div class="flex flex-col gap-1 mt-2">
+                        <span class="text-[10px] text-slate-600 uppercase flex justify-between">
+                            <span>Mẫu chuỗi tĩnh tại thời điểm hiện tại:</span>
+                            <span class="text-[9px] text-slate-500">Ký tự dạng tĩnh để copy</span>
+                        </span>
+                        <div class="flex gap-2">
+                            <input id="static-output-field" type="text" readonly
+                                class="flex-1 bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-sm text-slate-300 font-mono focus:outline-none">
+                            <button onclick="copyStaticText()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded transition-colors">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- HOW IT WORKS IN CODE -->
+            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800/80 flex flex-col gap-2">
+                <h3 class="text-xs font-semibold text-slate-300 uppercase font-mono flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    Công thức toán phân rã hiệu ứng lộ chữ
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Để tạo hiệu ứng lộ chữ từ nhiều hướng, chúng ta tính toán ngưỡng kích hoạt <code class="text-slate-300">T(i)</code> cho từng vị trí ký tự <code class="text-slate-300">i</code> trong chuỗi độ dài <code class="text-slate-300">N</code>. Khi bước chạy đạt hoặc vượt ngưỡng, ký tự gốc sẽ hiển thị cố định, ngược lại sẽ tiếp tục sinh ngẫu nhiên mã Unicode:
+                </p>
+                <div class="bg-[#090b11] p-3 rounded text-[11px] font-mono text-emerald-300 border border-slate-850 space-y-1">
+                    <div>• <strong>Từ giữa ra ngoài:</strong> Khoảng cách <code class="text-purple-400">dist = |i - (N - 1)/2|</code>. Lộ chữ khi <code class="text-purple-400">dist &lt; step</code>.</div>
+                    <div>• <strong>Từ ngoài vào giữa:</strong> Khoảng cách rìa <code class="text-purple-400">edge = min(i, N - 1 - i)</code>. Lộ chữ khi <code class="text-purple-400">edge &lt; step</code>.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TOAST ALERTS -->
+    <div id="toast" class="fixed bottom-6 bg-emerald-500 text-slate-950 px-4 py-2 rounded-lg text-xs font-bold shadow-xl opacity-0 translate-y-4 transition-all duration-300 pointer-events-none">
+        Đã sao chép chuỗi Unicode tĩnh thành công!
+    </div>
+
+    <!-- MAIN SCRIPT -->
+    <script>
+        const UNICODE_RANGES = {
+            'ascii': { min: 0x0021, max: 0x007E, desc: "Chuỗi ASCII tiêu chuẩn hiển thị tốt trên tất cả phông chữ (Ký tự, chữ số)." },
+            'latin-ext': { min: 0x0100, max: 0x017F, desc: "Dải chữ Latin mở rộng với các ký tự có dấu gộp lạ mắt." },
+            'cyrillic': { min: 0x0370, max: 0x04FF, desc: "Dải ký tự tiếng Hy Lạp cổ và chữ viết hệ Cyrillic (Nga/Đông Âu)." },
+            'arrows': { min: 0x2190, max: 0x25FF, desc: "Gồm hàng loạt các ký hiệu mũi tên xoay hướng, khối hình tam giác, hình tròn." },
+            'math': { min: 0x2200, max: 0x22FF, desc: "Dải các ký tự toán học đặc biệt như tích phân, căn bậc, tập hợp, đồng dạng." },
+            'blocks': { min: 0x2580, max: 0x259F, desc: "Các khối đồ họa đậm nhạt, gạch sọc lấp đầy màn hình tạo cảm giác bị nát phông chữ." },
+            'runes': { min: 0x16A0, max: 0x16F0, desc: "Ký tự cổ của người Viking (Runic), nhìn rất huyền bí và cổ xưa." },
+            'chaos': { min: 0x00A0, max: 0x0FFF, desc: "Dải rộng bao quát hàng nghìn ký tự quốc tế, biến đổi cực kỳ hỗn loạn." },
+            'all-mixed': { min: null, max: null, desc: "Trộn lẫn ngẫu nhiên các dải phía trên cho từng ký tự riêng biệt." },
+            'full-unicode': { min: 0x0021, max: 0x2BFF, desc: "Quét ngẫu nhiên toàn bộ hệ thống Unicode thông dụng từ 0x0021 đến 0x2BFF (Hàng vạn biểu tượng)." }
+        };
+
+        // Biến vận hành cơ bản
+        let activeTimer = null;
+        let currentDelay = 30; // ms
+
+        // Các biến trạng thái bổ sung cho Hiệu ứng Lộ chữ
+        let revealState = 'disabled'; // 'disabled' (Làm loạn 100%), 'revealing' (Đang hiện dần), 'holding' (Giữ chữ gốc)
+        let revealStep = 0;
+        let revealMaxSteps = 0;
+        let lastStepTime = 0;
+        const STEP_INTERVAL_MS = 180; // Tốc độ lộ chữ (180ms tăng thêm 1 bước)
+        let holdStartTime = 0;
+        const HOLD_DURATION_MS = 2000; // Thời gian dừng chữ chính xác khi đạt 100% trước khi làm loạn lại
+
+        // Các thành phần DOM
+        const inputText = document.getElementById('input-text');
+        const unicodeRangeSelect = document.getElementById('unicode-range');
+        const rangeInfo = document.getElementById('range-info');
+        const speedSlider = document.getElementById('speed-slider');
+        const speedIndicator = document.getElementById('speed-indicator');
+        const dynamicOutput = document.getElementById('dynamic-output');
+        const staticOutputField = document.getElementById('static-output-field');
+        const toast = document.getElementById('toast');
+        
+        // Thành phần DOM mới của Reveal
+        const revealDirectionSelect = document.getElementById('reveal-direction');
+        const chkAutoLoop = document.getElementById('chk-auto-loop');
+        const revealStateBadge = document.getElementById('reveal-state-badge');
+        const revealProgressBar = document.getElementById('reveal-progress-bar');
+        const revealProgressTxt = document.getElementById('reveal-progress-txt');
+        const btnTriggerReveal = document.getElementById('btn-trigger-reveal');
+
+        // Sinh 1 ký tự ngẫu nhiên trong dải chỉ định
+        function getRandomUnicodeChar(min, max) {
+            const codePoint = Math.floor(Math.random() * (max - min + 1)) + min;
+            return String.fromCodePoint(codePoint);
+        }
+
+        // Hàm quyết định xem ký tự ở vị trí 'index' có nên hiển thị chính xác chữ gốc hay không
+        function shouldRevealCharacter(index, length, step, direction) {
+            if (direction === 'none' || revealState === 'disabled') {
+                return false;
+            }
+            if (revealState === 'holding') {
+                return true; // Đang giữ trạng thái hoàn thành thì lộ 100%
+            }
+
+            switch(direction) {
+                case 'ltr':
+                    // Trái sang phải: index nhỏ hơn bước chạy
+                    return index < step;
+                
+                case 'rtl':
+                    // Phải sang trái: index tính ngược từ cuối về nhỏ hơn bước chạy
+                    return (length - 1 - index) < step;
+                
+                case 'center-out': {
+                    // Từ giữa ra hai bên
+                    const mid = (length - 1) / 2;
+                    const dist = Math.abs(index - mid);
+                    return dist < step;
+                }
+                
+                case 'out-center': {
+                    // Từ ngoài vào giữa
+                    const distFromEdge = Math.min(index, length - 1 - index);
+                    return distFromEdge < step;
+                }
+                
+                default:
+                    return false;
+            }
+        }
+
+        // Tạo ra chuỗi mới kết hợp ký tự ngẫu nhiên và chữ gốc dựa trên tiến trình lộ chữ
+        function buildObfuscatedString(baseString) {
+            const selectedKey = unicodeRangeSelect.value;
+            const direction = revealDirectionSelect.value;
+            const length = baseString.length;
+            
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                const char = baseString[i];
+                
+                if (char === ' ') {
+                    result += ' '; // Luôn giữ nguyên khoảng trắng để không dính chữ
+                } else if (shouldRevealCharacter(i, length, revealStep, direction)) {
+                    result += char; // Hiện chữ chính xác
+                } else {
+                    // Xử lý các dải đặc biệt mới bổ sung
+                    if (selectedKey === 'all-mixed') {
+                        // Chọn ngẫu nhiên một dải hợp lệ trong các dải định nghĩa sẵn
+                        const validKeys = Object.keys(UNICODE_RANGES).filter(k => k !== 'all-mixed' && k !== 'full-unicode');
+                        const randomKey = validKeys[Math.floor(Math.random() * validKeys.length)];
+                        const range = UNICODE_RANGES[randomKey];
+                        result += getRandomUnicodeChar(range.min, range.max);
+                    } else if (selectedKey === 'full-unicode') {
+                        // Quét ngẫu nhiên toàn bộ dải Unicode từ 0x0021 đến 0x2BFF
+                        const range = UNICODE_RANGES[selectedKey];
+                        result += getRandomUnicodeChar(range.min, range.max);
+                    } else {
+                        // Dải tiêu chuẩn
+                        const range = UNICODE_RANGES[selectedKey];
+                        result += getRandomUnicodeChar(range.min, range.max);
+                    }
+                }
+            }
+            return result;
+        }
+
+        // Quản lý trạng thái chuyển tiếp thời gian thực cho hiệu ứng Lộ chữ
+        function updateRevealState(length) {
+            const direction = revealDirectionSelect.value;
+            if (direction === 'none') {
+                revealState = 'disabled';
+                updateRevealUI(0, 0);
+                return;
+            }
+
+            // Tính toán số bước tối đa dựa trên hướng đi
+            if (direction === 'ltr' || direction === 'rtl') {
+                revealMaxSteps = length;
+            } else {
+                // Giữa ra hoặc ngoài vào (đồng thời hai phía): Số bước bằng một nửa chiều dài chuỗi
+                revealMaxSteps = Math.ceil(length / 2);
+            }
+
+            const now = Date.now();
+
+            if (revealState === 'revealing') {
+                // Tự động tăng bước theo thời gian đã cấu hình
+                if (now - lastStepTime > STEP_INTERVAL_MS) {
+                    revealStep++;
+                    lastStepTime = now;
+                    
+                    if (revealStep > revealMaxSteps) {
+                        revealState = 'holding';
+                        holdStartTime = now;
+                    }
+                }
+            } else if (revealState === 'holding') {
+                // Giữ nguyên chuỗi gốc trong thời gian ngắn trước khi đưa ra quyết định tiếp theo
+                if (now - holdStartTime > HOLD_DURATION_MS) {
+                    if (chkAutoLoop.checked) {
+                        // Reset về trạng thái bắt đầu để chạy lại vòng lặp mới
+                        revealState = 'revealing';
+                        revealStep = 0;
+                        lastStepTime = now;
+                    } else {
+                        // Tắt hiệu ứng, chuyển về làm loạn liên tục
+                        revealState = 'disabled';
+                    }
+                }
+            }
+
+            // Cập nhật thanh hiển thị tiến trình
+            let revealedCount = 0;
+            for (let i = 0; i < length; i++) {
+                if (inputText.value[i] !== ' ' && shouldRevealCharacter(i, length, revealStep, direction)) {
+                    revealedCount++;
+                }
+            }
+            const nonSpaceLength = inputText.value.replace(/\s/g, '').length;
+            updateRevealUI(revealedCount, nonSpaceLength);
+        }
+
+        // Cập nhật các thẻ hiển thị liên quan đến tiến trình Lộ chữ
+        function updateRevealUI(revealed, total) {
+            if (revealState === 'disabled') {
+                revealStateBadge.textContent = "Glitch 100%";
+                revealStateBadge.className = "px-2 py-0.5 rounded text-[9px] font-mono bg-rose-500/10 text-rose-400 border border-rose-500/20 uppercase";
+                revealProgressBar.style.width = "0%";
+                revealProgressTxt.textContent = "0% (Làm loạn 100%)";
+            } else if (revealState === 'revealing') {
+                revealStateBadge.textContent = "Đang lộ chữ";
+                revealStateBadge.className = "px-2 py-0.5 rounded text-[9px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase animate-pulse";
+                const percentage = total > 0 ? Math.round((revealed / total) * 100) : 0;
+                revealProgressBar.style.width = `${percentage}%`;
+                revealProgressTxt.textContent = `${percentage}% (${revealed}/${total} ký tự)`;
+            } else if (revealState === 'holding') {
+                revealStateBadge.textContent = "Hoàn thành";
+                revealStateBadge.className = "px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase";
+                revealProgressBar.style.width = "100%";
+                revealProgressTxt.textContent = `100% (${total}/${total} ký tự)`;
+            }
+        }
+
+        // Vòng lặp kết xuất chính của chương trình
+        function loop() {
+            const rawText = inputText.value;
+            if (rawText.length === 0) {
+                dynamicOutput.innerHTML = `<span class="text-slate-600 italic text-sm">Vui lòng nhập văn bản...</span>`;
+                staticOutputField.value = "";
+                return;
+            }
+
+            // Xử lý luồng lộ chữ
+            updateRevealState(rawText.length);
+
+            // Xây dựng chuỗi
+            const obfStr = buildObfuscatedString(rawText);
+            
+            // Render text động
+            dynamicOutput.textContent = obfStr;
+            // Cập nhật giá trị vào ô input tĩnh để user có thể bấm copy
+            staticOutputField.value = obfStr;
+        }
+
+        // Đăng ký và quản lý bộ lặp thời gian thực
+        function startGlitchTimer() {
+            if (activeTimer) clearInterval(activeTimer);
+            activeTimer = setInterval(loop, currentDelay);
+        }
+
+        // Thay đổi hướng từ menu lựa chọn
+        function changeRevealDirection() {
+            const val = revealDirectionSelect.value;
+            if (val === 'none') {
+                resetToContinuousGlitch();
+            } else {
+                triggerRevealSequence();
+            }
+        }
+
+        // Khởi động chuỗi lộ chữ
+        function triggerRevealSequence() {
+            const val = revealDirectionSelect.value;
+            if (val === 'none') {
+                // Tự động chuyển hướng sang Trái -> Phải nếu người dùng nhấn nút chạy nhưng chưa chọn hướng
+                revealDirectionSelect.value = 'ltr';
+            }
+            revealState = 'revealing';
+            revealStep = 0;
+            lastStepTime = Date.now();
+        }
+
+        // Hủy bỏ lộ chữ và đưa hệ thống về trạng thái làm loạn toàn bộ
+        function resetToContinuousGlitch() {
+            revealState = 'disabled';
+            revealStep = 0;
+            revealDirectionSelect.value = 'none';
+            loop();
+        }
+
+        // Cập nhật thông tin mô tả dải Unicode khi thay đổi option
+        function updateRangeDescription() {
+            const selectedKey = unicodeRangeSelect.value;
+            rangeInfo.textContent = UNICODE_RANGES[selectedKey].desc;
+            loop(); // Cập nhật lập tức
+        }
+
+        // Cập nhật tốc độ vòng lặp làm loạn
+        function updateSpeed(val) {
+            currentDelay = parseInt(val);
+            speedIndicator.textContent = `${currentDelay}ms`;
+            startGlitchTimer();
+        }
+
+        // Khôi phục chữ mẫu mặc định
+        function resetInput() {
+            inputText.value = "Minecraft §k Glitch";
+            resetToContinuousGlitch();
+        }
+
+        // Sao chép chuỗi tĩnh vào Clipboard
+        function copyStaticText() {
+            const textToCopy = staticOutputField.value;
+            if (!textToCopy) return;
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.opacity = '0';
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                showToastAlert();
+            } catch (err) {
+                console.error("Lỗi khi copy: ", err);
+            }
+            document.body.removeChild(tempTextArea);
+        }
+
+        // Hiển thị thông báo nhỏ nổi
+        function showToastAlert() {
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4');
+            }, 2000);
+        }
+
+        // Gắn sự kiện thay đổi văn bản đầu vào để xem trực quan ngay
+        inputText.addEventListener('input', () => {
+            // Nếu độ dài văn bản thay đổi, tính toán lại bước hiển thị
+            if (revealState !== 'disabled') {
+                revealStep = 0;
+            }
+            loop();
+        });
+
+        // Khởi động hệ thống
+        updateRangeDescription();
+        startGlitchTimer();
+    </script>
+
+</body>
+</html>

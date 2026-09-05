@@ -4,145 +4,217 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>App qua môn</title>
+    <title>app qua môn</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style_exam.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9EVME21XW"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-F9EVME21XW');
+        (function () {
+            try {
+                var t = localStorage.getItem("ontaptriet_theme");
+                if (t === "dark" || !t) document.documentElement.setAttribute("data-theme", "dark");
+            } catch (e) { }
+        })();
     </script>
 </head>
 
 <body>
-    <div class="wallpaper">
-        <video id="bg-video" loop muted autoplay playsinline webkit-playsinline preload="auto">
-            <source src="wall/bg.mp4" type="video/mp4">
-        </video>
-        <div class="wallpaper-overlay"></div>
+    <!-- Màn hình Loading ASCII lúc tải trang (2 giây) -->
+    <div class="page-loader" id="page-loader">
+        <span class="loader-spinner" id="loader-spinner">/</span>
     </div>
 
-    <div class="mac-window closing" id="app-window">
-        <div class="title-bar">
-            <div class="window-controls">
-                <div class="win-info-btn" id="info-btn" title="Thông tin ứng dụng">i</div>
-                <div class="win-close-btn disabled" title="Không thể đóng">&#x2715;</div>
+    <!-- Background Live Wallpaper -->
+    <div id="live-wallpaper-container" class="live-wallpaper-container">
+        <video id="live-wallpaper-video" class="live-wallpaper-video" loop muted playsinline></video>
+    </div>
+
+    <div class="canvas-wrapper">
+        <!-- Điểm neo: TOP CENTER -->
+        <header class="anchor-top-center" id="brand-header">
+            <div class="brand-title" id="brand-title-content">
+                Ontaptriet <span class="brand-version">v2</span>
             </div>
-            <div class="window-title">App này dùng để qua môn</div>
+        </header>
+
+        <!-- Điểm neo: CENTER (Menu chọn bài ôn) -->
+        <main class="anchor-center" id="menu-screen">
+            <!-- 1. Môn học (Component Dropdown) -->
+            <div class="menu-row">
+                <span class="menu-label-prefix">Môn học:</span>
+                <div class="custom-dropdown" id="dropdown-subject">
+                    <span class="dropdown-trigger">
+                        <span class="label-viewport">
+                            <span class="label-text-current">Kiến trúc máy tính</span>
+                        </span>
+                        <span class="dropdown-arrow">›</span>
+                    </span>
+                    <div class="dropdown-menu"></div>
+                </div>
+            </div>
+
+            <!-- 2. Chương học (Component Dropdown) -->
+            <div class="menu-row">
+                <span class="menu-label-prefix">Chương:</span>
+                <div class="custom-dropdown" id="dropdown-chapter">
+                    <span class="dropdown-trigger">
+                        <span class="label-viewport">
+                            <span class="label-text-current">Tất cả</span>
+                        </span>
+                        <span class="dropdown-arrow">›</span>
+                    </span>
+                    <div class="dropdown-menu"></div>
+                </div>
+            </div>
+
+            <!-- 3. Chế độ (Random cả đề) -->
+            <div class="menu-row">
+                <span class="menu-label-prefix">Chế độ:</span>
+                <button id="random-toggle-btn" class="btn-random-toggle active" type="button">Random cả đề</button>
+            </div>
+
+            <!-- 4A. Số lượng câu (hiển thị khi Random BẬT) -->
+            <div class="menu-row" id="row-limit">
+                <span class="menu-label-prefix">Số lượng câu:</span>
+                <div class="limit-options" id="limit-options">
+                    <span class="limit-choice" data-value="5">5 câu</span>
+                    <span class="limit-choice active" data-value="25">25 câu</span>
+                    <span class="limit-choice" data-value="50">50 câu</span>
+                    <span class="limit-choice" data-value="all">Tất cả</span>
+                </div>
+            </div>
+
+            <!-- 4B. Nhập phạm vi câu (hiển thị khi Random TẮT) -->
+            <div class="menu-row" id="row-range" style="display: none;">
+                <span class="menu-label-prefix">Phạm vi câu:</span>
+                <div class="exam-range-wrapper">
+                    <span class="range-prefix-text">Từ câu</span>
+                    <input type="number" id="range-from" class="exam-input-field" value="1" min="1" />
+                    <span class="range-separator-text">đến câu</span>
+                    <input type="number" id="range-to" class="exam-input-field" value="25" min="1" />
+                    <span class="range-total-hint" id="range-total-hint"></span>
+                </div>
+            </div>
+
+            <!-- Hàng nút hành động -->
+            <div class="menu-actions">
+                <button id="start-btn" class="btn-action btn-primary">
+                    <span class="btn-label">Bắt đầu</span> <span class="btn-arrow">›</span>
+                </button>
+                <button id="history-btn" class="btn-action btn-secondary">
+                    Xem lịch sử
+                </button>
+                <span class="action-separator">/</span>
+                <button id="settings-btn" class="btn-action btn-secondary">
+                    Cài đặt
+                </button>
+            </div>
+        </main>
+
+        <!-- Màn hình Làm bài -->
+        <section class="anchor-center" id="quiz-screen" style="display: none;"></section>
+
+        <!-- Màn hình Kết quả -->
+        <section class="anchor-center" id="result-screen" style="display: none;"></section>
+
+        <!-- Màn hình Lịch sử -->
+        <section class="anchor-center" id="history-screen" style="display: none;"></section>
+
+        <!-- Màn hình Cài đặt -->
+        <section class="anchor-center" id="settings-screen" style="display: none;">
+            <div class="settings-container">
+                <!-- 1. Giao diện (Sáng / Tối) -->
+                <div class="menu-row">
+                    <span class="menu-label-prefix">Giao diện:</span>
+                    <button id="theme-toggle-btn" class="btn-action btn-secondary btn-theme-toggle" type="button">
+                        <span class="label-viewport" id="theme-label-viewport">
+                            <span class="label-text-current">Tối</span>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- 2. Phông chữ (Dropdown) -->
+                <div class="menu-row">
+                    <span class="menu-label-prefix">Phông chữ:</span>
+                    <div class="custom-dropdown font-dropdown" id="dropdown-font">
+                        <span class="dropdown-trigger">
+                            <span class="label-viewport">
+                                <span class="label-text-current">Times New Roman</span>
+                            </span>
+                            <span class="dropdown-arrow">›</span>
+                        </span>
+                        <div class="dropdown-menu"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Hình nền động (Live Wallpaper) -->
+                <div class="menu-row">
+                    <span class="menu-label-prefix">Hình nền động:</span>
+                    <button id="lw-toggle-btn" class="btn-action btn-secondary btn-theme-toggle" type="button">
+                        <span class="label-viewport" id="lw-label-viewport">
+                            <span class="label-text-current">Bật</span>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Nút Về menu chính -->
+                <div class="menu-actions" style="margin-top: 28px;">
+                    <button id="settings-back-btn" class="btn-action btn-nav" type="button">
+                        <span class="btn-arrow">‹</span> <span class="btn-label">Về menu chính</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Điểm neo: BOTTOM (Status Bar ở dưới cùng trang) -->
+        <footer class="anchor-bottom-bar" id="quiz-status-bar">
+            <div class="quiz-back-wrapper">
+                <button id="quiz-back-btn" class="btn-quiz-back" type="button">
+                    <span class="btn-arrow">‹</span> <span class="btn-label back-label">Quay lại</span>
+                </button>
+                <span class="action-separator">/</span>
+                <button id="quiz-copy-btn" class="btn-quiz-copy" type="button" title="Copy câu hỏi và đáp án">
+                    <span class="label-viewport" id="quiz-copy-viewport">
+                        <span class="label-text-current">Copy câu hỏi này</span>
+                    </span>
+                </button>
+            </div>
+            <div class="quiz-index-center">
+                <span class="quiz-index-text" id="quiz-index-text"></span>
+            </div>
+            <div class="quiz-status-spacer"></div>
+        </footer>
+
+        <!-- Copyright ở góc dưới cùng bên phải -->
+        <div class="bottom-right-copyright" id="site-copyright">
+            <span>ontaptriet design by @phucthanhh</span>
         </div>
-
-        <div class="window-content">
-            <div id="menu-screen" class="fade-in">
-                <div class="hero-text">
-                    <h2>Thiết lập</h2>
-                    <p>Chọn bài tập của bạn</p>
-                </div>
-
-                <div class="compact-grid">
-                    <div class="mac-form-group">
-                        <label>Môn học</label>
-                        <select id="subject-select"></select>
-                    </div>
-
-                    <div class="mac-form-group">
-                        <label>Chương</label>
-                        <select id="chapter-select"></select>
-                    </div>
-                </div>
-
-                <div class="mac-form-group">
-                    <label>Số lượng câu</label>
-                    <div class="segmented-control">
-                        <label><input type="radio" name="limit" value="5" /><span>Xem trước (5)</span></label>
-                        <label><input type="radio" name="limit" value="25" checked /><span>25</span></label>
-                        <label><input type="radio" name="limit" value="50" /><span>50</span></label>
-                        <label><input type="radio" name="limit" value="all" /><span>Tất cả</span></label>
-                    </div>
-                </div>
-
-                <button id="start-btn" class="mac-btn-primary">Bắt đầu</button>
-                <button id="exam-mode-btn" class="mac-btn-secondary">Chế độ bài kiểm tra</button>
-                <button id="history-btn" class="mac-btn-secondary">Xem lịch sử làm bài</button>
-            </div>
-
-            <div id="quiz-screen" style="display: none" class="fade-in">
-                <div class="quiz-header-compact">
-                    <button id="back-home-btn" class="mac-btn-text">‹ Quay lại</button>
-                    <span class="q-counter"><span id="current-q-num">1</span> / <span id="total-q-num">10</span></span>
-                </div>
-
-                <div class="split-view">
-                    <div class="question-pane">
-                        <h3 id="q-text">Loading...</h3>
-                    </div>
-                    <div id="options-container" class="options-list-compact"></div>
-                </div>
-
-                <div class="quiz-footer-compact">
-                    <span id="feedback" style="font-weight: 600; font-size: 13px"></span>
-                    <button id="next-btn" class="mac-btn-primary small" style="display: none">Tiếp theo</button>
-                </div>
-            </div>
-
-            <div id="result-screen" style="display: none" class="fade-in">
-                <div class="hero-text">
-                    <div class="score-big" id="final-score-10">0.0</div>
-                    <p>Điểm số (Hệ 10)</p>
-                </div>
-
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <button onclick="resetToMenu()" class="mac-btn-primary" style="flex: 1;">Làm lại bài
-                        mới</button>
-                </div>
-
-                <div class="divider">Chi tiết câu sai</div>
-                <div id="review-list"></div>
-            </div>
-
-            <div id="history-screen" style="display: none" class="fade-in">
-                <div class="quiz-header-compact">
-                    <button id="history-back-btn" class="mac-btn-text">‹ Quay lại</button>
-                    <!-- Title and Open Window Button are removed since the UI acts differently per platform automatically -->
-                </div>
-
-                <div id="history-content" style="padding-top: 5px;">
-                    <!-- Lịch sử sẽ được inject vào đây -->
-                </div>
-
-                <button id="clear-history-btn" class="mac-btn-secondary">Xóa toàn bộ lịch sử</button>
-            </div>
-        </div>
-
-        <div class="app-credit">Designed by @phucthanhh, Built with Gemini AI - v<span id="app-version-text">1.6</span></div>
     </div>
 
-    <!-- Removed mac-modal-overlay as requested -->
-
-    <!-- Floating Controls -->
-    <div class="floating-controls">
-        <button id="mobile-info-toggle" class="mobile-info-toggle-btn" title="Thông tin ứng dụng">
-            <span id="mobile-info-icon"
-                style="font-family: serif; font-style: italic; font-weight: bold; font-size: 22px;">i</span>
-        </button>
-        <button id="focus-toggle" class="focus-toggle-btn" title="Chế độ tập trung">
-            <span id="focus-icon">🎯</span>
-        </button>
-        <button id="theme-toggle" class="theme-toggle-btn" title="Chuyển chế độ sáng/tối">
-            <span id="theme-icon">☀️</span>
-        </button>
-    </div>
-
+    <!-- Tầng dữ liệu & Logic cốt lõi -->
     <script src="scripts/config.js"></script>
     <script src="scripts/parser.js"></script>
     <script src="scripts/history.js"></script>
-    <script src="scripts/ui.js"></script>
     <script src="scripts/quiz.js"></script>
-    <script src="scripts/exam.js"></script>
+
+    <!-- Module Component Dropdown -->
+    <script src="scripts/dropdown.js"></script>
+
+    <!-- Các Module Giao diện (Views) -->
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/theme.js"></script>
+    <script src="scripts/wallpaper.js"></script>
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/quiz-view.js"></script>
+    <script src="scripts/result-view.js"></script>
+    <script src="scripts/history-view.js"></script>
+    <script src="scripts/settings-view.js"></script>
+    <script src="scripts/easter-egg.js"></script>
+
+    <!-- Điểm khởi chạy ứng dụng -->
     <script src="scripts/main.js"></script>
 </body>
 

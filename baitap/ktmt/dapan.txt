@@ -1,0 +1,269 @@
+(1-20)
+1. C
+2. C
+3. A
+4. D
+5. B
+6. A
+7. A
+8. A
+9. C
+10. D
+11. B
+12. A
+13. B
+14. B
+15. C
+16. A
+17. C
+18. A
+19. B
+20. B
+===
+30 câu tiếp theo (21 - 50)
+1. Mã thao tác và địa chỉ toán hạng — **C**
+2. Thanh ghi — **B**
+3. Bộ đếm chương trình → Bộ nhớ → Thanh ghi lệnh — **A**
+4. Máy tính để bàn, máy chủ, máy tính nhúng — **B**
+5. Hệ thống nhớ, Bộ xử lý, Bus liên kết, Hệ thống vào ra — **D**
+6. Thực hiện các phép toán số học, logic, phép dịch, quay — **D**
+7. Cả 3 phương án trên — **D**
+8. Bộ nhớ ngoài, Bộ nhớ trong — **A**
+9. Bộ nhớ không khả biến (sai vì RAM là khả biến) — **A**
+10. Thanh ghi — **D**
+11. Bộ nhớ ngoài, bộ nhớ chính, Cache, thanh ghi — **D**
+12. Card mạng, card âm thanh, card ti vi, modems — **A**
+13. Cả a và b đều đúng — **C**
+14. Vào – ra theo bản đồ bộ nhớ (MNIO) — **C**
+15. Dung lượng lớn — **C**
+16. 6 — **B**
+17. Đơn vị nối ghép — **D**
+18. Cộng, trừ, nhân, chia, đảo dấu — **B**
+19. Thực hiện lệnh nhanh hơn — **B**
+20. ROM và PROM — **D**
+21. Solid State Drive — **A**
+22. Cả A, B, C đều đúng — **D**
+23. Bộ nhớ RAM — **B**
+24. Ngăn xếp — **C**
+25. Là cách thức địa chỉ hóa trong trường địa chỉ của lệnh để xác định nơi chứa toán hạng — **C**
+26. Mã toán, Toán hạng — **A**
+27. Multiple Instruction Stream, Multiple Data Stream — **A**
+28. Reduced Instruction Set Computer — **B**
+29. Cache — **C**
+30. Bus dữ liệu, Bus địa chỉ và Bus điều khiển — **D**
+(Đây là câu 21–50. Sẵn sàng cho 50 câu tiếp theo khi bạn cần nhé.)
+===
+(51-100)
+1. Liên kết các thành phần trong máy tính — **B**
+2. Bus bộ vi xử lý — **B**
+3. Bus trong bộ vi xử lý — **A**
+4. Bus hệ thống — **D**
+5. Kết nối bộ vi xử lý với bộ nhớ chính, Cache và bộ điều khiển ghép nối vào ra — **B**
+6. Có tín hiệu đồng hồ chung điều khiển hoạt động — **C**
+7. Mọi thao tác thực hiện trong khoảng thời gian là bội số của chu kỳ Bus — **C**
+8. Không có tín hiệu đồng hồ chung điều khiển hoạt động — **C**
+9. Việc trao đổi dữ liệu cần tín hiệu handshake (đặc điểm của Bus KHÔNG đồng bộ) — **D**
+10. Việc điều khiển hoạt động của máy tính dễ dàng hơn — **B**
+11. Tập thanh ghi — **B**
+12. Thanh ghi cờ — **A**
+13. CPU có nhiều đơn vị vi xử lý — **D**
+14. Thông tin tạm thời — **D**
+15. Hard Disk Drive — **B**
+16. Tăng số lượng bộ xử lý — **B**
+17. ROM — **A**
+18. Multiple Instruction Stream, Single Data Stream — **A**
+19. SISD — **C**
+20. Cả 3 (giảm thời gian tính toán, giải bài toán lớn, độ phức tạp cao) — **D**
+21. Complex Instruction Set Computer — **B**
+22. Nhiều dòng lệnh, nhiều dòng số liệu — **A**
+23. 120,625 — **D**
+24. 29,75 — **B**
+25. 21.75 — **A**
+26. 21,25 — **C**
+27. 29.25 — **D**
+28. 23.5 — **A**
+29. 25.25 — **B**
+30. 25.75 — **C**
+31. 159.8125 — **B**
+32. 159.0625 — **C**
+33. 157.0625 — **D**
+34. 159.0625 — **C**
+35. 13557 — **A**
+36. 17605 — **D**
+37. 13407 — **B**
+38. 15605 — **C**
+39. 100001011 (2) — **A**
+40. 11110111 (2) — **C**
+41. 100011101 (2) — **B**
+42. 100010101 (2) — **D**
+43. 10001.001 — **A**
+44. 11001.101 — **A**
+45. 4271 (8) — **B**
+46. 5167(8) — **A**
+47. 1437 (8) — **C**
+48. 1421(8) — **D**
+49. 1541(8) — **A**
+50. 1511 (8) — **B**
+
+(Đây là câu 51–100. Lưu ý: các câu đổi hệ đếm mình tự tính lại thủ công để đảm bảo chính xác — bạn có thể kiểm tra chéo nếu muốn. Sẵn sàng cho câu 101–150 khi bạn cần!)
+(101-150)
+1. F1B7 — **C**
+2. A8E3 — **C**
+3. E3B5 — **D**
+4. 9DB4 — **A**
+5. 100111000 — **D**
+6. 11000000(2) — **A**
+7. 10111000 (2) — **B**
+8. 10111110 (2) — **C**
+9. 11001000(2) — **D**
+10. 11000010 (2) — **B**
+11. 10110110 (2) — **C**
+12. 01101110 — **B**
+13. CU, ALU, tập thanh ghi (RF), Bus bên trong và đơn vị ghép nối Bus (BIU) — **A**
+14. Thực hiện các phép tính số học và logic — **D**
+15. Cả 3 vùng nhớ (Code, Data, Stack) — **D**
+16. Bộ điều khiển vào/ra DMA — **A**
+17. Bộ đếm chương trình — **A**
+18. SP tự động giảm — **B**
+19. SP tự động tăng — **A**
+20. Chứa địa chỉ của ngăn nhớ dữ liệu mà CPU muốn truy cập — **D**
+21. Lệnh từ thanh ghi lệnh IR được đưa đến đơn vị điều khiển — **D**
+22. CPU giải mã lệnh để xác định thao tác cần thực hiện — **B**
+23. Chuyển dữ liệu giữa các thanh ghi — **C**
+24. Chia chu trình lệnh thành các công đoạn, thực hiện gối lên nhau kiểu dây chuyền — **A**
+25. Tất cả các chức năng trên — **D**
+26. Truyền dẫn tín hiệu giữa các bộ phận trong CPU và kết nối với Bus bên ngoài — **D**
+27. Máy in Laser, Máy in kim, Màn hình, Loa, Máy chiếu Projector — **C**
+28. Các phương án trên đều sai — **D**
+29. Nơi lưu trữ thông tin khi máy tính đang xử lý — **C**
+30. ROM — **B**
+31. Dữ liệu được định địa chỉ một cách ngẫu nhiên — **B**
+32. Cả ba loại trên — **D**
+33. Thời gian truy nhập nhỏ — **C**
+34. Cho phép truy nhập nhanh hơn so với DRAM — **B**
+35. Cho phép IC bộ nhớ hoạt động — **C**
+36. Chỉ cho phép đọc dữ liệu — **B**
+37. Cho phép ghi dữ liệu — **A**
+38. Không phải làm tươi theo chu kỳ — **B**
+39. Phải được làm tươi theo chu kỳ — **D**
+40. SRAM — **A**
+41. Lưu giữ dữ liệu mà bộ vi xử lý thường xuyên sử dụng — **C**
+42. Cho biết thao tác được thực hiện là đọc hay ghi — **C**
+43. DRAM — **B**
+44. SRAM (tiêu thụ nguồn lớn hơn) — **A**
+45. Nội dung không bị thay đổi — **B**
+46. Bộ nhớ SRAM được sử dụng cho bộ nhớ Cache — **C**
+47. Mạch giải mã địa chỉ — **B**
+48. Gồm một tụ điện và một Transistor — **B**
+49. Gồm sáu Transistor — **D**
+50. Nhanh hơn — **B**
+
+(101–150 xong. Lưu ý câu 144 về tiêu thụ nguồn SRAM/DRAM có thể tùy tài liệu, mình chọn theo cách hiểu phổ biến nhất. Sẵn sàng 151–200 khi bạn cần!)
+===
+(151-200)
+1. Nhập thông tin -> Xử lý thông tin -> Xuất thông tin — **A**
+2. CU, ALU, Tập thanh ghi, Đơn vị ghép nối Bus — **A**
+3. Kho chứa lệnh và dữ liệu tạm thời cho CPU xử lý — **C**
+4. Chuột, Bàn phím, Máy Scan, Micro, Webcam — **B**
+5. RAM — **A**
+6. Tập thanh ghi, Bộ nhớ Cache — **B**
+7. Đèn điện tử — **C**
+8. Nơi chứa các toán hạng mà thao tác sẽ tác động — **A**
+9. Lấy lệnh, Giải mã lệnh, Nạp các tham số, xử lý lệnh, ghi kết quả — **C**
+10. INTERRUPT — **C**
+11. Đèn điện tử — **C**
+12. Có 1 bộ xử lý, thực hiện lệnh tuần tự — **C**
+13. Giữ địa chỉ của lệnh tiếp theo sẽ được nhận vào — **A**
+14. Địa chỉ toán hạng là thanh ghi chứa địa chỉ lệch của ô nhớ chứa dữ liệu — **A**
+15. Nội dung của thanh ghi có địa chỉ nằm trong một ngăn nhớ — **D**
+16. Bộ nhớ DRAM có giá thành thấp hơn SRAM — **C**
+17. Bộ nhớ SRAM có giá thành cao hơn DRAM — **B**
+18. Flip-Flop — **B**
+19. Làm tươi — **C**
+20. Tất cả các kiểu trên — **D**
+21. Nguồn cấp cho tụ điện sẽ hết và dữ liệu sẽ bị mất — **B**
+22. Vì DRAM đòi hỏi mạch làm tươi nên không kinh tế với dung lượng nhỏ — **A**
+23. Tụ điện — **A**
+24. Các vị trí nhớ dùng để lưu trữ các bit nhị phân — **D**
+25. Thời gian truy cập vào mỗi ô nhớ là ngẫu nhiên — **C**
+26. Không mất dữ liệu khi mất nguồn — **C**
+27. Dung lượng lớn — **B**
+28. Không bị mất dữ liệu khi mất nguồn — **B**
+29. Truyền số liệu giữa bộ điều khiển ổ đĩa và bộ nhớ — **A**
+30. Bộ nhớ Cache có thể đặt trên cùng chip với CPU — **D**
+31. Cả 3 thông tin trên (Head, Cylinder, Sector) — **D**
+32. ROM — **A**
+33. 1 byte — **A**
+34. Synchronous Dynamic RAM — **D**
+35. Double Data Rate Dynamic RAM — **B**
+36. Tăng hiệu quả làm việc của CPU — **C**
+37. Các thanh ghi đa năng — **D**
+38. RAM — **B**
+39. Giao tiếp cổng USB — **C**
+40. Điều khiển cấp phát bộ vi xử lý trong môi trường đa nhiệm — **C**
+41. Đảm bảo việc trao đổi dữ liệu giữa máy tính và thiết bị ngoại vi — **B**
+42. Không mất dữ liệu khi mất nguồn — **C**
+43. Bộ nhớ từ, quang hoặc quang từ — **B**
+44. 6 — **C**
+45. 1 — **A**
+46. Nối tiếp — **B**
+47. Sử dụng các lệnh có kích thước khác nhau — **D**
+48. Thường thực hiện mỗi lệnh trong một xung nhịp Clock — **D**
+49. Nhanh hơn — **A**
+50. Địa chỉ offset của lệnh kế tiếp sẽ được thực hiện — **C**
+
+Sẵn sàng cho 201–250 khi bạn cần nhé!
+===
+(201-250)
+1. Địa chỉ bắt đầu của đoạn chương trình hiện hành trong bộ nhớ — **A**
+2. Địa chỉ bắt đầu của đoạn dữ liệu chứa các biến của chương trình hiện hành — **B**
+3. Địa chỉ bắt đầu của đoạn ngăn xếp trong bộ nhớ — **C**
+4. Địa chỉ đoạn dữ liệu mở rộng phục vụ cho chương trình hiện hành — **D**
+5. Truy cập bộ nhớ trực tiếp — **B**
+6. Direct Memory Access — **C**
+7. Truyền dữ liệu trực tiếp giữa bộ nhớ và các thiết bị ngoại vi — **A**
+8. Ngăn xếp — **A**
+9. Chương trình bị tạm dừng sẽ được tiếp tục thực hiện — **C**
+10. Ngắt (Interrupt) — **B**
+11. Nhóm lệnh số học — **A**
+12. Có thể có nhiều toán hạng — **D**
+13. Mã toán — **B**
+14. Cả 3 đáp án trên — **D**
+15. Điểm - điểm và điểm - đa điểm — **B**
+16. Trao đổi dữ liệu trực tiếp giữa ngoại vi và bộ nhớ trong — **A**
+17. Đơn vị tính toán số học và logic — **C**
+18. Giải mã lệnh — **B**
+19. Các thanh ghi, Các tín hiệu từ đơn vị điều khiển — **C**
+20. Bus dữ liệu, bus điều khiển, bus địa chỉ — **C**
+21. Thư viện chương trình con, chương trình điều khiển hệ thống, bảng chức năng, vi chương trình — **A**
+22. Kiến trúc tập lệnh — **B**
+23. Cả 3 đáp án trên — **D**
+24. Mã máy — **C**
+25. Mã toán, Toán hạng — **A**
+26. Tiền tố — **A**
+27. Mã toán — **C**
+28. Toán hạng — **B**
+29. Tiền tố, Mã toán, Toán hạng, Địa chỉ trực tiếp — **C**
+30. Nơi chứa các toán hạng — **B**
+31. Vi xử lý — **E**
+32. Mã nhị phân — **A**
+33. *(câu 233 không có trong dữ liệu gốc — file nhảy từ id 232 sang 234)*
+34. Có thể có nhiều toán hạng — **H**
+35. Ít lệnh — **B**
+36. RISC — **B**
+37. CISC — **A**
+38. Nhóm lệnh chuyển dữ liệu — **F**
+39. Nhóm lệnh chuyển dữ liệu — **B**
+40. Nhóm lệnh số học — **E**
+41. Nhóm lệnh điều khiển chương trình — **C**
+42. Đọc lệnh → Giải mã → Thực hiện lệnh → Lưu kết quả — **D**
+43. X = A - B — **C**
+44. X = A × B + C — **B**
+45. X = (A + B) × C — **C**
+46. X = A + (B × C) — **A**
+47. X = (A + B) × C — **B**
+48. X = (A + B) ÷ C — **C**
+49. X = (A – B) × (C + D) — **C**
+50. MOVE X, B / SUB X, A / DIV X, C — **B**
+
+Lưu ý: đây là toàn bộ 250 câu trong file (250 là câu cuối cùng), và câu 233 bị thiếu trong dữ liệu gốc (số id nhảy từ 232 sang 234) nên phần trả lời hụt 1 câu so với đúng 50. Vậy là xong toàn bộ đề cương rồi nhé!
