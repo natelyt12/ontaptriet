@@ -1,9 +1,12 @@
 /* --- PHONG CÁCH CHỮ ĐEN TUYỀN, CÙNG CỠ CHỮ, TỐI GIẢN TUYỆT ĐỐI --- */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Xóa bỏ lớp nền màu xanh nháy mặc định khi chạm trên màn hình cảm ứng */
 }
 
 :root {
@@ -18,7 +21,8 @@
     --ease-expo-in: cubic-bezier(0.7, 0, 0.84, 0);
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
     background-color: var(--bg-white);
@@ -74,7 +78,7 @@ body.animating-lock * {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    padding: 12px;
+    padding: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,7 +94,7 @@ body.animating-lock * {
     transform: translateX(-50%);
     text-align: center;
     user-select: none;
-    transition: opacity 0.35s var(--ease-expo-out), transform 0.35s var(--ease-expo-out);
+    transition: opacity 0.38s var(--ease-expo-out), transform 0.38s var(--ease-expo-out);
 }
 
 .anchor-top-center.fade-out {
@@ -107,22 +111,23 @@ body.animating-lock * {
     display: inline-flex;
     align-items: baseline;
     gap: 6px;
-    transition: opacity 0.18s var(--ease-expo-out);
+    transition: opacity 0.38s var(--ease-expo-out);
 }
 
 .brand-title.brand-fade-out {
     opacity: 0;
-    transition: opacity 0.18s var(--ease-expo-in);
+    transition: opacity 0.35s var(--ease-expo-in);
 }
 
 .brand-title.brand-fade-in {
-    animation: brandTitleFadeIn 0.22s var(--ease-expo-out) forwards;
+    animation: brandTitleFadeIn 0.38s var(--ease-expo-out) forwards;
 }
 
 @keyframes brandTitleFadeIn {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -146,7 +151,11 @@ body.animating-lock * {
 #menu-screen,
 #settings-screen,
 #result-screen,
+#history-screen,
+#history-detail-screen,
 .result-container,
+.history-container,
+.history-detail-container,
 #quiz-screen:has(.result-container) {
     max-width: 540px;
 }
@@ -230,6 +239,7 @@ body.animating-lock * {
         opacity: 1;
         transform: translateY(0);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-120%);
@@ -249,6 +259,7 @@ body.animating-lock * {
         opacity: 0;
         transform: translateY(120%);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -279,7 +290,8 @@ body.animating-lock * {
     left: calc(100% + 20px);
     top: -8px;
     background-color: var(--bg-white);
-    border-left: 1px solid rgba(0, 0, 0, 0.2); /* Border đen 0.2 bên trái */
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    /* Border đen 0.2 bên trái */
     border-radius: 0;
     padding: 8px 0 8px 16px;
     flex-direction: column;
@@ -300,6 +312,7 @@ body.animating-lock * {
         clip-path: inset(0 0 100% 0);
         opacity: 0;
     }
+
     to {
         clip-path: inset(0 0 0 0);
         opacity: 1;
@@ -318,6 +331,7 @@ body.animating-lock * {
         opacity: 1;
         transform: translateX(0);
     }
+
     to {
         opacity: 0;
         transform: translateX(30px);
@@ -345,6 +359,7 @@ body.animating-lock * {
         opacity: 0;
         transform: translateX(32px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -534,8 +549,7 @@ body.animating-lock * {
     gap: 28px;
     row-gap: 14px;
     flex-wrap: wrap;
-    margin-top: 24px;
-    padding-top: 18px;
+    padding-top: 14px;
 }
 
 .btn-action,
@@ -557,8 +571,7 @@ body.animating-lock * {
 
 .btn-action:hover,
 .btn-quiz-back:hover,
-.btn-quiz-next:hover,
-.btn-quiz-next.keep-hover {
+.btn-quiz-next:hover {
     opacity: 0.75;
 }
 
@@ -571,8 +584,7 @@ body.animating-lock * {
 
 .btn-action:hover .btn-label,
 .btn-quiz-back:hover .btn-label,
-.btn-quiz-next:hover .btn-label,
-.btn-quiz-next.keep-hover .btn-label {
+.btn-quiz-next:hover .btn-label {
     border-bottom-style: solid;
 }
 
@@ -592,8 +604,7 @@ body.animating-lock * {
 }
 
 .btn-action:hover .btn-arrow:last-child,
-.btn-quiz-next:hover .btn-arrow,
-.btn-quiz-next.keep-hover .btn-arrow {
+.btn-quiz-next:hover .btn-arrow {
     transform: translateX(3px);
 }
 
@@ -709,6 +720,7 @@ body.animating-lock * {
         opacity: 1;
         transform: translateY(0);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-24px);
@@ -865,6 +877,7 @@ body.animating-lock * {
         opacity: 0;
         transform: translateX(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);
@@ -884,15 +897,50 @@ body.animating-lock * {
 }
 
 @keyframes shakeWrongSteps {
-    0%   { opacity: 1; transform: translate(0, 0); }
-    12%  { opacity: 1; transform: translate(-1.5px, -1px); }
-    25%  { opacity: 1; transform: translate(1.5px, 1px); }
-    37%  { opacity: 1; transform: translate(-1px, 1.5px); }
-    50%  { opacity: 1; transform: translate(1px, -1.5px); }
-    62%  { opacity: 1; transform: translate(-1.5px, 0.5px); }
-    75%  { opacity: 1; transform: translate(1px, -1px); }
-    87%  { opacity: 1; transform: translate(-0.5px, 1px); }
-    100% { opacity: 1; transform: translate(0, 0); }
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translate(-1.5px, -1px);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translate(1.5px, 1px);
+    }
+
+    37% {
+        opacity: 1;
+        transform: translate(-1px, 1.5px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(1px, -1.5px);
+    }
+
+    62% {
+        opacity: 1;
+        transform: translate(-1.5px, 0.5px);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translate(1px, -1px);
+    }
+
+    87% {
+        opacity: 1;
+        transform: translate(-0.5px, 1px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
 }
 
 /* KHI CHỌN SAI: Đáp án đúng chuyển xanh lá và có đường kẻ dưới quét từ trái qua phải */
@@ -918,6 +966,7 @@ body.animating-lock * {
         transform: scaleX(0);
         opacity: 0.3;
     }
+
     100% {
         transform: scaleX(1);
         opacity: 1;
@@ -947,6 +996,7 @@ body.animating-lock * {
         opacity: 1;
         transform: translateY(0);
     }
+
     100% {
         opacity: 0;
         transform: translateY(-24px);
@@ -985,6 +1035,7 @@ body.animating-lock * {
         stroke-dashoffset: 100;
         opacity: 1;
     }
+
     100% {
         stroke-dashoffset: 0;
         opacity: 1;
@@ -1007,6 +1058,7 @@ body.animating-lock * {
         opacity: 0;
         transform: translateY(28px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -1015,7 +1067,7 @@ body.animating-lock * {
 
 /* HIỆU ỨNG CHỈ FADE (KHÔNG TRƯỢT) KHI VỀ MENU CHÍNH */
 .quiz-fade-out-only {
-    animation: pureFadeOut 0.22s var(--ease-expo-in) forwards !important;
+    animation: pureFadeOut 0.35s var(--ease-expo-in) forwards !important;
     pointer-events: none !important;
 }
 
@@ -1023,46 +1075,26 @@ body.animating-lock * {
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
 }
 
 .menu-fade-in-only {
-    animation: pureFadeIn 0.26s var(--ease-expo-out) forwards;
+    animation: pureFadeIn 0.38s var(--ease-expo-out) forwards;
 }
 
 @keyframes pureFadeIn {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    :root {
-        --uniform-size: 16px;
-    }
-    .menu-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-    .dropdown-menu {
-        position: static;
-        margin-top: 6px;
-        margin-left: 8px;
-        padding-left: 12px;
-    }
-    .anchor-bottom-bar {
-        bottom: 20px;
-        padding: 0 16px;
-    }
-}
 
 
 
@@ -1081,13 +1113,13 @@ body.animating-lock * {
     opacity: 0.35;
     user-select: none;
     pointer-events: none;
-    transition: opacity 0.3s var(--ease-expo-out);
+    transition: opacity 0.38s var(--ease-expo-out);
     z-index: 40;
 }
 
 .bottom-right-copyright.fade-out {
     opacity: 0;
-    transition: opacity 0.3s var(--ease-expo-in);
+    transition: opacity 0.35s var(--ease-expo-in);
 }
 
 /* --- CHẾ ĐỘ TỐI (DARK THEME) --- */
@@ -1121,6 +1153,8 @@ body.animating-lock * {
     background-color: #34c759;
 }
 
+
+
 [data-theme="dark"] .quiz-option.answer-wrong,
 [data-theme="dark"] .btn-quiz-back.confirming {
     color: #ff5252 !important;
@@ -1131,7 +1165,10 @@ body.animating-lock * {
 }
 
 /* Hiệu ứng chuyển màu êm dịu khi switch theme */
-html, body, .dropdown-menu, .canvas-wrapper {
+html,
+body,
+.dropdown-menu,
+.canvas-wrapper {
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -1140,15 +1177,7 @@ html, body, .dropdown-menu, .canvas-wrapper {
     width: 100%;
 }
 
-.history-header {
-    font-size: var(--uniform-size);
-    color: var(--text-pure-black);
-    margin-bottom: 24px;
-}
 
-.history-title {
-    font-weight: bold;
-}
 
 .history-list {
     display: flex;
@@ -1204,17 +1233,241 @@ html, body, .dropdown-menu, .canvas-wrapper {
     opacity: 0.75;
 }
 
+.history-item-sub {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-left: 30px;
+}
+
 .history-item-date {
     font-size: 14px;
     opacity: 0.45;
-    padding-left: 30px;
+}
+
+.btn-history-mistakes {
+    font-size: 14px;
+    padding: 0 0 1px 0;
+    opacity: 0.85;
+    white-space: nowrap;
+}
+
+.btn-history-mistakes:hover {
+    opacity: 1;
+}
+
+.history-detail-container {
+    width: 100%;
+}
+
+.history-detail-summary {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .history-detail-summary {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.history-detail-meta {
+    font-size: 15px;
+    margin-top: 6px;
+    opacity: 0.8;
 }
 
 .history-empty {
     font-size: var(--uniform-size);
-    opacity: 0.55;
     font-style: italic;
+}
+
+/* --- MÀN HÌNH TỔNG KẾT & DANH SÁCH CÂU SAI --- */
+.result-container {
+    width: 100%;
+}
+
+.result-summary-card {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .result-summary-card {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.result-score-line {
+    font-size: var(--uniform-size);
+    line-height: 1.6;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.mistakes-section {
+    margin-bottom: 24px;
+}
+
+.mistakes-header {
+    font-size: var(--uniform-size);
+    margin-bottom: 16px;
+    color: var(--text-pure-black);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.mistakes-header .mistakes-title {
+    font-weight: bold;
+}
+
+.mistakes-header .mistakes-count {
+    opacity: 0.65;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.mistakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-height: 48vh;
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+[data-theme="dark"] .mistakes-list {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.mistakes-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.mistakes-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .mistakes-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mistake-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .mistake-item {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.mistake-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.mistake-question {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    word-break: break-word;
+    margin-bottom: 2px;
+}
+
+.mistake-question .question-number {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.mistake-question .question-text {
+    font-weight: normal;
+}
+
+.mistake-options {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Đáp án trong danh sách câu sai: Cùng định dạng padding, margin và font-weight normal như quiz-view */
+.mistake-option {
+    position: relative;
+    font-size: var(--uniform-size);
+    font-weight: normal;
+    /* Không sử dụng bold */
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    padding: 3px 8px;
+    margin-left: -8px;
+    display: block;
+    width: fit-content;
+    user-select: none;
+    cursor: default;
+}
+
+.mistake-option .option-prefix {
+    font-weight: normal;
+}
+
+/* Đáp án không chọn: Giảm opacity 0.55 như quiz-view */
+.mistake-option:not(.answer-wrong):not(.answer-correct-revealed) {
+    opacity: 0.55;
+}
+
+/* Đáp án người dùng chọn sai: Màu đỏ y hệt quiz-view (#d93025 ở Light, #ff5252 ở Dark), KHÔNG dùng bold */
+.mistake-option.answer-wrong {
+    color: #d93025 !important;
+    font-weight: normal;
+    opacity: 1 !important;
+}
+
+[data-theme="dark"] .mistake-option.answer-wrong {
+    color: #ff5252 !important;
+}
+
+/* Đáp án đúng: Màu xanh lá cây y hệt quiz-view (#1e8e3e ở Light, #34c759 ở Dark), KHÔNG dùng bold */
+.mistake-option.answer-correct-revealed {
+    color: #1e8e3e !important;
+    font-weight: normal;
+    opacity: 1 !important;
+}
+
+[data-theme="dark"] .mistake-option.answer-correct-revealed {
+    color: #34c759 !important;
+}
+
+/* Đường kẻ dưới quét từ trái qua phải của đáp án đúng: Y hệt quiz-view, không phải text-decoration thông thường */
+.mistake-option.answer-correct-revealed::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    width: calc(100% - 16px);
+    bottom: 1px;
+    height: 1.5px;
+    background-color: #1e8e3e;
+    transform-origin: left center;
+    animation: borderLineSweepRight 0.42s var(--ease-expo-out) forwards;
+}
+
+[data-theme="dark"] .mistake-option.answer-correct-revealed::after {
+    background-color: #34c759 !important;
+}
+
+.mistakes-empty-congrats {
     padding: 12px 0;
+    font-size: var(--uniform-size);
+    color: #1e8e3e;
+    font-style: italic;
+    font-weight: normal;
+}
+
+[data-theme="dark"] .mistakes-empty-congrats {
+    color: #34c759;
 }
 
 /* --- MÀN HÌNH LOADING ASCII BAN ĐẦU --- */
@@ -1272,12 +1525,15 @@ html, body, .dropdown-menu, .canvas-wrapper {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
+
     50% {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1.5);
     }
+
     100% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(2);
     }
 }
+

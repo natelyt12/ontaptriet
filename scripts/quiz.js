@@ -136,7 +136,11 @@ function submitAnswer(selectedIndex) {
     } else {
         userAnswersLog.push({
             id: qData.id,
+            questionNumber: currentQuestionIndex + 1,
             question: qData.question,
+            options: [...qData.options],
+            selectedIndex: selectedIndex,
+            correctIndex: qData.correctAnswer,
             selected: qData.options[selectedIndex] || "",
             correct: qData.options[qData.correctAnswer] || qData.correctText || "",
         });

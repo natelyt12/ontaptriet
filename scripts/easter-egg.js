@@ -73,8 +73,8 @@ function initTitleMixedChaosEasterEgg() {
     const copyrightSpan = copyrightEl ? copyrightEl.querySelector("span") : null;
     const originalCopyright = copyrightSpan ? copyrightSpan.textContent : (copyrightEl ? copyrightEl.textContent : "");
 
-    const brandTitleEl = document.getElementById("brand-title-content");
-    const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : 'Ontaptriet <span class="brand-version">v2.1</span>';
+    const currentVer = typeof getAppVersion === "function" ? getAppVersion() : "v2.2";
+    const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : `Ontaptriet <span class="brand-version">${currentVer}</span>`;
 
     const mixedKeys = Object.keys(UNICODE_RANGES);
 
@@ -94,8 +94,8 @@ function initTitleMixedChaosEasterEgg() {
         // 1. Thẻ title của trang web
         document.title = chaosText;
 
-        // 2. Tiêu đề header ở trên: [chuỗi 30 ký tự] v2.1
-        const chaosBrandHtml = `${chaosText} <span class="brand-version">v2.1</span>`;
+        // 2. Tiêu đề header ở trên: [chuỗi 30 ký tự] version
+        const chaosBrandHtml = `${chaosText} <span class="brand-version">${currentVer}</span>`;
         if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
             DEFAULT_BRAND_TITLE = chaosBrandHtml;
         }
@@ -126,7 +126,7 @@ function initTitleMixedChaosEasterEgg() {
         document.title = originalTitle;
 
         if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
-            DEFAULT_BRAND_TITLE = 'Ontaptriet <span class="brand-version">v2.1</span>';
+            DEFAULT_BRAND_TITLE = `Ontaptriet <span class="brand-version">${currentVer}</span>`;
         }
         if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
             brandTitleEl.innerHTML = originalBrandHtml;

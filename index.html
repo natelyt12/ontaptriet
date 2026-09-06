@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>app qua môn</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mobile.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -36,7 +37,7 @@
         <!-- Điểm neo: TOP CENTER -->
         <header class="anchor-top-center" id="brand-header">
             <div class="brand-title" id="brand-title-content">
-                Ontaptriet <span class="brand-version">v2.1</span>
+                Ontaptriet <span class="brand-version">v2.2</span>
             </div>
         </header>
 
@@ -123,6 +124,9 @@
         <!-- Màn hình Lịch sử -->
         <section class="anchor-center" id="history-screen" style="display: none;"></section>
 
+        <!-- Màn hình Chi tiết câu sai của lịch sử -->
+        <section class="anchor-center" id="history-detail-screen" style="display: none;"></section>
+
         <!-- Màn hình Cài đặt -->
         <section class="anchor-center" id="settings-screen" style="display: none;">
             <div class="settings-container">
@@ -202,6 +206,9 @@
 
     <!-- Module Component Dropdown -->
     <script src="scripts/dropdown.js"></script>
+
+    <!-- Module Điều phối màn hình -->
+    <script src="scripts/screen-switcher.js"></script>
 
     <!-- Các Module Giao diện (Views) -->
     <script src="scripts/loader.js"></script>

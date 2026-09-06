@@ -1,4 +1,4 @@
-# Ôn Tập Triết v2.1 🎓
+# Ôn Tập Triết 🎓
 
 Ứng dụng web ôn thi trắc nghiệm đại học phong cách A4 tối giản, nhẹ và không phân tâm.
 

@@ -270,64 +270,47 @@ function initActionButtons() {
  * Bắt đầu bài thi: Tải dữ liệu, animation thoát menu chính, hiển thị quiz
  */
 async function startQuiz() {
-    if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
-    DropdownAnimationLock.lock();
-
     try {
-        // 0. Fadeout title Ontaptriet & copyright ở góc dưới
-        const brandHeader = document.getElementById("brand-header");
-        if (brandHeader) {
-            brandHeader.classList.add("fade-out");
-        }
-        const copyright = document.getElementById("site-copyright");
-        if (copyright) {
-            copyright.classList.add("fade-out");
-        }
+        await ScreenSwitcher.to("quiz-screen", {
+            autoUnlock: false, // quiz-view tự quản lý animation và unlock sau khi render
+            onBeforeFade: async () => {
+                // 0. Fadeout title Ontaptriet & copyright ở góc dưới
+                const brandHeader = document.getElementById("brand-header");
+                if (brandHeader) {
+                    brandHeader.classList.add("fade-out");
+                }
+                const copyright = document.getElementById("site-copyright");
+                if (copyright) {
+                    copyright.classList.add("fade-out");
+                }
 
-        // 1. Tải và chuẩn bị bộ câu hỏi theo đúng chế độ đã chọn
-        await loadQuizQuestions(
-            selectedSubjectKey,
-            selectedChapterVal,
-            selectedLimit,
-            isRandomQuestions,
-            rangeFromVal,
-            rangeToVal
-        );
-
-        // 2. Fade out cả cụm menu chính tại chỗ (không trượt)
-        const menuScreen = document.getElementById("menu-screen");
-        if (menuScreen) {
-            menuScreen.classList.add("quiz-fade-out-only");
-        }
-
-        // 3. Sau khi menu chính fade out (220ms), hiển thị quiz và trượt status bar lên từ cạnh dưới
-        setTimeout(() => {
-            const quizScreen = document.getElementById("quiz-screen");
-
-            if (menuScreen) {
-                menuScreen.style.display = "none";
-                menuScreen.classList.remove("quiz-fade-out-only");
-            }
-
-            if (quizScreen) {
-                quizScreen.style.display = "block";
+                // 1. Tải và chuẩn bị bộ câu hỏi theo đúng chế độ đã chọn
+                await loadQuizQuestions(
+                    selectedSubjectKey,
+                    selectedChapterVal,
+                    selectedLimit,
+                    isRandomQuestions,
+                    rangeFromVal,
+                    rangeToVal
+                );
+            },
+            onShow: () => {
                 if (typeof renderCurrentQuestion === "function") {
                     renderCurrentQuestion();
                 }
-            }
 
-            // Thanh status bar di chuyển từ dưới cạnh màn hình lên cùng nhịp với câu hỏi
-            const statusBar = document.getElementById("quiz-status-bar");
-            if (statusBar) {
-                statusBar.classList.add("active");
+                // Thanh status bar di chuyển từ dưới cạnh màn hình lên cùng nhịp với câu hỏi
+                const statusBar = document.getElementById("quiz-status-bar");
+                if (statusBar) {
+                    statusBar.classList.add("active");
+                }
+                if (typeof resetBackBtnState === "function") {
+                    resetBackBtnState();
+                }
             }
-            if (typeof resetBackBtnState === "function") {
-                resetBackBtnState();
-            }
-        }, 220);
+        });
     } catch (err) {
         console.error("Lỗi khi tải bài thi:", err);
         alert("Không thể tải bài thi: " + err.message);
-        DropdownAnimationLock.unlock();
     }
 }

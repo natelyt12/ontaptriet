@@ -190,7 +190,7 @@ function renderCurrentQuestion() {
             </div>
             <div class="quiz-options">
                 ${qData.options.map((opt, idx) => `
-                    <div class="quiz-option quiz-item-enter" data-index="${idx}" style="animation-delay: ${0.09 + idx * 0.05}s;">
+                    <div class="quiz-option quiz-item-enter ${idx === qData.correctAnswer ? 'opt-is-correct' : 'opt-is-wrong'}" data-index="${idx}" style="animation-delay: ${0.09 + idx * 0.05}s;">
                         <span class="option-prefix">${prefixes[idx] || ""}.</span> ${opt}
                     </div>
                 `).join("")}
@@ -281,7 +281,6 @@ function renderCurrentQuestion() {
         nextBtn.addEventListener("click", () => {
             if (isNavigatingNext) return;
             isNavigatingNext = true;
-            nextBtn.classList.add("keep-hover");
             nextBtn.style.pointerEvents = "none";
             transitionToNextQuestion();
         });
@@ -348,72 +347,45 @@ function transitionToNextQuestion() {
  * Trở về màn hình Menu chính từ bài thi hoặc kết quả
  */
 function returnToMenu() {
-    const menuScreen = document.getElementById("menu-screen");
-    const quizScreen = document.getElementById("quiz-screen");
-    const resultScreen = document.getElementById("result-screen");
-    const brandHeader = document.getElementById("brand-header");
+    ScreenSwitcher.to("menu-screen", {
+        fadeIn: true,
+        autoUnlock: true,
+        onBeforeFade: () => {
+            const statusBar = document.getElementById("quiz-status-bar");
+            if (statusBar) {
+                statusBar.classList.remove("active");
+            }
+            resetBackBtnState();
+            resetCopyBtnState();
+        },
+        onShow: (menuScreen) => {
+            const quizScreen = document.getElementById("quiz-screen");
+            if (quizScreen) {
+                quizScreen.innerHTML = "";
+            }
+            const resultScreen = document.getElementById("result-screen");
+            if (resultScreen) {
+                resultScreen.innerHTML = "";
+            }
 
-    if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
-    if (DropdownAnimationLock) {
-        DropdownAnimationLock.lock();
-    }
+            const brandHeader = document.getElementById("brand-header");
+            if (brandHeader) {
+                brandHeader.classList.remove("fade-out");
+            }
 
-    // 1. Fadeout tại chỗ không trượt cho màn hình quiz/result và ẩn status bar
-    if (quizScreen && quizScreen.style.display !== "none") {
-        quizScreen.classList.add("quiz-fade-out-only");
-    }
-    if (resultScreen && resultScreen.style.display !== "none") {
-        resultScreen.classList.add("quiz-fade-out-only");
-    }
-    const statusBar = document.getElementById("quiz-status-bar");
-    if (statusBar) {
-        statusBar.classList.remove("active");
-    }
-    resetBackBtnState();
-    resetCopyBtnState();
+            const copyright = document.getElementById("site-copyright");
+            if (copyright) {
+                copyright.classList.remove("fade-out");
+            }
 
-    // 2. Sau khi fadeout hoàn tất (220ms), ẩn quiz và fadein menu chính
-    setTimeout(() => {
-        if (quizScreen) {
-            quizScreen.style.display = "none";
-            quizScreen.innerHTML = "";
-            quizScreen.classList.remove("quiz-fade-out-only");
-        }
-        if (resultScreen) {
-            resultScreen.style.display = "none";
-            resultScreen.innerHTML = "";
-            resultScreen.classList.remove("quiz-fade-out-only");
-        }
-
-        if (brandHeader) {
-            brandHeader.classList.remove("fade-out");
-        }
-
-        const copyright = document.getElementById("site-copyright");
-        if (copyright) {
-            copyright.classList.remove("fade-out");
-        }
-
-        if (menuScreen) {
-            menuScreen.style.display = "block";
-            menuScreen.classList.add("menu-fade-in-only");
-            const rows = document.querySelectorAll("#menu-screen .menu-row, #menu-screen .menu-actions");
-            rows.forEach(r => {
-                r.classList.remove("menu-exit");
-                r.style.animationDelay = "";
-            });
-
-            setTimeout(() => {
-                menuScreen.classList.remove("menu-fade-in-only");
-                if (DropdownAnimationLock) {
-                    DropdownAnimationLock.unlock();
-                }
-            }, 260);
-        } else {
-            if (DropdownAnimationLock) {
-                DropdownAnimationLock.unlock();
+            if (menuScreen) {
+                const rows = menuScreen.querySelectorAll(".menu-row, .menu-actions");
+                rows.forEach(r => {
+                    r.classList.remove("menu-exit");
+                    r.style.animationDelay = "";
+                });
             }
         }
-    }, 220);
+    });
 }
 

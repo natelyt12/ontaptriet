@@ -6,71 +6,19 @@
  * - Khởi tạo các sự kiện cho nút Cài đặt, Đổi giao diện, và Quay lại
  */
 
-let DEFAULT_BRAND_TITLE = 'Ontaptriet <span class="brand-version">v2.1</span>';
-
 /**
- * Cập nhật tiêu đề ở top-center với hiệu ứng fadeout và fadein mượt mà
- * @param {string} content - Nội dung HTML hoặc chữ mới (mặc định là Ontaptriet v2)
- * @param {function} [onDone] - Callback khi animation hoàn tất
- */
-function setBrandTitle(content = DEFAULT_BRAND_TITLE, onDone) {
-    const container = document.getElementById("brand-title-content") || document.querySelector("#brand-header .brand-title");
-    if (!container) {
-        if (typeof onDone === "function") onDone();
-        return;
-    }
-
-    if (container.innerHTML.trim() === content.trim()) {
-        if (typeof onDone === "function") onDone();
-        return;
-    }
-
-    // 1. Fade out tiêu đề hiện tại
-    container.classList.remove("brand-fade-in");
-    container.classList.add("brand-fade-out");
-
-    setTimeout(() => {
-        // 2. Thay đổi nội dung
-        container.innerHTML = content;
-        container.classList.remove("brand-fade-out");
-        container.classList.add("brand-fade-in");
-
-        // 3. Dọn class fade-in sau khi hoàn tất
-        setTimeout(() => {
-            container.classList.remove("brand-fade-in");
-            if (typeof onDone === "function") onDone();
-        }, 220);
-    }, 180);
-}
-
-/**
- * Chuyển từ Menu chính sang Màn hình Cài đặt
+ * Chuyển từ Menu chính sang Màn hình Cài đặt (ẩn title top-center)
  */
 function showSettingsScreen() {
-    if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
-    if (DropdownAnimationLock) {
-        DropdownAnimationLock.lock();
-    }
-
-    // Đổi tiêu đề top-center thành "Cài đặt" với hiệu ứng fade
-    setBrandTitle("Cài đặt");
-
-    const menuScreen = document.getElementById("menu-screen");
-    const settingsScreen = document.getElementById("settings-screen");
-
-    if (menuScreen) {
-        menuScreen.classList.add("quiz-fade-out-only");
-    }
-
-    setTimeout(() => {
-        if (menuScreen) {
-            menuScreen.style.display = "none";
-            menuScreen.classList.remove("quiz-fade-out-only");
-        }
-
-        if (settingsScreen) {
-            settingsScreen.style.display = "block";
-
+    ScreenSwitcher.to("settings-screen", {
+        autoUnlock: false,
+        onBeforeFade: () => {
+            const brandHeader = document.getElementById("brand-header");
+            if (brandHeader) {
+                brandHeader.classList.add("fade-out");
+            }
+        },
+        onShow: (settingsScreen) => {
             // Kích hoạt animation trồi lên tuần tự cho các dòng cài đặt
             const items = settingsScreen.querySelectorAll(".settings-container > *");
             items.forEach((item, idx) => {
@@ -85,58 +33,33 @@ function showSettingsScreen() {
                     item.classList.remove("quiz-item-enter");
                     item.style.animationDelay = "";
                 });
+                if (DropdownAnimationLock) {
+                    DropdownAnimationLock.unlock();
+                }
             }, 600);
         }
-
-        if (DropdownAnimationLock) {
-            DropdownAnimationLock.unlock();
-        }
-    }, 220);
+    });
 }
 
 /**
- * Trở về Menu chính từ Màn hình Cài đặt
+ * Trở về Menu chính từ Màn hình Cài đặt (hiện lại title top-center)
  */
 function returnToMenuFromSettings() {
-    if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
-
     // Đóng dropdown font nếu đang mở
     if (typeof InlineDropdown !== "undefined" && typeof InlineDropdown.closeAll === "function") {
         InlineDropdown.closeAll();
     }
 
-    if (DropdownAnimationLock) {
-        DropdownAnimationLock.lock();
-    }
-
-    // Trả lại tiêu đề mặc định Ontaptriet v2
-    setBrandTitle(DEFAULT_BRAND_TITLE);
-
-    const menuScreen = document.getElementById("menu-screen");
-    const settingsScreen = document.getElementById("settings-screen");
-
-    if (settingsScreen) {
-        settingsScreen.classList.add("quiz-fade-out-only");
-    }
-
-    setTimeout(() => {
-        if (settingsScreen) {
-            settingsScreen.style.display = "none";
-            settingsScreen.classList.remove("quiz-fade-out-only");
+    ScreenSwitcher.to("menu-screen", {
+        fadeIn: true,
+        autoUnlock: true,
+        onShow: () => {
+            const brandHeader = document.getElementById("brand-header");
+            if (brandHeader) {
+                brandHeader.classList.remove("fade-out");
+            }
         }
-
-        if (menuScreen) {
-            menuScreen.style.display = "block";
-            menuScreen.classList.add("menu-fade-in-only");
-            setTimeout(() => {
-                menuScreen.classList.remove("menu-fade-in-only");
-            }, 300);
-        }
-
-        if (DropdownAnimationLock) {
-            DropdownAnimationLock.unlock();
-        }
-    }, 220);
+    });
 }
 
 /**
