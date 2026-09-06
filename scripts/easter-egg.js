@@ -73,6 +73,7 @@ function initTitleMixedChaosEasterEgg() {
     const copyrightSpan = copyrightEl ? copyrightEl.querySelector("span") : null;
     const originalCopyright = copyrightSpan ? copyrightSpan.textContent : (copyrightEl ? copyrightEl.textContent : "");
 
+    const brandTitleEl = document.getElementById("brand-title-content");
     const currentVer = typeof getAppVersion === "function" ? getAppVersion() : "v2.2";
     const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : `Ontaptriet <span class="brand-version">${currentVer}</span>`;
 
@@ -88,19 +89,29 @@ function initTitleMixedChaosEasterEgg() {
         return res;
     }
 
+    // Kiểm tra xem Easter egg mới (title_ascii_cycler) có đang chạy hay không
+    function isTitleCyclerActive() {
+        if (typeof EasterEggs === "undefined" || !EasterEggs.registry) return false;
+        const cycler = EasterEggs.registry.find(e => e.id === "title_ascii_cycler");
+        return !!(cycler && cycler.active);
+    }
+
     function applyChaosText() {
         const chaosText = generateMixedChaosString(30);
 
         // 1. Thẻ title của trang web
         document.title = chaosText;
 
-        // 2. Tiêu đề header ở trên: [chuỗi 30 ký tự] version
-        const chaosBrandHtml = `${chaosText} <span class="brand-version">${currentVer}</span>`;
-        if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
-            DEFAULT_BRAND_TITLE = chaosBrandHtml;
-        }
-        if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
-            brandTitleEl.innerHTML = chaosBrandHtml;
+        // 2. Tiêu đề header ở trên: Ưu tiên Easter Egg mới (title_ascii_cycler)
+        // Chỉ ghi đè tiêu đề header nếu Easter Egg mới không chạy
+        if (!isTitleCyclerActive()) {
+            const chaosBrandHtml = `${chaosText} <span class="brand-version">${currentVer}</span>`;
+            if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
+                DEFAULT_BRAND_TITLE = chaosBrandHtml;
+            }
+            if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
+                brandTitleEl.innerHTML = chaosBrandHtml;
+            }
         }
 
         // 3. Dòng credit ở góc dưới cùng bên phải: [chuỗi 30 ký tự] design by @phucthanhh
@@ -111,25 +122,19 @@ function initTitleMixedChaosEasterEgg() {
         }
     }
 
-    // Đổi title, brand header và credit ngay lập tức khi kích hoạt
+    // Đổi title, brand header và credit ngay lập tức khi kích hoạt (chỉ đổi 1 lần, không lặp lại 5s)
     applyChaosText();
 
-    // Cập nhật title, brand header và credit mỗi 5 giây (5000ms), tạm dừng khi ẩn tab để tối ưu hiệu năng
-    const intervalId = setInterval(() => {
-        if (!document.hidden) {
-            applyChaosText();
-        }
-    }, 5000);
-
     return () => {
-        clearInterval(intervalId);
         document.title = originalTitle;
 
-        if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
-            DEFAULT_BRAND_TITLE = `Ontaptriet <span class="brand-version">${currentVer}</span>`;
-        }
-        if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
-            brandTitleEl.innerHTML = originalBrandHtml;
+        if (!isTitleCyclerActive()) {
+            if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
+                DEFAULT_BRAND_TITLE = `Ontaptriet <span class="brand-version">${currentVer}</span>`;
+            }
+            if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
+                brandTitleEl.innerHTML = originalBrandHtml;
+            }
         }
 
         if (copyrightSpan) {
@@ -141,79 +146,166 @@ function initTitleMixedChaosEasterEgg() {
 }
 
 // =========================================================================
-// 3. EASTER EGG #3: Toàn bộ nội dung trang web bị xáo trộn liên tục
-//    bằng ASCII standard & Latin mở rộng, giữ nguyên độ dài (Tỉ lệ 2%)
+// 3. EASTER EGG #3: Title ASCII Animation Cycler (Tỉ lệ 50%)
+// Chuyển đổi tiêu đề thành animation xáo trộn Standard ASCII font JetBrains Mono
+// Chu kỳ: Giữ 3s -> Co/giãn độ dài về từ mới -> Quét reveal LTR -> Giữ 3s
 // =========================================================================
-function initPageContentChaosEasterEgg() {
-    const asciiLatinKeys = ['ascii', 'latin-ext'];
-    const IGNORED_TAGS = new Set(["SCRIPT", "STYLE", "NOSCRIPT"]);
+function initTitleAsciiCyclerEasterEgg() {
+    const brandTitleEl = document.getElementById("brand-title-content");
+    if (!brandTitleEl) return;
 
-    function getRandomAsciiLatinChar() {
-        const key = asciiLatinKeys[Math.floor(Math.random() * asciiLatinKeys.length)];
-        const range = UNICODE_RANGES[key];
-        return getRandomUnicodeChar(range.min, range.max);
+    const originalBrandHtml = brandTitleEl.innerHTML;
+    const originalFontFamily = brandTitleEl.style.fontFamily;
+    const originalLetterSpacing = brandTitleEl.style.letterSpacing;
+    const originalFontWeight = brandTitleEl.style.fontWeight;
+
+    // Thiết lập giao diện JetBrains Mono cho Title animation
+    brandTitleEl.style.fontFamily = "'JetBrains Mono', monospace";
+    brandTitleEl.style.letterSpacing = "0.5px";
+    brandTitleEl.style.fontWeight = "500";
+    brandTitleEl.style.whiteSpace = "nowrap";
+
+    let isRunning = true;
+
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // Fisher-Yates shuffle có chống lặp kề
+    function shuffleNoAdjacent(arr, lastItem = null) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        if (lastItem !== null && copy.length > 1 && copy[0] === lastItem) {
+            const swapIdx = Math.floor(Math.random() * (copy.length - 1)) + 1;
+            [copy[0], copy[swapIdx]] = [copy[swapIdx], copy[0]];
+        }
+        return copy;
     }
 
-    function scrambleText(text) {
-        let out = "";
-        for (let i = 0; i < text.length; i++) {
-            const ch = text[i];
-            if (ch === " " || ch === "\n" || ch === "\r" || ch === "\t") {
-                out += ch;
-            } else {
-                out += getRandomAsciiLatinChar();
+    const ALL_WORDS = [
+        "ONTAPTRIET",
+        "DAN_GAY",
+        "BINH_GAY",
+        "BINH_DZ_TOP_1_SERVER",
+        "nro",
+        "I_Hate_Blue_Archive",
+        "DESIGNED_BY_NATELYT",
+        "JOIN_OUR_DISCORD",
+        "WELCOME",
+        "github.com/natelyt12",
+        "SYSTEM_INITIALIZED",
+        "Check my Yumebako",
+        "github.com/natelyt12/Yumebako",
+        "NEVER_GONNA_GIVE_YOU_UP"
+    ];
+
+    // Lượt 1: Bắt đầu từ ONTAPTRIET, các từ tiếp theo được xáo trộn ngẫu nhiên
+    let wordQueue = shuffleNoAdjacent(ALL_WORDS.filter(w => w !== "ONTAPTRIET"), "ONTAPTRIET");
+    let queueIdx = 0;
+
+    function getNextTargetWord() {
+        if (queueIdx >= wordQueue.length) {
+            const lastWord = wordQueue[wordQueue.length - 1];
+            wordQueue = shuffleNoAdjacent(ALL_WORDS, lastWord);
+            queueIdx = 0;
+        }
+        const w = wordQueue[queueIdx];
+        queueIdx++;
+        return w;
+    }
+
+    // Chuyển đổi từ fromWord sang toWord:
+    // 1. Ký tự lỗi quét qua, co/giãn dần về độ dài ký tự mục tiêu
+    // 2. Sau đó mới reveal từ trái qua phải (LTR)
+    async function animateTransition(fromWord, toWord) {
+        if (!isRunning) return;
+
+        const lenA = fromWord.length;
+        const lenB = toWord.length;
+
+        // Giai đoạn 1: Ký tự lỗi co/giãn dần về độ dài của toWord
+        if (lenA !== lenB) {
+            const stepDir = lenB > lenA ? 1 : -1;
+            const diff = Math.abs(lenB - lenA);
+            const stepDelay = Math.max(35, Math.min(75, Math.floor(450 / diff)));
+
+            let curLen = lenA;
+            while (curLen !== lenB) {
+                if (!isRunning) return;
+                curLen += stepDir;
+                let chaos = "";
+                for (let i = 0; i < curLen; i++) {
+                    chaos += getRandomUnicodeChar(0x0021, 0x007E);
+                }
+                brandTitleEl.textContent = chaos;
+                await sleep(stepDelay);
+            }
+        } else {
+            // Nếu độ dài bằng nhau, nhấp nháy 3 nhịp chaos
+            for (let k = 0; k < 3; k++) {
+                if (!isRunning) return;
+                let chaos = "";
+                for (let i = 0; i < lenB; i++) {
+                    chaos += getRandomUnicodeChar(0x0021, 0x007E);
+                }
+                brandTitleEl.textContent = chaos;
+                await sleep(50);
             }
         }
-        return out;
-    }
 
-    function collectTextNodes(root) {
-        const textNodes = [];
-        const walker = document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode(node) {
-                    if (!node.parentElement) return NodeFilter.FILTER_REJECT;
-                    if (IGNORED_TAGS.has(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
-                    if (node.parentElement.classList && node.parentElement.classList.contains("easter-egg-dan-gay")) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-                    if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-                    return NodeFilter.FILTER_ACCEPT;
+        // Giai đoạn 2: Reveal từ trái qua phải (LTR)
+        const revealDelay = Math.max(35, Math.min(65, Math.floor(550 / lenB)));
+        for (let step = 0; step <= lenB; step++) {
+            if (!isRunning) return;
+            let str = "";
+            for (let i = 0; i < lenB; i++) {
+                if (i < step) {
+                    str += toWord[i];
+                } else {
+                    str += getRandomUnicodeChar(0x0021, 0x007E);
                 }
             }
-        );
-        let n;
-        while ((n = walker.nextNode())) {
-            textNodes.push(n);
+            brandTitleEl.textContent = str;
+            await sleep(revealDelay);
         }
-        return textNodes;
+
+        if (!isRunning) return;
+        brandTitleEl.textContent = toWord;
     }
 
-    function updateAllTextNodes() {
-        const nodes = collectTextNodes(document.body);
-        for (let i = 0; i < nodes.length; i++) {
-            const node = nodes[i];
-            if (node.__originalText === undefined) {
-                node.__originalText = node.nodeValue;
+    // Bắt đầu vòng lặp
+    async function runLoop() {
+        let currentWord = "ONTAPTRIET";
+        brandTitleEl.textContent = currentWord;
+
+        while (isRunning) {
+            // Giữ chữ trong 3 giây (3000ms)
+            await sleep(3000);
+            if (!isRunning) break;
+
+            // Nếu đang trong màn hình khác (fade-out) thì tạm hoãn nhẹ
+            const brandHeader = document.getElementById("brand-header");
+            if (brandHeader && brandHeader.classList.contains("fade-out")) {
+                await sleep(1000);
+                continue;
             }
-            node.nodeValue = scrambleText(node.__originalText);
+
+            const nextWord = getNextTargetWord();
+            await animateTransition(currentWord, nextWord);
+            currentWord = nextWord;
         }
     }
 
-    // Xáo trộn liên tục mỗi 50ms
-    const intervalId = setInterval(updateAllTextNodes, 50);
+    runLoop();
 
     return () => {
-        clearInterval(intervalId);
-        // Khôi phục văn bản gốc khi tắt easter egg
-        const nodes = collectTextNodes(document.body);
-        for (let i = 0; i < nodes.length; i++) {
-            if (nodes[i].__originalText !== undefined) {
-                nodes[i].nodeValue = nodes[i].__originalText;
-                delete nodes[i].__originalText;
-            }
+        isRunning = false;
+        if (brandTitleEl) {
+            brandTitleEl.innerHTML = originalBrandHtml;
+            brandTitleEl.style.fontFamily = originalFontFamily;
+            brandTitleEl.style.letterSpacing = originalLetterSpacing;
+            brandTitleEl.style.fontWeight = originalFontWeight;
         }
     };
 }
@@ -223,6 +315,15 @@ function initPageContentChaosEasterEgg() {
 // =========================================================================
 const EasterEggs = {
     registry: [
+        {
+            id: "title_ascii_cycler",
+            name: "Title ASCII Animation Cycler",
+            description: "50% tỉ lệ: Title biến thành animation xáo trộn JetBrains Mono chuyển đổi liên tục qua các thông điệp",
+            chance: 0.50,
+            active: false,
+            cleanup: null,
+            init: initTitleAsciiCyclerEasterEgg
+        },
         {
             id: "dan_gay_click",
             name: "Dân gay on click",
@@ -235,26 +336,17 @@ const EasterEggs = {
         {
             id: "title_mixed_chaos",
             name: "Title, Brand & Credit Glitch (Mixed Ranges)",
-            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.1') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự, mỗi 5s đổi một lần",
+            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.2') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự",
             chance: 0.05,
             active: false,
             cleanup: null,
             init: initTitleMixedChaosEasterEgg
-        },
-        {
-            id: "page_content_chaos",
-            name: "Toàn trang hỗn loạn (ASCII & Latin mở rộng)",
-            description: "2% tỉ lệ: tất cả nội dung trên trang web bị xáo trộn liên tục bằng ASCII standard và latin mở rộng, độ dài giữ nguyên",
-            chance: 0.02,
-            active: false,
-            cleanup: null,
-            init: initPageContentChaosEasterEgg
         }
     ],
 
     /**
      * Kích hoạt thủ công một easter egg bằng ID
-     * Ví dụ trong Console: EasterEggs.activate("title_mixed_chaos") hoặc EasterEggs.activate("page_content_chaos")
+     * Ví dụ trong Console: EasterEggs.activate("title_ascii_cycler") hoặc EasterEggs.activate("title_mixed_chaos")
      */
     activate(id) {
         const egg = this.registry.find(e => e.id === id);
@@ -273,7 +365,7 @@ const EasterEggs = {
 
     /**
      * Dừng thủ công một easter egg bằng ID
-     * Ví dụ trong Console: EasterEggs.stop("page_content_chaos")
+     * Ví dụ trong Console: EasterEggs.stop("title_ascii_cycler")
      */
     stop(id) {
         const egg = this.registry.find(e => e.id === id);
@@ -289,7 +381,7 @@ const EasterEggs = {
 
     /**
      * Bật / tắt chuyển đổi trạng thái một easter egg
-     * Ví dụ trong Console: EasterEggs.toggle("page_content_chaos")
+     * Ví dụ trong Console: EasterEggs.toggle("title_ascii_cycler")
      */
     toggle(id) {
         const egg = this.registry.find(e => e.id === id);
@@ -306,7 +398,18 @@ const EasterEggs = {
      * Khởi tạo toàn bộ Easter Eggs theo tỉ lệ xác suất khi web load
      */
     initAll() {
+        const asciiCycler = this.registry.find(e => e.id === "title_ascii_cycler");
+        let isAsciiCyclerActive = false;
+        if (asciiCycler && Math.random() < asciiCycler.chance) {
+            asciiCycler.active = true;
+            asciiCycler.cleanup = asciiCycler.init();
+            isAsciiCyclerActive = true;
+            console.log(`[EasterEgg] Kích hoạt ngẫu nhiên: "${asciiCycler.name}" (50%)`);
+        }
+
         this.registry.forEach(egg => {
+            if (egg.id === "title_ascii_cycler") return;
+
             if (typeof egg.chance === "number") {
                 const roll = Math.random();
                 if (roll < egg.chance) {

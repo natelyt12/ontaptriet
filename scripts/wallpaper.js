@@ -8,21 +8,55 @@
  */
 
 const LW_STORAGE_KEY = "ontaptriet_live_wallpaper";
-const LW_INDEX_STORAGE_KEY = "ontaptriet_last_wallpaper_index";
+const LW_ORDER_KEY = "ontaptriet_wallpaper_order";
+const LW_INDEX_KEY = "ontaptriet_wallpaper_idx";
 
 const LW_TOTAL = 10;
 const LW_VIDEOS = Array.from({ length: LW_TOTAL }, (_, i) => `lw/${i + 1}.mp4`);
 
 let isLwEnabled = localStorage.getItem(LW_STORAGE_KEY) !== "off";
 
-// Luân phiên chọn video tuần tự theo lượt mỗi lần tải trang (như ascii spinner)
-let lastIdx = parseInt(localStorage.getItem(LW_INDEX_STORAGE_KEY), 10);
-if (isNaN(lastIdx) || lastIdx < 0 || lastIdx >= LW_TOTAL) {
-    lastIdx = -1;
-}
-const currentLwIndex = (lastIdx + 1) % LW_TOTAL;
-localStorage.setItem(LW_INDEX_STORAGE_KEY, currentLwIndex.toString());
+// Thuật toán Cycle Shuffle: Xáo trộn danh sách theo vòng, hết lượt đảo lại đảm bảo video đầu != video cuối cũ
+function getNextCycledWallpaperIndex() {
+    function shuffleArray(arr, lastItem = null) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        if (lastItem !== null && copy.length > 1 && copy[0] === lastItem) {
+            const swapIdx = Math.floor(Math.random() * (copy.length - 1)) + 1;
+            [copy[0], copy[swapIdx]] = [copy[swapIdx], copy[0]];
+        }
+        return copy;
+    }
 
+    let order = null;
+    try {
+        order = JSON.parse(localStorage.getItem(LW_ORDER_KEY));
+    } catch (e) { }
+
+    let idx = parseInt(localStorage.getItem(LW_INDEX_KEY), 10);
+
+    if (!Array.isArray(order) || order.length !== LW_TOTAL || isNaN(idx)) {
+        order = shuffleArray(Array.from({ length: LW_TOTAL }, (_, i) => i), null);
+        idx = 0;
+    } else {
+        idx++;
+        if (idx >= order.length) {
+            const lastItem = order[order.length - 1];
+            order = shuffleArray(order, lastItem);
+            idx = 0;
+        }
+    }
+
+    localStorage.setItem(LW_ORDER_KEY, JSON.stringify(order));
+    localStorage.setItem(LW_INDEX_KEY, idx.toString());
+
+    return order[idx];
+}
+
+const currentLwIndex = getNextCycledWallpaperIndex();
 const currentLwVideoSrc = LW_VIDEOS[currentLwIndex];
 
 /**
