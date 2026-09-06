@@ -11,7 +11,7 @@
     --text-pure-black: #000000;
     --font-serif: "Times New Roman", Times, "Nimbus Roman No9 L", serif;
     /* Một cỡ chữ duy nhất đồng bộ toàn trang */
-    --uniform-size: 22px;
+    --uniform-size: 18.5px;
 
     /* QUY CHUẨN ANIMATION CHUẨN EXPO */
     --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -137,8 +137,7 @@ body.animating-lock * {
 /* 2. Điểm neo: CENTER (Vùng chọn) */
 .anchor-center {
     width: 100%;
-    max-width: 680px;
-    padding: 10px 20px;
+    max-width: 540px;
 }
 
 /* Các màn hình có nội dung ngắn gọn: Cân chỉnh max-width vừa vặn (580px) để trọng tâm cân đối và font chữ lớn không bị xuống dòng */
@@ -147,7 +146,7 @@ body.animating-lock * {
 #result-screen,
 .result-container,
 #quiz-screen:has(.result-container) {
-    max-width: 580px;
+    max-width: 540px;
 }
 
 /* Hàng ngang */
@@ -723,7 +722,7 @@ body.animating-lock * {
     font-size: var(--uniform-size);
     color: var(--text-pure-black);
     line-height: 1.35;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     word-break: break-word;
 }
 
@@ -739,7 +738,6 @@ body.animating-lock * {
 .quiz-options {
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
 
 .quiz-option {
@@ -1044,7 +1042,7 @@ body.animating-lock * {
 /* Responsive */
 @media (max-width: 768px) {
     :root {
-        --uniform-size: 19px;
+        --uniform-size: 16px;
     }
     .menu-row {
         flex-direction: column;
@@ -1063,6 +1061,8 @@ body.animating-lock * {
         padding: 0 16px;
     }
 }
+
+
 
 /* COPYRIGHT GÓC DƯỚI BÊN PHẢI */
 .bottom-right-copyright {

@@ -10,6 +10,20 @@ const appConfig = {
             { name: "Đề cương ôn tập (249 câu)", file: "de_cuong_ktmt.json" },
         ],
     },
+    cnxhkh: {
+        name: "Chủ nghĩa xã hội khoa học",
+        type: "txt",
+        path: "baitap/cnxhkh",
+        files: [
+            { name: "Chương 1 (21 câu)", file: "chuong1.txt" },
+            { name: "Chương 2 (47 câu)", file: "chuong2.txt" },
+            { name: "Chương 3 (45 câu)", file: "chuong3.txt" },
+            { name: "Chương 4 (45 câu)", file: "chuong4.txt" },
+            { name: "Chương 5 (45 câu)", file: "chuong5.txt" },
+            { name: "Chương 6 (60 câu)", file: "chuong6.txt" },
+            { name: "Chương 7 (45 câu)", file: "chuong7.txt" },
+        ],
+    },
 };
 
 // 2. Biến toàn cục lưu trạng thái làm bài

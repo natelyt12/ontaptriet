@@ -40,6 +40,9 @@ async function fetchAllSubjectQuestions(subjectKey, chapterVal = "all") {
         rawTexts.forEach(text => {
             allQuestions = allQuestions.concat(parseQuestions(text));
         });
+        allQuestions.forEach((q, idx) => {
+            q.id = idx + 1;
+        });
     }
 
     return allQuestions;
