@@ -190,7 +190,7 @@ function renderCurrentQuestion() {
             </div>
             <div class="quiz-options">
                 ${qData.options.map((opt, idx) => `
-                    <div class="quiz-option quiz-item-enter ${idx === qData.correctAnswer ? 'opt-is-correct' : 'opt-is-wrong'}" data-index="${idx}" style="animation-delay: ${0.09 + idx * 0.05}s;">
+                    <div class="quiz-option quiz-item-enter" data-index="${idx}" style="animation-delay: ${0.09 + idx * 0.05}s;">
                         <span class="option-prefix">${prefixes[idx] || ""}.</span> ${opt}
                     </div>
                 `).join("")}

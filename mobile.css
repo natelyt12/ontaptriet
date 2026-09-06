@@ -65,20 +65,8 @@
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0.22);
     }
 
-    /* 7. Quiz View: Chạm đáp án đúng lóe màu xanh, đáp án sai lóe màu đỏ */
-    .quiz-option.opt-is-correct {
-        -webkit-tap-highlight-color: rgba(30, 142, 62, 0.35);
-    }
-
-    .quiz-option.opt-is-wrong {
-        -webkit-tap-highlight-color: rgba(217, 48, 37, 0.35);
-    }
-
-    [data-theme="dark"] .quiz-option.opt-is-correct {
-        -webkit-tap-highlight-color: rgba(52, 199, 89, 0.38);
-    }
-
-    [data-theme="dark"] .quiz-option.opt-is-wrong {
-        -webkit-tap-highlight-color: rgba(255, 82, 82, 0.38);
+    /* 7. Quiz View: Bỏ hiệu ứng tap highlight trên đáp án giống PC để chống gian lận khi giữ ngón tay */
+    .quiz-option {
+        -webkit-tap-highlight-color: transparent !important;
     }
 }
