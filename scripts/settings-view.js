@@ -6,7 +6,7 @@
  * - Khởi tạo các sự kiện cho nút Cài đặt, Đổi giao diện, và Quay lại
  */
 
-let DEFAULT_BRAND_TITLE = 'Ontaptriet <span class="brand-version">v2</span>';
+let DEFAULT_BRAND_TITLE = 'Ontaptriet <span class="brand-version">v2.1</span>';
 
 /**
  * Cập nhật tiêu đề ở top-center với hiệu ứng fadeout và fadein mượt mà

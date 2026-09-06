@@ -74,7 +74,7 @@ function initTitleMixedChaosEasterEgg() {
     const originalCopyright = copyrightSpan ? copyrightSpan.textContent : (copyrightEl ? copyrightEl.textContent : "");
 
     const brandTitleEl = document.getElementById("brand-title-content");
-    const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : 'Ontaptriet <span class="brand-version">v2</span>';
+    const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : 'Ontaptriet <span class="brand-version">v2.1</span>';
 
     const mixedKeys = Object.keys(UNICODE_RANGES);
 
@@ -94,8 +94,8 @@ function initTitleMixedChaosEasterEgg() {
         // 1. Thẻ title của trang web
         document.title = chaosText;
 
-        // 2. Tiêu đề header ở trên: [chuỗi 30 ký tự] v2
-        const chaosBrandHtml = `${chaosText} <span class="brand-version">v2</span>`;
+        // 2. Tiêu đề header ở trên: [chuỗi 30 ký tự] v2.1
+        const chaosBrandHtml = `${chaosText} <span class="brand-version">v2.1</span>`;
         if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
             DEFAULT_BRAND_TITLE = chaosBrandHtml;
         }
@@ -126,7 +126,7 @@ function initTitleMixedChaosEasterEgg() {
         document.title = originalTitle;
 
         if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
-            DEFAULT_BRAND_TITLE = 'Ontaptriet <span class="brand-version">v2</span>';
+            DEFAULT_BRAND_TITLE = 'Ontaptriet <span class="brand-version">v2.1</span>';
         }
         if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
             brandTitleEl.innerHTML = originalBrandHtml;
@@ -235,7 +235,7 @@ const EasterEggs = {
         {
             id: "title_mixed_chaos",
             name: "Title, Brand & Credit Glitch (Mixed Ranges)",
-            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự, mỗi 5s đổi một lần",
+            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.1') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự, mỗi 5s đổi một lần",
             chance: 0.05,
             active: false,
             cleanup: null,

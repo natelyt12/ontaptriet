@@ -82,7 +82,7 @@ body.animating-lock * {
     z-index: 10;
 }
 
-/* 1. Điểm neo: TOP CENTER (Ontaptriet v2) */
+/* 1. Điểm neo: TOP CENTER (Ontaptriet v2.1) */
 .anchor-top-center {
     position: absolute;
     top: 36px;
@@ -90,13 +90,14 @@ body.animating-lock * {
     transform: translateX(-50%);
     text-align: center;
     user-select: none;
-    transition: opacity 0.35s var(--ease-expo-in), transform 0.35s var(--ease-expo-in);
+    transition: opacity 0.35s var(--ease-expo-out), transform 0.35s var(--ease-expo-out);
 }
 
 .anchor-top-center.fade-out {
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -12px);
+    transition: opacity 0.35s var(--ease-expo-in), transform 0.35s var(--ease-expo-in);
 }
 
 .brand-title {
@@ -106,15 +107,16 @@ body.animating-lock * {
     display: inline-flex;
     align-items: baseline;
     gap: 6px;
-    transition: opacity 0.18s ease;
+    transition: opacity 0.18s var(--ease-expo-out);
 }
 
 .brand-title.brand-fade-out {
     opacity: 0;
+    transition: opacity 0.18s var(--ease-expo-in);
 }
 
 .brand-title.brand-fade-in {
-    animation: brandTitleFadeIn 0.22s ease forwards;
+    animation: brandTitleFadeIn 0.22s var(--ease-expo-out) forwards;
 }
 
 @keyframes brandTitleFadeIn {
@@ -1013,7 +1015,7 @@ body.animating-lock * {
 
 /* HIỆU ỨNG CHỈ FADE (KHÔNG TRƯỢT) KHI VỀ MENU CHÍNH */
 .quiz-fade-out-only {
-    animation: pureFadeOut 0.22s ease forwards !important;
+    animation: pureFadeOut 0.22s var(--ease-expo-in) forwards !important;
     pointer-events: none !important;
 }
 
@@ -1027,7 +1029,7 @@ body.animating-lock * {
 }
 
 .menu-fade-in-only {
-    animation: pureFadeIn 0.26s ease forwards;
+    animation: pureFadeIn 0.26s var(--ease-expo-out) forwards;
 }
 
 @keyframes pureFadeIn {
@@ -1079,12 +1081,13 @@ body.animating-lock * {
     opacity: 0.35;
     user-select: none;
     pointer-events: none;
-    transition: opacity 0.3s var(--ease-expo-in);
+    transition: opacity 0.3s var(--ease-expo-out);
     z-index: 40;
 }
 
 .bottom-right-copyright.fade-out {
     opacity: 0;
+    transition: opacity 0.3s var(--ease-expo-in);
 }
 
 /* --- CHẾ ĐỘ TỐI (DARK THEME) --- */
