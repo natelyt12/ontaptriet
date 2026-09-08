@@ -13,4 +13,4 @@
 
 ## Tác giả
 - **Phúc Thanh** ([@phucthanhh](https://github.com/natelyt12)) - DCCNTT-16.3
-- Built with Gemini AI
+- Built with Gemini AI and my awesome brain🐧🔥

@@ -71,11 +71,11 @@ function initDanGayClickEasterEgg() {
 function initTitleMixedChaosEasterEgg() {
     const originalTitle = document.title;
     const copyrightEl = document.getElementById("site-copyright");
-    const copyrightSpan = copyrightEl ? copyrightEl.querySelector("span") : null;
+    const copyrightSpan = copyrightEl ? (copyrightEl.querySelector("#site-credit-text") || copyrightEl.querySelector("span")) : null;
     const originalCopyright = copyrightSpan ? copyrightSpan.textContent : (copyrightEl ? copyrightEl.textContent : "");
 
     const brandTitleEl = document.getElementById("brand-title-content");
-    const currentVer = typeof getAppVersion === "function" ? getAppVersion() : "v2.2";
+    const currentVer = typeof getAppVersion === "function" ? getAppVersion() : "v2.3";
     const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : `Ontaptriet <span class="brand-version">${currentVer}</span>`;
 
     const mixedKeys = Object.keys(UNICODE_RANGES);
@@ -204,7 +204,8 @@ function initTitleAsciiCyclerEasterEgg() {
         "MOONLIGHT_AND_SUNSHINE",
         "DEPLOYED_IN_VERCEL",
         "E_Là_Không_Thể",
-        "MICROSOFT_EDGE"
+        "MICROSOFT_EDGE",
+        "github.com/natelyt12/ontaptriet"
     ];
 
     // Lượt 1: Bắt đầu từ ONTAPTRIET, các từ tiếp theo được xáo trộn ngẫu nhiên
@@ -343,7 +344,7 @@ const EasterEggs = {
         {
             id: "title_mixed_chaos",
             name: "Title, Brand & Credit Glitch (Mixed Ranges)",
-            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.2') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự",
+            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.3') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự",
             chance: 0.05,
             active: false,
             cleanup: null,

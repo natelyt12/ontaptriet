@@ -404,11 +404,39 @@
     pointer-events: none;
     transition: opacity 0.38s var(--ease-expo-out);
     z-index: 40;
+    display: inline-flex;
+    align-items: baseline;
 }
 
 .bottom-right-copyright.fade-out {
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.35s var(--ease-expo-in);
+}
+
+.bottom-right-copyright:has(.btn-copyright-link:hover) {
+    opacity: 0.75;
+}
+
+.bottom-right-copyright .action-separator {
+    font-size: 13px;
+    margin: 0 6px;
+    opacity: 0.4;
+}
+
+.btn-copyright-link {
+    color: var(--text-pure-black);
+    text-decoration: none;
+    font-style: italic;
+    cursor: pointer;
+    pointer-events: auto;
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: opacity 0.15s ease, border-bottom-color 0.15s ease;
+}
+
+.btn-copyright-link:hover {
+    border-bottom-color: var(--text-pure-black);
 }
 
 /* --- DARK THEME CHO QUIZ SCREEN --- */

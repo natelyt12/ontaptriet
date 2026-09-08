@@ -95,6 +95,7 @@
         bottom: 14px;
         right: 14px;
         font-size: 12px;
+        max-width: calc(100vw - 28px);
     }
 
     /* 6. Hiệu ứng chạm (tap highlight): Màu trắng mờ và fadeout nhẹ nhàng thay cho màu xanh mặc định */
