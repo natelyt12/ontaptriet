@@ -147,16 +147,18 @@
                             <span class="chat-online-text"><span id="chat-online-count">1</span> trực tuyến</span>
                         </div>
                         <div class="chat-user-bar" id="chat-user-bar" style="display: none;">
-                            <span class="chat-user-label">Chat dưới tên</span>
-                            <span class="chat-user-name" id="chat-user-display"></span>
-                            <span class="action-separator">/</span>
-                            <button class="btn-action btn-secondary btn-chat-set-name" id="btn-chat-set-name"
-                                type="button" title="Thay đổi biệt danh (mỗi 24h)">
-                                <span class="label-viewport" id="chat-set-name-viewport">
-                                    <span class="label-text-current">Thay tên</span>
-                                </span>
-                            </button>
-                            <span class="action-separator">/</span>
+                            <div class="chat-user-info-group" id="chat-user-info-group">
+                                <span class="chat-user-label">Chat dưới tên</span>
+                                <span class="chat-user-name" id="chat-user-display"></span>
+                                <span class="action-separator">/</span>
+                                <button class="btn-action btn-secondary btn-chat-set-name" id="btn-chat-set-name"
+                                    type="button" title="Thay đổi biệt danh (mỗi 24h)">
+                                    <span class="label-viewport" id="chat-set-name-viewport">
+                                        <span class="label-text-current">Thay tên</span>
+                                    </span>
+                                </button>
+                                <span class="action-separator">/</span>
+                            </div>
                             <button class="btn-action btn-danger btn-chat-logout" id="btn-chat-logout" type="button"
                                 title="Đăng xuất">
                                 <span class="label-viewport" id="chat-logout-viewport">
@@ -177,6 +179,11 @@
                                 type="button">
                                 <span class="btn-label">Đăng nhập để thảo luận</span> <span class="btn-arrow">›</span>
                             </button>
+                        </div>
+
+                        <!-- Thông báo khi tài khoản bị cấm chat -->
+                        <div class="chat-banned-alert" id="chat-banned-alert" style="display: none;">
+                            Tài khoản của bạn đã bị cấm tham gia thảo luận do vi phạm tiêu chuẩn cộng đồng.
                         </div>
 
                         <!-- Khi đã đăng nhập: Khung gõ tin nhắn -->
@@ -202,8 +209,11 @@
                             </div>
                         </div>
 
+                        <div class="chat-login-rules" id="chat-login-rules">
+                            Nghiêm cấm ngôn từ thô tục, NSFW, xúc phạm hoặc spam. Vi phạm sẽ bị cấm chat vĩnh viễn.
+                        </div>
                         <div class="chat-cooldown-hint" id="chat-cooldown-hint">
-                            Cooldown 5 phút, lưu trữ tối đa 30 tin
+                            Cooldown 1 phút, lưu trữ tối đa 50 tin. Tin nhắn một khi đã gửi không thể sửa hoặc xóa.
                         </div>
                     </div>
                 </aside>
@@ -306,7 +316,8 @@
         <div class="bottom-right-copyright" id="site-copyright">
             <span id="site-credit-text">ontaptriet design by @phucthanhh</span>
             <span class="action-separator">/</span>
-            <a href="https://github.com/natelyt12/ontaptriet" target="_blank" rel="noopener noreferrer" class="btn-copyright-link">GitHub</a>
+            <a href="https://github.com/natelyt12/ontaptriet" target="_blank" rel="noopener noreferrer"
+                class="btn-copyright-link">GitHub</a>
         </div>
     </div>
 

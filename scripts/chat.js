@@ -30,7 +30,9 @@ import {
     setDoc,
     updateDoc,
     getDocs,
-    deleteDoc
+    deleteDoc,
+    writeBatch,
+    where
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // 1. Cấu hình Firebase dự án
@@ -56,9 +58,9 @@ googleProvider.setCustomParameters({
 });
 
 // Các hằng số quản lý
-const COOLDOWN_SECONDS = 300; // 5 phút = 300 giây
+const COOLDOWN_SECONDS = 60; // 1 phút = 60 giây
 const NICKNAME_COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 giờ = 86.400.000 ms
-const MAX_MESSAGES_LIMIT = 30; // Giới hạn tối đa 30 tin nhắn trong sảnh
+const MAX_MESSAGES_LIMIT = 50; // Giới hạn tối đa 50 tin nhắn trong sảnh
 const GOD_MODE_EMAIL = "25002894@eaut.edu.vn";
 const PRESENCE_COLLECTION = "presence";
 const HEARTBEAT_INTERVAL_MS = 25000; // 25 giây gửi heartbeat 1 lần
@@ -117,24 +119,33 @@ function updateAuthUI() {
     const setNameBtn = document.getElementById("btn-chat-set-name");
     const loginPrompt = document.getElementById("chat-login-prompt-wrapper");
     const inputControls = document.getElementById("chat-input-controls");
+    const bannedAlert = document.getElementById("chat-banned-alert");
+    const infoGroup = document.getElementById("chat-user-info-group");
+    const isBanned = Boolean(currentProfile && currentProfile.bannedChat === true);
 
     if (currentUser && currentProfile) {
         if (userBar) userBar.style.display = "flex";
         if (loginPrompt) loginPrompt.style.display = "none";
-        if (inputControls) inputControls.style.display = "block";
+
+        if (isBanned) {
+            if (inputControls) inputControls.style.display = "none";
+            if (bannedAlert) bannedAlert.style.display = "block";
+            if (infoGroup) infoGroup.style.display = "none";
+        } else {
+            if (inputControls) inputControls.style.display = "block";
+            if (bannedAlert) bannedAlert.style.display = "none";
+            if (infoGroup) infoGroup.style.display = "inline-flex";
+        }
 
         if (userDisplay) {
             const nick = currentProfile.nickname || currentUser.displayName || currentUser.email;
             userDisplay.textContent = nick;
         }
-
-        if (setNameBtn) {
-            setNameBtn.style.display = "inline-block";
-        }
     } else {
         if (userBar) userBar.style.display = "none";
         if (loginPrompt) loginPrompt.style.display = "block";
         if (inputControls) inputControls.style.display = "none";
+        if (bannedAlert) bannedAlert.style.display = "none";
         if (typeof resetLogoutBtnState === "function") {
             resetLogoutBtnState();
         }
@@ -326,7 +337,12 @@ function showNicknameRoll(text, duration = 2400) {
 async function handleChangeNickname() {
     if (!currentUser || !currentProfile) return;
 
-    // Kiểm tra thời gian kể từ lần đổi trước (24 giờ) - Bỏ qua nếu kích hoạt God Mode
+    if (currentProfile && currentProfile.bannedChat === true) {
+        alert("Tài khoản của bạn đang bị cấm chat, không thể đổi biệt danh.");
+        return;
+    }
+
+    // Nếu không bật God Mode thì kiểm tra giới hạn 24 giờ
     if (!isGodModeActive() && currentProfile.nicknameUpdatedAt) {
         const lastUpdated = currentProfile.nicknameUpdatedAt.toDate
             ? currentProfile.nicknameUpdatedAt.toDate().getTime()
@@ -366,7 +382,28 @@ async function handleChangeNickname() {
         currentProfile.nickname = newNick;
         currentProfile.nicknameUpdatedAt = new Date();
         updateAuthUI();
+
+        // Cập nhật lại giao diện tin nhắn ngay lập tức trên máy hiện tại
+        if (Array.isArray(lastRenderedMessages) && lastRenderedMessages.length > 0) {
+            renderMessages(lastRenderedMessages);
+        }
+
         showNicknameRoll("Đã đổi!", 2200);
+
+        // Đồng bộ cập nhật trường author trong tất cả tin nhắn cũ của người này trên Firestore
+        try {
+            const qUserMsgs = query(collection(db, "messages"), where("uid", "==", currentUser.uid));
+            const userMsgsSnap = await getDocs(qUserMsgs);
+            if (!userMsgsSnap.empty) {
+                const batch = writeBatch(db);
+                userMsgsSnap.forEach(d => {
+                    batch.update(d.ref, { author: newNick });
+                });
+                await batch.commit();
+            }
+        } catch (syncErr) {
+            console.warn("Không thể batch update tin nhắn cũ trên Firestore:", syncErr);
+        }
     } catch (err) {
         console.error("Lỗi cập nhật biệt danh:", err);
         alert("Không thể cập nhật biệt danh lúc này. Vui lòng thử lại sau.");
@@ -448,7 +485,10 @@ async function handleLogout() {
 /**
  * Render danh sách tin nhắn nhận được từ Firestore
  */
+let lastRenderedMessages = [];
+
 function renderMessages(messagesList) {
+    lastRenderedMessages = messagesList || [];
     const container = document.getElementById("chat-messages-list");
     if (!container) return;
 
@@ -459,7 +499,7 @@ function renderMessages(messagesList) {
         emptyDiv.className = "chat-msg-item";
         emptyDiv.style.fontStyle = "italic";
         emptyDiv.style.opacity = "0.5";
-        emptyDiv.textContent = "Sảnh chưa có tin nhắn nào. Hãy là người đầu tiên gửi lời chúc ôn thi!";
+        emptyDiv.textContent = "Sảnh chưa có tin nhắn nào. Hãy là người đầu tiên gửi tin nhắn!";
         container.appendChild(emptyDiv);
         return;
     }
@@ -473,6 +513,10 @@ function renderMessages(messagesList) {
             item.classList.add("chat-msg-self");
         }
 
+        const authorName = (isSelf && currentProfile && currentProfile.nickname)
+            ? currentProfile.nickname
+            : (msg.author || "Sinh viên");
+
         const meta = document.createElement("div");
         meta.className = "chat-msg-meta";
 
@@ -482,7 +526,7 @@ function renderMessages(messagesList) {
 
         const authorSpan = document.createElement("span");
         authorSpan.className = "chat-msg-author";
-        authorSpan.textContent = `${msg.author || "Sinh viên"}:`;
+        authorSpan.textContent = `${authorName}:`;
 
         meta.appendChild(timeSpan);
         meta.appendChild(authorSpan);
@@ -519,7 +563,10 @@ function updateMobileChatPreview(messagesList) {
     const recentMsgs = messagesList.slice(-2);
     previewEl.innerHTML = recentMsgs.map(msg => {
         const timeStr = formatTime(msg.createdAt);
-        const author = msg.author || "Sinh viên";
+        const isSelf = currentUser && (msg.uid === currentUser.uid);
+        const author = (isSelf && currentProfile && currentProfile.nickname)
+            ? currentProfile.nickname
+            : (msg.author || "Sinh viên");
         const text = msg.text || "";
         return `<div class="mobile-chat-preview-item"><span class="mobile-chat-time">[${timeStr}]</span> <span class="mobile-chat-author">${author}:</span> <span class="mobile-chat-msg">${text}</span></div>`;
     }).join("");
@@ -587,7 +634,7 @@ async function pruneOldMessages() {
         if (snap.size > MAX_MESSAGES_LIMIT) {
             const docsToDelete = snap.docs.slice(MAX_MESSAGES_LIMIT);
             for (const d of docsToDelete) {
-                await deleteDoc(d.ref).catch(() => {});
+                await deleteDoc(d.ref).catch(() => { });
             }
         }
     } catch (e) {
@@ -602,6 +649,11 @@ async function handleSendMessage() {
     if (!currentUser) {
         alert("Vui lòng đăng nhập tài khoản trường (@eaut.edu.vn) để gửi tin nhắn!");
         handleLogin();
+        return;
+    }
+
+    if (currentProfile && currentProfile.bannedChat === true) {
+        alert("Tài khoản của bạn đã bị cấm chat do vi phạm tiêu chuẩn cộng đồng!");
         return;
     }
 
@@ -636,7 +688,7 @@ async function handleSendMessage() {
         if (!isGodModeActive()) {
             await updateDoc(doc(db, "users", currentUser.uid), {
                 lastMessageAt: serverTimestamp()
-            }).catch(() => {});
+            }).catch(() => { });
         }
 
         input.value = "";
@@ -754,7 +806,7 @@ function listenToPresence() {
 
             // Dọn bớt session rác định kỳ (tối đa 3 doc mỗi lần)
             if (staleDocs.length > 0) {
-                staleDocs.slice(0, 3).forEach((ref) => deleteDoc(ref).catch(() => {}));
+                staleDocs.slice(0, 3).forEach((ref) => deleteDoc(ref).catch(() => { }));
             }
         }, () => {
             // Fallback khi chưa cấu hình Rules trên Firebase Console
@@ -782,7 +834,7 @@ function initPresenceSystem() {
     window.addEventListener("beforeunload", () => {
         try {
             const sid = getPresenceSessionId();
-            deleteDoc(doc(db, PRESENCE_COLLECTION, sid)).catch(() => {});
+            deleteDoc(doc(db, PRESENCE_COLLECTION, sid)).catch(() => { });
         } catch (e) { }
     });
 

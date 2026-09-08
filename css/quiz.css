@@ -178,8 +178,13 @@
 }
 
 /* Khi user di chuột vào đáp án (chưa chọn): giữ màu đen, giảm opacity 0.55, không dash */
-.quiz-option:hover:not(.answer-wrong):not(.answer-correct):not(.answer-correct-revealed) {
+.quiz-option:hover:not(.quiz-item-enter):not(.quiz-item-exit):not(.answer-wrong):not(.answer-correct):not(.answer-correct-revealed) {
     opacity: 0.55;
+}
+
+/* Khóa hover vào các đáp án khi đang chạy animation */
+body.animating-lock .quiz-option {
+    pointer-events: none !important;
 }
 
 /* KHI CHỌN ĐÁP ÁN SAI: Rung 4 phía rất nhẹ nhàng và giữ nguyên màu đỏ, nhưng vẫn chịu opacity fadeout */
@@ -343,7 +348,8 @@
 .quiz-item-enter {
     opacity: 0;
     transform: translateY(28px);
-    animation: quizItemRiseExpo 0.38s var(--ease-expo-out) forwards;
+    animation: quizItemRiseExpo 0.38s var(--ease-expo-out) both;
+    pointer-events: none !important;
 }
 
 @keyframes quizItemRiseExpo {

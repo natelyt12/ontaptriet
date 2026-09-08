@@ -180,13 +180,17 @@ Mọi chuyển động trong dự án phải dùng đường cong Easing Exponen
 
 * **Công cụ Moderation CLI (`cli.mjs` - được bỏ trong `.gitignore`):**
   * Viết bằng Node.js thuần (ESM), không phụ thuộc package ngoài.
-  * Hỗ trợ điều hướng mũi tên `↑ / ↓`, phím `d / Delete` để kiểm duyệt xóa tin nhắn vi phạm, phím `g` để bật/tắt Bỏ qua Cooldown, phím `r` để làm mới dữ liệu, phím `q` để thoát.
+  * Hỗ trợ 2 Tab điều hướng bằng phím `Tab` hoặc `1 / 2`:
+    * **Tab [1] Tin nhắn:** Xem và duyệt danh sách tin nhắn, phím `d / Delete` để xóa tin nhắn vi phạm, phím `b` để **Cấm Chat (Ban Chat)** và tự động xóa sạch tin nhắn của người vi phạm, phím `u` để **Gỡ cấm chat (Unban)**.
+    * **Tab [2] Tài khoản:** Liệt kê toàn bộ tài khoản đã đăng nhập trong Firestore (`users`), hiển thị biệt danh mới nhất, email, UID, trạng thái `[BANNED]` hoặc `[HOẠT ĐỘNG]`. Cho phép Cấm (`b`) hoặc Gỡ cấm (`u`) trực tiếp mà không phụ thuộc vào việc có tin nhắn trong sảnh hay không.
+  * Phím `g` để bật/tắt Bỏ qua Cooldown (Bypass), phím `r` để làm mới dữ liệu, phím `q` để thoát.
+  * Tự động hiển thị tag `[BANNED]` màu đỏ cạnh tên người dùng đã bị cấm chat.
   * Tự động xác thực tài khoản Google `@eaut.edu.vn` lần đầu qua popup trình duyệt và lưu phiên làm việc vào `.admin_session.json` (tự động refresh token vĩnh viễn). Hỗ trợ cả file `serviceAccountKey.json` nếu có.
 * **Đặc quyền Bỏ qua Cooldown (`25002894@eaut.edu.vn`):**
   * Tài khoản duy nhất được phép kích hoạt: `25002894@eaut.edu.vn`.
   * Trạng thái lưu trên Firestore document `users/JfewpDCx6YV7OSezz8YyKNwCPm63` với trường `{ bypassCooldown: true/false, godMode: true/false }` và được lắng nghe realtime `onSnapshot`.
   * Khi kích hoạt:
-    * Bỏ qua hoàn toàn bộ đếm Cooldown 5 phút giữa các lần gửi tin.
+    * Bỏ qua hoàn toàn bộ đếm Cooldown (1 phút) giữa các lần gửi tin.
     * Bỏ qua giới hạn 24 giờ đổi biệt danh, cho phép đổi tên liên tục không giới hạn.
     * **Hoàn toàn ẩn và không gắn nhãn/badge lên UI** để giữ trải nghiệm tự nhiên, kín đáo.
 * **Cấu hình Quyền Firestore (Security Rules) khi xóa tin hoặc đổi trạng thái:**
