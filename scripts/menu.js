@@ -111,7 +111,8 @@ function initRandomToggle() {
 
     if (!toggleBtn) return;
 
-    toggleBtn.addEventListener("click", () => {
+    toggleBtn.addEventListener("mousedown", (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
         if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
 
         isRandomQuestions = !isRandomQuestions;
@@ -220,7 +221,8 @@ async function updateAvailableCount() {
 function initLimitSelector() {
     const choices = document.querySelectorAll(".limit-choice");
     choices.forEach(choice => {
-        choice.addEventListener("click", () => {
+        choice.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
             if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
             choices.forEach(c => c.classList.remove("active"));
             choice.classList.add("active");
@@ -238,13 +240,15 @@ function initActionButtons() {
     const themeBtn = document.getElementById("theme-toggle-btn");
 
     if (startBtn) {
-        startBtn.onclick = () => {
+        startBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             startQuiz();
         };
     }
 
     if (historyBtn) {
-        historyBtn.onclick = () => {
+        historyBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
             if (typeof showHistoryScreen === "function") {
                 showHistoryScreen();
@@ -253,7 +257,8 @@ function initActionButtons() {
     }
 
     if (themeBtn) {
-        themeBtn.onclick = () => {
+        themeBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             if (typeof toggleTheme === "function") {
                 toggleTheme();
             }
@@ -262,7 +267,7 @@ function initActionButtons() {
 
     // Áp dụng theme đã lưu ngay khi khởi tạo
     if (typeof applyTheme === "function") {
-        applyTheme(currentTheme, false);
+        applyTheme(currentTheme, false, false);
     }
 }
 

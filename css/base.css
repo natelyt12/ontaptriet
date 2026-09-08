@@ -1,0 +1,274 @@
+/* =========================================================================
+   MODULE: BASE & LAYOUT (css/base.css)
+   Phong cách chữ đen tuyền, cùng cỡ chữ, tối giản tuyệt đối chuẩn giấy A4
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    /* Xóa bỏ lớp nền màu xanh nháy mặc định khi chạm trên màn hình cảm ứng */
+}
+
+:root {
+    --bg-white: #ffffff;
+    --text-pure-black: #000000;
+    --font-serif: "Times New Roman", Times, "Nimbus Roman No9 L", serif;
+    /* Một cỡ chữ duy nhất đồng bộ toàn trang */
+    --uniform-size: 18.5px;
+
+    /* QUY CHUẨN ANIMATION CHUẨN EXPO */
+    --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-expo-in: cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* --- CHẾ ĐỘ TỐI (DARK THEME) TOÀN CỤC --- */
+[data-theme="dark"] {
+    --bg-white: #121212;
+    --text-pure-black: #ededed;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-white);
+    color: var(--text-pure-black);
+    font-family: var(--font-serif);
+    font-size: var(--uniform-size);
+    line-height: 1.25;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Hiệu ứng chuyển màu êm dịu khi switch theme */
+html,
+body,
+.dropdown-menu,
+.canvas-wrapper {
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* KHÓA TƯƠNG TÁC CLICK KHI ĐANG CHẠY ANIMATION (Khóa qua JS Capture Phase để tránh pointer-events: none làm mất trạng thái :hover của nút) */
+body.animating-lock {
+    user-select: none;
+}
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* --- BACKGROUND LIVE WALLPAPER --- */
+.live-wallpaper-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+/* Chỉ hiển thị hình nền động trên nền tối (Dark mode) để giữ Light mode chuẩn giấy thi A4 tối giản */
+[data-theme="dark"] .live-wallpaper-container.active {
+    opacity: 0.18;
+}
+
+.live-wallpaper-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* KHUNG CANVAS TOÀN MÀN HÌNH */
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.mobile-spacer,
+.mobile-chat-preview {
+    display: none;
+}
+
+/* 1. Điểm neo: TOP CENTER (Ontaptriet v2.1) */
+.anchor-top-center {
+    position: absolute;
+    top: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    user-select: none;
+    transition: opacity 0.38s var(--ease-expo-out), transform 0.38s var(--ease-expo-out);
+}
+
+.anchor-top-center.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -12px);
+    transition: opacity 0.35s var(--ease-expo-in), transform 0.35s var(--ease-expo-in);
+}
+
+.brand-title {
+    font-size: var(--uniform-size);
+    font-weight: normal;
+    color: var(--text-pure-black);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    transition: opacity 0.38s var(--ease-expo-out);
+}
+
+.brand-title.brand-fade-out {
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-expo-in);
+}
+
+.brand-title.brand-fade-in {
+    animation: brandTitleFadeIn 0.38s var(--ease-expo-out) forwards;
+}
+
+@keyframes brandTitleFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.brand-version {
+    font-size: var(--uniform-size);
+    font-weight: normal;
+    color: var(--text-pure-black);
+    opacity: 0.55;
+    font-style: italic;
+}
+
+/* 2. Điểm neo: CENTER (Vùng chọn) */
+.anchor-center {
+    width: 100%;
+    max-width: 540px;
+}
+
+/* Các màn hình có nội dung ngắn gọn: Cân chỉnh max-width vừa vặn (540px) để trọng tâm cân đối */
+#settings-screen,
+#result-screen,
+#history-screen,
+#history-detail-screen,
+.result-container,
+.history-container,
+.history-detail-container,
+#quiz-screen:has(.result-container) {
+    max-width: 540px;
+}
+
+#menu-screen {
+    max-width: 960px;
+    width: 100%;
+    transition: max-width 0.35s var(--ease-expo-out);
+}
+
+/* Hàng ngang */
+.menu-row {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    width: 100%;
+    position: relative;
+}
+
+.menu-label-prefix {
+    font-size: var(--uniform-size);
+    font-weight: normal;
+    color: var(--text-pure-black);
+    white-space: nowrap;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+/* --- MÀN HÌNH LOADING ASCII BAN ĐẦU --- */
+.page-loader {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    user-select: none;
+    transition: opacity 0.25s ease;
+}
+
+.page-loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-spinner {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    font-family: "JetBrains Mono", monospace !important;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 24px;
+    height: 28px;
+    line-height: 1;
+    text-align: center;
+    white-space: pre;
+    letter-spacing: 0.5px;
+}
+
+/* --- EASTER EGGS --- */
+.easter-egg-dan-gay {
+    position: fixed;
+    pointer-events: none !important;
+    user-select: none;
+    z-index: 10;
+    font-family: inherit;
+    font-size: var(--uniform-size);
+    font-weight: normal;
+    font-style: normal;
+    color: var(--text-pure-black);
+    white-space: nowrap;
+    animation: danGayPopScale 0.5s linear forwards;
+    transform-origin: center center;
+}
+
+@keyframes danGayPopScale {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}

@@ -14,7 +14,8 @@ const ScreenSwitcher = {
         "result-screen",
         "history-screen",
         "history-detail-screen",
-        "settings-screen"
+        "settings-screen",
+        "chat-screen"
     ],
 
     /**

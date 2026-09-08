@@ -1,0 +1,436 @@
+/* =========================================================================
+   MODULE: QUIZ SCREEN & FEEDBACK (css/quiz.css)
+   Giao diện làm bài trắc nghiệm, phản hồi đúng/sai, SVG border sweep, status bar
+   ========================================================================= */
+
+/* --- GIAO DIỆN LÀM BÀI TRẮC NGHIỆM --- */
+.quiz-container {
+    width: 100%;
+}
+
+.quiz-question {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    margin-bottom: 18px;
+    word-break: break-word;
+}
+
+.quiz-question .question-number {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.quiz-question .question-text {
+    font-weight: normal;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-option {
+    position: relative;
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    cursor: pointer;
+    user-select: none;
+    padding: 3px 8px;
+    margin-left: -8px;
+    transition: opacity 0.15s ease, color 0.25s ease;
+    display: block;
+    width: fit-content;
+}
+
+/* HÀNG NÚT CÂU TIẾP THEO (NẰM DƯỚI CÁC ĐÁP ÁN) */
+.quiz-next-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 28px;
+    width: 100%;
+}
+
+/* 3. Điểm neo: BOTTOM (Thanh trạng thái di chuyển từ dưới cạnh màn hình lên) */
+.anchor-bottom-bar {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translate(-50%, calc(100% + 30px));
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    max-width: 860px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    user-select: none;
+    pointer-events: none;
+    transition: transform 0.28s var(--ease-expo-in), opacity 0.25s ease, visibility 0.28s;
+    z-index: 50;
+}
+
+.anchor-bottom-bar.active {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 0.42s var(--ease-expo-out), opacity 0.35s ease;
+}
+
+.quiz-status-spacer {
+    min-height: 1px;
+}
+
+.quiz-back-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-start;
+    white-space: nowrap;
+}
+
+.btn-quiz-copy {
+    font-family: var(--font-serif);
+    font-size: var(--uniform-size);
+    font-style: italic;
+    color: var(--text-pure-black);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: baseline;
+    vertical-align: baseline;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.btn-quiz-copy .label-viewport {
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: width 0.3s var(--ease-expo-out), opacity 0.15s ease, border-bottom-color 0.15s ease;
+}
+
+.btn-quiz-copy:hover .label-viewport {
+    opacity: 0.75;
+    border-bottom-color: var(--text-pure-black);
+}
+
+/* Trạng thái xác nhận màu đỏ khi bấm 1 lần */
+.btn-quiz-back .label-viewport {
+    border-bottom: 1.5px dashed var(--text-pure-black);
+    padding-bottom: 1px;
+    transition: width 0.3s var(--ease-expo-out), border-bottom-style 0.15s ease, border-bottom-color 0.2s ease;
+}
+
+.btn-quiz-back:hover .label-viewport,
+.btn-quiz-back.btn-active-hold .label-viewport {
+    border-bottom-style: solid;
+}
+
+.btn-quiz-back.confirming {
+    color: #d93025 !important;
+}
+
+.btn-quiz-back.confirming .btn-label,
+.btn-quiz-back.confirming .label-viewport {
+    border-bottom-color: #d93025 !important;
+    border-bottom-style: solid;
+}
+
+.quiz-index-center {
+    text-align: center;
+}
+
+.quiz-index-text {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    opacity: 0.45;
+}
+
+.btn-quiz-next {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(20px);
+    transition: opacity 0.15s ease;
+}
+
+/* KHI CHỌN XONG ĐÁP ÁN: Nút câu tiếp theo fade từ phải qua trái */
+.btn-quiz-next.show-from-right {
+    pointer-events: auto;
+    animation: nextBtnSlideInRight 0.35s var(--ease-expo-out) forwards;
+}
+
+@keyframes nextBtnSlideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Khi user di chuột vào đáp án (chưa chọn): giữ màu đen, giảm opacity 0.55, không dash */
+.quiz-option:hover:not(.answer-wrong):not(.answer-correct):not(.answer-correct-revealed) {
+    opacity: 0.55;
+}
+
+/* KHI CHỌN ĐÁP ÁN SAI: Rung 4 phía rất nhẹ nhàng và giữ nguyên màu đỏ, nhưng vẫn chịu opacity fadeout */
+.quiz-option.answer-wrong {
+    color: #d93025;
+    animation: shakeWrongSteps 0.28s steps(1) forwards;
+    cursor: default;
+}
+
+@keyframes shakeWrongSteps {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translate(-1.5px, -1px);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translate(1.5px, 1px);
+    }
+
+    37% {
+        opacity: 1;
+        transform: translate(-1px, 1.5px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(1px, -1.5px);
+    }
+
+    62% {
+        opacity: 1;
+        transform: translate(-1.5px, 0.5px);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translate(1px, -1px);
+    }
+
+    87% {
+        opacity: 1;
+        transform: translate(-0.5px, 1px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+/* KHI CHỌN SAI: Đáp án đúng chuyển xanh lá và có đường kẻ dưới quét từ trái qua phải */
+.quiz-option.answer-correct-revealed {
+    color: #1e8e3e;
+    cursor: default;
+}
+
+.quiz-option.answer-correct-revealed::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    width: calc(100% - 16px);
+    bottom: 1px;
+    height: 1.5px;
+    background-color: #1e8e3e;
+    transform-origin: left center;
+    animation: borderLineSweepRight 0.42s var(--ease-expo-out) forwards;
+}
+
+@keyframes borderLineSweepRight {
+    0% {
+        transform: scaleX(0);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Khi đã chọn 1 câu: khóa chọn thêm */
+.quiz-options.quiz-answered {
+    pointer-events: none !important;
+}
+
+.quiz-options.quiz-answered .quiz-option {
+    cursor: default !important;
+}
+
+/* ANIMATION THOÁT TỪNG DÒNG TRƯỢT LÊN TRÊN VÀ FADEOUT (EXPO IN) */
+.quiz-item-exit {
+    animation-name: quizItemFlyUpOut !important;
+    animation-duration: 0.28s !important;
+    animation-timing-function: var(--ease-expo-in) !important;
+    animation-fill-mode: forwards !important;
+    pointer-events: none !important;
+}
+
+@keyframes quizItemFlyUpOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-24px);
+    }
+}
+
+/* KHI CHỌN ĐÁP ÁN ĐÚNG: Chuyển và giữ nguyên màu xanh lá cây, nhưng vẫn chịu opacity fadeout */
+.quiz-option.answer-correct {
+    color: #1e8e3e;
+    cursor: default;
+}
+
+/* SVG border màu xanh lá quét vòng theo chiều kim đồng hồ và GIỮ NGUYÊN */
+.border-sweep-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.border-sweep-rect {
+    fill: none;
+    stroke: #1e8e3e;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: borderSweepHold 0.85s var(--ease-expo-out) forwards;
+}
+
+@keyframes borderSweepHold {
+    0% {
+        stroke-dashoffset: 100;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+.quiz-option .option-prefix {
+    font-weight: normal;
+}
+
+/* ANIMATION TRƯỢT LẦN LƯỢT TỪ DƯỚI LÊN (EXPO OUT) */
+.quiz-item-enter {
+    opacity: 0;
+    transform: translateY(28px);
+    animation: quizItemRiseExpo 0.38s var(--ease-expo-out) forwards;
+}
+
+@keyframes quizItemRiseExpo {
+    0% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* HIỆU ỨNG CHỈ FADE (KHÔNG TRƯỢT) KHI VỀ MENU CHÍNH */
+.quiz-fade-out-only {
+    animation: pureFadeOut 0.35s var(--ease-expo-in) forwards !important;
+}
+
+@keyframes pureFadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.menu-fade-in-only {
+    animation: pureFadeIn 0.38s var(--ease-expo-out) forwards;
+}
+
+@keyframes pureFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* COPYRIGHT GÓC DƯỚI BÊN PHẢI */
+.bottom-right-copyright {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    max-width: calc(100vw - 48px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: normal;
+    color: var(--text-pure-black);
+    opacity: 0.35;
+    user-select: none;
+    pointer-events: none;
+    transition: opacity 0.38s var(--ease-expo-out);
+    z-index: 40;
+}
+
+.bottom-right-copyright.fade-out {
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-expo-in);
+}
+
+/* --- DARK THEME CHO QUIZ SCREEN --- */
+[data-theme="dark"] .quiz-option.answer-correct,
+[data-theme="dark"] .quiz-option.answer-correct-revealed {
+    color: #34c759 !important;
+}
+
+[data-theme="dark"] .border-sweep-rect {
+    stroke: #34c759;
+}
+
+[data-theme="dark"] .quiz-option.answer-correct-revealed::after {
+    background-color: #34c759;
+}
+
+[data-theme="dark"] .quiz-option.answer-wrong,
+[data-theme="dark"] .btn-quiz-back.confirming {
+    color: #ff5252 !important;
+}
+
+[data-theme="dark"] .btn-quiz-back.confirming .btn-label,
+[data-theme="dark"] .btn-quiz-back.confirming .label-viewport {
+    border-bottom-color: #ff5252 !important;
+}

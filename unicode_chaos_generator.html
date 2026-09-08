@@ -51,7 +51,7 @@
                         placeholder="Nhập chữ bất kỳ..." 
                         class="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition-colors font-mono">
                     
-                    <button onclick="resetInput()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs text-slate-300 transition-colors font-semibold">
+                    <button onmousedown="resetInput()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs text-slate-300 transition-colors font-semibold">
                         Đặt lại
                     </button>
                 </div>
@@ -143,10 +143,10 @@
 
                 <!-- Action Button -->
                 <div class="flex gap-2">
-                    <button id="btn-trigger-reveal" onclick="triggerRevealSequence()" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/20">
+                    <button id="btn-trigger-reveal" onmousedown="triggerRevealSequence()" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/20">
                         ⚡ Bắt đầu Lộ Chữ
                     </button>
-                    <button id="btn-glitch-all" onclick="resetToContinuousGlitch()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg transition-all">
+                    <button id="btn-glitch-all" onmousedown="resetToContinuousGlitch()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg transition-all">
                         Làm loạn 100%
                     </button>
                 </div>
@@ -176,7 +176,7 @@
                         <div class="flex gap-2">
                             <input id="static-output-field" type="text" readonly
                                 class="flex-1 bg-slate-900 border border-slate-800 rounded px-3 py-1.5 text-sm text-slate-300 font-mono focus:outline-none">
-                            <button onclick="copyStaticText()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded transition-colors">
+                            <button onmousedown="copyStaticText()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded transition-colors">
                                 Copy
                             </button>
                         </div>

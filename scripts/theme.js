@@ -7,11 +7,13 @@
 
 // 1. Quản lý Theme (Sáng / Tối)
 const THEME_STORAGE_KEY = "ontaptriet_theme";
-let currentTheme = localStorage.getItem(THEME_STORAGE_KEY) || "dark";
+let currentTheme = localStorage.getItem(THEME_STORAGE_KEY) || "light";
 
-function applyTheme(theme, animate = false) {
+function applyTheme(theme, animate = false, save = true) {
     currentTheme = theme;
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    if (save) {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+    }
     if (theme === "dark") {
         document.documentElement.setAttribute("data-theme", "dark");
     } else {
@@ -37,7 +39,7 @@ function applyTheme(theme, animate = false) {
 function toggleTheme() {
     if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
-    applyTheme(nextTheme, true);
+    applyTheme(nextTheme, true, true);
 }
 
 // 2. Quản lý Phông chữ (Font Options)
@@ -49,13 +51,14 @@ const FONT_OPTIONS = [
     { id: "merriweather", name: "Merriweather", family: '"Merriweather", Georgia, serif' },
     { id: "ebgaramond", name: "EB Garamond", family: '"EB Garamond", Garamond, Georgia, serif' },
     { id: "literata", name: "Literata", family: '"Literata", Georgia, serif' },
-    { id: "playfair", name: "Playfair Display", family: '"Playfair Display", Georgia, serif' },
+    { id: "lexend", name: "Lexend", family: '"Lexend", system-ui, -apple-system, sans-serif' },
     { id: "crimson", name: "Crimson Pro", family: '"Crimson Pro", "Crimson Text", Garamond, Georgia, serif' },
 ];
 
 let fontDropdown = null;
 
 function applyFont(fontId, save = true) {
+    if (fontId === "spacegrotesk" || fontId === "playfair") fontId = "lexend";
     let fontConfig = FONT_OPTIONS.find(f => f.id === fontId);
     if (!fontConfig) {
         fontConfig = FONT_OPTIONS[0];

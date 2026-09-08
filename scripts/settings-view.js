@@ -71,19 +71,22 @@ function initSettingsView() {
     const themeBtn = document.getElementById("theme-toggle-btn");
 
     if (settingsBtn) {
-        settingsBtn.onclick = () => {
+        settingsBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             showSettingsScreen();
         };
     }
 
     if (settingsBackBtn) {
-        settingsBackBtn.onclick = () => {
+        settingsBackBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             returnToMenuFromSettings();
         };
     }
 
     if (themeBtn) {
-        themeBtn.onclick = () => {
+        themeBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             if (typeof toggleTheme === "function") {
                 toggleTheme();
             }
@@ -92,7 +95,8 @@ function initSettingsView() {
 
     const lwBtn = document.getElementById("lw-toggle-btn");
     if (lwBtn) {
-        lwBtn.onclick = () => {
+        lwBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             if (typeof toggleLiveWallpaper === "function") {
                 toggleLiveWallpaper();
             }

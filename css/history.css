@@ -1,0 +1,111 @@
+/* =========================================================================
+   MODULE: HISTORY SCREEN (css/history.css)
+   Giao diện lịch sử làm bài, danh sách lần thi và chi tiết lần thi
+   ========================================================================= */
+
+.history-container {
+    width: 100%;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.history-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .history-item {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.history-item-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    line-height: 1.35;
+}
+
+.history-index {
+    font-weight: bold;
+    min-width: 22px;
+}
+
+.history-subject {
+    font-weight: normal;
+}
+
+.history-chapter {
+    opacity: 0.65;
+    font-style: italic;
+}
+
+.history-separator {
+    opacity: 0.35;
+}
+
+.history-score {
+    font-weight: bold;
+}
+
+.history-counts {
+    opacity: 0.75;
+}
+
+.history-item-sub {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-left: 30px;
+}
+
+.history-item-date {
+    font-size: 14px;
+    opacity: 0.45;
+}
+
+.btn-history-mistakes {
+    font-size: 14px;
+    padding: 0 0 1px 0;
+    opacity: 0.85;
+    white-space: nowrap;
+}
+
+.btn-history-mistakes:hover {
+    opacity: 1;
+}
+
+.history-detail-container {
+    width: 100%;
+}
+
+.history-detail-summary {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .history-detail-summary {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.history-detail-meta {
+    font-size: 15px;
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+.history-empty {
+    font-size: var(--uniform-size);
+    font-style: italic;
+}

@@ -1,0 +1,190 @@
+/* =========================================================================
+   MODULE: RESULT SCREEN & MISTAKES REVIEW (css/result.css)
+   Màn hình tổng kết điểm và danh sách các câu làm sai
+   ========================================================================= */
+
+.result-container {
+    width: 100%;
+}
+
+.result-summary-card {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .result-summary-card {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.result-score-line {
+    font-size: var(--uniform-size);
+    line-height: 1.6;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.mistakes-section {
+    margin-bottom: 24px;
+}
+
+.mistakes-header {
+    font-size: var(--uniform-size);
+    margin-bottom: 16px;
+    color: var(--text-pure-black);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.mistakes-header .mistakes-title {
+    font-weight: bold;
+}
+
+.mistakes-header .mistakes-count {
+    opacity: 0.65;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.mistakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-height: 48vh;
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+[data-theme="dark"] .mistakes-list {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.mistakes-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.mistakes-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .mistakes-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mistake-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .mistake-item {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.mistake-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.mistake-question {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    word-break: break-word;
+    margin-bottom: 2px;
+}
+
+.mistake-question .question-number {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.mistake-question .question-text {
+    font-weight: normal;
+}
+
+.mistake-options {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Đáp án trong danh sách câu sai: Cùng định dạng padding, margin và font-weight normal như quiz-view */
+.mistake-option {
+    position: relative;
+    font-size: var(--uniform-size);
+    font-weight: normal;
+    color: var(--text-pure-black);
+    line-height: 1.35;
+    padding: 3px 8px;
+    margin-left: -8px;
+    display: block;
+    width: fit-content;
+    user-select: none;
+    cursor: default;
+}
+
+.mistake-option .option-prefix {
+    font-weight: normal;
+}
+
+/* Đáp án không chọn: Giảm opacity 0.55 như quiz-view */
+.mistake-option:not(.answer-wrong):not(.answer-correct-revealed) {
+    opacity: 0.55;
+}
+
+/* Đáp án người dùng chọn sai: Màu đỏ y hệt quiz-view (#d93025 ở Light, #ff5252 ở Dark), KHÔNG dùng bold */
+.mistake-option.answer-wrong {
+    color: #d93025 !important;
+    font-weight: normal;
+    opacity: 1 !important;
+}
+
+[data-theme="dark"] .mistake-option.answer-wrong {
+    color: #ff5252 !important;
+}
+
+/* Đáp án đúng: Màu xanh lá cây y hệt quiz-view (#1e8e3e ở Light, #34c759 ở Dark), KHÔNG dùng bold */
+.mistake-option.answer-correct-revealed {
+    color: #1e8e3e !important;
+    font-weight: normal;
+    opacity: 1 !important;
+}
+
+[data-theme="dark"] .mistake-option.answer-correct-revealed {
+    color: #34c759 !important;
+}
+
+/* Đường kẻ dưới quét từ trái qua phải của đáp án đúng: Y hệt quiz-view, không phải text-decoration thông thường */
+.mistake-option.answer-correct-revealed::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    width: calc(100% - 16px);
+    bottom: 1px;
+    height: 1.5px;
+    background-color: #1e8e3e;
+    transform-origin: left center;
+    animation: borderLineSweepRight 0.42s var(--ease-expo-out) forwards;
+}
+
+[data-theme="dark"] .mistake-option.answer-correct-revealed::after {
+    background-color: #34c759 !important;
+}
+
+.mistakes-empty-congrats {
+    padding: 12px 0;
+    font-size: var(--uniform-size);
+    color: #1e8e3e;
+    font-style: italic;
+    font-weight: normal;
+}
+
+[data-theme="dark"] .mistakes-empty-congrats {
+    color: #34c759;
+}

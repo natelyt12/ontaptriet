@@ -12,8 +12,38 @@ const DropdownAnimationLock = {
     unlock() {
         this.isLocked = false;
         document.body.classList.remove("animating-lock");
+        document.querySelectorAll(".btn-active-hold").forEach(el => el.classList.remove("btn-active-hold"));
     }
 };
+
+// Chặn mọi tương tác chuột khi animation đang chạy qua Capture Phase trên window
+// Không cần dùng pointer-events: none, giúp giữ nguyên 100% trạng thái :hover của nút khi bấm
+window.addEventListener("mousedown", (e) => {
+    if (DropdownAnimationLock.isLocked) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return;
+    }
+    const btn = e.target.closest(".btn-action, .btn-quiz-back, .btn-quiz-next, .btn-random-toggle, .limit-choice, .dropdown-trigger, .quiz-option");
+    if (btn) {
+        btn.classList.add("btn-active-hold");
+    }
+}, true);
+
+window.addEventListener("click", (e) => {
+    if (DropdownAnimationLock.isLocked) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+    }
+}, true);
+
+window.addEventListener("mouseup", () => {
+    if (!DropdownAnimationLock.isLocked) {
+        setTimeout(() => {
+            document.querySelectorAll(".btn-active-hold").forEach(el => el.classList.remove("btn-active-hold"));
+        }, 120);
+    }
+}, true);
 
 /**
  * Hàm hỗ trợ đo kích thước chữ chính xác và cuộn chữ (Vertical Text Roll + Width Transition)
@@ -122,7 +152,8 @@ class InlineDropdown {
     bindEvents() {
         if (!this.trigger) return;
 
-        this.trigger.addEventListener("click", (e) => {
+        this.trigger.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
             e.stopPropagation();
             if (DropdownAnimationLock.isLocked) return;
 
@@ -151,7 +182,8 @@ class InlineDropdown {
             item.style.setProperty("--item-delay", `${0.18 + index * 0.04}s`);
             item.innerHTML = `<span class="item-text">${itemData.name}</span>`;
 
-            item.addEventListener("click", (e) => {
+            item.addEventListener("mousedown", (e) => {
+                if (e.button !== undefined && e.button !== 0) return;
                 e.stopPropagation();
                 if (DropdownAnimationLock.isLocked) return;
 
@@ -222,7 +254,8 @@ class InlineDropdown {
 }
 
 // Bắt sự kiện click ra ngoài để đóng mọi dropdown
-document.addEventListener("click", () => {
+document.addEventListener("mousedown", (e) => {
+    if (e.button !== undefined && e.button !== 0) return;
     if (DropdownAnimationLock.isLocked) return;
     InlineDropdown.closeAll();
 });

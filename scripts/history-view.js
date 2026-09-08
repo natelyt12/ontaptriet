@@ -73,8 +73,11 @@ function renderHistoryScreen() {
                     <span class="btn-arrow">‹</span> <span class="btn-label">Về menu chính</span>
                 </button>
                 ${list.length > 0 ? `
-                    <button id="history-clear-btn" class="btn-action btn-danger">
-                        Xóa lịch sử
+                    <span class="action-separator">/</span>
+                    <button id="history-clear-btn" class="btn-action btn-danger btn-history-clear" type="button">
+                        <span class="label-viewport" id="history-clear-viewport">
+                            <span class="label-text-current">Xóa lịch sử</span>
+                        </span>
                     </button>
                 ` : ""}
             </div>
@@ -91,7 +94,8 @@ function renderHistoryScreen() {
 
     // Gắn sự kiện xem câu sai cho từng đợt làm bài (nếu có câu sai)
     historyScreen.querySelectorAll(".btn-history-mistakes").forEach(btn => {
-        btn.onclick = () => {
+        btn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             const idx = parseInt(btn.getAttribute("data-history-idx"), 10);
             if (!isNaN(idx) && list[idx]) {
                 showHistoryMistakesDetail(list[idx]);
@@ -102,35 +106,52 @@ function renderHistoryScreen() {
     // Gắn sự kiện nút Quay lại
     const backBtn = document.getElementById("history-back-btn");
     if (backBtn) {
-        backBtn.onclick = () => {
+        backBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             returnFromHistoryToMenu();
         };
     }
 
-    // Gắn sự kiện nút Xóa lịch sử (xác nhận 2 bước)
+    // Gắn sự kiện nút Xóa lịch sử (xác nhận 2 bước dạng cuộn chữ mượt mà)
     const clearBtn = document.getElementById("history-clear-btn");
+    const clearViewport = document.getElementById("history-clear-viewport");
     let isClearConfirming = false;
     let clearTimer = null;
 
-    if (clearBtn) {
-        clearBtn.onclick = () => {
+    function resetHistoryClearState() {
+        isClearConfirming = false;
+        clearTimeout(clearTimer);
+        if (clearBtn) clearBtn.classList.remove("confirming");
+        if (clearViewport) {
+            const currentSpan = clearViewport.querySelector(".label-text-current");
+            const currentText = currentSpan ? currentSpan.textContent.trim() : clearViewport.textContent.trim();
+            if (currentText !== "Xóa lịch sử") {
+                if (typeof animateLabelRoll === "function") {
+                    animateLabelRoll(clearViewport, "Xóa lịch sử");
+                } else {
+                    clearViewport.innerHTML = `<span class="label-text-current">Xóa lịch sử</span>`;
+                }
+            }
+        }
+    }
+
+    if (clearBtn && clearViewport) {
+        clearBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             if (!isClearConfirming) {
                 isClearConfirming = true;
-                clearBtn.style.color = "#d93025";
-                clearBtn.style.borderBottomColor = "#d93025";
-                clearBtn.textContent = "Xác nhận xóa?";
+                clearBtn.classList.add("confirming");
+                if (typeof animateLabelRoll === "function") {
+                    animateLabelRoll(clearViewport, "Xác nhận");
+                } else {
+                    clearViewport.innerHTML = `<span class="label-text-current">Xác nhận</span>`;
+                }
 
                 clearTimeout(clearTimer);
-                clearTimer = setTimeout(() => {
-                    if (isClearConfirming) {
-                        isClearConfirming = false;
-                        clearBtn.style.color = "";
-                        clearBtn.style.borderBottomColor = "";
-                        clearBtn.textContent = "Xóa lịch sử";
-                    }
-                }, 4000);
+                clearTimer = setTimeout(resetHistoryClearState, 4000);
             } else {
                 clearTimeout(clearTimer);
+                resetHistoryClearState();
                 if (typeof clearHistory === "function") {
                     clearHistory();
                 }
@@ -287,7 +308,8 @@ function renderHistoryMistakesDetail(record) {
 
     const backBtn = document.getElementById("history-detail-back-btn");
     if (backBtn) {
-        backBtn.onclick = () => {
+        backBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             returnFromDetailToHistory();
         };
     }

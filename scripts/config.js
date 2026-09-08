@@ -2,7 +2,7 @@
 
 // 0. Phiên bản ứng dụng toàn cục (Global Version Index)
 // Chỉ cần đổi số phiên bản tại đây (ví dụ "2.2"), toàn bộ giao diện sẽ tự động cập nhật
-const APP_VERSION = "2.2";
+const APP_VERSION = "2.3";
 
 function getAppVersion() {
     const v = String(APP_VERSION).trim();

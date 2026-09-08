@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Khởi tạo các sự kiện cho Menu tĩnh
     initMenu();
 
-
     // Khởi tạo các Easter Eggs (nếu có)
     if (typeof initEasterEggs === "function") {
         initEasterEggs();

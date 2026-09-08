@@ -20,8 +20,19 @@ function resetBackBtnState() {
     isBackConfirming = false;
     clearTimeout(backResetTimer);
     const backBtn = document.getElementById("quiz-back-btn");
-    if (backBtn) {
-        backBtn.classList.remove("confirming");
+    const viewport = document.getElementById("quiz-back-viewport");
+    if (backBtn) backBtn.classList.remove("confirming");
+    if (viewport) {
+        const currentSpan = viewport.querySelector(".label-text-current");
+        const currentText = currentSpan ? currentSpan.textContent.trim() : viewport.textContent.trim();
+        if (currentText !== "Quay lại") {
+            if (typeof animateLabelRoll === "function") {
+                animateLabelRoll(viewport, "Quay lại");
+            } else {
+                viewport.innerHTML = `<span class="label-text-current">Quay lại</span>`;
+            }
+        }
+    } else if (backBtn) {
         const label = backBtn.querySelector(".back-label");
         if (label) label.textContent = "Quay lại";
     }
@@ -129,13 +140,19 @@ async function handleCopyCurrentQuestion() {
 
 function initStatusBar() {
     const backBtn = document.getElementById("quiz-back-btn");
+    const backViewport = document.getElementById("quiz-back-viewport");
     if (backBtn) {
-        backBtn.addEventListener("click", () => {
+        backBtn.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
             if (!isBackConfirming) {
                 isBackConfirming = true;
                 backBtn.classList.add("confirming");
-                const label = backBtn.querySelector(".back-label");
-                if (label) label.textContent = "Xác nhận";
+                if (backViewport && typeof animateLabelRoll === "function") {
+                    animateLabelRoll(backViewport, "Xác nhận");
+                } else {
+                    const label = backBtn.querySelector(".back-label") || backViewport;
+                    if (label) label.textContent = "Xác nhận";
+                }
 
                 clearTimeout(backResetTimer);
                 backResetTimer = setTimeout(resetBackBtnState, 4000);
@@ -149,7 +166,10 @@ function initStatusBar() {
 
     const copyBtn = document.getElementById("quiz-copy-btn");
     if (copyBtn) {
-        copyBtn.addEventListener("click", handleCopyCurrentQuestion);
+        copyBtn.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
+            handleCopyCurrentQuestion();
+        });
     }
 }
 
@@ -226,7 +246,8 @@ function renderCurrentQuestion() {
     let hasAnswered = false;
 
     optionEls.forEach(el => {
-        el.addEventListener("click", () => {
+        el.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
             if (hasAnswered) return;
             hasAnswered = true;
 
@@ -278,10 +299,10 @@ function renderCurrentQuestion() {
     // Bấm nút "Câu tiếp theo ›" để chuyển câu
     if (nextBtn) {
         let isNavigatingNext = false;
-        nextBtn.addEventListener("click", () => {
+        nextBtn.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
             if (isNavigatingNext) return;
             isNavigatingNext = true;
-            nextBtn.style.pointerEvents = "none";
             transitionToNextQuestion();
         });
     }

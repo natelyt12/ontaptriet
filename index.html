@@ -5,18 +5,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>app qua môn</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/quiz.css" />
+    <link rel="stylesheet" href="css/history.css" />
+    <link rel="stylesheet" href="css/result.css" />
+    <link rel="stylesheet" href="css/chat.css" />
     <link rel="stylesheet" href="mobile.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Crimson+Pro:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Crimson+Pro:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lexend:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <script>
         (function () {
             try {
                 var t = localStorage.getItem("ontaptriet_theme");
-                if (t === "dark" || !t) document.documentElement.setAttribute("data-theme", "dark");
+                if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
             } catch (e) { }
         })();
     </script>
@@ -37,81 +42,171 @@
         <!-- Điểm neo: TOP CENTER -->
         <header class="anchor-top-center" id="brand-header">
             <div class="brand-title" id="brand-title-content">
-                Ontaptriet <span class="brand-version">v2.2</span>
+                Ontaptriet <span class="brand-version">v2.3</span>
             </div>
         </header>
 
-        <!-- Điểm neo: CENTER (Menu chọn bài ôn) -->
+        <!-- Điểm neo: CENTER (Menu chọn bài ôn & Sảnh chat) -->
         <main class="anchor-center" id="menu-screen">
-            <!-- 1. Môn học (Component Dropdown) -->
-            <div class="menu-row">
-                <span class="menu-label-prefix">Môn học:</span>
-                <div class="custom-dropdown" id="dropdown-subject">
-                    <span class="dropdown-trigger">
-                        <span class="label-viewport">
-                            <span class="label-text-current">Kiến trúc máy tính</span>
-                        </span>
-                        <span class="dropdown-arrow">›</span>
-                    </span>
-                    <div class="dropdown-menu"></div>
-                </div>
-            </div>
+            <div class="lobby-layout" id="lobby-layout">
+                <!-- KHỐI MENU CHỌN BÀI ÔN (BÊN TRÁI TRÊN PC, PHÍA TRÊN TRÊN MOBILE) -->
+                <section class="lobby-menu-panel">
+                    <!-- 1. Môn học (Component Dropdown) -->
+                    <div class="menu-row">
+                        <span class="menu-label-prefix">Môn học:</span>
+                        <div class="custom-dropdown" id="dropdown-subject">
+                            <span class="dropdown-trigger">
+                                <span class="label-viewport">
+                                    <span class="label-text-current">Kiến trúc máy tính</span>
+                                </span>
+                                <span class="dropdown-arrow">›</span>
+                            </span>
+                            <div class="dropdown-menu"></div>
+                        </div>
+                    </div>
 
-            <!-- 2. Chương học (Component Dropdown) -->
-            <div class="menu-row">
-                <span class="menu-label-prefix">Chương:</span>
-                <div class="custom-dropdown" id="dropdown-chapter">
-                    <span class="dropdown-trigger">
-                        <span class="label-viewport">
-                            <span class="label-text-current">Tất cả</span>
-                        </span>
-                        <span class="dropdown-arrow">›</span>
-                    </span>
-                    <div class="dropdown-menu"></div>
-                </div>
-            </div>
+                    <!-- 2. Chương học (Component Dropdown) -->
+                    <div class="menu-row">
+                        <span class="menu-label-prefix">Chương:</span>
+                        <div class="custom-dropdown" id="dropdown-chapter">
+                            <span class="dropdown-trigger">
+                                <span class="label-viewport">
+                                    <span class="label-text-current">Tất cả</span>
+                                </span>
+                                <span class="dropdown-arrow">›</span>
+                            </span>
+                            <div class="dropdown-menu"></div>
+                        </div>
+                    </div>
 
-            <!-- 3. Chế độ (Random cả đề) -->
-            <div class="menu-row">
-                <span class="menu-label-prefix">Chế độ:</span>
-                <button id="random-toggle-btn" class="btn-random-toggle active" type="button">Random cả đề</button>
-            </div>
+                    <!-- 3. Chế độ (Random cả đề) -->
+                    <div class="menu-row">
+                        <span class="menu-label-prefix">Chế độ:</span>
+                        <button id="random-toggle-btn" class="btn-random-toggle active" type="button">Random cả
+                            đề</button>
+                    </div>
 
-            <!-- 4A. Số lượng câu (hiển thị khi Random BẬT) -->
-            <div class="menu-row" id="row-limit">
-                <span class="menu-label-prefix">Số lượng câu:</span>
-                <div class="limit-options" id="limit-options">
-                    <span class="limit-choice" data-value="5">5 câu</span>
-                    <span class="limit-choice active" data-value="25">25 câu</span>
-                    <span class="limit-choice" data-value="50">50 câu</span>
-                    <span class="limit-choice" data-value="all">Tất cả</span>
-                </div>
-            </div>
+                    <!-- 4A. Số lượng câu (hiển thị khi Random BẬT) -->
+                    <div class="menu-row" id="row-limit">
+                        <span class="menu-label-prefix">Số lượng câu:</span>
+                        <div class="limit-options" id="limit-options">
+                            <span class="limit-choice" data-value="5">5 câu</span>
+                            <span class="limit-choice active" data-value="25">25 câu</span>
+                            <span class="limit-choice" data-value="50">50 câu</span>
+                            <span class="limit-choice" data-value="all">Tất cả</span>
+                        </div>
+                    </div>
 
-            <!-- 4B. Nhập phạm vi câu (hiển thị khi Random TẮT) -->
-            <div class="menu-row" id="row-range" style="display: none;">
-                <span class="menu-label-prefix">Phạm vi câu:</span>
-                <div class="exam-range-wrapper">
-                    <span class="range-prefix-text">Từ câu</span>
-                    <input type="number" id="range-from" class="exam-input-field" value="1" min="1" />
-                    <span class="range-separator-text">đến câu</span>
-                    <input type="number" id="range-to" class="exam-input-field" value="25" min="1" />
-                    <span class="range-total-hint" id="range-total-hint"></span>
-                </div>
-            </div>
+                    <!-- 4B. Nhập phạm vi câu (hiển thị khi Random TẮT) -->
+                    <div class="menu-row" id="row-range" style="display: none;">
+                        <span class="menu-label-prefix">Phạm vi câu:</span>
+                        <div class="exam-range-wrapper">
+                            <span class="range-prefix-text">Từ câu</span>
+                            <input type="number" id="range-from" class="exam-input-field" value="1" min="1" />
+                            <span class="range-separator-text">đến câu</span>
+                            <input type="number" id="range-to" class="exam-input-field" value="25" min="1" />
+                            <span class="range-total-hint" id="range-total-hint"></span>
+                        </div>
+                    </div>
 
-            <!-- Hàng nút hành động -->
-            <div class="menu-actions">
-                <button id="start-btn" class="btn-action btn-primary">
-                    <span class="btn-label">Bắt đầu</span> <span class="btn-arrow">›</span>
-                </button>
-                <button id="history-btn" class="btn-action btn-secondary">
-                    Xem lịch sử
-                </button>
-                <span class="action-separator">/</span>
-                <button id="settings-btn" class="btn-action btn-secondary">
-                    Cài đặt
-                </button>
+                    <!-- Hàng nút hành động -->
+                    <div class="menu-actions">
+                        <button id="start-btn" class="btn-action btn-primary">
+                            <span class="btn-label">Bắt đầu</span> <span class="btn-arrow">›</span>
+                        </button>
+                        <button id="history-btn" class="btn-action btn-secondary">
+                            Xem lịch sử
+                        </button>
+                        <span class="action-separator">/</span>
+                        <button id="settings-btn" class="btn-action btn-secondary">
+                            Cài đặt
+                        </button>
+                    </div>
+
+                    <!-- Mobile Chat Preview & Trigger (chỉ hiển thị trên mobile <= 768px) -->
+                    <div class="mobile-chat-preview" id="mobile-chat-preview">
+                        <div class="mobile-chat-ticker" id="mobile-chat-ticker">
+                            <div class="mobile-chat-latest-content" id="mobile-chat-latest-content">
+                                <span class="mobile-chat-empty">Đang kết nối Sảnh chat...</span>
+                            </div>
+                        </div>
+                        <div class="mobile-chat-action">
+                            <button id="btn-open-mobile-chat" class="btn-action btn-nav" type="button">
+                                <span class="btn-label">Vào sảnh chat</span> <span class="btn-arrow">›</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KHỐI CHAT SẢNH (BÊN PHẢI TRÊN PC, PHÍA DƯỚI TRÊN MOBILE) -->
+                <aside class="lobby-chat-panel" id="lobby-chat-panel">
+                    <!-- Header của Chat -->
+                    <div class="chat-header">
+                        <div class="chat-title-group">
+                            <span class="chat-title">Sảnh chat</span>
+                            <span class="chat-online-text"><span id="chat-online-count">1</span> trực tuyến</span>
+                        </div>
+                        <div class="chat-user-bar" id="chat-user-bar" style="display: none;">
+                            <span class="chat-user-label">Chat dưới tên</span>
+                            <span class="chat-user-name" id="chat-user-display"></span>
+                            <span class="action-separator">/</span>
+                            <button class="btn-action btn-secondary btn-chat-set-name" id="btn-chat-set-name"
+                                type="button" title="Thay đổi biệt danh (mỗi 24h)">
+                                <span class="label-viewport" id="chat-set-name-viewport">
+                                    <span class="label-text-current">Thay tên</span>
+                                </span>
+                            </button>
+                            <span class="action-separator">/</span>
+                            <button class="btn-action btn-danger btn-chat-logout" id="btn-chat-logout" type="button"
+                                title="Đăng xuất">
+                                <span class="label-viewport" id="chat-logout-viewport">
+                                    <span class="label-text-current">Đăng xuất</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Danh sách tin nhắn -->
+                    <div class="chat-messages-container" id="chat-messages-list"></div>
+
+                    <!-- Khung nhập tin nhắn -->
+                    <div class="chat-input-area">
+                        <!-- Khi chưa đăng nhập: Nút Đăng nhập để thảo luận -->
+                        <div class="chat-login-prompt-wrapper" id="chat-login-prompt-wrapper">
+                            <button id="btn-chat-login-prompt" class="btn-action btn-primary btn-chat-login-prompt"
+                                type="button">
+                                <span class="btn-label">Đăng nhập để thảo luận</span> <span class="btn-arrow">›</span>
+                            </button>
+                        </div>
+
+                        <!-- Khi đã đăng nhập: Khung gõ tin nhắn -->
+                        <div class="chat-input-controls" id="chat-input-controls" style="display: none;">
+                            <div class="chat-input-wrapper">
+                                <input type="text" id="chat-input-field" class="chat-input-field"
+                                    placeholder="Gõ lời nhắn gửi đồng môn..." maxlength="120" autocomplete="off" />
+                                <span class="chat-char-count" id="chat-char-count">0/120</span>
+                            </div>
+
+                            <div class="chat-bottom-actions">
+                                <button id="chat-send-btn" class="btn-action btn-primary btn-chat-send" type="button">
+                                    <span class="btn-label" id="chat-send-label">Gửi tin nhắn</span>
+                                    <span class="btn-arrow" id="chat-send-arrow">›</span>
+                                </button>
+                                <span class="action-separator">/</span>
+                                <button id="chat-clear-btn" class="btn-action btn-secondary btn-chat-clear"
+                                    type="button">
+                                    <span class="label-viewport" id="chat-clear-viewport">
+                                        <span class="label-text-current">Xóa</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="chat-cooldown-hint" id="chat-cooldown-hint">
+                            Cooldown 5 phút, lưu trữ tối đa 30 tin
+                        </div>
+                    </div>
+                </aside>
             </div>
         </main>
 
@@ -135,7 +230,7 @@
                     <span class="menu-label-prefix">Giao diện:</span>
                     <button id="theme-toggle-btn" class="btn-action btn-secondary btn-theme-toggle" type="button">
                         <span class="label-viewport" id="theme-label-viewport">
-                            <span class="label-text-current">Tối</span>
+                            <span class="label-text-current">Giấy A4</span>
                         </span>
                     </button>
                 </div>
@@ -159,7 +254,7 @@
                     <span class="menu-label-prefix">Hình nền động:</span>
                     <button id="lw-toggle-btn" class="btn-action btn-secondary btn-theme-toggle" type="button">
                         <span class="label-viewport" id="lw-label-viewport">
-                            <span class="label-text-current">Bật</span>
+                            <span class="label-text-current">Tắt</span>
                         </span>
                     </button>
                 </div>
@@ -173,11 +268,26 @@
             </div>
         </section>
 
+        <!-- Màn hình Sảnh Chat riêng biệt trên Mobile -->
+        <section class="anchor-center" id="chat-screen" style="display: none;">
+            <div class="mobile-chat-screen-wrapper">
+                <div id="mobile-chat-mount"></div>
+                <div class="menu-actions" style="margin-top: 18px;">
+                    <button id="mobile-chat-back-btn" class="btn-action btn-nav" type="button">
+                        <span class="btn-arrow">‹</span> <span class="btn-label">Về menu chính</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- Điểm neo: BOTTOM (Status Bar ở dưới cùng trang) -->
         <footer class="anchor-bottom-bar" id="quiz-status-bar">
             <div class="quiz-back-wrapper">
                 <button id="quiz-back-btn" class="btn-quiz-back" type="button">
-                    <span class="btn-arrow">‹</span> <span class="btn-label back-label">Quay lại</span>
+                    <span class="btn-arrow">‹</span>
+                    <span class="label-viewport" id="quiz-back-viewport">
+                        <span class="label-text-current">Quay lại</span>
+                    </span>
                 </button>
                 <span class="action-separator">/</span>
                 <button id="quiz-copy-btn" class="btn-quiz-copy" type="button" title="Copy câu hỏi và đáp án">
@@ -220,6 +330,7 @@
     <script src="scripts/history-view.js"></script>
     <script src="scripts/settings-view.js"></script>
     <script src="scripts/easter-egg.js"></script>
+    <script type="module" src="scripts/chat.js"></script>
 
     <!-- Điểm khởi chạy ứng dụng -->
     <script src="scripts/main.js"></script>

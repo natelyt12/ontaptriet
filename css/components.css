@@ -1,0 +1,633 @@
+/* =========================================================================
+   MODULE: REUSABLE COMPONENTS & BUTTONS (css/components.css)
+   Hệ thống Dropdown, Nút bấm chữ phẳng (Flat text buttons), và Vi tương tác
+   ========================================================================= */
+
+/* --- COMPONENT DROPDOWN TÁI SỬ DỤNG --- */
+.custom-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    vertical-align: baseline;
+}
+
+/* Khung bấm chọn */
+.dropdown-trigger {
+    display: inline-flex;
+    align-items: baseline;
+    cursor: pointer;
+    user-select: none;
+    padding-bottom: 1px;
+}
+
+/* KHUNG CHỨA CHỮ: Animate độ rộng mượt mà, viền nét đứt khi hover */
+.label-viewport {
+    display: inline-block;
+    position: relative;
+    height: 1.25em;
+    overflow: hidden;
+    vertical-align: bottom;
+    white-space: nowrap;
+    border-bottom: 1.5px dashed transparent;
+    box-sizing: content-box;
+    transition: width 0.3s var(--ease-expo-out), border-bottom-color 0.15s ease;
+}
+
+/* Hover vào trigger: hiển thị nét đứt ở label */
+.dropdown-trigger:hover .label-viewport,
+.dropdown-trigger.btn-active-hold .label-viewport {
+    border-bottom-color: var(--text-pure-black);
+}
+
+/* Khi đang mở dropdown: chuyển thành nét liền solid */
+.dropdown-trigger.active .label-viewport {
+    border-bottom-style: solid;
+    border-bottom-color: var(--text-pure-black);
+}
+
+.label-text-current {
+    display: block;
+    line-height: 1.25em;
+    white-space: nowrap;
+}
+
+/* Giai đoạn 1: Chữ cũ bay lên trên và mờ dần với Expo In */
+.text-fly-out {
+    display: block;
+    line-height: 1.25em;
+    white-space: nowrap;
+    animation: flyUpOutExpo 0.16s var(--ease-expo-in) forwards;
+}
+
+@keyframes flyUpOutExpo {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-120%);
+    }
+}
+
+/* Giai đoạn 2: Chữ mới trồi từ dưới lên và hiện rõ với Expo Out */
+.text-fly-in {
+    display: block;
+    line-height: 1.25em;
+    white-space: nowrap;
+    animation: flyUpInExpo 0.28s var(--ease-expo-out) forwards;
+}
+
+@keyframes flyUpInExpo {
+    0% {
+        opacity: 0;
+        transform: translateY(120%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MŨI TÊN ĐỘC LẬP Ở CUỐI: Luôn hiển thị rõ, tự động trôi theo chiều dài của label-viewport */
+.dropdown-arrow {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    user-select: none;
+    line-height: 1;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+}
+
+.dropdown-trigger:hover .dropdown-arrow,
+.dropdown-trigger.btn-active-hold .dropdown-arrow {
+    transform: translateX(2px);
+}
+
+/* --- MENU BÊN PHẢI INLINE --- */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    left: calc(100% + 20px);
+    top: -8px;
+    background-color: var(--bg-white);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    /* Border đen 0.2 bên trái */
+    border-radius: 0;
+    padding: 8px 0 8px 16px;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 100;
+    min-width: 280px;
+    transform-origin: top;
+}
+
+/* Trạng thái MỞ: Kéo từ height 0 xuống với Expo Out */
+.dropdown-menu.show {
+    display: flex;
+    animation: menuExpandDownExpo 0.25s var(--ease-expo-out) forwards;
+}
+
+@keyframes menuExpandDownExpo {
+    from {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+}
+
+/* Trạng thái ĐÓNG: Di chuyển cả container sang phải, fade về opacity 0 với Expo In */
+.dropdown-menu.closing {
+    display: flex;
+    animation: menuCloseRightExpo 0.22s var(--ease-expo-in) forwards;
+    pointer-events: none;
+}
+
+@keyframes menuCloseRightExpo {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+}
+
+/* CÁC ITEM TRONG MENU */
+.dropdown-item {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(32px);
+    animation: slideInItemExpo 0.4s var(--ease-expo-out) forwards;
+    animation-delay: var(--item-delay, 0.2s);
+    display: inline-flex;
+    align-items: baseline;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+@keyframes slideInItemExpo {
+    from {
+        opacity: 0;
+        transform: translateX(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.dropdown-item:hover {
+    transform: translateX(-3px);
+}
+
+/* Label text của item: thêm nét đứt và giữ hiệu ứng opacity khi hover */
+.dropdown-item .item-text {
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: opacity 0.15s ease, border-bottom-color 0.15s ease;
+}
+
+.dropdown-item:hover .item-text {
+    opacity: 0.55;
+    border-bottom-color: var(--text-pure-black);
+}
+
+/* BỘ CHỌN SỐ LƯỢNG CÂU */
+.limit-options {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    align-items: baseline;
+    flex-wrap: nowrap;
+}
+
+.limit-choice {
+    position: relative;
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    white-space: nowrap;
+    border: none;
+    padding: 0 0 2px 0;
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: inherit;
+    transition: color 0.15s ease;
+}
+
+.limit-choice::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    border-bottom: 1.5px dashed transparent;
+    pointer-events: none;
+    transition: border-bottom-color 0.15s ease, border-bottom-style 0.15s ease;
+}
+
+.limit-choice:hover:not(.active)::after,
+.limit-choice.btn-active-hold:not(.active)::after {
+    border-bottom-color: var(--text-pure-black);
+}
+
+.limit-choice.active {
+    color: blue;
+}
+
+.limit-choice.active::after {
+    border-bottom-style: solid;
+    border-bottom-color: blue;
+}
+
+/* NÚT CHUYỂN ĐỔI CHẾ ĐỘ RANDOM (DÙNG ::after ĐỂ ĐỒNG BỘ NÉT DASH VÀ KHÔNG XÊ DỊCH KHI HOVER) */
+.btn-random-toggle {
+    position: relative;
+    font-family: var(--font-serif);
+    font-size: var(--uniform-size);
+    font-style: normal !important;
+    background: transparent;
+    border: none;
+    padding: 0 0 2px 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+    color: var(--text-pure-black);
+    user-select: none;
+    display: inline-block;
+    line-height: inherit;
+    vertical-align: baseline;
+    transition: color 0.15s ease;
+}
+
+.btn-random-toggle::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    border-bottom: 1.5px dashed transparent;
+    pointer-events: none;
+    transition: border-bottom-color 0.15s ease, border-bottom-style 0.15s ease;
+}
+
+.btn-random-toggle:hover:not(.active)::after,
+.btn-random-toggle.btn-active-hold:not(.active)::after {
+    border-bottom-color: var(--text-pure-black);
+}
+
+.btn-random-toggle.active {
+    color: blue;
+}
+
+.btn-random-toggle.active::after {
+    border-bottom-style: solid;
+    border-bottom-color: blue;
+}
+
+/* KHU VỰC NHẬP PHẠM VI CÂU (CHỈ GẠCH CHÂN DƯỚI INPUT) */
+.exam-range-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.range-prefix-text,
+.range-separator-text {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    user-select: none;
+}
+
+.exam-input-field {
+    width: 48px;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px dashed var(--text-pure-black);
+    color: var(--text-pure-black);
+    font-family: inherit;
+    font-size: var(--uniform-size);
+    text-align: center;
+    outline: none;
+    padding: 0 2px 1px 2px;
+    margin: 0 4px;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    transition: border-bottom-style 0.15s ease, border-bottom-color 0.15s ease;
+}
+
+.exam-input-field:hover {
+    border-bottom-color: var(--text-pure-black);
+}
+
+.exam-input-field:focus {
+    border-bottom-style: solid;
+    border-bottom-color: var(--text-pure-black);
+}
+
+.exam-input-field::-webkit-outer-spin-button,
+.exam-input-field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.range-total-hint {
+    font-size: var(--uniform-size);
+    font-style: italic;
+    color: var(--text-pure-black);
+    opacity: 0.45;
+    user-select: none;
+    margin-left: 4px;
+}
+
+/* HÀNG NÚT HÀNH ĐỘNG */
+.menu-actions {
+    display: flex;
+    align-items: center;
+    row-gap: 14px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+}
+
+.menu-actions .btn-primary,
+.menu-actions #start-btn,
+.menu-actions #retry-btn {
+    margin-right: 28px;
+}
+
+/* Fallback chống dính nút nếu hai nút liền kề không có phân cách */
+.menu-actions .btn-action+.btn-action {
+    margin-left: 20px;
+}
+
+.btn-action,
+.btn-quiz-back,
+.btn-quiz-next {
+    font-family: var(--font-serif);
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    transition: opacity 0.15s ease, color 0.2s ease;
+}
+
+.btn-action:hover,
+.btn-action.btn-active-hold,
+.btn-quiz-back:hover,
+.btn-quiz-back.btn-active-hold,
+.btn-quiz-next:hover,
+.btn-quiz-next.btn-active-hold {
+    opacity: 0.75;
+}
+
+/* Nhãn chữ (Label): gạch chân nét đứt, hover chuyển nét liền */
+.btn-label {
+    border-bottom: 1.5px dashed var(--text-pure-black);
+    padding-bottom: 1px;
+    transition: border-bottom-style 0.15s ease, border-bottom-color 0.2s ease;
+}
+
+.btn-action:hover .btn-label,
+.btn-action.btn-active-hold .btn-label,
+.btn-quiz-back:hover .btn-label,
+.btn-quiz-back.btn-active-hold .btn-label,
+.btn-quiz-next:hover .btn-label,
+.btn-quiz-next.btn-active-hold .btn-label {
+    border-bottom-style: solid;
+}
+
+/* Mũi tên: KHÔNG bao giờ bị gạch chân, tự trượt theo hướng chỉ */
+.btn-arrow {
+    display: inline-block;
+    user-select: none;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+}
+
+/* Mũi tên bên phải ›: cách trái 8px, trượt sang phải khi hover */
+.btn-action .btn-arrow:last-child,
+.btn-quiz-next .btn-arrow {
+    margin-left: 8px;
+}
+
+.btn-action:hover .btn-arrow:last-child,
+.btn-action.btn-active-hold .btn-arrow:last-child,
+.btn-quiz-next:hover .btn-arrow,
+.btn-quiz-next.btn-active-hold .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* Mũi tên bên trái ‹: cách phải 8px, trượt sang trái khi hover */
+.btn-action .btn-arrow:first-child,
+.btn-quiz-back .btn-arrow {
+    margin-right: 8px;
+}
+
+.btn-action:hover .btn-arrow:first-child,
+.btn-action.btn-active-hold .btn-arrow:first-child,
+.btn-quiz-back:hover .btn-arrow,
+.btn-quiz-back.btn-active-hold .btn-arrow {
+    transform: translateX(-3px);
+}
+
+/* 1. NÚT CHÍNH ĐẶC CÁCH (Primary Action: Bắt đầu, Làm lại) - ĐẶC CÁCH FONT BOLD */
+.btn-primary,
+.btn-start {
+    font-weight: bold;
+    font-style: normal;
+    padding-bottom: 1px;
+}
+
+/* 2. NÚT ĐIỀU HƯỚNG CÓ MŨI TÊN (Regular Nav: Câu tiếp theo, Quay lại, Về menu ở lịch sử) - FONT THƯỜNG */
+.btn-nav,
+.btn-quiz-back,
+.btn-quiz-next {
+    font-weight: normal;
+    font-style: normal;
+    padding-bottom: 1px;
+}
+
+/* 3. NÚT PHỤ CHỮ NGHIÊNG (Secondary Ghost: Xem lịch sử, Giao diện, Về menu ở kết quả) */
+.btn-secondary,
+.btn-history {
+    font-weight: normal;
+    font-style: italic;
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: opacity 0.15s ease, border-bottom-color 0.15s ease;
+}
+
+.btn-secondary:hover,
+.btn-secondary.btn-active-hold,
+.btn-history:hover,
+.btn-history.btn-active-hold {
+    opacity: 0.75;
+    border-bottom-color: var(--text-pure-black);
+}
+
+/* 4. NÚT NGUY HIỂM / HỦY (Destructive Action: Xóa lịch sử) */
+.btn-danger {
+    font-weight: normal;
+    font-style: italic;
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: opacity 0.15s ease, border-bottom-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-danger:hover,
+.btn-danger.btn-active-hold {
+    color: #d93025;
+    border-bottom-color: #d93025;
+    opacity: 0.75;
+}
+
+/* NÚT XÓA LỊCH SỬ DẠNG CUỘN CHỮ (ROLLING BUTTON) */
+.btn-history-clear {
+    border-bottom: none !important;
+}
+
+.btn-history-clear .label-viewport {
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: width 0.3s var(--ease-expo-out), opacity 0.15s ease, border-bottom-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-history-clear:hover .label-viewport,
+.btn-history-clear.btn-active-hold .label-viewport {
+    color: #d93025;
+    border-bottom-color: #d93025;
+    opacity: 0.75;
+}
+
+.btn-history-clear.confirming {
+    opacity: 1 !important;
+}
+
+.btn-history-clear.confirming .label-viewport {
+    color: #d93025 !important;
+    border-bottom-color: #d93025 !important;
+    border-bottom-style: solid;
+    opacity: 1 !important;
+}
+
+/* Phân cách giữa các nút hành động */
+.action-separator {
+    font-size: var(--uniform-size);
+    color: var(--text-pure-black);
+    opacity: 0.3;
+    user-select: none;
+    margin: 0 8px;
+}
+
+/* Nút chuyển đổi Giao diện Sáng / Tối trong Màn hình Cài đặt */
+.btn-theme-toggle {
+    font-family: var(--font-serif);
+    font-size: var(--uniform-size);
+    font-style: normal;
+    color: var(--text-pure-black);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: baseline;
+    vertical-align: baseline;
+}
+
+.btn-theme-toggle .label-viewport {
+    border-bottom: 1.5px dashed transparent;
+    padding-bottom: 1px;
+    transition: width 0.3s var(--ease-expo-out), opacity 0.15s ease, border-bottom-color 0.15s ease;
+}
+
+.btn-theme-toggle:hover .label-viewport {
+    opacity: 0.75;
+    border-bottom-color: var(--text-pure-black);
+}
+
+/* Container Màn hình Cài đặt */
+.settings-container {
+    width: 100%;
+}
+
+/* ANIMATION THOÁT MENU CHÍNH: CÁC DÒNG TRƯỢT LÊN VÀ FADEOUT (EXPO IN) */
+.menu-row.menu-exit,
+.menu-actions.menu-exit {
+    animation: menuRowExitUp 0.28s var(--ease-expo-in) forwards;
+}
+
+@keyframes menuRowExitUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-24px);
+    }
+}
+
+/* --- DARK THEME CHO COMPONENTS --- */
+[data-theme="dark"] .dropdown-menu {
+    border-left-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .limit-choice.active {
+    color: #64b5f6;
+}
+
+[data-theme="dark"] .limit-choice.active::after {
+    border-bottom-color: #64b5f6;
+}
+
+[data-theme="dark"] .btn-random-toggle.active {
+    color: #64b5f6;
+}
+
+[data-theme="dark"] .btn-random-toggle.active::after {
+    border-bottom-color: #64b5f6;
+}
+
+[data-theme="dark"] .btn-danger:hover,
+[data-theme="dark"] .btn-danger.btn-active-hold {
+    color: #ff5252;
+    border-bottom-color: #ff5252;
+}
+
+[data-theme="dark"] .btn-history-clear:hover .label-viewport,
+[data-theme="dark"] .btn-history-clear.btn-active-hold .label-viewport {
+    color: #ff5252;
+    border-bottom-color: #ff5252;
+}
+
+[data-theme="dark"] .btn-history-clear.confirming .label-viewport {
+    color: #ff5252 !important;
+    border-bottom-color: #ff5252 !important;
+}

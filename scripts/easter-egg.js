@@ -52,15 +52,16 @@ function initDanGayClickEasterEgg() {
     }
 
     const clickHandler = (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
         const x = e.clientX ?? (e.pageX - window.scrollX);
         const y = e.clientY ?? (e.pageY - window.scrollY);
         spawnDanGayPopup(x, y);
     };
 
-    document.addEventListener("click", clickHandler, true);
+    document.addEventListener("mousedown", clickHandler, true);
 
     return () => {
-        document.removeEventListener("click", clickHandler, true);
+        document.removeEventListener("mousedown", clickHandler, true);
     };
 }
 
@@ -191,13 +192,19 @@ function initTitleAsciiCyclerEasterEgg() {
         "nro",
         "I_Hate_Blue_Archive",
         "DESIGNED_BY_NATELYT",
-        "JOIN_OUR_DISCORD",
+        "JOIN_OUR_DISCORD_SERVER",
         "WELCOME",
         "github.com/natelyt12",
         "SYSTEM_INITIALIZED",
-        "Check my Yumebako",
+        "discord.gg/wxCJ6FXY6",
         "github.com/natelyt12/Yumebako",
-        "NEVER_GONNA_GIVE_YOU_UP"
+        "NEVER_GONNA_GIVE_YOU_UP",
+        "AT_THE_SPEED_OF_LIGHT",
+        "EVERY_END",
+        "MOONLIGHT_AND_SUNSHINE",
+        "DEPLOYED_IN_VERCEL",
+        "E_Là_Không_Thể",
+        "MICROSOFT_EDGE"
     ];
 
     // Lượt 1: Bắt đầu từ ONTAPTRIET, các từ tiếp theo được xáo trộn ngẫu nhiên

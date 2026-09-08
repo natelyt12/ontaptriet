@@ -14,7 +14,7 @@ const LW_INDEX_KEY = "ontaptriet_wallpaper_idx";
 const LW_TOTAL = 10;
 const LW_VIDEOS = Array.from({ length: LW_TOTAL }, (_, i) => `lw/${i + 1}.mp4`);
 
-let isLwEnabled = localStorage.getItem(LW_STORAGE_KEY) !== "off";
+let isLwEnabled = localStorage.getItem(LW_STORAGE_KEY) === "on";
 
 // Thuật toán Cycle Shuffle: Xáo trộn danh sách theo vòng, hết lượt đảo lại đảm bảo video đầu != video cuối cũ
 function getNextCycledWallpaperIndex() {
@@ -62,9 +62,11 @@ const currentLwVideoSrc = LW_VIDEOS[currentLwIndex];
 /**
  * Áp dụng trạng thái video (play / pause / load) và cập nhật nhãn trong Cài đặt
  */
-function applyLiveWallpaper(enabled, animateLabel = false) {
+function applyLiveWallpaper(enabled, animateLabel = false, save = true) {
     isLwEnabled = enabled;
-    localStorage.setItem(LW_STORAGE_KEY, enabled ? "on" : "off");
+    if (save) {
+        localStorage.setItem(LW_STORAGE_KEY, enabled ? "on" : "off");
+    }
 
     const container = document.getElementById("live-wallpaper-container");
     const video = document.getElementById("live-wallpaper-video");
@@ -135,7 +137,7 @@ function syncWallpaperWithTheme(theme) {
  */
 function toggleLiveWallpaper() {
     if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
-    applyLiveWallpaper(!isLwEnabled, true);
+    applyLiveWallpaper(!isLwEnabled, true, true);
 }
 
 /**
@@ -146,7 +148,7 @@ function initLiveWallpaper() {
     if (video) {
         video.loop = true;
     }
-    applyLiveWallpaper(isLwEnabled, false);
+    applyLiveWallpaper(isLwEnabled, false, false);
 }
 
 

@@ -8,21 +8,58 @@
         --uniform-size: 16px;
     }
 
-    /* 1. Tiêu đề Ontaptriet: top ít hơn, nằm gần rìa trên hơn */
+    /* 1. Cho phép cuộn dọc tự nhiên trên mobile khi nội dung dài */
+    html,
+    body {
+        height: auto;
+        min-height: 100%;
+        overflow-y: auto;
+    }
+
+    .canvas-wrapper {
+        min-height: 100vh;
+        height: auto;
+        padding: 0 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto;
+    }
+
+    /* Đưa vùng nội dung chính ra chính giữa màn hình điện thoại */
+    .anchor-center {
+        margin: auto 0;
+    }
+
+    #settings-screen,
+    #history-screen,
+    #history-detail-screen,
+    #chat-screen {
+        margin-top: 56px;
+        margin-bottom: 48px;
+    }
+
+    /* 2. Tiêu đề Ontaptriet: top ít hơn, nằm gần rìa trên hơn */
     .anchor-top-center {
         top: 16px;
     }
 
-    /* 2. Menu Row: Chuyển sang dạng cột cho màn hình hẹp */
+    /* 3. Menu Row: Hiển thị inline (nhãn + tùy chọn cùng hàng) cho cả Menu chính và Cài đặt */
     .menu-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 8px;
         margin-bottom: 16px;
         width: 100%;
+        flex-wrap: wrap;
     }
 
-    /* 3. Dropdown Menu: Giữ nguyên toàn bộ animation, chỉ thay đổi vị trí mở ngay dưới */
+    .limit-options {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    /* 4. Dropdown Menu: Giữ nguyên toàn bộ animation, mở ngay dưới trigger */
     .custom-dropdown {
         position: relative;
     }
@@ -31,6 +68,8 @@
         left: 0;
         top: calc(100% + 6px);
         right: auto;
+        min-width: 200px;
+        max-width: calc(100vw - 56px);
     }
 
     /* 4. Thanh điều hướng câu hỏi dưới cùng: Index câu hỏi nằm ở bên phải thay vì ở giữa */
@@ -68,5 +107,120 @@
     /* 7. Quiz View: Bỏ hiệu ứng tap highlight trên đáp án giống PC để chống gian lận khi giữ ngón tay */
     .quiz-option {
         -webkit-tap-highlight-color: transparent !important;
+    }
+
+    /* 8. Sảnh Chat trên mobile: Tách thành Màn hình riêng biệt */
+    .lobby-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+    }
+
+    .lobby-menu-panel {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .lobby-layout > .lobby-chat-panel,
+    #lobby-layout > .lobby-chat-panel {
+        display: none !important;
+    }
+
+    .mobile-chat-preview {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 14px;
+        border-top: 1px dashed rgba(0, 0, 0, 0.15);
+        user-select: none;
+    }
+
+    [data-theme="dark"] .mobile-chat-preview {
+        border-top-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .mobile-chat-ticker {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 13.5px;
+        line-height: 1.35;
+        overflow: hidden;
+        cursor: default;
+    }
+
+    .mobile-chat-latest-content {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .mobile-chat-preview-item {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .mobile-chat-preview-item .mobile-chat-time {
+        font-size: 12px;
+        opacity: 0.45;
+        font-family: inherit;
+        flex-shrink: 0;
+    }
+
+    .mobile-chat-preview-item .mobile-chat-author {
+        font-size: 13px;
+        font-weight: bold;
+        opacity: 0.85;
+        flex-shrink: 0;
+    }
+
+    .mobile-chat-preview-item .mobile-chat-msg {
+        font-size: 13.5px;
+        font-style: italic;
+        color: var(--text-pure-black);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .mobile-chat-latest-content .mobile-chat-empty {
+        font-size: 13.5px;
+        font-style: italic;
+        opacity: 0.45;
+    }
+
+    .mobile-chat-action {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Màn hình Chat riêng biệt trên mobile (#chat-screen) */
+    .mobile-chat-screen-wrapper {
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+        padding-top: 8px;
+    }
+
+    .mobile-chat-screen-wrapper .lobby-chat-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+    }
+
+    .mobile-chat-screen-wrapper .chat-messages-container {
+        min-height: 240px;
+        max-height: 46vh;
     }
 }

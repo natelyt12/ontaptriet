@@ -172,7 +172,8 @@ function renderQuizResult() {
 
     const retryBtn = document.getElementById("retry-btn");
     if (retryBtn) {
-        retryBtn.onclick = () => {
+        retryBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             currentQuestionIndex = 0;
             userScore = 0;
             userAnswersLog = [];
@@ -184,7 +185,8 @@ function renderQuizResult() {
 
     const backMenuBtn = document.getElementById("back-menu-btn");
     if (backMenuBtn) {
-        backMenuBtn.onclick = () => {
+        backMenuBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
             if (typeof returnToMenu === "function") {
                 returnToMenu();
             }
