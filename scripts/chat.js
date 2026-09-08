@@ -78,11 +78,10 @@ let heartbeatTimer = null;
 let unsubscribePresence = null;
 
 /**
- * Kiểm tra xem người dùng hiện tại có đang kích hoạt God Mode không
+ * Kiểm tra xem người dùng hiện tại có đang kích hoạt chế độ Bỏ qua Cooldown (Bypass / God Mode) không
  */
 function isGodModeActive() {
-    if (!currentUser || !currentUser.email) return false;
-    if (currentUser.email.toLowerCase() !== GOD_MODE_EMAIL.toLowerCase()) return false;
+    if (!currentUser) return false;
     return Boolean(currentProfile && (currentProfile.godMode === true || currentProfile.bypassCooldown === true));
 }
 

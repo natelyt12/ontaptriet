@@ -186,13 +186,13 @@ Mọi chuyển động trong dự án phải dùng đường cong Easing Exponen
   * Phím `g` để bật/tắt Bỏ qua Cooldown (Bypass), phím `r` để làm mới dữ liệu, phím `q` để thoát.
   * Tự động hiển thị tag `[BANNED]` màu đỏ cạnh tên người dùng đã bị cấm chat.
   * Tự động xác thực tài khoản Google `@eaut.edu.vn` lần đầu qua popup trình duyệt và lưu phiên làm việc vào `.admin_session.json` (tự động refresh token vĩnh viễn). Hỗ trợ cả file `serviceAccountKey.json` nếu có.
-* **Đặc quyền Bỏ qua Cooldown (`25002894@eaut.edu.vn`):**
-  * Tài khoản duy nhất được phép kích hoạt: `25002894@eaut.edu.vn`.
-  * Trạng thái lưu trên Firestore document `users/JfewpDCx6YV7OSezz8YyKNwCPm63` với trường `{ bypassCooldown: true/false, godMode: true/false }` và được lắng nghe realtime `onSnapshot`.
+* **Đặc quyền Bỏ qua Cooldown (Bypass / God Mode):**
+  * Có thể cấp hoặc thu hồi cho bất kỳ tài khoản nào qua phím `g` trên CLI (`cli.mjs`) tại Tab [1] hoặc Tab [2].
+  * Trạng thái lưu trên Firestore document `users/{uid}` với trường `{ bypassCooldown: true/false, godMode: true/false }` và được lắng nghe realtime `onSnapshot`.
   * Khi kích hoạt:
-    * Bỏ qua hoàn toàn bộ đếm Cooldown (1 phút) giữa các lần gửi tin.
+    * Bỏ qua hoàn toàn bộ đếm Cooldown (1 phút) giữa các lần gửi tin (cho phép gửi liên tục).
     * Bỏ qua giới hạn 24 giờ đổi biệt danh, cho phép đổi tên liên tục không giới hạn.
-    * **Hoàn toàn ẩn và không gắn nhãn/badge lên UI** để giữ trải nghiệm tự nhiên, kín đáo.
+    * **Hoàn toàn ẩn và không gắn nhãn/badge lên UI người dùng** để giữ trải nghiệm tự nhiên, kín đáo (chỉ hiện tag `[⚡BYPASS]` trên CLI admin).
 * **Cấu hình Quyền Firestore (Security Rules) khi xóa tin hoặc đổi trạng thái:**
   * Thêm hàm `isAdmin()` kiểm tra `request.auth.token.email == '25002894@eaut.edu.vn'` trong Firestore Rules trên Firebase Console để cho phép tài khoản admin xóa tin vi phạm của người khác và cập nhật trạng thái.
   * Hoặc đặt file `serviceAccountKey.json` vào thư mục dự án để chạy với quyền SuperAdmin (tự động vượt qua mọi Security Rules).
