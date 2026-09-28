@@ -1,6 +1,6 @@
 /* =========================================================================
    MODULE: LOBBY CHAT & PRESENCE (css/chat.css)
-   Giao diện Sảnh chat EAUT, khung tin nhắn, thông tin tài khoản và realtime presence
+   Giao diện Đại sảnh EAUT, khung tin nhắn, thông tin tài khoản và realtime presence
    ========================================================================= */
 
 .lobby-layout {
@@ -209,6 +209,8 @@
     font-family: inherit;
     color: var(--text-pure-black);
     padding-left: 2px;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .chat-msg-self .chat-msg-author {
@@ -284,9 +286,16 @@
     font-size: 14px;
     line-height: 1.35;
     outline: none;
-    padding: 6px 65px 6px 0;
+    padding: 6px 75px 6px 0;
     box-sizing: border-box;
     transition: border-bottom-style 0.15s ease, border-bottom-color 0.15s ease;
+    resize: none;
+    min-height: 32px;
+    height: 32px;
+    max-height: 120px;
+    overflow-y: auto;
+    display: block;
+    scrollbar-width: thin;
 }
 
 .chat-input-field:hover {
@@ -308,11 +317,22 @@
     position: absolute;
     right: 0;
     bottom: 6px;
-    font-size: 13px;
+    font-size: 12px;
     font-family: inherit;
     opacity: 0.35;
     user-select: none;
     line-height: 1.35;
+    transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.chat-char-count.over-limit {
+    color: #d93025;
+    opacity: 1;
+    font-weight: bold;
+}
+
+[data-theme="dark"] .chat-char-count.over-limit {
+    color: #ff5252;
 }
 
 /* Hàng nút bấm của Chat */

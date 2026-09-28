@@ -51,14 +51,14 @@ const FONT_OPTIONS = [
     { id: "merriweather", name: "Merriweather", family: '"Merriweather", Georgia, serif' },
     { id: "ebgaramond", name: "EB Garamond", family: '"EB Garamond", Garamond, Georgia, serif' },
     { id: "literata", name: "Literata", family: '"Literata", Georgia, serif' },
-    { id: "lexend", name: "Lexend", family: '"Lexend", system-ui, -apple-system, sans-serif' },
+    { id: "opensans", name: "Open Sans", family: '"Open Sans", system-ui, -apple-system, sans-serif' },
     { id: "crimson", name: "Crimson Pro", family: '"Crimson Pro", "Crimson Text", Garamond, Georgia, serif' },
 ];
 
 let fontDropdown = null;
 
 function applyFont(fontId, save = true) {
-    if (fontId === "spacegrotesk" || fontId === "playfair") fontId = "lexend";
+    if (fontId === "spacegrotesk" || fontId === "playfair" || fontId === "lexend") fontId = "opensans";
     let fontConfig = FONT_OPTIONS.find(f => f.id === fontId);
     if (!fontConfig) {
         fontConfig = FONT_OPTIONS[0];

@@ -119,11 +119,13 @@
     border-left: 1px solid rgba(0, 0, 0, 0.2);
     /* Border đen 0.2 bên trái */
     border-radius: 0;
-    padding: 8px 0 8px 16px;
+    padding: 8px 16px 8px 16px;
     flex-direction: column;
     gap: 6px;
     z-index: 100;
     min-width: 280px;
+    width: max-content;
+    box-sizing: border-box;
     transform-origin: top;
 }
 

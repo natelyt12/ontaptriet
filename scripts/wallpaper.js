@@ -11,8 +11,8 @@ const LW_STORAGE_KEY = "ontaptriet_live_wallpaper";
 const LW_ORDER_KEY = "ontaptriet_wallpaper_order";
 const LW_INDEX_KEY = "ontaptriet_wallpaper_idx";
 
-const LW_TOTAL = 10;
-const LW_VIDEOS = Array.from({ length: LW_TOTAL }, (_, i) => `lw/${i + 1}.mp4`);
+const LW_TOTAL = 15;
+const LW_VIDEOS = Array.from({ length: LW_TOTAL }, (_, i) => `lw/${i + 1}.webm`);
 
 let isLwEnabled = localStorage.getItem(LW_STORAGE_KEY) === "on";
 

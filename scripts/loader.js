@@ -34,51 +34,6 @@ const SPINNER_PRESETS = [
         }
     },
 
-    // --- BỘ 2: Wave Scan (Quét sóng radar lướt qua lại giữa hai mút, không kèm %) ---
-    {
-        name: "wave-scan",
-        interval: 65,
-        frames: [
-            "< ===-------- >",
-            "< -===------- >",
-            "< --===------ >",
-            "< ---===----- >",
-            "< ----===---- >",
-            "< -----===--- >",
-            "< ------===-- >",
-            "< -------===- >",
-            "< --------=== >",
-            "< -------===- >",
-            "< ------===-- >",
-            "< -----===--- >",
-            "< ----===---- >",
-            "< ---===----- >",
-            "< --===------ >",
-            "< -===------- >"
-        ]
-    },
-
-    // --- BỘ 3: Audio Spectrum Equalizer (Kim tự tháp lượn sóng qua lại nhịp nhàng) ---
-    {
-        name: "spectrum-pyramid",
-        interval: 70,
-        frames: (() => {
-            const BARS = [" ", " ", "▂", "▃", "▄", "▅", "▆", "▇", "█"];
-            const colCount = 9;
-            const peakSequence = [0, 1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1];
-
-            return peakSequence.map(peak => {
-                let frame = "";
-                for (let i = 0; i < colCount; i++) {
-                    const dist = Math.abs(i - peak);
-                    const level = Math.max(0, 8 - dist * 2);
-                    frame += BARS[level];
-                }
-                return frame;
-            });
-        })()
-    },
-
     // --- Các kiểu cổ điển bổ sung ---
     {
         name: "braille",

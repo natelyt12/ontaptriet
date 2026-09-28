@@ -566,7 +566,8 @@ function updateMobileChatPreview(messagesList) {
         const author = (isSelf && currentProfile && currentProfile.nickname)
             ? currentProfile.nickname
             : (msg.author || "Sinh viên");
-        const text = msg.text || "";
+        const rawText = msg.text || "";
+        const text = rawText.replace(/\r?\n+/g, " ");
         return `<div class="mobile-chat-preview-item"><span class="mobile-chat-time">[${timeStr}]</span> <span class="mobile-chat-author">${author}:</span> <span class="mobile-chat-msg">${text}</span></div>`;
     }).join("");
 }
@@ -642,6 +643,25 @@ async function pruneOldMessages() {
 }
 
 /**
+ * Đếm số từ trong chuỗi văn bản (phân tách bởi khoảng trắng / ký tự xuống dòng)
+ */
+function getChatWordCount(str) {
+    const trimmed = (str || "").trim();
+    if (!trimmed) return 0;
+    return trimmed.split(/\s+/).length;
+}
+
+/**
+ * Tự động co giãn chiều cao của textarea theo nội dung (tối đa 120px)
+ */
+function autoResizeChatInput(el) {
+    if (!el) return;
+    el.style.height = "auto";
+    const newHeight = Math.min(Math.max(el.scrollHeight, 32), 120);
+    el.style.height = newHeight + "px";
+}
+
+/**
  * Gửi tin nhắn mới lên Firestore
  */
 async function handleSendMessage() {
@@ -669,17 +689,24 @@ async function handleSendMessage() {
         return;
     }
 
+    const wordCount = getChatWordCount(text);
+    if (wordCount > 300) {
+        alert(`Tin nhắn quá dài (${wordCount}/300 từ). Vui lòng rút gọn lại dưới 300 từ!`);
+        input.focus();
+        return;
+    }
+
     const authorName = (currentProfile && currentProfile.nickname)
         ? currentProfile.nickname
         : (currentUser.displayName || currentUser.email.split("@")[0]);
 
     try {
-        // Thêm tin nhắn vào collection "messages"
+        // Thêm tin nhắn vào collection "messages" (hỗ trợ xuống dòng và tối đa 300 từ)
         await addDoc(collection(db, "messages"), {
             uid: currentUser.uid,
             author: authorName.slice(0, 24),
             email: currentUser.email,
-            text: text.slice(0, 120),
+            text: text,
             createdAt: serverTimestamp()
         });
 
@@ -691,8 +718,12 @@ async function handleSendMessage() {
         }
 
         input.value = "";
+        autoResizeChatInput(input);
         const charCount = document.getElementById("chat-char-count");
-        if (charCount) charCount.textContent = "0/120";
+        if (charCount) {
+            charCount.textContent = "0/300 từ";
+            charCount.classList.remove("over-limit");
+        }
 
         // Bắt đầu đếm ngược cooldown 5 phút (nếu không có God Mode)
         if (!isGodModeActive()) {
@@ -961,7 +992,11 @@ function initChatApp() {
             } else {
                 resetClearBtnState();
                 inputField.value = "";
-                if (charCount) charCount.textContent = "0/120";
+                autoResizeChatInput(inputField);
+                if (charCount) {
+                    charCount.textContent = "0/300 từ";
+                    charCount.classList.remove("over-limit");
+                }
                 inputField.focus();
             }
         };
@@ -972,12 +1007,21 @@ function initChatApp() {
             if (isClearConfirming) {
                 resetClearBtnState();
             }
-            const len = inputField.value.length;
-            if (charCount) charCount.textContent = `${len}/120`;
+            autoResizeChatInput(inputField);
+            const words = getChatWordCount(inputField.value);
+            if (charCount) {
+                charCount.textContent = `${words}/300 từ`;
+                if (words > 300) {
+                    charCount.classList.add("over-limit");
+                } else {
+                    charCount.classList.remove("over-limit");
+                }
+            }
         });
 
         inputField.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
+            const isMobile = window.innerWidth <= 768;
+            if (e.key === "Enter" && !e.shiftKey && !e.isComposing && !isMobile) {
                 e.preventDefault();
                 handleSendMessage();
             }

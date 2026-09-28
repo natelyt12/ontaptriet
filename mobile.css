@@ -44,7 +44,7 @@
         top: 16px;
     }
 
-    /* 3. Menu Row: Hiển thị inline (nhãn + tùy chọn cùng hàng) cho cả Menu chính và Cài đặt */
+    /* 3. Menu Row: Hiển thị inline cho các màn hình phụ (Cài đặt,...) */
     .menu-row {
         flex-direction: row;
         align-items: baseline;
@@ -52,6 +52,20 @@
         margin-bottom: 16px;
         width: 100%;
         flex-wrap: wrap;
+    }
+
+    /* Ở Menu chính: Xuống dòng nội dung thay vì inline cùng label (chỉ dành cho điện thoại) */
+    #menu-screen .menu-row,
+    .lobby-menu-panel .menu-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 18px;
+    }
+
+    #menu-screen .menu-row .menu-label-prefix,
+    .lobby-menu-panel .menu-row .menu-label-prefix {
+        min-width: 0;
     }
 
     .limit-options {
@@ -69,7 +83,10 @@
         top: calc(100% + 6px);
         right: auto;
         min-width: 200px;
+        width: max-content;
         max-width: calc(100vw - 56px);
+        padding: 8px 16px 8px 16px;
+        box-sizing: border-box;
     }
 
     /* 4. Thanh điều hướng câu hỏi dưới cùng: Index câu hỏi nằm ở bên phải thay vì ở giữa */

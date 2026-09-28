@@ -141,6 +141,48 @@ function initRandomToggle() {
 }
 
 /**
+ * Chuẩn hóa và kiểm tra tính hợp lệ của phạm vi câu hỏi (Từ câu ... đến câu ...)
+ * - Không cho phép nhập vượt quá số câu tối đa (currentAvailableTotal)
+ * - Không cho phép index câu đầu lớn hơn index câu cuối
+ * @param {'from'|'to'|null} source - Nguồn gọi kiểm tra để ưu tiên giữ giá trị đang sửa
+ */
+function validateRangeInputs(source = null) {
+    const fromInput = document.getElementById("range-from");
+    const toInput = document.getElementById("range-to");
+    if (!fromInput || !toInput) return;
+
+    let fromVal = parseInt(fromInput.value, 10);
+    let toVal = parseInt(toInput.value, 10);
+
+    // 1. Kiểm tra giá trị rỗng hoặc nhỏ hơn 1
+    if (isNaN(fromVal) || fromVal < 1) fromVal = 1;
+    if (isNaN(toVal) || toVal < 1) toVal = 1;
+
+    // 2. Không được vượt quá số câu tối đa hiện có
+    if (fromVal > currentAvailableTotal) fromVal = currentAvailableTotal;
+    if (toVal > currentAvailableTotal) toVal = currentAvailableTotal;
+
+    // 3. Đảm bảo câu đầu không được lớn hơn câu cuối
+    if (fromVal > toVal) {
+        if (source === "from") {
+            toVal = fromVal;
+        } else if (source === "to") {
+            fromVal = toVal;
+        } else {
+            toVal = fromVal;
+        }
+    }
+
+    fromInput.value = fromVal.toString();
+    toInput.value = toVal.toString();
+    fromInput.max = currentAvailableTotal;
+    toInput.max = currentAvailableTotal;
+
+    rangeFromVal = fromVal;
+    rangeToVal = toVal;
+}
+
+/**
  * Khởi tạo ô nhập phạm vi ôn luyện từ câu ... đến câu ...
  */
 function initRangeInputs() {
@@ -150,14 +192,21 @@ function initRangeInputs() {
     if (fromInput) {
         fromInput.addEventListener("input", () => {
             const val = parseInt(fromInput.value, 10);
-            if (!isNaN(val) && val >= 1) {
-                rangeFromVal = val;
+            if (!isNaN(val)) {
+                if (val > currentAvailableTotal) {
+                    fromInput.value = currentAvailableTotal.toString();
+                    rangeFromVal = currentAvailableTotal;
+                } else if (val >= 1) {
+                    rangeFromVal = val;
+                }
             }
         });
         fromInput.addEventListener("blur", () => {
-            if (isNaN(parseInt(fromInput.value, 10)) || parseInt(fromInput.value, 10) < 1) {
-                fromInput.value = "1";
-                rangeFromVal = 1;
+            validateRangeInputs("from");
+        });
+        fromInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                fromInput.blur();
             }
         });
     }
@@ -165,16 +214,21 @@ function initRangeInputs() {
     if (toInput) {
         toInput.addEventListener("input", () => {
             const val = parseInt(toInput.value, 10);
-            if (!isNaN(val) && val >= 1) {
-                rangeToVal = val;
+            if (!isNaN(val)) {
+                if (val > currentAvailableTotal) {
+                    toInput.value = currentAvailableTotal.toString();
+                    rangeToVal = currentAvailableTotal;
+                } else if (val >= 1) {
+                    rangeToVal = val;
+                }
             }
         });
         toInput.addEventListener("blur", () => {
-            let val = parseInt(toInput.value, 10);
-            if (isNaN(val) || val < 1) {
-                val = Math.min(25, currentAvailableTotal);
-                toInput.value = val.toString();
-                rangeToVal = val;
+            validateRangeInputs("to");
+        });
+        toInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                toInput.blur();
             }
         });
     }
@@ -185,8 +239,6 @@ function initRangeInputs() {
  */
 async function updateAvailableCount() {
     const hintEl = document.getElementById("range-total-hint");
-    const toInput = document.getElementById("range-to");
-    const fromInput = document.getElementById("range-from");
 
     try {
         if (typeof fetchAllSubjectQuestions === "function") {
@@ -203,16 +255,7 @@ async function updateAvailableCount() {
         hintEl.textContent = `/ ${currentAvailableTotal} câu`;
     }
 
-    if (toInput) {
-        toInput.max = currentAvailableTotal;
-        if (parseInt(toInput.value, 10) > currentAvailableTotal) {
-            toInput.value = currentAvailableTotal.toString();
-            rangeToVal = currentAvailableTotal;
-        }
-    }
-    if (fromInput) {
-        fromInput.max = currentAvailableTotal;
-    }
+    validateRangeInputs(null);
 }
 
 /**
@@ -290,6 +333,9 @@ async function startQuiz() {
                 }
 
                 // 1. Tải và chuẩn bị bộ câu hỏi theo đúng chế độ đã chọn
+                if (!isRandomQuestions) {
+                    validateRangeInputs(null);
+                }
                 await loadQuizQuestions(
                     selectedSubjectKey,
                     selectedChapterVal,

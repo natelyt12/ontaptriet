@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Crimson+Pro:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Lexend:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Crimson+Pro:ital,wght@0,400..700;1,400..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
     <script>
         (function () {
@@ -42,11 +42,11 @@
         <!-- Điểm neo: TOP CENTER -->
         <header class="anchor-top-center" id="brand-header">
             <div class="brand-title" id="brand-title-content">
-                Ontaptriet <span class="brand-version">v2.3</span>
+                Ontaptriet <span class="brand-version">v2.4</span>
             </div>
         </header>
 
-        <!-- Điểm neo: CENTER (Menu chọn bài ôn & Sảnh chat) -->
+        <!-- Điểm neo: CENTER (Menu chọn bài ôn & Đại sảnh) -->
         <main class="anchor-center" id="menu-screen">
             <div class="lobby-layout" id="lobby-layout">
                 <!-- KHỐI MENU CHỌN BÀI ÔN (BÊN TRÁI TRÊN PC, PHÍA TRÊN TRÊN MOBILE) -->
@@ -127,7 +127,7 @@
                     <div class="mobile-chat-preview" id="mobile-chat-preview">
                         <div class="mobile-chat-ticker" id="mobile-chat-ticker">
                             <div class="mobile-chat-latest-content" id="mobile-chat-latest-content">
-                                <span class="mobile-chat-empty">Đang kết nối Sảnh chat...</span>
+                                <span class="mobile-chat-empty">Đang kết nối Đại sảnh...</span>
                             </div>
                         </div>
                         <div class="mobile-chat-action">
@@ -143,7 +143,7 @@
                     <!-- Header của Chat -->
                     <div class="chat-header">
                         <div class="chat-title-group">
-                            <span class="chat-title">Sảnh chat</span>
+                            <span class="chat-title">Đại sảnh</span>
                             <span class="chat-online-text"><span id="chat-online-count">1</span> trực tuyến</span>
                         </div>
                         <div class="chat-user-bar" id="chat-user-bar" style="display: none;">
@@ -189,9 +189,9 @@
                         <!-- Khi đã đăng nhập: Khung gõ tin nhắn -->
                         <div class="chat-input-controls" id="chat-input-controls" style="display: none;">
                             <div class="chat-input-wrapper">
-                                <input type="text" id="chat-input-field" class="chat-input-field"
-                                    placeholder="Gõ lời nhắn gửi đồng môn..." maxlength="120" autocomplete="off" />
-                                <span class="chat-char-count" id="chat-char-count">0/120</span>
+                                <textarea id="chat-input-field" class="chat-input-field"
+                                    placeholder="Gõ lời nhắn gửi đồng môn..." rows="1" autocomplete="off"></textarea>
+                                <span class="chat-char-count" id="chat-char-count">0/300 từ</span>
                             </div>
 
                             <div class="chat-bottom-actions">
@@ -317,7 +317,7 @@
             <span id="site-credit-text">ontaptriet design by @phucthanhh</span>
             <span class="action-separator">/</span>
             <a href="https://github.com/natelyt12/ontaptriet" target="_blank" rel="noopener noreferrer"
-                class="btn-copyright-link">GitHub</a>
+                class="btn-copyright-link">Github</a>
         </div>
     </div>
 
