@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. Kiểm tra tài khoản Quản trị viên tối cao (Admin)
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == '25002894@eaut.edu.vn' ||
+        request.auth.uid == 'JfewpDCx6YV7OSezz8YyKNwCPm63' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.godMode == true)
+      );
+    }
+
+    // 2. Kiểm tra tài khoản có bị Cấm Chat hay không (an toàn, không lỗi crash khi chưa có trường bannedChat)
+    function isBanned() {
+      let userPath = /databases/$(database)/documents/users/$(request.auth.uid);
+      return exists(userPath) && 
+             ('bannedChat' in get(userPath).data) && 
+             get(userPath).data.bannedChat == true;
+    }
+
+    // 3. Hàm phát hiện liên kết mã độc / nguy hiểm rõ rệt (executable, script scheme)
+    function isDangerousLink(text) {
+      return text.matches('(?s).*(javascript:|data:|vbscript:|file:|\\.exe(\\?|\\s|$)|\\.apk(\\?|\\s|$)|\\.bat(\\?|\\s|$)|\\.cmd(\\?|\\s|$)|\\.msi(\\?|\\s|$)).*');
+    }
+
+    // 4. Collection quản lý hồ sơ người dùng
+    match /users/{userId} {
+      allow read: if true;
+      
+      // Cho phép tạo doc chính mình lần đầu, cấm tự gán các quyền đặc quyền
+      allow create: if request.auth != null && request.auth.uid == userId &&
+        !request.resource.data.keys().hasAny(['godMode', 'bypassCooldown', 'bannedChat']);
+      
+      // Admin được sửa tất cả.
+      // Người dùng chỉ được sửa doc của chính mình và BỊ KHÓA các trường đặc quyền (bannedChat, godMode, bypassCooldown)
+      allow update: if isAdmin() || (
+        request.auth != null && request.auth.uid == userId &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['bannedChat', 'godMode', 'bypassCooldown'])
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // 5. Collection tin nhắn sảnh chat (Bảo mật đa tầng)
+    match /messages/{messageId} {
+      allow read: if true;
+      
+      // Cho phép gửi tin nhắn khi:
+      // - Đã đăng nhập
+      // - Không bị cấm chat (isBanned() == false)
+      // - Đúng UID chính chủ (chống mạo danh người khác gửi tin)
+      // - Thành viên và Admin được phép gửi link học tập/thảo luận, nhưng chặn mã độc và sus link
+      allow create: if request.auth != null
+        && !isBanned()
+        && request.resource.data.uid == request.auth.uid
+        && !isDangerousLink(request.resource.data.text);
+      
+      // Chỉ Admin hoặc chính chủ mới được xóa tin nhắn
+      allow delete: if request.auth != null && (request.auth.uid == resource.data.uid || isAdmin());
+      
+      // Đồng bộ đổi author khi người dùng cập nhật biệt danh
+      allow update: if request.auth != null && (
+        isAdmin() || (
+          request.auth.uid == resource.data.uid && 
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['author'])
+        )
+      );
+    }
+
+    // 6. Số người trực tuyến Realtime
+    match /presence/{sessionId} {
+      allow read, write: if true;
+    }
+  }
+}

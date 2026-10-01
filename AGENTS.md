@@ -201,3 +201,6 @@ Mọi chuyển động trong dự án phải dùng đường cong Easing Exponen
   * Lắng nghe realtime `onSnapshot` đếm các phiên có tín hiệu trong vòng 60 giây gần nhất.
   * Tự động xóa phiên khi đóng tab (`beforeunload`) và dọn dẹp các phiên cũ quá hạn (> 3 phút).
   * Quy tắc Firestore: `match /presence/{sessionId} { allow read, write: if true; }`.
+* **Chính sách Kiểm soát Liên kết (Link Control Policy):**
+  * Thành viên và Quản trị viên đều được phép gửi liên kết hữu ích trong sảnh chat. Mọi liên kết hợp lệ sẽ tự động được hiển thị dưới dạng thẻ liên kết (`<a>`) có thể bấm mở tab mới an toàn (`rel="noopener noreferrer nofollow"`), style chữ màu xanh với gạch chân nét đứt (`.chat-msg-link`).
+  * Nghiêm cấm gửi liên kết đáng ngờ (suspicious link / lừa đảo / phần mềm độc hại / IP lạ / scam / NSFW) đối với toàn bộ người dùng (kể cả Admin). Hệ thống client và Firestore Security Rules chủ động chặn các mã độc rõ rệt (`javascript:`, `data:`, `.exe`, `.apk`,...), và bất kỳ ai gửi liên kết đáng ngờ sẽ bị Quản trị viên Cấm Chat (Ban Chat) vĩnh viễn qua công cụ CLI `cli.mjs`.

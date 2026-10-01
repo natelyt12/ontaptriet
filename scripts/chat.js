@@ -86,6 +86,142 @@ function isGodModeActive() {
 }
 
 /**
+ * Check whether a user or profile possesses administrator privileges
+ * @param {object|null} user - Firebase Auth user object
+ * @param {object|null} profile - Firestore user profile document
+ * @returns {boolean}
+ */
+function isAdminUser(user, profile) {
+    if (!user) return false;
+    if (user.email && user.email.toLowerCase() === GOD_MODE_EMAIL.toLowerCase()) return true;
+    if (profile && (profile.isAdmin === true || profile.role === "admin" || profile.godMode === true || profile.bypassCooldown === true)) return true;
+    return false;
+}
+
+/**
+ * Common list of generic and country top-level domains for URL detection
+ */
+const TLD_REGEX_PART = "com|vn|edu\\.vn|org|net|edu|gov|io|me|dev|app|info|xyz|gg|co|link|online|top|site|cc|to|tv|ly|gl|ai|pro|tech|shop|icu|mobi|space|live|club|vip|work|page|social|biz|cloud|store";
+
+/**
+ * Check whether a text string contains hyperlinks or web domains
+ * @param {string} text - Message text to check
+ * @returns {boolean}
+ */
+function containsLink(text) {
+    if (!text || typeof text !== "string") return false;
+
+    // Detect explicit protocols
+    if (/\b(?:https?|ftp):\/\/[^\s/$.?#].[^\s]*/i.test(text)) {
+        return true;
+    }
+
+    // Detect www. prefixes
+    if (/\bwww\.[a-z0-9-]+(?:\.[a-z0-9-]+)+(?:[/?#][^\s]*)?/i.test(text)) {
+        return true;
+    }
+
+    // Detect domain names with recognized TLDs
+    const domainPattern = new RegExp(`(?:^|\\s|[(\\[<])(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+(?:${TLD_REGEX_PART})(?::[0-9]{1,5})?(?:[/?#][^\\s]*)?(?=$|\\s|[.,;:!?)\\]>])`, "i");
+
+    return domainPattern.test(text);
+}
+
+/**
+ * Detect whether a message contains explicitly suspicious, malicious or deceptive links
+ * (e.g. dangerous URI schemes, malware downloads, raw IP addresses, phishing patterns)
+ * @param {string} text - Message text to inspect
+ * @returns {boolean}
+ */
+function isSuspiciousLink(text) {
+    if (!text || typeof text !== "string") return false;
+
+    // Dangerous / executable URI schemes
+    if (/\b(?:javascript|data|vbscript|file|blob):/i.test(text)) {
+        return true;
+    }
+
+    // Direct executable or dangerous archive download links
+    if (/\.(?:exe|apk|bat|cmd|vbs|msi|scr|dll|ps1|com)(?:[?#\s]|$)/i.test(text)) {
+        return true;
+    }
+
+    // Raw IPv4 addresses as hosts (typical for malware/phishing drops)
+    if (/(?:https?:\/\/)?(?:\d{1,3}\.){3}\d{1,3}(?::\d+)?(?:[/?#\s]|$)/i.test(text)) {
+        return true;
+    }
+
+    // Known suspicious patterns or misleading domain spoofs
+    if (/\b(?:free-robux|free-nitro|steamcommunit[a-z]|login-verify|bank-verify|phishing)\b/i.test(text)) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Render message content into a target container, converting links to safe clickable anchors only if allowed
+ * @param {HTMLElement} container - Target container element
+ * @param {string} text - Message text
+ * @param {boolean} allowLinks - Whether links should be rendered as clickable elements
+ */
+function renderMessageText(container, text, allowLinks) {
+    container.textContent = "";
+    if (!text) return;
+
+    if (!allowLinks) {
+        container.textContent = text;
+        return;
+    }
+
+    const urlRegex = new RegExp(`((?:https?:\\/\\/|ftp:\\/\\/|www\\.)[^\\s]+|(?:\\b[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+(?:${TLD_REGEX_PART})(?::[0-9]{1,5})?(?:\\/[^\\s]*)?)`, "gi");
+
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlRegex.exec(text)) !== null) {
+        const matchStart = match.index;
+        let matchedUrl = match[0];
+
+        // Trim trailing punctuation marks from matched URL
+        let trailingPunct = "";
+        const punctMatch = matchedUrl.match(/[.,;:!?)\>\]'"]+$/);
+        if (punctMatch) {
+            trailingPunct = punctMatch[0];
+            matchedUrl = matchedUrl.slice(0, -trailingPunct.length);
+        }
+
+        if (matchStart > lastIndex) {
+            container.appendChild(document.createTextNode(text.substring(lastIndex, matchStart)));
+        }
+
+        if (matchedUrl.length > 0) {
+            const linkEl = document.createElement("a");
+            linkEl.className = "chat-msg-link";
+            let href = matchedUrl;
+            if (!/^https?:\/\//i.test(href) && !/^ftp:\/\//i.test(href)) {
+                href = "https://" + href;
+            }
+            linkEl.href = href;
+            linkEl.target = "_blank";
+            linkEl.rel = "noopener noreferrer nofollow";
+            linkEl.textContent = matchedUrl;
+            container.appendChild(linkEl);
+        }
+
+        if (trailingPunct) {
+            container.appendChild(document.createTextNode(trailingPunct));
+        }
+
+        lastIndex = match.index + match[0].length;
+    }
+
+    if (lastIndex < text.length) {
+        container.appendChild(document.createTextNode(text.substring(lastIndex)));
+    }
+}
+
+/**
  * Lấy khóa lưu trữ cooldown theo UID
  */
 function getCooldownStorageKey(uid) {
@@ -532,7 +668,7 @@ function renderMessages(messagesList) {
 
         const textDiv = document.createElement("div");
         textDiv.className = "chat-msg-text";
-        textDiv.textContent = msg.text;
+        renderMessageText(textDiv, msg.text, true);
 
         item.appendChild(meta);
         item.appendChild(textDiv);
@@ -696,6 +832,13 @@ async function handleSendMessage() {
         return;
     }
 
+    const isSenderAdmin = isAdminUser(currentUser, currentProfile);
+    if (isSuspiciousLink(text)) {
+        alert("Nghiêm cấm gửi liên kết đáng ngờ (suspicious link / phần mềm độc hại / IP không xác thực)! Vi phạm sẽ bị cấm chat vĩnh viễn.");
+        input.focus();
+        return;
+    }
+
     const authorName = (currentProfile && currentProfile.nickname)
         ? currentProfile.nickname
         : (currentUser.displayName || currentUser.email.split("@")[0]);
@@ -707,6 +850,7 @@ async function handleSendMessage() {
             author: authorName.slice(0, 24),
             email: currentUser.email,
             text: text,
+            isAdmin: isSenderAdmin,
             createdAt: serverTimestamp()
         });
 

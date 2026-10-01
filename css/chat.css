@@ -213,6 +213,25 @@
     word-break: break-word;
 }
 
+.chat-msg-link {
+    color: blue;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 3px;
+    word-break: break-all;
+    cursor: pointer;
+    transition: opacity 0.15s ease, text-decoration-style 0.15s ease;
+}
+
+.chat-msg-link:hover {
+    opacity: 0.75;
+    text-decoration-style: solid;
+}
+
+[data-theme="dark"] .chat-msg-link {
+    color: #64b5f6;
+}
+
 .chat-msg-self .chat-msg-author {
     color: blue;
 }
