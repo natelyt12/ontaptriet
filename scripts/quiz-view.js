@@ -1,162 +1,182 @@
 /**
- * Module: Giao diện Làm bài thi (scripts/quiz-view.js)
- * Chịu trách nhiệm:
- * - Render câu hỏi, tiền tố A/B/C/D, animation trượt lên tuần tự (Expo Out)
- * - Xử lý click chọn đáp án (đúng: SVG border sweep; sai: rung nhẹ)
- * - Nút "Câu tiếp theo ›" / "Xem kết quả ›" fade từ phải sang
- * - Chuyển câu mượt mà (Expo In trượt lên, Expo Out trồi lên)
- * - Thanh Status Bar ở đáy và nút Quay lại (xác nhận 2 bước)
- * - Điều hướng về Menu chính
+ * Module: Giao diện Làm bài thi - Vertical Snap Carousel (scripts/quiz-view.js)
+ *
+ * Architecture:
+ * - All .quiz-slide elements have natural height (content-driven, no fixed height)
+ * - .quiz-carousel-track translateY positions the current slide at vertical center of viewport
+ * - Scroll: wheel accumulator pattern (ref: carousel temp) — continuous, no hard throttle
+ *   → accumulate deltaY, trigger snap when |acc| >= WHEEL_THRESHOLD
+ *   → while animating, next target = targetSlideIdx ± 1 (continuous scroll)
+ * - Snap animation uses easeOutExpo timed RAF (700ms)
+ * - Opacity: 3 fixed levels via CSS classes, `linear` transition
+ *     .past    → 0.4  (answered, above current)
+ *     .current → 1    (being answered)
+ *     .upcoming → 0   (not yet revealed)
+ * - ALWAYS CENTERED: track has top padding = viewportH/2 - firstSlideH/2 so even slide 0 is centered
+ * - After answering, AUTO_ADVANCE_DELAY ms → advanceCarousel()
+ * - No "Next question" button
  */
 
+/* ─── State ─── */
 let isBackConfirming = false;
 let backResetTimer = null;
 let copyResetTimer = null;
+window.quizIsDragMoved = false;
 
-/**
- * Quản lý trạng thái nút quay lại ở status bar dưới cùng
- */
+/* Scroll animation state (easeOutExpo timed RAF) */
+let scrollAnimId = null;    // rAF handle
+let scrollStartY = 0;       // translateY at animation start
+let scrollTargetY = 0;       // translateY destination
+let scrollStartTime = 0;       // performance.now() at start
+let scrollCurrentY = 0;       // currently applied translateY
+
+/* Slide index tracking */
+let targetSlideIdx = 0;       // destination slide index (may be ahead of viewSlideIdx during animation)
+let viewSlideIdx = 0;       // last settled slide index
+
+/* Wheel accumulator (ref: carousel temp wheel pattern) */
+let wheelAccumulator = 0;
+let wheelResetTimer = null;
+const WHEEL_THRESHOLD = 35;     // accumulated deltaY to trigger one snap step
+const WHEEL_RESET_MS = 120;    // ms of no wheel input → reset accumulator
+
+/* Geometry */
+let slideTopMap = [];   // slideTopMap[i]    = offsetTop of slide i relative to track
+let slideHeightMap = [];   // slideHeightMap[i] = offsetHeight of slide i
+let viewportH = 0;    // available height (window - header - statusbar)
+let trackPaddingTop = 0;   // extra top padding added to track so slide 0 is centered
+
+/* DOM references */
+let carouselTrack = null;
+let carouselViewport = null;
+
+/* Timers */
+let advanceTimer = null;
+
+/* Constants */
+const SCROLL_DURATION = 500;   // ms — easeOutExpo snap
+const AUTO_ADVANCE_DELAY = 600;  // ms after answering before auto-advance
+
+/* Slide index for opacity interpolation */
+let scrollStartSlideIdx = 0;  // slide idx when current snap animation started
+
+/* ─── Easing (matches carousel temp) ─── */
+function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+}
+
+/* ─── Clipboard / Status Bar ─── */
+
 function resetBackBtnState() {
     isBackConfirming = false;
     clearTimeout(backResetTimer);
     const backBtn = document.getElementById("quiz-back-btn");
-    const viewport = document.getElementById("quiz-back-viewport");
+    const vp = document.getElementById("quiz-back-viewport");
     if (backBtn) backBtn.classList.remove("confirming");
-    if (viewport) {
-        const currentSpan = viewport.querySelector(".label-text-current");
-        const currentText = currentSpan ? currentSpan.textContent.trim() : viewport.textContent.trim();
-        if (currentText !== "Quay lại") {
+    if (vp) {
+        const span = vp.querySelector(".label-text-current");
+        const txt = span ? span.textContent.trim() : vp.textContent.trim();
+        if (txt !== "Quay lại") {
             if (typeof animateLabelRoll === "function") {
-                animateLabelRoll(viewport, "Quay lại");
+                animateLabelRoll(vp, "Quay lại");
             } else {
-                viewport.innerHTML = `<span class="label-text-current">Quay lại</span>`;
+                vp.innerHTML = `<span class="label-text-current">Quay lại</span>`;
             }
         }
     } else if (backBtn) {
-        const label = backBtn.querySelector(".back-label");
-        if (label) label.textContent = "Quay lại";
+        const lbl = backBtn.querySelector(".back-label");
+        if (lbl) lbl.textContent = "Quay lại";
     }
 }
 
-/**
- * Reset nhãn nút copy câu hỏi về trạng thái ban đầu
- */
 function resetCopyBtnState() {
     clearTimeout(copyResetTimer);
-    const copyViewport = document.getElementById("quiz-copy-viewport");
-    if (copyViewport) {
-        const currentSpan = copyViewport.querySelector(".label-text-current");
-        if (currentSpan && currentSpan.textContent.trim() !== "Copy câu hỏi này") {
+    const vp = document.getElementById("quiz-copy-viewport");
+    if (vp) {
+        const span = vp.querySelector(".label-text-current");
+        if (span && span.textContent.trim() !== "Copy câu hỏi này") {
             if (typeof animateLabelRoll === "function") {
-                animateLabelRoll(copyViewport, "Copy câu hỏi này");
+                animateLabelRoll(vp, "Copy câu hỏi này");
             } else {
-                copyViewport.innerHTML = `<span class="label-text-current">Copy câu hỏi này</span>`;
+                vp.innerHTML = `<span class="label-text-current">Copy câu hỏi này</span>`;
             }
         }
     }
 }
 
-/**
- * Sao chép văn bản vào clipboard với fallback hỗ trợ mọi trình duyệt
- */
 async function copyTextToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
-        try {
-            await navigator.clipboard.writeText(text);
-            return true;
-        } catch (e) {
-            // Chuyển sang fallback bên dưới
-        }
+        try { await navigator.clipboard.writeText(text); return true; } catch (_) { }
     }
     try {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-9999px";
-        textArea.style.top = "-9999px";
-        textArea.style.opacity = "0";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        const successful = document.execCommand("copy");
-        document.body.removeChild(textArea);
-        return successful;
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        Object.assign(ta.style, { position: "fixed", left: "-9999px", top: "-9999px", opacity: "0" });
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
     } catch (err) {
-        console.error("Lỗi khi sao chép:", err);
+        console.error("Copy failed:", err);
         return false;
     }
 }
 
-/**
- * Định dạng nội dung câu hỏi và các đáp án để copy (không bao gồm tiền tố "Câu XX")
- */
 function formatQuestionForCopy(qData) {
     if (!qData) return "";
-    let questionText = (qData.question || "").trim();
-    // Loại bỏ tiền tố "Câu XX:", "Câu XX.", "Câu XX -", "Câu XX " nếu có sẵn trong dữ liệu gốc
-    questionText = questionText.replace(/^câu\s*\d+[\s:.-]*/i, "").trim();
-
+    let q = (qData.question || "").trim().replace(/^câu\s*\d+[\s:.-]*/i, "").trim();
     const prefixes = ["A", "B", "C", "D", "E", "F", "G", "H"];
-    const optionsText = (qData.options || []).map((opt, idx) => {
-        const prefix = prefixes[idx] || String.fromCharCode(65 + idx);
-        let text = (opt || "").trim();
-        // Loại bỏ tiền tố A., B., a., b. nếu dữ liệu gốc đã gắn sẵn
-        text = text.replace(/^[a-z]\.\s*/i, "").trim();
-        return `${prefix}. ${text}`;
+    const opts = (qData.options || []).map((opt, i) => {
+        const p = prefixes[i] || String.fromCharCode(65 + i);
+        const t = (opt || "").trim().replace(/^[a-z]\.\s*/i, "").trim();
+        return `${p}. ${t}`;
     });
-
-    if (optionsText.length > 0) {
-        return `${questionText}\n${optionsText.join("\n")}`;
-    }
-    return questionText;
+    return opts.length ? `${q}\n${opts.join("\n")}` : q;
 }
 
-/**
- * Xử lý sự kiện khi bấm nút Copy câu hỏi
- */
 async function handleCopyCurrentQuestion() {
-    if (!currentQuestions || !currentQuestions[currentQuestionIndex]) return;
-    const qData = currentQuestions[currentQuestionIndex];
-    const textToCopy = formatQuestionForCopy(qData);
-    if (!textToCopy) return;
+    const idx = viewSlideIdx;
+    const qData = currentQuestions && currentQuestions[idx];
+    if (!qData) return;
+    const text = formatQuestionForCopy(qData);
+    if (!text) return;
 
-    const success = await copyTextToClipboard(textToCopy);
-    if (success) {
-        const copyViewport = document.getElementById("quiz-copy-viewport");
-        if (copyViewport) {
+    const ok = await copyTextToClipboard(text);
+    if (ok) {
+        const vp = document.getElementById("quiz-copy-viewport");
+        if (vp) {
             clearTimeout(copyResetTimer);
             if (typeof animateLabelRoll === "function") {
-                animateLabelRoll(copyViewport, "Đã copy!");
+                animateLabelRoll(vp, "Đã copy!");
             } else {
-                copyViewport.innerHTML = `<span class="label-text-current">Đã copy!</span>`;
+                vp.innerHTML = `<span class="label-text-current">Đã copy!</span>`;
             }
-
-            copyResetTimer = setTimeout(() => {
-                resetCopyBtnState();
-            }, 2000);
+            copyResetTimer = setTimeout(resetCopyBtnState, 2000);
         }
     }
 }
 
 function initStatusBar() {
     const backBtn = document.getElementById("quiz-back-btn");
-    const backViewport = document.getElementById("quiz-back-viewport");
+    const backVp = document.getElementById("quiz-back-viewport");
     if (backBtn) {
         backBtn.addEventListener("mousedown", (e) => {
             if (e.button !== undefined && e.button !== 0) return;
             if (!isBackConfirming) {
                 isBackConfirming = true;
                 backBtn.classList.add("confirming");
-                if (backViewport && typeof animateLabelRoll === "function") {
-                    animateLabelRoll(backViewport, "Xác nhận");
+                if (backVp && typeof animateLabelRoll === "function") {
+                    animateLabelRoll(backVp, "Xác nhận");
                 } else {
-                    const label = backBtn.querySelector(".back-label") || backViewport;
-                    if (label) label.textContent = "Xác nhận";
+                    const lbl = backBtn.querySelector(".back-label") || backVp;
+                    if (lbl) lbl.textContent = "Xác nhận";
                 }
-
                 clearTimeout(backResetTimer);
                 backResetTimer = setTimeout(resetBackBtnState, 4000);
             } else {
+                clearTimeout(advanceTimer);
+                stopScrollAnim();
                 resetBackBtnState();
                 resetCopyBtnState();
                 returnToMenu();
@@ -173,235 +193,661 @@ function initStatusBar() {
     }
 }
 
+/* ─── Scroll Engine (easeOutExpo timed RAF) ─── */
+
+function stopScrollAnim() {
+    if (scrollAnimId) {
+        cancelAnimationFrame(scrollAnimId);
+        scrollAnimId = null;
+    }
+}
+
 /**
- * Render câu hỏi hiện tại theo đúng format yêu cầu
+ * Computes the translateY value that centers slide `idx` vertically in the viewport.
+ *
+ * trackPaddingTop is pre-added at the track top so that slide 0 is centered without any offset.
+ * For slide i: target = trackPaddingTop + slideTopMap[i] - (viewportH - slideHeightMap[i]) / 2
+ * Which simplifies to: the center of slide i aligns with the center of the viewport.
+ *
+ * @param {number} idx
+ * @returns {number} translateY value (positive = track moves up)
  */
-function renderCurrentQuestion() {
-    const quizScreen = document.getElementById("quiz-screen");
-    if (!quizScreen) return;
+function computeTargetY(idx) {
+    const top = slideTopMap[idx] || 0;
+    const height = slideHeightMap[idx] || 0;
+    const offsetToCenter = (viewportH - height) / 2;
+    // Leave safe top margin for absolute header
+    return Math.max(0, top - Math.max(100, offsetToCenter));
+}
 
-    resetCopyBtnState();
+/**
+ * Updates the opacity of every visible (non-upcoming) slide based on a continuous
+ * float index representing the current "center" of the viewport.
+ *
+ * Matches the carousel temp's continuous opacity pattern:
+ * - Distance 0 from center → opacity 1.0
+ * - Distance ≥1 from center → opacity 0.4 (floor)
+ * Applied directly via style.opacity every RAF tick (no CSS transition involved).
+ *
+ * @param {number} continuousIdx - float, e.g. 1.4 means 40% between slide 1 and 2
+ */
+function applySlideOpacities(continuousIdx) {
+    if (!carouselTrack) return;
+    const slides = carouselTrack.querySelectorAll(".quiz-slide");
+    slides.forEach(slide => {
+        if (slide.classList.contains("upcoming")) {
+            slide.style.opacity = "0";
+            return;
+        }
+        const i = parseInt(slide.getAttribute("data-slide-index"), 10);
+        const dist = Math.abs(i - continuousIdx);
+        // Linear fade: opacity 1 at center, 0.4 at distance >= 1
+        const opacity = Math.max(0.4, 1 - dist * 0.6);
+        slide.style.opacity = opacity.toFixed(3);
+    });
+}
 
-    const qData = currentQuestions[currentQuestionIndex];
-    if (!qData) {
-        quizScreen.innerHTML = `
-            <div class="quiz-container">
-                <div class="quiz-question">Đã hoàn thành tất cả câu hỏi!</div>
-            </div>
-        `;
+/**
+ * Maps a physical scroll Y position to a continuous float index.
+ */
+function getContinuousIdx(y) {
+    if (currentQuestionIndex === 0) return 0;
+
+    for (let i = 0; i < currentQuestionIndex; i++) {
+        const y1 = computeTargetY(i);
+        const y2 = computeTargetY(i + 1);
+        if (y >= y1 && y <= y2) {
+            const fraction = (y - y1) / (y2 - y1);
+            return i + fraction;
+        }
+    }
+
+    const y0 = computeTargetY(0);
+    if (y < y0) {
+        const y1 = computeTargetY(1);
+        const dy = y1 - y0;
+        return dy > 0 ? 0 - (y0 - y) / dy : 0;
+    }
+
+    const yLast = computeTargetY(currentQuestionIndex);
+    if (y > yLast) {
+        const yPrev = computeTargetY(currentQuestionIndex - 1);
+        const dy = yLast - yPrev;
+        return dy > 0 ? currentQuestionIndex + (y - yLast) / dy : currentQuestionIndex;
+    }
+
+    return currentQuestionIndex;
+}
+
+/**
+ * Launches a timed easeOutExpo snap animation from `scrollCurrentY` to `targetY`.
+ * Updates translateY and slide opacities every RAF tick (continuous soft-select).
+ * Fires onSettle() when animation completes (hard select equivalent).
+ *
+ * @param {number}   targetY
+ * @param {number}   [idx]       - slide index being scrolled to
+ * @param {Function} [onSettle]  - called when animation finishes
+ */
+function snapScrollTo(targetY, idx, onSettle) {
+    stopScrollAnim();
+
+    scrollStartY = scrollCurrentY;
+    scrollTargetY = targetY;
+    scrollStartTime = performance.now();
+    scrollStartSlideIdx = viewSlideIdx;
+
+    // Soft-select: update status bar immediately when snap starts
+    if (idx !== undefined) {
+        viewSlideIdx = idx;
+        const statusEl = document.getElementById("quiz-index-text");
+        if (statusEl) statusEl.textContent = `${idx + 1}/${currentQuestions.length}`;
+    }
+
+    if (Math.abs(scrollTargetY - scrollStartY) < 0.5) {
+        scrollCurrentY = scrollTargetY;
+        if (carouselTrack) carouselTrack.style.transform = `translateY(${-scrollCurrentY}px)`;
+        applySlideOpacities(idx !== undefined ? idx : viewSlideIdx);
+        if (onSettle) onSettle();
         return;
     }
 
-    const prefixes = ["A", "B", "C", "D", "E", "F"];
-    const isLast = currentQuestionIndex === currentQuestions.length - 1;
+    const startIdx = scrollStartSlideIdx;
+    const endIdx = idx !== undefined ? idx : viewSlideIdx;
 
-    // Cập nhật chỉ số câu trên thanh Status Bar ở dưới cùng trang
-    const statusIndexEl = document.getElementById("quiz-index-text");
-    if (statusIndexEl) {
-        statusIndexEl.textContent = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
-    }
+    function tick(now) {
+        const elapsed = now - scrollStartTime;
+        const t = Math.min(elapsed / SCROLL_DURATION, 1);
+        const eased = easeOutExpo(t);
+        scrollCurrentY = scrollStartY + (scrollTargetY - scrollStartY) * eased;
 
-    // Render HTML câu hỏi, các đáp án, và hàng nút câu tiếp theo
-    quizScreen.innerHTML = `
-        <div class="quiz-container">
-            <div class="quiz-question quiz-item-enter" style="animation-delay: 0.04s;">
-                <strong class="question-number">Câu ${currentQuestionIndex + 1}:</strong>
-                <span class="question-text">${qData.question}</span>
-            </div>
-            <div class="quiz-options">
-                ${qData.options.map((opt, idx) => `
-                    <div class="quiz-option quiz-item-enter" data-index="${idx}" style="animation-delay: ${0.09 + idx * 0.05}s;">
-                        <span class="option-prefix">${prefixes[idx] || ""}.</span> ${opt}
-                    </div>
-                `).join("")}
-            </div>
-            <div class="quiz-next-row quiz-item-enter" style="animation-delay: ${0.09 + qData.options.length * 0.05}s;">
-                <button id="quiz-next-btn" class="btn-quiz-next">
-                    <span class="btn-label">${isLast ? "Xem kết quả" : "Câu tiếp theo"}</span> <span class="btn-arrow">›</span>
-                </button>
-            </div>
-        </div>
-    `;
-
-    // Khóa pointer-events trong lúc câu hỏi và các đáp án đang trượt lên
-    if (DropdownAnimationLock) {
-        DropdownAnimationLock.lock();
-    }
-
-    // Dọn sạch class animation enter và mở khóa pointer events sau khi animation trượt lên hoàn tất
-    setTimeout(() => {
-        quizScreen.querySelectorAll(".quiz-item-enter").forEach(item => {
-            item.classList.remove("quiz-item-enter");
-            item.style.animationDelay = "";
-        });
-        if (DropdownAnimationLock) {
-            DropdownAnimationLock.unlock();
+        if (carouselTrack) {
+            carouselTrack.style.transform = `translateY(${-scrollCurrentY}px)`;
+            applySlideOpacities(getContinuousIdx(scrollCurrentY));
         }
-    }, 700);
 
-    // Gắn sự kiện click vào các đáp án (chỉ cho phép chọn 1 lần)
-    const optionsContainer = quizScreen.querySelector(".quiz-options");
-    const optionEls = quizScreen.querySelectorAll(".quiz-option");
-    const nextBtn = quizScreen.querySelector("#quiz-next-btn");
+        if (t < 1) {
+            scrollAnimId = requestAnimationFrame(tick);
+        } else {
+            scrollCurrentY = scrollTargetY;
+            scrollAnimId = null;
+            // Hard select: snap complete, apply final discrete opacities
+            applySlideOpacities(endIdx);
+            if (onSettle) onSettle();
+        }
+    }
+
+    scrollAnimId = requestAnimationFrame(tick);
+}
+
+/* ─── Geometry ─── */
+
+/**
+ * Reads and caches the offsetTop and offsetHeight of every .quiz-slide.
+ * Must be called after DOM changes that affect slide heights.
+ */
+function measureSlides() {
+    if (!carouselTrack) return;
+    const slides = carouselTrack.querySelectorAll(".quiz-slide");
+    slideTopMap = [];
+    slideHeightMap = [];
+    slides.forEach(slide => {
+        slideTopMap.push(slide.offsetTop);
+        slideHeightMap.push(slide.offsetHeight);
+    });
+}
+
+/* ─── Slide Content ─── */
+
+/**
+ * Injects real question content + stagger enter animation into a placeholder slide.
+ */
+function revealSlideContent(slideEl, qData, qIndex) {
+    const contentEl = slideEl.querySelector(".quiz-slide-content");
+    if (!contentEl) return;
+
+    const prefixes = ["A", "B", "C", "D", "E", "F"];
+    const optionsHTML = qData.options.map((opt, idx) => `
+        <div class="quiz-option quiz-item-enter" data-index="${idx}" style="animation-delay:${0.09 + idx * 0.05}s;">
+            <span class="option-prefix">${prefixes[idx] || ""}.</span> ${opt}
+        </div>`).join("");
+
+    contentEl.innerHTML = `
+        <div class="quiz-question quiz-item-enter" style="animation-delay:0.04s;">
+            <strong class="question-number">Câu ${qIndex + 1}:</strong>
+            <span class="question-text">${qData.question}</span>
+        </div>
+        <div class="quiz-options">
+            ${optionsHTML}
+        </div>`;
+
+    const duration = Math.round((0.09 + qData.options.length * 0.05) * 1000 + 380 + 40);
+    setTimeout(() => {
+        contentEl.querySelectorAll(".quiz-item-enter").forEach(el => {
+            el.classList.remove("quiz-item-enter");
+            el.style.animationDelay = "";
+        });
+    }, duration);
+}
+
+/* ─── Answer Interaction ─── */
+
+/**
+ * Wires up click handlers for answer options. Locks after first selection,
+ * shows correct/wrong feedback, schedules auto-advance.
+ */
+function attachAnswerHandlers(slideEl, qIndex) {
+    const optContainer = slideEl.querySelector(".quiz-options");
+    const optionEls = slideEl.querySelectorAll(".quiz-option");
     let hasAnswered = false;
 
     optionEls.forEach(el => {
-        el.addEventListener("mousedown", (e) => {
-            if (e.button !== undefined && e.button !== 0) return;
+        el.addEventListener("pointerup", (e) => {
+            if (e.pointerType === "mouse" && e.button !== 0) return;
+            if (window.quizIsDragMoved) return;
             if (hasAnswered) return;
             hasAnswered = true;
 
-            // Khóa toàn bộ các lựa chọn ngay lập tức
-            if (optionsContainer) {
-                optionsContainer.classList.add("quiz-answered");
-            }
+            if (optContainer) optContainer.classList.add("quiz-answered");
 
             const selectedIdx = parseInt(el.getAttribute("data-index"), 10);
             const result = submitAnswer(selectedIdx);
 
             if (result.isCorrect) {
-                el.classList.remove("quiz-item-enter");
-                el.classList.remove("answer-wrong");
                 el.classList.add("answer-correct");
-
-                // Quét border màu xanh lá theo chiều kim đồng hồ bắt đầu từ góc trên bên trái và giữ nguyên
-                const oldSvg = el.querySelector(".border-sweep-svg");
-                if (oldSvg) oldSvg.remove();
-
-                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                svg.setAttribute("class", "border-sweep-svg");
-                svg.innerHTML = `<rect x="0" y="0" width="100%" height="100%" pathLength="100" class="border-sweep-rect" />`;
-                el.appendChild(svg);
             } else {
-                // Đáp án sai: rung 4 phía rất nhẹ nhàng và giữ nguyên màu đỏ
-                el.classList.remove("quiz-item-enter");
                 el.classList.remove("answer-wrong");
-                void el.offsetWidth; // Reflow kích hoạt lại animation rung
+                void el.offsetWidth;
                 el.classList.add("answer-wrong");
-
-                // Khi chọn sai: đáp án đúng chuyển xanh lá và có border dưới quét từ trái qua phải
                 if (result.correctIndex !== undefined && optionEls[result.correctIndex]) {
                     const correctEl = optionEls[result.correctIndex];
-                    correctEl.classList.remove("quiz-item-enter");
                     correctEl.classList.remove("answer-correct");
-                    void correctEl.offsetWidth; // Reflow kích hoạt animation
+                    void correctEl.offsetWidth;
                     correctEl.classList.add("answer-correct-revealed");
                 }
             }
 
-            // Hiện nút "Câu tiếp theo ›" fade từ phải qua trái
-            if (nextBtn) {
-                nextBtn.classList.add("show-from-right");
-            }
+            clearTimeout(advanceTimer);
+            advanceTimer = setTimeout(() => advanceCarousel(), AUTO_ADVANCE_DELAY);
         });
     });
+}
 
-    // Bấm nút "Câu tiếp theo ›" để chuyển câu
-    if (nextBtn) {
-        let isNavigatingNext = false;
-        nextBtn.addEventListener("mousedown", (e) => {
-            if (e.button !== undefined && e.button !== 0) return;
-            if (isNavigatingNext) return;
-            isNavigatingNext = true;
-            transitionToNextQuestion();
-        });
+/* ─── Carousel Orchestration ─── */
+
+/**
+ * Advances to the next question after answering.
+ * Marks current slide as "past", reveals next slide content, snaps to center it.
+ */
+function advanceCarousel() {
+    if (!carouselTrack) return;
+
+    const answeredIdx = currentQuestionIndex;
+    currentQuestionIndex++;
+    const nextIdx = currentQuestionIndex;
+
+    // Mark answered slide as past
+    const answeredSlide = carouselTrack.querySelector(`.quiz-slide[data-slide-index="${answeredIdx}"]`);
+    if (answeredSlide) {
+        answeredSlide.classList.remove("current");
+        answeredSlide.classList.add("past");
     }
+
+    if (nextIdx >= currentQuestions.length) {
+        stopScrollAnim();
+        if (typeof renderQuizResult === "function") renderQuizResult();
+        return;
+    }
+
+    const nextSlide = carouselTrack.querySelector(`.quiz-slide[data-slide-index="${nextIdx}"]`);
+    if (!nextSlide) return;
+
+    // Inject content and activate next slide
+    if (nextSlide.classList.contains("upcoming")) {
+        revealSlideContent(nextSlide, currentQuestions[nextIdx], nextIdx);
+    }
+    nextSlide.classList.remove("upcoming");
+    nextSlide.classList.add("current");
+
+    // Lock DropdownAnimationLock during stagger enter
+    if (DropdownAnimationLock) DropdownAnimationLock.lock();
+    const enterDuration = Math.round((0.09 + currentQuestions[nextIdx].options.length * 0.05) * 1000 + 380 + 40);
+    setTimeout(() => { if (DropdownAnimationLock) DropdownAnimationLock.unlock(); }, enterDuration);
+
+    attachAnswerHandlers(nextSlide, nextIdx);
+
+    // Re-measure after content injection then snap
+    targetSlideIdx = nextIdx;
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            measureSlides();
+            snapScrollTo(computeTargetY(nextIdx), nextIdx);
+            resetCopyBtnState();
+        });
+    });
 }
 
 /**
- * Chuyển sang câu hỏi tiếp theo
+ * Scrolls to slide `idx` using the snap engine.
+ * Used by the wheel handler to browse answered slides.
+ *
+ * @param {number} idx - clamp to [0, currentQuestionIndex]
  */
-function transitionToNextQuestion() {
+function scrollToSlide(idx) {
+    const clamped = Math.max(0, Math.min(currentQuestionIndex, idx));
+    targetSlideIdx = clamped;
+    snapScrollTo(computeTargetY(clamped), clamped);
+    resetCopyBtnState();
+}
+
+/* ─── Entry Point ─── */
+
+/**
+ * Builds and mounts the full carousel into #quiz-screen.
+ */
+function renderCurrentQuestion() {
     const quizScreen = document.getElementById("quiz-screen");
-    if (!quizScreen) {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < currentQuestions.length) {
-            renderCurrentQuestion();
-        } else if (typeof renderQuizResult === "function") {
-            renderQuizResult();
-        }
+    if (!quizScreen) return;
+
+    document.body.style.overflowY = "hidden";
+
+    // Reset all state
+    stopScrollAnim();
+    clearTimeout(advanceTimer);
+    clearTimeout(wheelResetTimer);
+    wheelAccumulator = 0;
+    scrollCurrentY = 0;
+    scrollTargetY = 0;
+    viewSlideIdx = 0;
+    targetSlideIdx = 0;
+    slideTopMap = [];
+    slideHeightMap = [];
+    carouselTrack = null;
+    carouselViewport = null;
+    trackPaddingTop = 0;
+
+    resetCopyBtnState();
+
+    if (!currentQuestions || currentQuestions.length === 0) {
+        quizScreen.innerHTML = `<div class="quiz-container"><div class="quiz-question">Đã hoàn thành tất cả câu hỏi!</div></div>`;
         return;
     }
 
-    const questionEl = quizScreen.querySelector(".quiz-question");
-    const optionEls = Array.from(quizScreen.querySelectorAll(".quiz-option"));
-    const nextRowEl = quizScreen.querySelector(".quiz-next-row");
+    const statusEl = document.getElementById("quiz-index-text");
+    if (statusEl) statusEl.textContent = `1/${currentQuestions.length}`;
 
-    const items = [];
-    if (questionEl) items.push(questionEl);
-    items.push(...optionEls);
-    if (nextRowEl) items.push(nextRowEl);
+    // ── Compute available viewport height ──
+    viewportH = window.innerHeight;
 
-    if (items.length === 0) {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < currentQuestions.length) {
-            renderCurrentQuestion();
-        } else if (typeof renderQuizResult === "function") {
-            renderQuizResult();
+    // ── Build DOM ──
+    const viewport = document.createElement("div");
+    viewport.className = "quiz-screen-viewport";
+    viewport.style.height = `${viewportH}px`;
+    carouselViewport = viewport;
+
+    const track = document.createElement("div");
+    track.className = "quiz-carousel-track";
+    carouselTrack = track;
+
+    const prefixes = ["A", "B", "C", "D", "E", "F"];
+
+    // Slide 0: full content + stagger enter
+    const firstQ = currentQuestions[0];
+    const firstOptionsHTML = firstQ.options.map((opt, idx) => `
+        <div class="quiz-option quiz-item-enter" data-index="${idx}" style="animation-delay:${0.09 + idx * 0.05}s;">
+            <span class="option-prefix">${prefixes[idx] || ""}.</span> ${opt}
+        </div>`).join("");
+
+    const firstSlideHTML = `
+        <div class="quiz-slide current" data-slide-index="0">
+            <div class="quiz-container quiz-slide-content">
+                <div class="quiz-question quiz-item-enter" style="animation-delay:0.04s;">
+                    <strong class="question-number">Câu 1:</strong>
+                    <span class="question-text">${firstQ.question}</span>
+                </div>
+                <div class="quiz-options">
+                    ${firstOptionsHTML}
+                </div>
+            </div>
+        </div>`;
+
+    // Remaining slides: empty placeholders (opacity 0, no content)
+    const upcomingHTML = currentQuestions.slice(1).map((_, relIdx) => {
+        const absIdx = relIdx + 1;
+        return `<div class="quiz-slide upcoming" data-slide-index="${absIdx}">
+            <div class="quiz-container quiz-slide-content" aria-hidden="true"></div>
+        </div>`;
+    }).join("");
+
+    track.innerHTML = firstSlideHTML + upcomingHTML;
+    viewport.appendChild(track);
+    quizScreen.innerHTML = "";
+    quizScreen.appendChild(viewport);
+
+    // ── Wheel handler (accumulator pattern — ref: carousel temp) ──
+    // Registers on the viewport (passive: false to allow preventDefault)
+    viewport.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const delta = e.deltaY || e.deltaX;
+        wheelAccumulator += delta;
+
+        clearTimeout(wheelResetTimer);
+        wheelResetTimer = setTimeout(() => { wheelAccumulator = 0; }, WHEEL_RESET_MS);
+
+        if (Math.abs(wheelAccumulator) >= WHEEL_THRESHOLD) {
+            const direction = Math.sign(wheelAccumulator);
+            wheelAccumulator = 0;
+            // Use targetSlideIdx (not viewSlideIdx) so rapid scroll queues correctly
+            scrollToSlide(targetSlideIdx + direction);
         }
-        return;
-    }
+    }, { passive: false });
 
-    if (DropdownAnimationLock) {
-        DropdownAnimationLock.lock();
-    }
+    // ── Touch / Drag engine (Vertical) ──
+    let isDragging = false;
+    let dragStartY = 0;
+    let dragStartScrollY = 0;
+    let dragStartTime = 0;
 
-    // Từng dòng trượt lên trên và fadeout tuần tự từ trên xuống dưới (Expo In)
-    const stepDelay = 0.05;
-    items.forEach((item, idx) => {
-        item.style.setProperty("animation-delay", `${idx * stepDelay}s`, "important");
-        item.classList.add("quiz-item-exit");
+    let isMoveTicking = false;
+
+    const startDrag = (clientY) => {
+        if (!currentQuestions || currentQuestions.length <= 1) return;
+        isDragging = true;
+        window.quizIsDragMoved = false;
+        isMoveTicking = false;
+        dragStartY = clientY;
+        dragStartScrollY = scrollCurrentY;
+        dragStartTime = performance.now();
+        stopScrollAnim();
+    };
+
+    const moveDrag = (clientY) => {
+        if (!isDragging) return;
+        const deltaY = clientY - dragStartY;
+
+        if (Math.abs(deltaY) > 5) {
+            window.quizIsDragMoved = true;
+        }
+
+        let newY = dragStartScrollY - deltaY;
+
+        const minY = computeTargetY(0);
+        let maxY = computeTargetY(currentQuestionIndex);
+
+        const currentTop = slideTopMap[currentQuestionIndex] || 0;
+        const currentH = slideHeightMap[currentQuestionIndex] || 0;
+        const maxScrollForBottom = currentTop + currentH - (viewportH - 120);
+        if (maxScrollForBottom > maxY) maxY = maxScrollForBottom;
+
+        if (newY < minY) {
+            newY = minY - Math.pow(minY - newY, 0.7);
+        } else if (newY > maxY) {
+            newY = maxY + Math.pow(newY - maxY, 0.7);
+        }
+
+        scrollCurrentY = newY;
+
+        if (!isMoveTicking) {
+            isMoveTicking = true;
+            requestAnimationFrame(() => {
+                if (carouselTrack) {
+                    carouselTrack.style.transform = `translateY(${-scrollCurrentY}px)`;
+                    applySlideOpacities(getContinuousIdx(scrollCurrentY));
+                }
+                isMoveTicking = false;
+            });
+        }
+    };
+
+    const endDrag = (clientY) => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        const deltaY = clientY !== undefined ? clientY - dragStartY : 0;
+        const duration = performance.now() - dragStartTime;
+        const velocity = deltaY / Math.max(1, duration);
+
+        let closestIdx = 0;
+        let minDiff = Infinity;
+        for (let i = 0; i <= currentQuestionIndex; i++) {
+            const targetY = computeTargetY(i);
+            const diff = Math.abs(scrollCurrentY - targetY);
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestIdx = i;
+            }
+        }
+
+        let targetIdx = closestIdx;
+
+        if (Math.abs(velocity) > 0.4 && Math.abs(deltaY) > 20) {
+            if (velocity > 0) {
+                targetIdx = Math.max(0, closestIdx - 1);
+            } else {
+                targetIdx = Math.min(currentQuestionIndex, closestIdx + 1);
+            }
+        }
+
+        if (targetIdx === closestIdx && Math.abs(velocity) <= 0.4) {
+            const minYForSlide = computeTargetY(closestIdx);
+            const currentTop = slideTopMap[closestIdx] || 0;
+            const currentH = slideHeightMap[closestIdx] || 0;
+            const maxYForSlide = currentTop + currentH - (viewportH - 120);
+
+            if (scrollCurrentY >= minYForSlide && scrollCurrentY <= maxYForSlide) {
+                // Stay at current scroll position inside a tall slide
+                snapScrollTo(scrollCurrentY, closestIdx);
+                setTimeout(() => { window.quizIsDragMoved = false; }, 50);
+                return;
+            }
+        }
+
+        scrollToSlide(targetIdx);
+        setTimeout(() => { window.quizIsDragMoved = false; }, 50);
+    };
+
+    viewport.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 1) startDrag(e.touches[0].pageY);
+    }, { passive: true });
+
+    viewport.addEventListener("touchmove", (e) => {
+        if (isDragging && e.touches.length === 1) moveDrag(e.touches[0].pageY);
+    }, { passive: true });
+
+    viewport.addEventListener("touchend", (e) => {
+        if (isDragging) endDrag(e.changedTouches[0]?.pageY);
     });
 
-    const totalExitDuration = Math.round((items.length - 1) * stepDelay * 1000 + 280 + 40);
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < currentQuestions.length) {
-            renderCurrentQuestion();
-        } else if (typeof renderQuizResult === "function") {
-            renderQuizResult();
+    viewport.addEventListener("touchcancel", () => {
+        if (isDragging) endDrag();
+    });
+
+    // Desktop (mouse) drag is intentionally disabled — use wheel to navigate.
+    // Touch drag (pointerType !== "mouse") remains active for mobile.
+    viewport.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "mouse") return;
+        if (e.button !== undefined && e.button !== 0) return;
+        startDrag(e.pageY);
+    });
+
+    const onPointerMove = (e) => { if (isDragging && e.pointerType !== "mouse") moveDrag(e.pageY); };
+    const onPointerUp = (e) => { if (isDragging && e.pointerType !== "mouse") endDrag(e.pageY); };
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+
+    // Resize listener for responsive geometry
+    const onResize = () => {
+        viewportH = window.innerHeight;
+        measureSlides();
+        const slide0H = slideHeightMap[0] || 0;
+        trackPaddingTop = Math.max(120, Math.floor((viewportH - slide0H) / 2));
+        if (carouselTrack) {
+            carouselTrack.style.paddingTop = `${trackPaddingTop}px`;
+            const lastSlideH = slideHeightMap[currentQuestions.length - 1] || 0;
+            const trackPaddingBottom = Math.max(120, Math.floor((viewportH - lastSlideH) / 2));
+            carouselTrack.style.paddingBottom = `${trackPaddingBottom}px`;
         }
-    }, totalExitDuration);
+        measureSlides(); // Re-measure after padding applied
+        snapScrollTo(computeTargetY(currentQuestionIndex), currentQuestionIndex);
+    };
+    window.addEventListener("resize", onResize);
+
+    // Save cleanup globally to call on returnToMenu
+    window.quizCleanupDrag = () => {
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+        window.removeEventListener("resize", onResize);
+    };
+
+    // ── Stagger enter + pointer lock for slide 0 ──
+    if (DropdownAnimationLock) DropdownAnimationLock.lock();
+    const firstEnterDuration = Math.round((0.09 + firstQ.options.length * 0.05) * 1000 + 380 + 40);
+    setTimeout(() => {
+        quizScreen.querySelectorAll(".quiz-item-enter").forEach(el => {
+            el.classList.remove("quiz-item-enter");
+            el.style.animationDelay = "";
+        });
+        if (DropdownAnimationLock) DropdownAnimationLock.unlock();
+    }, firstEnterDuration);
+
+    // ── Measure geometry and initial position after two rAF frames ──
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            measureSlides();
+
+            // Ensure at least 120px padding at top (header clearance)
+            const slide0H = slideHeightMap[0] || 0;
+            trackPaddingTop = Math.max(120, Math.floor((viewportH - slide0H) / 2));
+            track.style.paddingTop = `${trackPaddingTop}px`;
+
+            // Ensure at least 120px padding at bottom (status bar clearance)
+            const lastSlideH = slideHeightMap[currentQuestions.length - 1] || 0;
+            const trackPaddingBottom = Math.max(120, Math.floor((viewportH - lastSlideH) / 2));
+            track.style.paddingBottom = `${trackPaddingBottom}px`;
+
+            // Re-measure after padding is applied (all offsetTop values shift by trackPaddingTop)
+            measureSlides();
+
+            // Position at slide 0 center (which is now exactly viewportH/2 due to padding)
+            scrollCurrentY = computeTargetY(0);
+            scrollTargetY = scrollCurrentY;
+            track.style.transform = `translateY(${-scrollCurrentY}px)`;
+            applySlideOpacities(0);
+
+            const firstSlide = track.querySelector(".quiz-slide[data-slide-index='0']");
+            if (firstSlide) attachAnswerHandlers(firstSlide, 0);
+        });
+    });
 }
 
-/**
- * Trở về màn hình Menu chính từ bài thi hoặc kết quả
- */
+/** Legacy alias */
+function transitionToNextQuestion() {
+    advanceCarousel();
+}
+
+/* ─── Return to Menu ─── */
+
 function returnToMenu() {
+    stopScrollAnim();
+    clearTimeout(advanceTimer);
+    clearTimeout(wheelResetTimer);
+    wheelAccumulator = 0;
+    document.body.style.overflowY = "";
+
+    if (window.quizCleanupDrag) {
+        window.quizCleanupDrag();
+        window.quizCleanupDrag = null;
+    }
+
+    // Force-release any stagger/animation lock left over from quiz rendering
+    // so the menu transition is never blocked.
+    if (typeof DropdownAnimationLock !== "undefined" && DropdownAnimationLock) {
+        DropdownAnimationLock.unlock();
+    }
+
     ScreenSwitcher.to("menu-screen", {
         fadeIn: true,
         autoUnlock: true,
         onBeforeFade: () => {
             const statusBar = document.getElementById("quiz-status-bar");
-            if (statusBar) {
-                statusBar.classList.remove("active");
-            }
+            if (statusBar) statusBar.classList.remove("active");
             resetBackBtnState();
             resetCopyBtnState();
         },
         onShow: (menuScreen) => {
             const quizScreen = document.getElementById("quiz-screen");
-            if (quizScreen) {
-                quizScreen.innerHTML = "";
-            }
+            if (quizScreen) quizScreen.innerHTML = "";
+
             const resultScreen = document.getElementById("result-screen");
-            if (resultScreen) {
-                resultScreen.innerHTML = "";
-            }
+            if (resultScreen) resultScreen.innerHTML = "";
 
             const brandHeader = document.getElementById("brand-header");
-            if (brandHeader) {
-                brandHeader.classList.remove("fade-out");
-            }
+            if (brandHeader) brandHeader.classList.remove("fade-out");
 
             const copyright = document.getElementById("site-copyright");
-            if (copyright) {
-                copyright.classList.remove("fade-out");
-            }
+            if (copyright) copyright.classList.remove("fade-out");
 
             if (menuScreen) {
-                const rows = menuScreen.querySelectorAll(".menu-row, .menu-actions");
-                rows.forEach(r => {
+                menuScreen.querySelectorAll(".menu-row, .menu-actions").forEach(r => {
                     r.classList.remove("menu-exit");
                     r.style.animationDelay = "";
                 });
@@ -409,4 +855,3 @@ function returnToMenu() {
         }
     });
 }
-

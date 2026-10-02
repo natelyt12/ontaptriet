@@ -45,9 +45,9 @@ function showSettingsScreen() {
  * Trở về Menu chính từ Màn hình Cài đặt (hiện lại title top-center)
  */
 function returnToMenuFromSettings() {
-    // Đóng dropdown font nếu đang mở
-    if (typeof InlineDropdown !== "undefined" && typeof InlineDropdown.closeAll === "function") {
-        InlineDropdown.closeAll();
+    // Đóng dropdown font ngay lập tức (không delay 220ms) để fade-out bắt đầu liền tay
+    if (typeof InlineDropdown !== "undefined" && typeof InlineDropdown.closeAllImmediate === "function") {
+        InlineDropdown.closeAllImmediate();
     }
 
     ScreenSwitcher.to("menu-screen", {

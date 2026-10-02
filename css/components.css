@@ -550,7 +550,9 @@
     margin: 0 8px;
 }
 
-/* Nút chuyển đổi Giao diện Sáng / Tối trong Màn hình Cài đặt */
+/* Nút chuyển đổi Giao diện Sáng / Tối trong Màn hình Cài đặt.
+   border-bottom: none !important trên button cha để tránh double-underline:
+   chỉ .label-viewport bên trong mới quản lý nét đứt (pattern giống btn-history-clear). */
 .btn-theme-toggle {
     font-family: var(--font-serif);
     font-size: var(--uniform-size);
@@ -560,6 +562,7 @@
     display: inline-flex;
     align-items: baseline;
     vertical-align: baseline;
+    border-bottom: none !important;
 }
 
 .btn-theme-toggle .label-viewport {

@@ -25,47 +25,6 @@ function getRandomUnicodeChar(min, max) {
 }
 
 // =========================================================================
-// 1. EASTER EGG #1: "Dân gay" phóng to khi click chuột (Tỉ lệ 10%)
-// =========================================================================
-function initDanGayClickEasterEgg() {
-    function spawnDanGayPopup(x, y) {
-        const popup = document.createElement("div");
-        popup.className = "easter-egg-dan-gay";
-        popup.textContent = "dân gay";
-
-        popup.style.left = `${x}px`;
-        popup.style.top = `${y}px`;
-
-        document.body.appendChild(popup);
-
-        // Tự hủy sau khi hiệu ứng 1.5s hoàn tất
-        popup.addEventListener("animationend", () => {
-            popup.remove();
-        });
-
-        // Fallback tự hủy phòng khi animationend bị trình duyệt chặn
-        setTimeout(() => {
-            if (popup.parentElement) {
-                popup.remove();
-            }
-        }, 1600);
-    }
-
-    const clickHandler = (e) => {
-        if (e.button !== undefined && e.button !== 0) return;
-        const x = e.clientX ?? (e.pageX - window.scrollX);
-        const y = e.clientY ?? (e.pageY - window.scrollY);
-        spawnDanGayPopup(x, y);
-    };
-
-    document.addEventListener("mousedown", clickHandler, true);
-
-    return () => {
-        document.removeEventListener("mousedown", clickHandler, true);
-    };
-}
-
-// =========================================================================
 // 2. EASTER EGG #2: Thẻ Title, Header Brand & Credit bị xáo trộn Mixed Ranges 30 ký tự (Tỉ lệ 5%)
 // =========================================================================
 function initTitleMixedChaosEasterEgg() {
@@ -75,7 +34,7 @@ function initTitleMixedChaosEasterEgg() {
     const originalCopyright = copyrightSpan ? copyrightSpan.textContent : (copyrightEl ? copyrightEl.textContent : "");
 
     const brandTitleEl = document.getElementById("brand-title-content");
-    const currentVer = typeof getAppVersion === "function" ? getAppVersion() : "v2.5";
+    const currentVer = typeof getAppVersion === "function" ? getAppVersion() : "v2.6";
     const originalBrandHtml = brandTitleEl ? brandTitleEl.innerHTML : `Ontaptriet <span class="brand-version">${currentVer}</span>`;
 
     const mixedKeys = Object.keys(UNICODE_RANGES);
@@ -100,22 +59,8 @@ function initTitleMixedChaosEasterEgg() {
     function applyChaosText() {
         const chaosText = generateMixedChaosString(30);
 
-        // 1. Thẻ title của trang web
-        document.title = chaosText;
-
-        // 2. Tiêu đề header ở trên: Ưu tiên Easter Egg mới (title_ascii_cycler)
-        // Chỉ ghi đè tiêu đề header nếu Easter Egg mới không chạy
-        if (!isTitleCyclerActive()) {
-            const chaosBrandHtml = `${chaosText} <span class="brand-version">${currentVer}</span>`;
-            if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
-                DEFAULT_BRAND_TITLE = chaosBrandHtml;
-            }
-            if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
-                brandTitleEl.innerHTML = chaosBrandHtml;
-            }
-        }
-
-        // 3. Dòng credit ở góc dưới cùng bên phải: [chuỗi 30 ký tự] design by @phucthanhh
+        // Chỉ áp dụng lên dòng credit góc dưới cùng bên phải
+        // (không đụng vào document.title hay brand header để tránh lỗi ký tự gây hoang mang)
         if (copyrightSpan) {
             copyrightSpan.textContent = `${chaosText} design by @phucthanhh`;
         } else if (copyrightEl) {
@@ -127,17 +72,6 @@ function initTitleMixedChaosEasterEgg() {
     applyChaosText();
 
     return () => {
-        document.title = originalTitle;
-
-        if (!isTitleCyclerActive()) {
-            if (typeof DEFAULT_BRAND_TITLE !== "undefined") {
-                DEFAULT_BRAND_TITLE = `Ontaptriet <span class="brand-version">${currentVer}</span>`;
-            }
-            if (brandTitleEl && !brandTitleEl.textContent.includes("Cài đặt")) {
-                brandTitleEl.innerHTML = originalBrandHtml;
-            }
-        }
-
         if (copyrightSpan) {
             copyrightSpan.textContent = originalCopyright;
         } else if (copyrightEl) {
@@ -205,7 +139,7 @@ function initTitleAsciiCyclerEasterEgg() {
         "E_Là_Không_Thể",
         "MICROSOFT_EDGE",
         "github.com/natelyt12/ontaptriet",
-        "Ontaptriet v2.5"
+        "Ontaptriet v2.6"
     ];
 
     // Lượt 1: Bắt đầu từ ONTAPTRIET, các từ tiếp theo được xáo trộn ngẫu nhiên
@@ -326,25 +260,16 @@ const EasterEggs = {
         {
             id: "title_ascii_cycler",
             name: "Title ASCII Animation Cycler",
-            description: "50% tỉ lệ: Title biến thành animation xáo trộn JetBrains Mono chuyển đổi liên tục qua các thông điệp",
-            chance: 0.50,
+            description: "30% tỉ lệ: Title biến thành animation xáo trộn JetBrains Mono chuyển đổi liên tục qua các thông điệp",
+            chance: 0.30,
             active: false,
             cleanup: null,
             init: initTitleAsciiCyclerEasterEgg
         },
         {
-            id: "dan_gay_click",
-            name: "Dân gay on click",
-            description: "10% tỉ lệ: mỗi click của user sẽ có một chữ 'dân gay' phóng to lên rồi biến mất trong 1.5s",
-            chance: 0.10,
-            active: false,
-            cleanup: null,
-            init: initDanGayClickEasterEgg
-        },
-        {
             id: "title_mixed_chaos",
             name: "Title, Brand & Credit Glitch (Mixed Ranges)",
-            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.5') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự",
+            description: "5% tỉ lệ: thẻ title, tiêu đề header ('[30 ký tự] v2.6') và dòng credit ('[30 ký tự] design by @phucthanhh') bị thay thế bằng chuỗi ký tự Mixed Ranges dài 30 ký tự",
             chance: 0.05,
             active: false,
             cleanup: null,
@@ -412,7 +337,7 @@ const EasterEggs = {
             asciiCycler.active = true;
             asciiCycler.cleanup = asciiCycler.init();
             isAsciiCyclerActive = true;
-            console.log(`[EasterEgg] Kích hoạt ngẫu nhiên: "${asciiCycler.name}" (50%)`);
+            console.log(`[EasterEgg] Kích hoạt ngẫu nhiên: "${asciiCycler.name}" (30%)`);
         }
 
         this.registry.forEach(egg => {

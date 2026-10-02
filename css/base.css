@@ -115,6 +115,7 @@ body.animating-lock {
     transform: translateX(-50%);
     text-align: center;
     user-select: none;
+    z-index: 50;
     transition: opacity 0.38s var(--ease-expo-out), transform 0.38s var(--ease-expo-out);
 }
 

@@ -251,6 +251,19 @@ class InlineDropdown {
             if (typeof callback === "function") callback();
         }
     }
+
+    /**
+     * Closes all open dropdowns instantly with no animation delay.
+     * Use this before screen transitions where the 220ms closing animation
+     * would introduce a fake delay before the fade-out starts.
+     */
+    static closeAllImmediate() {
+        document.querySelectorAll(".dropdown-trigger.active").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".dropdown-menu.show, .dropdown-menu.closing").forEach(m => {
+            m.classList.remove("show", "closing");
+            m.innerHTML = "";
+        });
+    }
 }
 
 // Bắt sự kiện click ra ngoài để đóng mọi dropdown

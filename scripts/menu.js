@@ -315,46 +315,49 @@ function initActionButtons() {
 }
 
 /**
- * Bắt đầu bài thi: Tải dữ liệu, animation thoát menu chính, hiển thị quiz
+ * Bắt đầu bài thi: Tải dữ liệu song song với animation thoát menu, hiển thị quiz
  */
 async function startQuiz() {
     try {
-        await ScreenSwitcher.to("quiz-screen", {
-            autoUnlock: false, // quiz-view tự quản lý animation và unlock sau khi render
-            onBeforeFade: async () => {
-                // 0. Fadeout title Ontaptriet & copyright ở góc dưới
-                const brandHeader = document.getElementById("brand-header");
-                if (brandHeader) {
-                    brandHeader.classList.add("fade-out");
-                }
-                const copyright = document.getElementById("site-copyright");
-                if (copyright) {
-                    copyright.classList.add("fade-out");
-                }
+        // Close any open dropdowns immediately so they don't block or flash during the fade
+        if (typeof InlineDropdown !== "undefined" && typeof InlineDropdown.closeAllImmediate === "function") {
+            InlineDropdown.closeAllImmediate();
+        }
 
-                // 1. Tải và chuẩn bị bộ câu hỏi theo đúng chế độ đã chọn
-                if (!isRandomQuestions) {
-                    validateRangeInputs(null);
-                }
-                await loadQuizQuestions(
-                    selectedSubjectKey,
-                    selectedChapterVal,
-                    selectedLimit,
-                    isRandomQuestions,
-                    rangeFromVal,
-                    rangeToVal
-                );
+        // Kick off data loading immediately — runs in parallel with the fade-out animation
+        if (!isRandomQuestions) {
+            validateRangeInputs(null);
+        }
+        const questionsPromise = loadQuizQuestions(
+            selectedSubjectKey,
+            selectedChapterVal,
+            selectedLimit,
+            isRandomQuestions,
+            rangeFromVal,
+            rangeToVal
+        );
+
+        await ScreenSwitcher.to("quiz-screen", {
+            autoUnlock: false, // quiz-view manages its own animation lock after render
+            onBeforeFade: () => {
+                // Fade out header & copyright synchronously — no await, no delay
+                const brandHeader = document.getElementById("brand-header");
+                if (brandHeader) brandHeader.classList.add("fade-out");
+
+                const copyright = document.getElementById("site-copyright");
+                if (copyright) copyright.classList.add("fade-out");
             },
-            onShow: () => {
+            onShow: async () => {
+                // Wait for data to be ready (usually already done by the time fade completes)
+                await questionsPromise;
+
                 if (typeof renderCurrentQuestion === "function") {
                     renderCurrentQuestion();
                 }
 
-                // Thanh status bar di chuyển từ dưới cạnh màn hình lên cùng nhịp với câu hỏi
                 const statusBar = document.getElementById("quiz-status-bar");
-                if (statusBar) {
-                    statusBar.classList.add("active");
-                }
+                if (statusBar) statusBar.classList.add("active");
+
                 if (typeof resetBackBtnState === "function") {
                     resetBackBtnState();
                 }

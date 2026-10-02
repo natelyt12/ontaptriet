@@ -3,6 +3,87 @@
    Giao diện làm bài trắc nghiệm, phản hồi đúng/sai, SVG border sweep, status bar
    ========================================================================= */
 
+/* --- CAROUSEL VIEWPORT & TRACK --- */
+
+/*
+ * #quiz-screen khi chứa carousel: chiếm toàn bộ chiều cao canvas-wrapper khả dụng.
+ * canvas-wrapper đã có overflow:hidden nên đây chỉ cần đảm bảo quiz-screen
+ * không thếm chiều cao trang.
+ */
+#quiz-screen:has(.quiz-screen-viewport) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/*
+ * .quiz-screen-viewport: khung cố định overflow:hidden, che phần tràn phía trên/dưới.
+ * Chiều cao được set động bằng JS (= window.innerHeight trừ header + statusbar).
+ */
+.quiz-screen-viewport {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 32px);
+    height: 100%;
+    max-width: calc(540px + 32px);
+    padding: 0 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+    touch-action: none;
+}
+
+/*
+ * .quiz-carousel-track: "toa tàu" chứa tất cả slide, dịch chuyển bằng translateY qua LERP.
+ */
+.quiz-carousel-track {
+    position: relative;
+    width: 100%;
+    will-change: transform;
+}
+
+/*
+ * Mỗi .quiz-slide tương ứng một câu hỏi.
+ * upcoming: placeholder ẩn (chỉ giữ chiều cao).
+ * current: câu đang làm, opacity 1.
+ * past: câu đã làm, opacity 0.6, pointer-events off.
+ */
+.quiz-slide {
+    width: 100%;
+    box-sizing: border-box;
+    /* Height is natural (content-driven). JS centers the slide by translating the track. */
+    /* Opacity is updated continuously per rAF frame by JS. No CSS transition needed. */
+}
+
+/* .quiz-slide-content fills the slide width */
+.quiz-slide-content {
+    width: 100%;
+    /* Padding gives breathing room so content isn't flush against viewport edges */
+    padding: 26px 0;
+}
+
+.quiz-slide.upcoming {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.quiz-slide.current {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.quiz-slide.past {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: default;
+}
+
 /* --- GIAO DIỆN LÀM BÀI TRẮC NGHIỆM --- */
 .quiz-container {
     width: 100%;
@@ -44,12 +125,9 @@
     width: fit-content;
 }
 
-/* HÀNG NÚT CÂU TIẾP THEO (NẰM DƯỚI CÁC ĐÁP ÁN) */
+/* HÀNG NÚT CÂU TIẾP THEO — đã loại bỏ khỏi carousel design, giữ lại để không vỡ code cũ nếu tham chiếu */
 .quiz-next-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 28px;
-    width: 100%;
+    display: none;
 }
 
 /* 3. Điểm neo: BOTTOM (Thanh trạng thái di chuyển từ dưới cạnh màn hình lên) */
@@ -57,7 +135,7 @@
     position: absolute;
     bottom: 24px;
     left: 50%;
-    transform: translate(-50%, calc(100% + 30px));
+    transform: translateX(-50%);
     opacity: 0;
     visibility: hidden;
     width: 100%;
@@ -68,16 +146,15 @@
     align-items: center;
     user-select: none;
     pointer-events: none;
-    transition: transform 0.28s var(--ease-expo-in), opacity 0.25s ease, visibility 0.28s;
+    transition: opacity 0.25s ease, visibility 0.28s;
     z-index: 50;
 }
 
 .anchor-bottom-bar.active {
-    transform: translate(-50%, 0);
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: transform 0.42s var(--ease-expo-out), opacity 0.35s ease;
+    transition: opacity 0.35s ease;
 }
 
 .quiz-status-spacer {
@@ -241,12 +318,14 @@ body.animating-lock .quiz-option {
     }
 }
 
-/* KHI CHỌN SAI: Đáp án đúng chuyển xanh lá và có đường kẻ dưới quét từ trái qua phải */
+/* KHI ĐÁP ÁN ĐÚNG (do chọn đúng hoặc được hé lộ khi chọn sai): Chuyển xanh lá và có đường kẻ dưới quét từ trái qua phải */
+.quiz-option.answer-correct,
 .quiz-option.answer-correct-revealed {
     color: #1e8e3e;
     cursor: default;
 }
 
+.quiz-option.answer-correct::after,
 .quiz-option.answer-correct-revealed::after {
     content: "";
     position: absolute;
@@ -301,44 +380,7 @@ body.animating-lock .quiz-option {
     }
 }
 
-/* KHI CHỌN ĐÁP ÁN ĐÚNG: Chuyển và giữ nguyên màu xanh lá cây, nhưng vẫn chịu opacity fadeout */
-.quiz-option.answer-correct {
-    color: #1e8e3e;
-    cursor: default;
-}
-
-/* SVG border màu xanh lá quét vòng theo chiều kim đồng hồ và GIỮ NGUYÊN */
-.border-sweep-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: visible;
-}
-
-.border-sweep-rect {
-    fill: none;
-    stroke: #1e8e3e;
-    stroke-width: 1.5;
-    vector-effect: non-scaling-stroke;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: borderSweepHold 0.85s var(--ease-expo-out) forwards;
-}
-
-@keyframes borderSweepHold {
-    0% {
-        stroke-dashoffset: 100;
-        opacity: 1;
-    }
-
-    100% {
-        stroke-dashoffset: 0;
-        opacity: 1;
-    }
-}
+/* Removed SVG border styles as per user request */
 
 .quiz-option .option-prefix {
     font-weight: normal;
@@ -366,7 +408,7 @@ body.animating-lock .quiz-option {
 
 /* HIỆU ỨNG CHỈ FADE (KHÔNG TRƯỢT) KHI VỀ MENU CHÍNH */
 .quiz-fade-out-only {
-    animation: pureFadeOut 0.35s var(--ease-expo-in) forwards !important;
+    animation: pureFadeOut 0.28s cubic-bezier(0.25, 0, 0.5, 1) forwards !important;
 }
 
 @keyframes pureFadeOut {
@@ -451,10 +493,7 @@ body.animating-lock .quiz-option {
     color: #34c759 !important;
 }
 
-[data-theme="dark"] .border-sweep-rect {
-    stroke: #34c759;
-}
-
+[data-theme="dark"] .quiz-option.answer-correct::after,
 [data-theme="dark"] .quiz-option.answer-correct-revealed::after {
     background-color: #34c759;
 }
