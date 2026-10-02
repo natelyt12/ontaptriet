@@ -42,7 +42,7 @@
         <!-- Điểm neo: TOP CENTER -->
         <header class="anchor-top-center" id="brand-header">
             <div class="brand-title" id="brand-title-content">
-                Ontaptriet <span class="brand-version">v2.6</span>
+                Ontaptriet <span class="brand-version">v2.7</span>
             </div>
         </header>
 
@@ -210,7 +210,8 @@
                         </div>
 
                         <div class="chat-login-rules" id="chat-login-rules">
-                            Nghiêm cấm ngôn từ thô tục, NSFW, xúc phạm, spam hoặc gửi liên kết đáng ngờ (suspicious link). Vi phạm sẽ bị cấm chat vĩnh viễn.
+                            Nghiêm cấm ngôn từ thô tục, NSFW, xúc phạm, spam hoặc gửi liên kết đáng ngờ (suspicious
+                            link). Vi phạm sẽ bị cấm chat vĩnh viễn.
                         </div>
                         <div class="chat-cooldown-hint" id="chat-cooldown-hint">
                             Cooldown 1 phút, lưu trữ tối đa 50 tin. Tin nhắn một khi đã gửi không thể sửa hoặc xóa.
@@ -260,7 +261,7 @@
                 </div>
 
                 <!-- 3. Hình nền động (Live Wallpaper) -->
-                <div class="menu-row">
+                <div class="menu-row" id="row-live-wallpaper">
                     <span class="menu-label-prefix">Hình nền động:</span>
                     <button id="lw-toggle-btn" class="btn-action btn-secondary btn-theme-toggle" type="button">
                         <span class="label-viewport" id="lw-label-viewport">
@@ -269,10 +270,17 @@
                     </button>
                 </div>
 
+                <!-- 4. Độ sáng hình nền -->
+                <div class="menu-row" id="row-lw-brightness" style="display: none;">
+                    <span class="menu-label-prefix">Độ sáng hình nền:</span>
+                    <div id="lw-brightness-slider" class="ascii-slider" style="flex: 1;"></div>
+                </div>
+
                 <!-- Nút Về menu chính -->
                 <div class="menu-actions" style="margin-top: 28px;">
                     <button id="settings-back-btn" class="btn-action btn-nav" type="button">
-                        <span class="btn-arrow">‹</span> <span class="btn-label">Về menu chính</span>
+                        <span class="btn-arrow">‹</span> <span class="btn-label" id="settings-back-label">Về menu
+                            chính</span>
                     </button>
                 </div>
             </div>
@@ -300,21 +308,23 @@
                     </span>
                 </button>
                 <span class="action-separator">/</span>
-                <button id="quiz-copy-btn" class="btn-quiz-copy" type="button" title="Copy câu hỏi và đáp án">
+                <button id="quiz-copy-btn" class="btn-quiz-copy btn-action btn-secondary" type="button"
+                    style="border-bottom: none !important;" title="Copy câu hỏi và đáp án">
                     <span class="label-viewport" id="quiz-copy-viewport">
-                        <span class="label-text-current">Copy câu hỏi này</span>
+                        <span class="label-text-current">Copy câu hỏi</span>
                     </span>
                 </button>
+                <span class="action-separator">/</span>
+                <button id="quiz-settings-btn" class="btn-action btn-secondary" type="button">Cài đặt</button>
             </div>
             <div class="quiz-index-center">
                 <span class="quiz-index-text" id="quiz-index-text"></span>
             </div>
-            <div class="quiz-status-spacer"></div>
         </footer>
 
         <!-- Copyright ở góc dưới cùng bên phải -->
         <div class="bottom-right-copyright" id="site-copyright">
-            <span id="site-credit-text">ontaptriet design by @phucthanhh</span>
+            <span id="site-credit-text">ontaptriet <span class="brand-version">v2.7</span> design by @phucthanhh</span>
             <span class="action-separator">/</span>
             <a href="https://github.com/natelyt12/ontaptriet" target="_blank" rel="noopener noreferrer"
                 class="btn-copyright-link">Github</a>
@@ -329,6 +339,7 @@
 
     <!-- Module Component Dropdown -->
     <script src="scripts/dropdown.js"></script>
+    <script src="scripts/ascii-slider.js"></script>
 
     <!-- Module Điều phối màn hình -->
     <script src="scripts/screen-switcher.js"></script>

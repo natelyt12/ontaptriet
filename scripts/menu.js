@@ -368,3 +368,31 @@ async function startQuiz() {
         alert("Không thể tải bài thi: " + err.message);
     }
 }
+
+/**
+ * Bắt đầu bài thi trực tiếp (không qua fetch data), dùng cho tính năng Làm lại câu sai
+ */
+function startQuizDirectly() {
+    ScreenSwitcher.to("quiz-screen", {
+        autoUnlock: false,
+        onBeforeFade: () => {
+            const brandHeader = document.getElementById("brand-header");
+            if (brandHeader) brandHeader.classList.add("fade-out");
+
+            const copyright = document.getElementById("site-copyright");
+            if (copyright) copyright.classList.add("fade-out");
+        },
+        onShow: () => {
+            if (typeof renderCurrentQuestion === "function") {
+                renderCurrentQuestion();
+            }
+
+            const statusBar = document.getElementById("quiz-status-bar");
+            if (statusBar) statusBar.classList.add("active");
+
+            if (typeof resetBackBtnState === "function") {
+                resetBackBtnState();
+            }
+        }
+    });
+}

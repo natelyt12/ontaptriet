@@ -191,3 +191,30 @@ function resetQuizState() {
     currentSubjectName = "";
     currentChapterName = "";
 }
+
+/**
+ * Nạp trực tiếp các câu sai vào currentQuestions để ôn lại
+ */
+function loadMistakesForRetry(mistakesArray, subject, chapter) {
+    if (!Array.isArray(mistakesArray) || mistakesArray.length === 0) return false;
+    
+    currentQuestions = mistakesArray.map(m => ({
+        id: m.id,
+        question: m.question,
+        options: [...m.options],
+        correctAnswer: m.correctIndex,
+        correctText: m.correct
+    }));
+
+    currentQuestions.forEach(q => shuffleQuestionOptions(q));
+    
+    currentQuestionIndex = 0;
+    userScore = 0;
+    userAnswersLog = [];
+    if(subject) currentSubjectName = subject;
+    if(chapter) {
+        currentChapterName = chapter.includes("(Làm lại)") ? chapter : chapter + " (Làm lại)";
+    }
+    
+    return true;
+}

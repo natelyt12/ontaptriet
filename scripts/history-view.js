@@ -34,7 +34,7 @@ function renderHistoryScreen() {
     const historyScreen = document.getElementById("history-screen");
     if (!historyScreen) return;
 
-    const list = (typeof getHistory === "function" ? getHistory() : []).slice(0, 5);
+    const list = (typeof getHistory === "function" ? getHistory() : []).slice(0, 10);
 
     historyScreen.innerHTML = `
         <div class="history-container">
@@ -285,8 +285,12 @@ function renderHistoryMistakesDetail(record) {
                 ${mistakesHtml}
             </div>
 
-            <!-- 3. Nút quay lại lịch sử -->
+            <!-- 3. Nút thao tác -->
             <div class="menu-actions quiz-item-enter" style="animation-delay: ${actionsDelay}s; margin-top: 20px; padding-top: 14px;">
+                ${mistakes.length > 0 ? `
+                <button id="retry-history-mistakes-btn" class="btn-action btn-primary"><span class="btn-label">Làm lại câu sai</span> <span class="btn-arrow">›</span></button>
+                <span class="action-separator">/</span>
+                ` : ''}
                 <button id="history-detail-back-btn" class="btn-action btn-nav">
                     <span class="btn-arrow">‹</span> <span class="btn-label">Quay lại lịch sử</span>
                 </button>
@@ -305,6 +309,18 @@ function renderHistoryMistakesDetail(record) {
             DropdownAnimationLock.unlock();
         }
     }, totalDurationMs);
+
+    const retryBtn = document.getElementById("retry-history-mistakes-btn");
+    if (retryBtn) {
+        retryBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
+            if (typeof loadMistakesForRetry === "function" && loadMistakesForRetry(mistakes, record.subject, record.chapter)) {
+                if (typeof startQuizDirectly === "function") {
+                    startQuizDirectly();
+                }
+            }
+        };
+    }
 
     const backBtn = document.getElementById("history-detail-back-btn");
     if (backBtn) {

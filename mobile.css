@@ -89,22 +89,14 @@
         box-sizing: border-box;
     }
 
-    /* 4. Thanh điều hướng câu hỏi dưới cùng: Index câu hỏi nằm ở bên phải thay vì ở giữa */
+    /* 4. Thanh điều hướng câu hỏi dưới cùng: Padding */
     .anchor-bottom-bar {
         bottom: 16px;
         padding: 0 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
-    .quiz-index-center {
-        text-align: right;
-        margin-left: auto;
-    }
-
-    .quiz-status-spacer {
-        display: none;
+    .quiz-back-wrapper {
+        gap: 8px;
     }
 
     /* 5. Copyright ở góc dưới */

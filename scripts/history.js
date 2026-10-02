@@ -32,9 +32,9 @@ function saveHistory(score10, correctCount, totalCount, subjectName, chapterName
         // Thêm vào đầu danh sách
         historyList.unshift(newRecord);
 
-        // Giới hạn tối đa 5 lượt làm gần nhất
-        if (historyList.length > 5) {
-            historyList.splice(5);
+        // Giới hạn tối đa 10 lượt làm gần nhất
+        if (historyList.length > 10) {
+            historyList.splice(10);
         }
 
         localStorage.setItem(HISTORY_KEY, JSON.stringify(historyList));

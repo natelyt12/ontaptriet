@@ -151,7 +151,14 @@ function renderQuizResult() {
 
             <!-- 3. Nút thao tác điều hướng -->
             <div class="menu-actions quiz-item-enter" style="animation-delay: ${actionsDelay}s; margin-top: 20px; padding-top: 14px;">
+                ${mistakes.length > 0 ? `
+                <button id="retry-mistakes-btn" class="btn-action btn-primary"><span class="btn-label">Làm lại câu sai</span> <span class="btn-arrow">›</span></button>
+                <span class="action-separator">/</span>
+                <button id="retry-btn" class="btn-action btn-secondary">Làm lại toàn bộ</button>
+                ` : `
                 <button id="retry-btn" class="btn-action btn-primary"><span class="btn-label">Làm lại</span> <span class="btn-arrow">›</span></button>
+                `}
+                <span class="action-separator">/</span>
                 <button id="back-menu-btn" class="btn-action btn-secondary">Về menu chính</button>
             </div>
         </div>
@@ -169,6 +176,18 @@ function renderQuizResult() {
             DropdownAnimationLock.unlock();
         }
     }, totalDurationMs);
+
+    const retryMistakesBtn = document.getElementById("retry-mistakes-btn");
+    if (retryMistakesBtn) {
+        retryMistakesBtn.onmousedown = (e) => {
+            if (e && e.button !== 0) return;
+            if (typeof loadMistakesForRetry === "function" && loadMistakesForRetry(mistakes, res.subjectName, res.chapterName)) {
+                if (typeof startQuizDirectly === "function") {
+                    startQuizDirectly();
+                }
+            }
+        };
+    }
 
     const retryBtn = document.getElementById("retry-btn");
     if (retryBtn) {

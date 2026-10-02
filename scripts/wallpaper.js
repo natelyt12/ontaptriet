@@ -138,10 +138,28 @@ function syncWallpaperWithTheme(theme) {
 function toggleLiveWallpaper() {
     if (DropdownAnimationLock && DropdownAnimationLock.isLocked) return;
     applyLiveWallpaper(!isLwEnabled, true, true);
+    updateWallpaperUI();
 }
 
 /**
- * Khởi tạo hình nền động khi tải trang
+ * Cập nhật hiển thị dòng cài đặt Hình nền động tùy thuộc theme
+ */
+function updateWallpaperUI() {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const rowLw = document.getElementById("row-live-wallpaper");
+    const rowBrightness = document.getElementById("row-lw-brightness");
+    
+    if (isDark) {
+        if (rowLw) rowLw.style.display = "flex";
+        if (rowBrightness) rowBrightness.style.display = isLwEnabled ? "flex" : "none";
+    } else {
+        if (rowLw) rowLw.style.display = "none";
+        if (rowBrightness) rowBrightness.style.display = "none";
+    }
+}
+
+/**
+ * Khởi tạo hình nền động và độ sáng khi tải trang
  */
 function initLiveWallpaper() {
     const video = document.getElementById("live-wallpaper-video");
@@ -149,6 +167,33 @@ function initLiveWallpaper() {
         video.loop = true;
     }
     applyLiveWallpaper(isLwEnabled, false, false);
+    
+    // Khởi tạo slider độ sáng ASCII sử dụng component
+    const savedOpacity = parseFloat(localStorage.getItem("ontaptriet_lw_opacity")) || 0.2;
+    document.documentElement.style.setProperty("--lw-opacity", savedOpacity);
+    
+    let initialStep = Math.round(savedOpacity / 0.1);
+    if (typeof AsciiSlider !== "undefined") {
+        new AsciiSlider({
+            containerId: "lw-brightness-slider",
+            steps: 10,
+            initialStep: initialStep,
+            showPercentage: true,
+            defaultStep: 2,
+            onChange: (step) => {
+                const newOpacity = step * 0.1;
+                document.documentElement.style.setProperty("--lw-opacity", newOpacity);
+                localStorage.setItem("ontaptriet_lw_opacity", newOpacity);
+            }
+        });
+    }
+    
+    // Lắng nghe sự thay đổi theme để ẩn hiện cài đặt
+    const observer = new MutationObserver(() => {
+        updateWallpaperUI();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    updateWallpaperUI();
 }
 
 

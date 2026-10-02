@@ -59,8 +59,15 @@ function initTitleMixedChaosEasterEgg() {
     function applyChaosText() {
         const chaosText = generateMixedChaosString(30);
 
-        // Chỉ áp dụng lên dòng credit góc dưới cùng bên phải
-        // (không đụng vào document.title hay brand header để tránh lỗi ký tự gây hoang mang)
+        // Áp dụng lên document.title và brand header nếu cycler không chiếm quyền
+        if (!isTitleCyclerActive()) {
+            document.title = chaosText;
+            if (brandTitleEl) {
+                brandTitleEl.innerHTML = `${chaosText} <span class="brand-version">${currentVer}</span>`;
+            }
+        }
+
+        // Áp dụng lên dòng credit góc dưới cùng bên phải
         if (copyrightSpan) {
             copyrightSpan.textContent = `${chaosText} design by @phucthanhh`;
         } else if (copyrightEl) {
@@ -72,6 +79,12 @@ function initTitleMixedChaosEasterEgg() {
     applyChaosText();
 
     return () => {
+        if (!isTitleCyclerActive()) {
+            document.title = originalTitle;
+            if (brandTitleEl) {
+                brandTitleEl.innerHTML = originalBrandHtml;
+            }
+        }
         if (copyrightSpan) {
             copyrightSpan.textContent = originalCopyright;
         } else if (copyrightEl) {
@@ -139,7 +152,6 @@ function initTitleAsciiCyclerEasterEgg() {
         "E_Là_Không_Thể",
         "MICROSOFT_EDGE",
         "github.com/natelyt12/ontaptriet",
-        "Ontaptriet v2.6"
     ];
 
     // Lượt 1: Bắt đầu từ ONTAPTRIET, các từ tiếp theo được xáo trộn ngẫu nhiên

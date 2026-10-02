@@ -38,10 +38,16 @@ body {
     background-color: var(--bg-white);
     color: var(--text-pure-black);
     font-family: var(--font-serif);
+    font-size-adjust: 0.5;
     font-size: var(--uniform-size);
     line-height: 1.25;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size-adjust: inherit;
 }
 
 /* Hiệu ứng chuyển màu êm dịu khi switch theme */
@@ -60,6 +66,7 @@ body.animating-lock {
 #app {
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     position: relative;
 }
 
@@ -70,6 +77,7 @@ body.animating-lock {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
@@ -79,7 +87,7 @@ body.animating-lock {
 
 /* Chỉ hiển thị hình nền động trên nền tối (Dark mode) để giữ Light mode chuẩn giấy thi A4 tối giản */
 [data-theme="dark"] .live-wallpaper-container.active {
-    opacity: 0.18;
+    opacity: var(--lw-opacity, 0.18);
 }
 
 .live-wallpaper-video {
@@ -94,6 +102,7 @@ body.animating-lock {
     position: relative;
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     padding: 24px;
     display: flex;
     justify-content: center;
@@ -202,7 +211,7 @@ body.animating-lock {
     font-weight: normal;
     color: var(--text-pure-black);
     white-space: nowrap;
-    min-width: 140px;
+    min-width: 170px;
     flex-shrink: 0;
 }
 
@@ -212,6 +221,7 @@ body.animating-lock {
     inset: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-white);
     display: flex;
     justify-content: center;

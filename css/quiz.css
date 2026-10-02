@@ -141,8 +141,8 @@
     width: 100%;
     max-width: 860px;
     padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     user-select: none;
     pointer-events: none;
@@ -155,10 +155,6 @@
     visibility: visible;
     pointer-events: auto;
     transition: opacity 0.35s ease;
-}
-
-.quiz-status-spacer {
-    min-height: 1px;
 }
 
 .quiz-back-wrapper {
@@ -220,7 +216,8 @@
 }
 
 .quiz-index-center {
-    text-align: center;
+    text-align: right;
+    margin-left: auto;
 }
 
 .quiz-index-text {

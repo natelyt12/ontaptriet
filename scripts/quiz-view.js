@@ -23,6 +23,10 @@ let backResetTimer = null;
 let copyResetTimer = null;
 window.quizIsDragMoved = false;
 
+let isFreeScrollMode = false;
+let inertiaAnimId = null;
+let inertiaVelocity = 0;
+
 /* Scroll animation state (easeOutExpo timed RAF) */
 let scrollAnimId = null;    // rAF handle
 let scrollStartY = 0;       // translateY at animation start
@@ -94,11 +98,11 @@ function resetCopyBtnState() {
     const vp = document.getElementById("quiz-copy-viewport");
     if (vp) {
         const span = vp.querySelector(".label-text-current");
-        if (span && span.textContent.trim() !== "Copy câu hỏi này") {
+        if (span && span.textContent.trim() !== "Copy câu hỏi") {
             if (typeof animateLabelRoll === "function") {
-                animateLabelRoll(vp, "Copy câu hỏi này");
+                animateLabelRoll(vp, "Copy câu hỏi");
             } else {
-                vp.innerHTML = `<span class="label-text-current">Copy câu hỏi này</span>`;
+                vp.innerHTML = `<span class="label-text-current">Copy câu hỏi</span>`;
             }
         }
     }
@@ -191,6 +195,16 @@ function initStatusBar() {
             handleCopyCurrentQuestion();
         });
     }
+
+    const settingsBtn = document.getElementById("quiz-settings-btn");
+    if (settingsBtn) {
+        settingsBtn.addEventListener("mousedown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
+            if (typeof showSettingsScreen === "function") {
+                showSettingsScreen("quiz-screen");
+            }
+        });
+    }
 }
 
 /* ─── Scroll Engine (easeOutExpo timed RAF) ─── */
@@ -200,6 +214,58 @@ function stopScrollAnim() {
         cancelAnimationFrame(scrollAnimId);
         scrollAnimId = null;
     }
+    if (inertiaAnimId) {
+        cancelAnimationFrame(inertiaAnimId);
+        inertiaAnimId = null;
+    }
+}
+
+function launchInertiaScroll(initialVelocity) {
+    stopScrollAnim();
+    inertiaVelocity = initialVelocity;
+    let lastTime = performance.now();
+
+    function tick(now) {
+        const dt = now - lastTime;
+        lastTime = now;
+
+        const cappedDt = Math.min(dt, 32);
+
+        // Apply friction
+        inertiaVelocity *= Math.pow(0.992, cappedDt);
+
+        if (Math.abs(inertiaVelocity) < 0.05) {
+            inertiaAnimId = null;
+            return;
+        }
+
+        scrollCurrentY -= (inertiaVelocity * cappedDt);
+
+        const minY = computeTargetY(0);
+        let maxY = computeTargetY(currentQuestionIndex);
+        const currentTop = slideTopMap[currentQuestionIndex] || 0;
+        const currentH = slideHeightMap[currentQuestionIndex] || 0;
+        const maxScrollForBottom = currentTop + currentH - (viewportH - 120);
+        if (maxScrollForBottom > maxY) maxY = maxScrollForBottom;
+
+        if (scrollCurrentY < minY) {
+            inertiaAnimId = null;
+            snapScrollTo(minY);
+            return;
+        } else if (scrollCurrentY > maxY) {
+            inertiaAnimId = null;
+            snapScrollTo(maxY);
+            return;
+        }
+
+        if (carouselTrack) {
+            carouselTrack.style.transform = `translateY(${-scrollCurrentY}px)`;
+            applySlideOpacities(getContinuousIdx(scrollCurrentY));
+        }
+
+        inertiaAnimId = requestAnimationFrame(tick);
+    }
+    inertiaAnimId = requestAnimationFrame(tick);
 }
 
 /**
@@ -237,6 +303,10 @@ function applySlideOpacities(continuousIdx) {
     slides.forEach(slide => {
         if (slide.classList.contains("upcoming")) {
             slide.style.opacity = "0";
+            return;
+        }
+        if (isFreeScrollMode) {
+            slide.style.opacity = "1";
             return;
         }
         const i = parseInt(slide.getAttribute("data-slide-index"), 10);
@@ -441,6 +511,8 @@ function attachAnswerHandlers(slideEl, qIndex) {
 function advanceCarousel() {
     if (!carouselTrack) return;
 
+    isFreeScrollMode = false;
+
     const answeredIdx = currentQuestionIndex;
     currentQuestionIndex++;
     const nextIdx = currentQuestionIndex;
@@ -524,6 +596,7 @@ function renderCurrentQuestion() {
     carouselTrack = null;
     carouselViewport = null;
     trackPaddingTop = 0;
+    isFreeScrollMode = false;
 
     resetCopyBtnState();
 
@@ -612,6 +685,7 @@ function renderCurrentQuestion() {
     const startDrag = (clientY) => {
         if (!currentQuestions || currentQuestions.length <= 1) return;
         isDragging = true;
+
         window.quizIsDragMoved = false;
         isMoveTicking = false;
         dragStartY = clientY;
@@ -626,6 +700,12 @@ function renderCurrentQuestion() {
 
         if (Math.abs(deltaY) > 5) {
             window.quizIsDragMoved = true;
+            if (!isFreeScrollMode) {
+                isFreeScrollMode = true;
+                if (carouselTrack) {
+                    applySlideOpacities(getContinuousIdx(scrollCurrentY));
+                }
+            }
         }
 
         let newY = dragStartScrollY - deltaY;
@@ -664,44 +744,26 @@ function renderCurrentQuestion() {
 
         const deltaY = clientY !== undefined ? clientY - dragStartY : 0;
         const duration = performance.now() - dragStartTime;
-        const velocity = deltaY / Math.max(1, duration);
+        let velocity = duration > 0 ? deltaY / Math.max(1, duration) : 0;
 
-        let closestIdx = 0;
-        let minDiff = Infinity;
-        for (let i = 0; i <= currentQuestionIndex; i++) {
-            const targetY = computeTargetY(i);
-            const diff = Math.abs(scrollCurrentY - targetY);
-            if (diff < minDiff) {
-                minDiff = diff;
-                closestIdx = i;
-            }
+        if (velocity > 3.5) velocity = 3.5;
+        if (velocity < -3.5) velocity = -3.5;
+
+        const minY = computeTargetY(0);
+        let maxY = computeTargetY(currentQuestionIndex);
+        const currentTop = slideTopMap[currentQuestionIndex] || 0;
+        const currentH = slideHeightMap[currentQuestionIndex] || 0;
+        const maxScrollForBottom = currentTop + currentH - (viewportH - 120);
+        if (maxScrollForBottom > maxY) maxY = maxScrollForBottom;
+
+        if (scrollCurrentY < minY) {
+            snapScrollTo(minY);
+        } else if (scrollCurrentY > maxY) {
+            snapScrollTo(maxY);
+        } else {
+            launchInertiaScroll(velocity);
         }
 
-        let targetIdx = closestIdx;
-
-        if (Math.abs(velocity) > 0.4 && Math.abs(deltaY) > 20) {
-            if (velocity > 0) {
-                targetIdx = Math.max(0, closestIdx - 1);
-            } else {
-                targetIdx = Math.min(currentQuestionIndex, closestIdx + 1);
-            }
-        }
-
-        if (targetIdx === closestIdx && Math.abs(velocity) <= 0.4) {
-            const minYForSlide = computeTargetY(closestIdx);
-            const currentTop = slideTopMap[closestIdx] || 0;
-            const currentH = slideHeightMap[closestIdx] || 0;
-            const maxYForSlide = currentTop + currentH - (viewportH - 120);
-
-            if (scrollCurrentY >= minYForSlide && scrollCurrentY <= maxYForSlide) {
-                // Stay at current scroll position inside a tall slide
-                snapScrollTo(scrollCurrentY, closestIdx);
-                setTimeout(() => { window.quizIsDragMoved = false; }, 50);
-                return;
-            }
-        }
-
-        scrollToSlide(targetIdx);
         setTimeout(() => { window.quizIsDragMoved = false; }, 50);
     };
 
@@ -737,6 +799,9 @@ function renderCurrentQuestion() {
     // Resize listener for responsive geometry
     const onResize = () => {
         viewportH = window.innerHeight;
+        if (carouselViewport) {
+            carouselViewport.style.height = `${viewportH}px`;
+        }
         measureSlides();
         const slide0H = slideHeightMap[0] || 0;
         trackPaddingTop = Math.max(120, Math.floor((viewportH - slide0H) / 2));

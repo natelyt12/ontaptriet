@@ -6,16 +6,29 @@
  * - Khởi tạo các sự kiện cho nút Cài đặt, Đổi giao diện, và Quay lại
  */
 
+let settingsPreviousScreen = "menu-screen";
+
 /**
- * Chuyển từ Menu chính sang Màn hình Cài đặt (ẩn title top-center)
+ * Chuyển từ màn hình bất kỳ sang Màn hình Cài đặt (ẩn title top-center và status bar nếu cần)
  */
-function showSettingsScreen() {
+function showSettingsScreen(fromScreen = "menu-screen") {
+    settingsPreviousScreen = fromScreen;
+    
+    const backLabel = document.getElementById("settings-back-label");
+    if (backLabel) {
+        backLabel.textContent = (fromScreen === "quiz-screen") ? "Quay lại bài làm" : "Về menu chính";
+    }
+
     ScreenSwitcher.to("settings-screen", {
         autoUnlock: false,
         onBeforeFade: () => {
             const brandHeader = document.getElementById("brand-header");
             if (brandHeader) {
                 brandHeader.classList.add("fade-out");
+            }
+            if (fromScreen === "quiz-screen") {
+                const statusBar = document.getElementById("quiz-status-bar");
+                if (statusBar) statusBar.classList.remove("active");
             }
         },
         onShow: (settingsScreen) => {
@@ -42,7 +55,7 @@ function showSettingsScreen() {
 }
 
 /**
- * Trở về Menu chính từ Màn hình Cài đặt (hiện lại title top-center)
+ * Trở về màn hình trước đó từ Màn hình Cài đặt
  */
 function returnToMenuFromSettings() {
     // Đóng dropdown font ngay lập tức (không delay 220ms) để fade-out bắt đầu liền tay
@@ -50,13 +63,18 @@ function returnToMenuFromSettings() {
         InlineDropdown.closeAllImmediate();
     }
 
-    ScreenSwitcher.to("menu-screen", {
+    ScreenSwitcher.to(settingsPreviousScreen, {
         fadeIn: true,
         autoUnlock: true,
         onShow: () => {
-            const brandHeader = document.getElementById("brand-header");
-            if (brandHeader) {
-                brandHeader.classList.remove("fade-out");
+            if (settingsPreviousScreen !== "quiz-screen") {
+                const brandHeader = document.getElementById("brand-header");
+                if (brandHeader) {
+                    brandHeader.classList.remove("fade-out");
+                }
+            } else {
+                const statusBar = document.getElementById("quiz-status-bar");
+                if (statusBar) statusBar.classList.add("active");
             }
         }
     });
