@@ -41,7 +41,7 @@ const SPRING_VEL_EPS = 0.01; // Velocity threshold for rest
 /* Wheel Accumulator */
 let wheelAccumulator = 0;
 let wheelResetTimer = null;
-const WHEEL_THRESHOLD = 150; // Accumulated delta to trigger one step
+const WHEEL_THRESHOLD = 40; // Accumulated delta to trigger one step
 const WHEEL_RESET_MS = 250; // Timeout to clear accumulator
 
 /* Drag & Momentum Constants (ported from Yume physics.js) */
